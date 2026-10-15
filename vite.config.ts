@@ -41,6 +41,9 @@ export default defineConfig({
     environment: 'jsdom',
     globals: true,
     setupFiles: ['./tests/setup.ts'],
+    // Zona fija: el motor de repaso ancla los intervalos de un día o más a la
+    // hora local, y los tests de cambio de horario necesitan una zona con DST.
+    env: { TZ: 'Europe/Madrid' },
     include: ['src/**/*.{test,spec}.{ts,tsx}', 'tests/**/*.{test,spec}.{ts,tsx}'],
     coverage: {
       provider: 'v8',

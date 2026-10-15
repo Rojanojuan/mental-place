@@ -125,3 +125,49 @@ visor, incluido el aviso del punto sin contenido.
 - **Palacio 2 · Gramática C1**: `documentación/100 grammar news.pdf` (218 páginas) está en el
   repositorio, esperando que el usuario describa la estructura que quiere, como hizo con fonética.
 - La semilla se carga con `fetch` en el visor (D-014). En la Fase 2 pasa a IndexedDB.
+
+---
+
+## Fase 1 · Dominio + motor de repaso — ✅ terminada (2026-10-15)
+
+### Hecho
+
+`src/srs/`, **puro** (sin I/O, sin reloj propio, sin aleatoriedad; ESLint lo vigila):
+
+| Archivo        | Qué contiene                                                                                                    |
+| -------------- | --------------------------------------------------------------------------------------------------------------- |
+| `intervals.ts` | Aritmética de intervalos: suma de calendario, normalización, anclaje a la hora preferida, etiquetas en español. |
+| `presets.ts`   | R10, Rápido examen, Clásico 1-3-7-14-30, Adaptativo (SM-2) y Personalizado.                                     |
+| `grade.ts`     | `grade()`, `override()`, `previewIntervals()`, `shortcuts()`, `computeNext()`.                                  |
+| `status.ts`    | `itemStatus()`, `locusStatus()`, `compareUrgency()`.                                                            |
+| `queue.ts`     | `buildQueue()`, `queueCounts()`.                                                                                |
+| `index.ts`     | Fachada del módulo y `newReviewState()`.                                                                        |
+
+Todo lo que pide el contrato §6: las cuatro calificaciones en modo checkpoints con sus reglas
+(`againAction` reset/back1/back2, `hardFactor`, `easySkip`, `minInterval`), el paso a `mastered`,
+el anclaje de los intervalos de un día o más a `dayStartHour`, los tres tipos de ajuste manual
+(fecha exacta, +intervalo, salto de etapa), los seis atajos de la hoja de próximo repaso, el
+estado de un ítem y el agregado de un punto, y la cola con vencidos primero, nuevos hasta el
+límite diario y desempate por prioridad —más el recorrido por orden de ruta.
+
+### Comprobaciones
+
+| Comando            | Resultado                                                              |
+| ------------------ | ---------------------------------------------------------------------- |
+| `npm test`         | ✅ **196 tests** en 10 archivos                                        |
+| `npm run test:cov` | ✅ 98,5 % sentencias · 96,4 % ramas · 97,8 % funciones · 99,5 % líneas |
+| `npm run check`    | ✅ typecheck + lint + tests                                            |
+
+La batería obligatoria está completa: **las 44 combinaciones de calificación × etapa de R10**
+comprobadas una por una contra la tabla del contrato, reset/back1/back2, dominado (incluido que la
+etapa no siga creciendo y que un «otra vez» lo devuelva al principio), redondeo a la hora de inicio
+del día, los tres overrides, **cuatro tests de cambio de horario** (ida y vuelta del horario de
+verano, la hora que no existe y un tramo de 7 días que dura 169 h), límites diarios, orden de la
+cola y estado agregado del punto. Los tests corren en `Europe/Madrid` para que el DST sea
+determinista en cualquier máquina (D-023).
+
+### Pendiente
+
+- El motor todavía no está enchufado a ninguna pantalla: la sesión de repaso es Fase 4. Hasta
+  entonces el Inspector solo muestra el contenido ingresado.
+- `src/db/` sigue vacío: sin persistencia, nada de lo que calcula el motor se guarda (Fase 2).

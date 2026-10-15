@@ -127,3 +127,76 @@ para quien quiera leerlas estructuradas.
 **Motivo:** un `import` normal haría que TypeScript infiriera el tipo literal de un JSON de 690 kB
 (lento y frágil) y Vite lo incrustaría en el bundle de JavaScript. Con `?url` sale como asset
 aparte: 693 kB, 93 kB comprimido. En la Fase 2 la semilla pasa a IndexedDB y esto desaparece.
+
+## Fase 1 — Motor de repaso (2026-10-15)
+
+### D-015 · El motor no genera ids ni lee el reloj
+
+`grade()` y `override()` reciben `now` por parámetro y derivan el id del log de
+`itemId` + fecha (`log-itm-1-2026-10-15T…`), salvo que se les pase `logId`.
+
+**Motivo:** la regla 3 exige un motor puro. Con `Date.now()` o `crypto.randomUUID()` dentro no
+habría tests deterministas. Quien persista puede sustituir el id por el suyo.
+
+### D-016 · «Dominado» es una etapa canónica: la del último checkpoint + 1
+
+El contrato dice que el ítem pasa a `mastered` «al superar la etapa 10». La etapa se guarda, por
+tanto, como `intervals.length + 1` y ahí se queda: calificar «bien» otra vez no la sube a 12.
+
+**Motivo:** un único valor para un único estado. Y `back1` desde dominado devuelve a la etapa 10,
+que es lo que se espera.
+
+### D-017 · Un ítem dominado no se pinta como vencido
+
+`itemStatus()` comprueba `mastered` **antes** que `due`.
+
+**Motivo:** el contrato §4.1 llama al repaso de un dominado «opcional (anual)». Si saliera en rojo
+pulsante y en la cola de hoy, no sería opcional. `buildQueue()` lo incluye solo si se le pide con
+`includeMastered`.
+
+### D-018 · `itemStatus(state, now, schedule?)` lleva un tercer parámetro
+
+La firma del contrato es `itemStatus(state, now)`, pero sin el horario no se puede saber cuál es la
+última etapa y, por tanto, distinguir `mastered` de `review`. El tercer parámetro es opcional: sin
+él la función sigue funcionando y nunca devuelve `mastered`.
+
+### D-019 · Los intervalos derivados se normalizan en minutos, horas o días
+
+«Difícil» en la etapa 10 de R10 son 262 800 minutos. Expresados en la unidad que divida exacto
+salían «4380 h», que no se lee. La regla es: minutos por debajo de una hora, horas hasta dos días,
+y días a partir de ahí, con un decimal como máximo («3,5 d», «182,5 d»).
+
+**Motivo:** legibilidad. Semanas y meses siguen disponibles para los intervalos que define el
+usuario; simplemente no se generan solos, porque «15 d» se lee mejor que «2,1 sem».
+
+### D-020 · El modo adaptativo deduce el intervalo anterior, no lo guarda
+
+SM-2 necesita el intervalo que se aplicó la última vez. En vez de añadir un campo a `ReviewState`,
+se deduce de `dueAt − lastReviewedAt`.
+
+**Motivo:** evita tocar el esquema del contrato (regla 6) y tiene un efecto deseable: si el usuario
+fijó la fecha a mano, el modo adaptativo parte de la que él eligió.
+
+### D-021 · Los parámetros de SM-2, elegidos aquí
+
+El contrato solo fija la facilidad inicial (2,5) y su mínimo (1,3). El resto se eligió:
+«otra vez» −0,20 y vuelta al intervalo mínimo; «difícil» −0,15 e intervalo × 1,2; «bien»
+intervalo × facilidad; «fácil» +0,15 e intervalo × facilidad × 1,3. El modo adaptativo nunca
+declara `mastered`, porque no tiene última etapa.
+
+**Motivo:** son los valores habituales de SM-2. Si el usuario prefiere otros, se cambian en
+`src/srs/grade.ts` sin tocar nada más.
+
+### D-022 · `override()` recibe la calificación y la etapa de partida
+
+El `ReviewLog` del contrato exige un `grade`, pero un ajuste manual no es una calificación. La
+firma es `override(state, schedule, target, now, { grade, stageBefore })`: el flujo real es
+calificar, ver la propuesta y ajustarla, así que el log del ajuste lleva la calificación que el
+usuario dio. **Se guarda ese log, no los dos.**
+
+### D-023 · Los tests corren en `Europe/Madrid`
+
+`vite.config.ts` fija `TZ` en el entorno de Vitest.
+
+**Motivo:** el motor ancla los intervalos de un día o más a la hora local, y los tests obligatorios
+de cambio de horario necesitan una zona con DST para ser deterministas en cualquier máquina.
