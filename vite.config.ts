@@ -37,6 +37,12 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url)),
     },
   },
+  server: {
+    watch: {
+      // Sin esto, cada informe de cobertura recarga la página en desarrollo.
+      ignored: ['**/coverage/**', '**/dist/**', '**/dev-dist/**'],
+    },
+  },
   test: {
     environment: 'jsdom',
     globals: true,
