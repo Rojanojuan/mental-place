@@ -1,8 +1,9 @@
-import { useMemo, useState } from 'react';
+import { useState } from 'react';
 import { useLiveQuery } from 'dexie-react-hooks';
-import { BODY_SILHOUETTE, BODY_VIEWBOX } from '@/design/assets';
+import { Link } from 'react-router-dom';
+import { BodyMap } from '@/components/BodyMap';
 import { STATE_LABEL, STATE_TOKEN } from '@/design/states';
-import type { ID, Item, Locus, LocusState, SceneObject, Zone } from '@/domain/types';
+import type { ID, Item, SceneObject, Zone } from '@/domain/types';
 import {
   listItemsByLocus,
   listLoci,
@@ -14,31 +15,10 @@ import {
 import { BlockView } from './BlockView';
 import './inspector.css';
 
-// Lienzo: cuerpo frontal + hueco del 22 % del ancho de un cuerpo + cuerpo posterior.
-const GAP = BODY_VIEWBOX.width * 0.22;
-const BACK_X = BODY_VIEWBOX.width + GAP;
-const CANVAS_W = BODY_VIEWBOX.width * 2 + GAP;
-
-// Tamaño del punto en unidades del viewBox: 5,2 % del alto del cuerpo, y 2,6 %
-// para los puntos densos (cabeza, manos). La Fase 4 lo recalculará en píxeles
-// reales con un ResizeObserver, que es lo que pide el diseño.
-const PIN = BODY_VIEWBOX.height * 0.052;
-const PIN_DENSE = BODY_VIEWBOX.height * 0.026;
-
-interface Placed {
-  locus: Locus;
-  state: LocusState;
-  cx: number;
-  cy: number;
-  r: number;
-}
-
 /**
- * Visor del contenido ingresado. Lee de IndexedDB con `useLiveQuery`, así que
- * se refresca solo cuando cambian los datos o los estados de repaso.
- *
- * En la Fase 4 se parte en `BodyMap` + `LocusDetail`; los componentes ya están
- * separados por responsabilidad para que ese corte no toque la lógica.
+ * Recorre el palacio punto por punto para revisar el contenido ingresado.
+ * Lee de IndexedDB con `useLiveQuery`: al calificar en una sesión, el color de
+ * los puntos cambia aquí sin recargar.
  */
 export function Inspector() {
   const [selectedId, setSelectedId] = useState<ID | null>(null);
@@ -67,17 +47,6 @@ export function Inspector() {
     return { items, scene };
   }, [current]);
 
-  const placed = useMemo<Placed[]>(() => {
-    if (!map) return [];
-    return map.loci.map((locus) => ({
-      locus,
-      state: map.statuses[locus.id] ?? 'empty',
-      cx: (locus.side === 'back' ? BACK_X : 0) + locus.pos.x * BODY_VIEWBOX.width,
-      cy: locus.pos.y * BODY_VIEWBOX.height,
-      r: (locus.dense === true ? PIN_DENSE : PIN) / 2,
-    }));
-  }, [map]);
-
   if (!palace || !map) {
     return (
       <section className="insp insp--msg">
@@ -90,8 +59,9 @@ export function Inspector() {
     );
   }
 
-  const selected = placed.find((p) => p.locus.id === current);
-  const filled = placed.filter((p) => p.state !== 'empty').length;
+  const locus = map.loci.find((l) => l.id === current);
+  const state = locus ? (map.statuses[locus.id] ?? 'empty') : 'empty';
+  const filled = map.loci.filter((l) => map.statuses[l.id] !== 'empty').length;
 
   return (
     <section className="insp">
@@ -99,7 +69,7 @@ export function Inspector() {
         <div>
           <h2>{palace.name}</h2>
           <p className="insp__sub">
-            {placed.length} puntos · {filled} con contenido · {map.zones.length} zonas
+            {map.loci.length} puntos · {filled} con contenido · {map.zones.length} zonas
           </p>
         </div>
         <ul className="insp__zones">
@@ -114,79 +84,28 @@ export function Inspector() {
 
       <div className="insp__body">
         <div className="insp__map">
-          <svg
-            viewBox={`0 0 ${String(CANVAS_W)} ${String(BODY_VIEWBOX.height)}`}
-            role="group"
-            aria-label="Mapa del cuerpo con los puntos del palacio"
-          >
-            <image
-              href={BODY_SILHOUETTE.front}
-              x={0}
-              y={0}
-              width={BODY_VIEWBOX.width}
-              height={BODY_VIEWBOX.height}
-            />
-            <image
-              href={BODY_SILHOUETTE.back}
-              x={BACK_X}
-              y={0}
-              width={BODY_VIEWBOX.width}
-              height={BODY_VIEWBOX.height}
-            />
-            {placed.map((pin) => {
-              const isSel = pin.locus.id === current;
-              return (
-                <g
-                  key={pin.locus.id}
-                  className={`pin${isSel ? ' pin--sel' : ''}`}
-                  role="button"
-                  tabIndex={0}
-                  aria-label={`${String(pin.locus.routeNo)}. ${pin.locus.partName} — ${STATE_LABEL[pin.state]}`}
-                  aria-pressed={isSel}
-                  onClick={() => {
-                    setSelectedId(pin.locus.id);
-                  }}
-                  onKeyDown={(e) => {
-                    if (e.key === 'Enter' || e.key === ' ') {
-                      e.preventDefault();
-                      setSelectedId(pin.locus.id);
-                    }
-                  }}
-                >
-                  <title>{`${String(pin.locus.routeNo)}. ${pin.locus.partName}`}</title>
-                  <circle
-                    cx={pin.cx}
-                    cy={pin.cy}
-                    r={pin.r}
-                    fill={`var(${STATE_TOKEN[pin.state]})`}
-                    stroke="var(--state-edge)"
-                    strokeWidth={1.5}
-                  />
-                  {pin.locus.dense !== true && (
-                    <text x={pin.cx} y={pin.cy} className="pin__n">
-                      {pin.locus.routeNo}
-                    </text>
-                  )}
-                </g>
-              );
-            })}
-          </svg>
+          <BodyMap
+            loci={map.loci}
+            statusByLocus={map.statuses}
+            selectedIds={current === null ? [] : [current]}
+            onLocusTap={setSelectedId}
+          />
           <ol className="insp__route">
-            {placed.map((pin) => (
-              <li key={pin.locus.id}>
+            {map.loci.map((entry) => (
+              <li key={entry.id}>
                 <button
                   type="button"
-                  className={`insp__rbtn${pin.locus.id === current ? ' is-sel' : ''}`}
+                  className={`insp__rbtn${entry.id === current ? ' is-sel' : ''}`}
                   onClick={() => {
-                    setSelectedId(pin.locus.id);
+                    setSelectedId(entry.id);
                   }}
                 >
-                  <span className="insp__rn mono">{pin.locus.routeNo}</span>
+                  <span className="insp__rn mono">{entry.routeNo}</span>
                   <span
                     className="insp__rdot"
-                    style={{ background: `var(${STATE_TOKEN[pin.state]})` }}
+                    style={{ background: `var(${STATE_TOKEN[map.statuses[entry.id] ?? 'empty']})` }}
                   />
-                  {pin.locus.partName}
+                  {entry.partName}
                 </button>
               </li>
             ))}
@@ -194,21 +113,19 @@ export function Inspector() {
         </div>
 
         <article className="insp__detail">
-          {!selected ? (
+          {!locus ? (
             <p>Elige un punto.</p>
           ) : (
             <>
               <h3>
-                <span className="mono">{selected.locus.routeNo}</span> · {selected.locus.partName}
+                <span className="mono">{locus.routeNo}</span> · {locus.partName}
               </h3>
               <p className="insp__meta">
-                {map.zones.find((z) => z.id === selected.locus.zoneId)?.name} · lado{' '}
-                {selected.locus.side === 'back' ? 'posterior' : 'frontal'}
-                {selected.locus.dense === true && ' · punto denso'} · {STATE_LABEL[selected.state]}
+                {map.zones.find((z) => z.id === locus.zoneId)?.name} · lado{' '}
+                {locus.side === 'back' ? 'posterior' : 'frontal'}
+                {locus.dense === true && ' · punto denso'} · {STATE_LABEL[state]}
               </p>
-              {selected.locus.anchor && (
-                <p className="insp__anchor">{selected.locus.anchor.text}</p>
-              )}
+              {locus.anchor && <p className="insp__anchor">{locus.anchor.text}</p>}
 
               {detail && detail.scene.length > 0 && (
                 <ul className="insp__scene">
@@ -224,7 +141,7 @@ export function Inspector() {
               {detail?.items.length === 0 ? (
                 <p className="insp__empty">
                   Punto sin contenido.
-                  {selected.locus.notes !== undefined && ` ${selected.locus.notes}`}
+                  {locus.notes !== undefined && ` ${locus.notes}`}
                 </p>
               ) : (
                 detail?.items.map((item: Item) => (
@@ -236,6 +153,12 @@ export function Inspector() {
                     ))}
                   </div>
                 ))
+              )}
+
+              {detail && detail.items.length > 0 && (
+                <Link className="btn insp__study" to="/sesion">
+                  Ir a repasar
+                </Link>
               )}
             </>
           )}

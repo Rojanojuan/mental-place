@@ -1,0 +1,148 @@
+.today h2 {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.today__sub {
+  margin: var(--space-1) 0 0;
+  color: var(--text-3);
+  font-size: 13px;
+}
+
+.today--msg {
+  padding: var(--space-6);
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+.today__grid {
+  margin-top: var(--space-5);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(240px, 380px);
+  gap: var(--space-5);
+  align-items: start;
+}
+
+@media (max-width: 900px) {
+  .today__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .today__map {
+    order: -1;
+  }
+}
+
+.today__panel {
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  padding: var(--space-5);
+}
+
+.today__counts {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: var(--space-6);
+}
+
+.today__counts li {
+  display: flex;
+  flex-direction: column;
+}
+
+.today__n {
+  font-size: 32px;
+  font-weight: 500;
+  line-height: 1.1;
+  font-variant-numeric: tabular-nums;
+}
+
+.today__label {
+  font-size: 12px;
+  color: var(--text-3);
+}
+
+.today__cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin-top: var(--space-5);
+  text-decoration: none;
+}
+
+.today__done {
+  margin-top: var(--space-5);
+  color: var(--text-2);
+  font-size: 14px;
+}
+
+.today__h3 {
+  margin: var(--space-6) 0 var(--space-3);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-2);
+}
+
+.today__forecast {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: var(--space-2);
+  align-items: end;
+}
+
+.today__forecast li {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.today__bar-wrap {
+  display: flex;
+  align-items: flex-end;
+  height: 64px;
+  width: 100%;
+  background: var(--sunken);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+
+.today__bar {
+  width: 100%;
+  min-height: 2px;
+  background: var(--accent);
+  opacity: 0.75;
+  border-radius: var(--radius-sm);
+}
+
+.today__bar-n {
+  font-size: 11px;
+  color: var(--text-2);
+}
+
+.today__bar-d {
+  font-size: 11px;
+  color: var(--text-3);
+}
+
+.today__map {
+  background: var(--sunken);
+  border-radius: var(--radius-lg);
+  padding: var(--space-3);
+}
+
+.today__palace {
+  margin: var(--space-2) 0 0;
+  text-align: center;
+  font-size: 12px;
+  color: var(--text-3);
+}

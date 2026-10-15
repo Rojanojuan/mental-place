@@ -134,3 +134,22 @@
   color: var(--text);
   box-shadow: var(--shadow-sm);
 }
+
+.btn--primary {
+  min-height: 48px;
+  font-weight: 500;
+}
+
+.btn--primary kbd {
+  font-size: 10px;
+  color: var(--text-3);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  padding: 0 4px;
+}
+
+.tabs__btn {
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+}

@@ -253,3 +253,47 @@ el bootstrap se quedará solo con los presets.
 
 El Inspector consulta la base con `useLiveQuery` de `dexie-react-hooks` (D-005): al calificar un
 ítem, el color de su punto cambia sin que nadie recargue nada. Es lo que justifica esa dependencia.
+
+## Fase 4 (primera parte) — Hoy y la sesión (2026-10-15)
+
+### D-031 · La cola se congela al entrar en la sesión
+
+`Session` arma la cola una vez al montarse, no con `useLiveQuery`. Si se recalculara en vivo, al
+calificar una tarjeta la cola se reordenaría y las siguientes se moverían bajo los pies del
+usuario.
+
+El mapa y la pantalla de Hoy sí van en vivo: ahí el cambio instantáneo es justo lo que se quiere.
+
+### D-032 · Calificar no escribe hasta que el usuario acepta
+
+El contrato §4.3 dice que el usuario **siempre** ve la fecha propuesta y puede cambiarla. Así que
+tocar «Bien» solo calcula la propuesta con `previewIntervals()` y abre la hoja; se escribe en
+`Aceptar` (con `applyGrade`) o al elegir un ajuste (con `applyOverride`). Nunca las dos cosas, así
+que el historial tiene **un log por repaso**.
+
+Hay un test que lo comprueba: con la hoja abierta, `reviewLogs` sigue vacía.
+
+### D-033 · Nombre accesible explícito en los botones de calificar
+
+Cada botón lleva `aria-label="Bien · 10 min"` y `aria-keyshortcuts`. Sin el `aria-label`, el nombre
+accesible sale de concatenar la etiqueta, el intervalo y el número de tecla sin separación
+(«Bien10 min3»), que es lo que oiría un lector de pantalla.
+
+### D-034 · Reloj de 24 horas, no el de 12 del prototipo
+
+El prototipo escribe «jueves 16, 8:00 a. m.»; la app escribe «Jueves 16 de octubre, 8:00», y
+«Hoy, 19:50» o «Mañana, 8:00» cuando toca. Es menos ambiguo y se lee de un golpe.
+Anotado también en `docs/HANDOFF_DISENO.md`.
+
+### D-035 · `BrowserRouter`, no `HashRouter`
+
+Las URLs quedan limpias (`/sesion`) y el service worker que genera `vite-plugin-pwa` sirve
+`index.html` como `navigateFallback`, así que los enlaces profundos funcionan instalada y sin
+conexión.
+
+### D-036 · El mapa es un componente, no código repetido
+
+`src/components/BodyMap.tsx` lo usan Hoy, la sesión y el Inspector. Recibe los puntos, sus estados
+y el punto enfocado; no consulta nada. Implementa lo que pide el diseño: cámara de 700 ms al punto,
+pines contra-escalados para que no cambien de tamaño con el zoom, halo pulsante en los vencidos,
+rayado en los pausados, estrella en los dominados y número oculto por debajo de 13 px.

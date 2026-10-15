@@ -220,3 +220,48 @@ colas y la ida y vuelta completa de la semilla de fonética por la base de datos
   de cambios. El motor y la base ya están listos para recibirlos.
 - Sigue sin existir la sesión de repaso: `applyGrade()` funciona y está probado, pero nadie lo
   llama desde la UI todavía (Fase 4).
+
+---
+
+## Fase 4 (primera parte) · Hoy y la sesión de repaso — ✅ (2026-10-15)
+
+Ya se puede **estudiar**: el ciclo completo del contrato §4.5 funciona de punta a punta.
+
+### Hecho
+
+| Pantalla / componente              | Qué hace                                                                                                                           |
+| ---------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| `src/components/BodyMap.tsx`       | El mapa compartido: cámara al punto, pines contra-escalados, halo pulsante en vencidos, rayado en pausados, estrella en dominados. |
+| `src/features/today/Today.tsx`     | Saludo, racha, vencidos/nuevos/dominados, «Repasar ahora (N)», previsión de 7 días y el mapa.                                      |
+| `src/features/session/Session.tsx` | Las tres fases (señalar → escena → contenido), los 4 botones con su intervalo, teclado, progreso y resumen.                        |
+| `NextReviewSheet.tsx`              | La hoja del próximo repaso: **Aceptar** como acción principal y los ajustes bajo «Avanzado».                                       |
+| `App.tsx`                          | React Router: `/`, `/sesion`, `/inspector`, `/tokens`.                                                                             |
+
+**El flujo:** se señala el punto en el cuerpo con zoom y su ancla → el usuario intenta recordar →
+espacio (o «Revelar») muestra los objetos de escena, escalonados → otro espacio muestra el
+contenido → los cuatro botones con su intervalo debajo (`10 min`, `1 d`…) → la hoja con la fecha
+propuesta y la etapa → **Aceptar**, o «Avanzado» para los seis atajos, la fecha y hora exactas o
+saltar a una etapa. Teclado: **espacio** revela, **1–4** califican.
+
+### Comprobaciones
+
+| Comando         | Resultado                                          |
+| --------------- | -------------------------------------------------- |
+| `npm run check` | ✅ typecheck + lint + **293 tests** en 14 archivos |
+| `npm run build` | ✅ 415 kB JS (132 kB gzip)                         |
+
+21 tests nuevos sobre las pantallas, con la base de datos real: las tres fases revelándose en
+orden, que el reverso **no** se ve antes de tiempo, los intervalos de cada botón, que **nada se
+escribe hasta aceptar**, que un atajo deja un único log con `manual: true`, el salto de etapa, el
+teclado, la cola completa hasta el resumen, el recorrido sin filtrar por vencimiento y los contadores
+de Hoy.
+
+### Pendiente de la Fase 4
+
+Faltan las pantallas de **editor de palacio**, **detalle del punto editable**, **editor de ítem**,
+**biblioteca**, **horarios**, **estadísticas**, **casas** y **onboarding**. El Inspector hace de
+detalle de punto en modo lectura mientras tanto.
+
+### Pendiente de la Fase 3
+
+Importar y exportar sigue sin pantalla ni validación Zod. La semilla entra por `bootstrap.ts`.

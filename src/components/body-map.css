@@ -1,0 +1,70 @@
+.bodymap {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.bodymap image {
+  opacity: 0.92;
+}
+
+/* Cámara: 700 ms con el easing de cámara del diseño. */
+.bodymap__camera {
+  transition: transform var(--dur-camera) var(--ease-camera);
+}
+
+.pin {
+  cursor: pointer;
+}
+
+.pin__dot {
+  transition: opacity var(--dur-fast) var(--ease-out);
+}
+
+.pin:hover .pin__dot {
+  opacity: 0.85;
+}
+
+.pin:focus-visible {
+  outline: none;
+}
+
+.pin:focus-visible .pin__dot {
+  stroke: var(--accent);
+  stroke-width: 3;
+}
+
+.pin--focus .pin__dot {
+  transform-box: fill-box;
+  transform-origin: center;
+  transform: scale(1.15);
+}
+
+.pin--sel .pin__dot {
+  stroke: var(--accent);
+}
+
+/* Vencido: halo que late. Se oculta con prefers-reduced-motion (tokens.css). */
+.pin__halo {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: pc-pulse var(--dur-pulse) var(--ease-out) infinite;
+  pointer-events: none;
+}
+
+.pin__n {
+  font-family: var(--font-ui);
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  fill: var(--ink-on-state);
+  text-anchor: middle;
+  dominant-baseline: central;
+  pointer-events: none;
+}
+
+.pin__star {
+  fill: var(--ink-on-state);
+  text-anchor: middle;
+  dominant-baseline: central;
+  pointer-events: none;
+}

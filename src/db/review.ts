@@ -290,3 +290,28 @@ export async function forecast(
   }
   return [...buckets].map(([date, count]) => ({ date, count }));
 }
+
+/**
+ * Racha de días seguidos estudiando, contando hacia atrás desde hoy.
+ * Si hoy todavía no se ha estudiado pero ayer sí, la racha sigue viva.
+ */
+export async function studyStreak(now: Date, database: DB = db): Promise<number> {
+  const logs = await database.reviewLogs.orderBy('at').reverse().limit(2000).toArray();
+  if (logs.length === 0) return 0;
+
+  const days = new Set(logs.map((log) => log.at.slice(0, 10)));
+  const key = (date: Date): string =>
+    `${String(date.getFullYear())}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
+
+  const cursor = new Date(now);
+  if (!days.has(key(cursor))) {
+    cursor.setDate(cursor.getDate() - 1);
+    if (!days.has(key(cursor))) return 0;
+  }
+  let streak = 0;
+  while (days.has(key(cursor))) {
+    streak += 1;
+    cursor.setDate(cursor.getDate() - 1);
+  }
+  return streak;
+}

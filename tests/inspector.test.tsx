@@ -1,11 +1,12 @@
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
-import { render, screen, waitFor } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it } from 'vitest';
 import type { Bundle } from '@/domain/types';
 import { applyGrade, clearAll, db, ensurePresets, importBundle } from '@/db';
 import { Inspector } from '@/features/inspector/Inspector';
+import { renderAt } from './render';
 
 const seed = JSON.parse(
   readFileSync(resolve(process.cwd(), 'seed/fonetica45.json'), 'utf8'),
@@ -22,7 +23,7 @@ const heading = (): Promise<HTMLElement> =>
 
 describe('Inspector', () => {
   it('pinta el palacio con sus 45 puntos y 5 zonas', async () => {
-    render(<Inspector />);
+    renderAt(<Inspector />, '/inspector');
     expect(await heading()).toBeInTheDocument();
     expect(screen.getByText(/45 puntos · 44 con contenido · 5 zonas/)).toBeInTheDocument();
     // Un pin por punto (los botones de la lista de ruta tienen otro nombre).
@@ -30,7 +31,7 @@ describe('Inspector', () => {
   });
 
   it('abre el primer punto con contenido y muestra sus tablas', async () => {
-    render(<Inspector />);
+    renderAt(<Inspector />, '/inspector');
     await heading();
 
     // El ancla sale con el mapa; los bloques llegan en una segunda consulta.
@@ -43,7 +44,7 @@ describe('Inspector', () => {
   });
 
   it('cambia de punto al tocar otro pin', async () => {
-    render(<Inspector />);
+    renderAt(<Inspector />, '/inspector');
     await heading();
 
     await userEvent.click(screen.getByRole('button', { name: /^2\. Frente/ }));
@@ -58,7 +59,7 @@ describe('Inspector', () => {
   });
 
   it('avisa de que el punto 34 no tiene contenido', async () => {
-    render(<Inspector />);
+    renderAt(<Inspector />, '/inspector');
     await heading();
 
     await userEvent.click(screen.getByRole('button', { name: /^34\. Tobillo/ }));
@@ -71,7 +72,7 @@ describe('Inspector', () => {
 
   it('refleja el estado de repaso que hay en la base de datos', async () => {
     // El punto 1 pasa de «Nuevo» a «Aprendiendo» al calificarlo.
-    render(<Inspector />);
+    renderAt(<Inspector />, '/inspector');
     await heading();
     await waitFor(() => {
       expect(screen.getByRole('button', { name: /^1\. Pelo.*Nuevo/ })).toBeInTheDocument();
@@ -86,7 +87,7 @@ describe('Inspector', () => {
 
   it('espera mientras la base de datos está vacía', async () => {
     await clearAll(db);
-    render(<Inspector />);
+    renderAt(<Inspector />, '/inspector');
     expect(await screen.findByText(/Abriendo la base de datos/)).toBeInTheDocument();
     expect(screen.getByText(/npm run seed:fonetica/)).toBeInTheDocument();
   });
