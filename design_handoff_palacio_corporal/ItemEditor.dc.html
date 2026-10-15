@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="_ds/nocturne-b05dafec-65a9-46f7-a005-25140c24ba40/styles.css">
+  <script src="_ds/nocturne-b05dafec-65a9-46f7-a005-25140c24ba40/_ds_bundle.js"></script>
+  <link rel="stylesheet" href="pc-tokens.css">
+  <script src="https://unpkg.com/@phosphor-icons/web@2.1.1"></script>
+</helmet>
+<div data-pc-theme="{{ theme }}" style="position: relative; width: 390px; height: 844px; border-radius: 44px; overflow: hidden; background: var(--bg); color: var(--text); font-family: var(--font-ui); font-size: 15px; line-height: 1.45; box-shadow: var(--shadow-md); isolation: isolate;">
+  <div style="position: absolute; left: 0; right: 0; top: 0; height: 44px; display: flex; align-items: center; justify-content: space-between; padding: 0 28px 0 32px; font: 600 14px/1 var(--font-ui); z-index: 40; background: var(--bg);">
+    <span>19:40</span>
+    <div style="display: flex; gap: 6px; font-size: 15px;"><i class="ph-fill ph-cell-signal-high"></i><i class="ph-fill ph-wifi-high"></i><i class="ph-fill ph-battery-high"></i></div>
+  </div>
+  <div style="position: absolute; left: 0; right: 0; top: 44px; z-index: 39; background: var(--bg); display: flex; flex-direction: column; gap: 8px; padding: 0 8px 10px; box-shadow: 0 1px 0 var(--line);">
+    <div style="height: 52px; display: flex; align-items: center; gap: 4px;">
+      <button aria-label="Cerrar" style="width: 44px; height: 44px; border: 0; border-radius: 10px; background: transparent; color: var(--text-2); font-size: 20px; cursor: pointer; display: grid; place-items: center;" style-hover="background: var(--surface);"><i class="ph ph-x"></i></button>
+      <span style="flex: 1; font-size: 15px; font-weight: 500;">Editar ítem</span>
+      <button style="height: 40px; padding: 0 14px; border-radius: 10px; border: 1.5px solid var(--accent); background: var(--accent-tint); color: var(--accent-text); font: 500 14px var(--font-ui); cursor: pointer;">Guardar</button>
+    </div>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; padding: 3px; gap: 2px; margin: 0 8px; border-radius: 10px; background: var(--sunken);">
+      <sc-for list="{{ tabs }}" as="t" hint-placeholder-count="2">
+        <button onClick="{{ t.go }}" style="height: 36px; border: 0; border-radius: 7px; background: {{ t.bg }}; box-shadow: {{ t.shadow }}; color: {{ t.color }}; font: 500 13px var(--font-ui); cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 6px;"><i class="{{ t.icon }}"></i>{{ t.label }}</button>
+      </sc-for>
+    </div>
+  </div>
+
+  <sc-if value="{{ isEdit }}" hint-placeholder-val="{{ true }}">
+    <div style="position: absolute; inset: 154px 0 0 0; overflow-y: auto; scrollbar-width: none; padding: 16px 16px 48px; display: flex; flex-direction: column; gap: 22px;">
+      <div style="display: flex; flex-direction: column; gap: 8px;">
+        <span style="font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-3);">Plantilla</span>
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px;">
+          <sc-for list="{{ templates }}" as="t" hint-placeholder-count="3">
+            <button onClick="{{ t.go }}" style="height: 64px; display: flex; flex-direction: column; align-items: flex-start; justify-content: center; gap: 4px; padding: 0 10px; border-radius: 12px; border: {{ t.border }}; background: {{ t.bg }}; color: var(--text); cursor: pointer; font-family: var(--font-ui); text-align: left;"><i class="{{ t.icon }}" style="font-size: 18px; color: var(--text-2);"></i><span style="font-size: 13px; font-weight: 500;">{{ t.label }}</span></button>
+          </sc-for>
+        </div>
+      </div>
+
+      <label style="display: flex; flex-direction: column; gap: 5px; font-size: 12px; color: var(--text-2);">{{ titleLabel }}
+        <input value="{{ title }}" onChange="{{ setTitle }}" style="height: 48px; padding: 0 12px; border-radius: 10px; border: 1px solid var(--line-2); background: var(--surface); color: var(--text); font: 500 17px var(--font-ui); caret-color: var(--accent);">
+      </label>
+
+      <sc-if value="{{ isGrammar }}" hint-placeholder-val="{{ true }}">
+        <div style="display: flex; flex-direction: column; gap: 22px;">
+          <label style="display: flex; flex-direction: column; gap: 5px; font-size: 12px; color: var(--text-2);">Regla en una frase
+            <textarea rows="3" style="min-height: 84px; scrollbar-width: none; padding: 10px 12px; border-radius: 10px; border: 1px solid var(--line-2); background: var(--surface); color: var(--text); font: 400 14px/1.45 var(--font-ui); resize: vertical; caret-color: var(--accent);">Conecta una acción pasada con el presente: importa el resultado o la experiencia, no el momento.</textarea>
+          </label>
+          <label style="display: flex; flex-direction: column; gap: 5px; font-size: 12px; color: var(--text-2);">Fórmula
+            <input value="S + have/has + past participle" style="height: 44px; padding: 0 12px; border-radius: 10px; border: 1px solid var(--line-2); background: var(--sunken); color: var(--accent-text); font: 500 14px var(--font-mono); caret-color: var(--accent);">
+          </label>
+
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <div style="display: flex; align-items: baseline; justify-content: space-between;"><span style="font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-3);">Tabla de conjugación</span><span style="font: 400 11px var(--font-mono); color: var(--text-3);">verbo: work</span></div>
+            <div style="overflow-x: auto; margin: 0 -16px; padding: 0 16px; scrollbar-width: thin;">
+              <div style="display: grid; grid-template-columns: 104px repeat(5, 132px); border-radius: 10px; overflow: hidden; box-shadow: 0 0 0 1px var(--line-2); width: max-content;">
+                <sc-for list="{{ tableHead }}" as="h" hint-placeholder-count="6">
+                  <div style="height: 34px; display: flex; align-items: center; padding: 0 8px; background: var(--surface-2); font: 500 10px var(--font-ui); letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-3);">{{ h.v }}</div>
+                </sc-for>
+                <sc-for list="{{ tableCells }}" as="c" hint-placeholder-count="18">
+                  <input value="{{ c.v }}" onChange="{{ c.set }}" readOnly="{{ c.ro }}" aria-label="{{ c.aria }}" style="height: 40px; padding: 0 8px; border: 0; border-top: 1px solid var(--line); background: {{ c.bg }}; color: {{ c.color }}; font: 400 12px var(--font-mono); outline-offset: -2px; min-width: 0;">
+                </sc-for>
+              </div>
+            </div>
+          </div>
+
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <div style="display: flex; align-items: baseline; justify-content: space-between;"><span style="font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-3);">Sub-elementos · {{ subCount }}</span></div>
+            <div style="display: flex; flex-direction: column; border-radius: 14px; background: var(--surface); box-shadow: var(--shadow-sm); overflow: hidden;">
+              <sc-for list="{{ subs }}" as="s" hint-placeholder-count="6">
+                <div style="display: flex; flex-direction: column; border-top: {{ s.border }};">
+                  <button onClick="{{ s.toggle }}" aria-expanded="{{ s.open }}" style="min-height: 52px; display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 8px; padding: 0 12px; border: 0; background: transparent; color: var(--text); cursor: pointer; text-align: left; font-family: var(--font-ui);">
+                    <div style="display: flex; flex-direction: column; min-width: 0;"><span style="font: 500 14px var(--font-mono); color: var(--accent-text);">{{ s.piece }}</span><span style="font-size: 12px; color: var(--text-3);">{{ s.fn }}</span></div>
+                    <i class="{{ s.caret }}" style="color: var(--text-3);"></i>
+                  </button>
+                  <sc-if value="{{ s.open }}" hint-placeholder-val="{{ false }}">
+                    <div style="display: grid; grid-template-columns: 92px 1fr; gap: 8px 10px; padding: 0 12px 14px; font-size: 13px;">
+                      <span style="color: var(--text-3);">Apreciación</span><span style="text-wrap: pretty;">{{ s.note }}</span>
+                      <span style="color: var(--text-3);">Ejemplo</span><span style="font-family: var(--font-mono); font-size: 12px;">{{ s.ex }}</span>
+                      <span style="color: var(--text-3);">Dato</span><span style="color: var(--text-2); text-wrap: pretty;">{{ s.fact }}</span>
+                    </div>
+                  </sc-if>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ isVocab }}" hint-placeholder-val="{{ false }}">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+          <label style="display: flex; flex-direction: column; gap: 5px; font-size: 12px; color: var(--text-2);">Traducción<input value="preguntarse · asombrarse" style="height: 44px; padding: 0 12px; border-radius: 10px; border: 1px solid var(--line-2); background: var(--surface); color: var(--text); font: 400 14px var(--font-ui); min-width: 0;"></label>
+          <label style="display: flex; flex-direction: column; gap: 5px; font-size: 12px; color: var(--text-2);">Pronunciación<input value="/ˈwʌn.dər/" style="height: 44px; padding: 0 12px; border-radius: 10px; border: 1px solid var(--line-2); background: var(--surface); color: var(--text); font: 400 14px var(--font-mono); min-width: 0;"></label>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ isFree }}" hint-placeholder-val="{{ false }}">
+        <div style="display: flex; flex-direction: column; gap: 10px;">
+          <label style="display: flex; flex-direction: column; gap: 5px; font-size: 12px; color: var(--text-2);">Frente (pregunta o pista)<input value="¿Cómo distingo sheep y ship?" style="height: 44px; padding: 0 12px; border-radius: 10px; border: 1px solid var(--line-2); background: var(--surface); color: var(--text); font: 400 14px var(--font-ui);"></label>
+          <label style="display: flex; flex-direction: column; gap: 5px; font-size: 12px; color: var(--text-2);">Reverso (respuesta)<input value="/iː/ larga y tensa · /ɪ/ corta y relajada" style="height: 44px; padding: 0 12px; border-radius: 10px; border: 1px solid var(--line-2); background: var(--surface); color: var(--text); font: 400 14px var(--font-ui);"></label>
+        </div>
+      </sc-if>
+
+      <div style="display: flex; flex-direction: column; gap: 8px;">
+        <span style="font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-3);">Bloques de contenido · {{ blockCount }}</span>
+        <div style="display: flex; flex-direction: column; gap: 6px;">
+          <sc-for list="{{ blocks }}" as="b" hint-placeholder-count="4">
+            <div style="display: grid; grid-template-columns: 24px 32px 1fr auto; align-items: center; gap: 8px; min-height: 52px; padding: 0 4px 0 6px; border-radius: 12px; background: var(--surface); box-shadow: var(--shadow-sm);">
+              <i class="ph ph-dots-six-vertical" style="color: var(--text-3); font-size: 18px;" aria-label="Arrastrar para reordenar"></i>
+              <div style="width: 32px; height: 32px; border-radius: 8px; background: var(--surface-2); display: grid; place-items: center; color: var(--text-2);"><i class="{{ b.icon }}"></i></div>
+              <div style="display: flex; flex-direction: column; min-width: 0;"><span style="font-size: 12px; color: var(--text-3);">{{ b.kind }}</span><span style="font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{ b.preview }}</span></div>
+              <div style="display: flex;">
+                <button onClick="{{ b.up }}" disabled="{{ b.first }}" aria-label="Subir" style="width: 34px; height: 44px; border: 0; background: transparent; color: var(--text-2); cursor: pointer;"><i class="ph ph-caret-up"></i></button>
+                <button onClick="{{ b.del }}" aria-label="Quitar bloque" style="width: 34px; height: 44px; border: 0; background: transparent; color: var(--text-3); cursor: pointer;"><i class="ph ph-x"></i></button>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+        <div style="display: flex; flex-wrap: wrap; gap: 6px;">
+          <sc-for list="{{ addBlocks }}" as="a" hint-placeholder-count="7">
+            <button onClick="{{ a.go }}" style="height: 36px; padding: 0 10px; display: flex; align-items: center; gap: 6px; border-radius: 999px; border: 1px dashed var(--line-2); background: transparent; color: var(--text-2); font: 500 12px var(--font-ui); cursor: pointer;" style-hover="background: var(--surface); color: var(--text);"><i class="{{ a.icon }}"></i>{{ a.kind }}</button>
+          </sc-for>
+        </div>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 8px;">
+        <span style="font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-3);">Ubicación en el palacio</span>
+        <div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap; font-size: 13px;">
+          <span style="height: 30px; display: inline-flex; align-items: center; padding: 0 10px; border-radius: 8px; background: var(--surface-2);">{{ pickPalace }}</span><i class="ph ph-caret-right" style="color: var(--text-3);"></i>
+          <span style="height: 30px; display: inline-flex; align-items: center; gap: 6px; padding: 0 10px; border-radius: 8px; background: var(--surface-2);"><span style="width: 8px; height: 8px; border-radius: 50%; background: {{ pickZoneColor }};"></span>{{ pickZone }}</span><i class="ph ph-caret-right" style="color: var(--text-3);"></i>
+          <span style="height: 30px; display: inline-flex; align-items: center; padding: 0 10px; border-radius: 8px; background: var(--accent-tint); color: var(--accent-text);">L{{ pick.n }} · {{ pick.name }}</span>
+        </div>
+        <div style="height: 300px; border-radius: 14px; background: var(--surface); box-shadow: var(--shadow-sm); overflow: hidden; position: relative;">
+          <dc-import name="BodyMap" loci="{{ loci }}" side="front" width="358" height="300" pin-size="20" selected-ids="{{ pickIds }}" no-pulse="{{ true }}" on-pin-tap="{{ pickLocus }}" hint-size="358px,300px"></dc-import>
+          <span style="position: absolute; left: 10px; bottom: 8px; font-size: 11px; color: var(--text-3);">Toca un punto para asignar</span>
+        </div>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 12px;">
+        <span style="font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-3);">Organización y repaso</span>
+        <div style="display: flex; flex-direction: column; gap: 5px;"><span style="font-size: 12px; color: var(--text-2);">Etiquetas</span>
+          <div style="display: flex; flex-wrap: wrap; gap: 6px; padding: 6px; border-radius: 10px; border: 1px solid var(--line-2); background: var(--surface);">
+            <sc-for list="{{ tags }}" as="t" hint-placeholder-count="3"><span style="height: 30px; display: inline-flex; align-items: center; gap: 4px; padding: 0 4px 0 10px; border-radius: 7px; background: var(--surface-2); font-size: 12px;">{{ t.v }}<button onClick="{{ t.del }}" aria-label="Quitar etiqueta" style="width: 24px; height: 24px; border: 0; background: transparent; color: var(--text-3); cursor: pointer;"><i class="ph ph-x"></i></button></span></sc-for>
+            <input placeholder="Añadir…" onKeyDown="{{ addTag }}" style="flex: 1; min-width: 80px; height: 30px; border: 0; background: transparent; color: var(--text); font: 400 13px var(--font-ui);">
+          </div>
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+          <label style="display: flex; flex-direction: column; gap: 5px; font-size: 12px; color: var(--text-2);">Mazo<select style="height: 44px; padding: 0 10px; border-radius: 10px; border: 1px solid var(--line-2); background: var(--surface); color: var(--text); font: 400 14px var(--font-ui);"><option>Gramática C1</option><option>Vocabulario EN</option><option>Geografía</option></select></label>
+          <label style="display: flex; flex-direction: column; gap: 5px; font-size: 12px; color: var(--text-2);">Prioridad (frecuencia)<input value="12" inputmode="numeric" style="height: 44px; padding: 0 12px; border-radius: 10px; border: 1px solid var(--line-2); background: var(--surface); color: var(--text); font: 400 14px var(--font-mono);"></label>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 5px;"><span style="font-size: 12px; color: var(--text-2);">Horario de repaso</span>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; padding: 3px; gap: 2px; border-radius: 10px; background: var(--sunken);">
+            <sc-for list="{{ schedOpts }}" as="o" hint-placeholder-count="2"><button onClick="{{ o.go }}" style="min-height: 44px; border: 0; border-radius: 7px; background: {{ o.bg }}; box-shadow: {{ o.shadow }}; color: {{ o.color }}; font: 500 13px var(--font-ui); cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center;"><span>{{ o.label }}</span><span style="font: 400 11px var(--font-mono); color: var(--text-3);">{{ o.sub }}</span></button></sc-for>
+          </div>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ isPreview }}" hint-placeholder-val="{{ false }}">
+    <div style="position: absolute; inset: 154px 0 0 0; display: flex; flex-direction: column; align-items: center; gap: 10px; padding-top: 14px; background: var(--sunken);">
+      <span style="font-size: 12px; color: var(--text-3);">Así se verá al repasar · fase de contenido</span>
+      <div style="width: 312px; height: 675px; overflow: hidden; border-radius: 36px;">
+        <div style="width: 390px; height: 844px; transform: scale(0.8); transform-origin: 0 0;">
+          <dc-import name="PalacioApp" theme="{{ theme }}" screen="session" phase="content" card-index="{{ previewIndex }}" hint-size="390px,844px"></dc-import>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:390,&quot;height&quot;:844},&quot;theme&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;dark&quot;,&quot;light&quot;],&quot;default&quot;:&quot;dark&quot;,&quot;tsType&quot;:&quot;'dark'|'light'&quot;},&quot;tab&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;edit&quot;,&quot;preview&quot;],&quot;default&quot;:&quot;edit&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;template&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;grammar&quot;,&quot;vocab&quot;,&quot;free&quot;],&quot;default&quot;:&quot;grammar&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+class Component extends DCLogic {
+  state = { d: null, tab: null, tpl: null, title: null, open: { 0: true }, blocks: null, pick: 'L8', tags: ['C1', 'tiempos', 'perfectos'], sched: 'inherit', table: null };
+  componentDidMount() { import('./pc-data.js').then(d => this.setState({ d })); }
+  renderVals() {
+    const theme = this.props.theme ?? 'dark';
+    const d = this.state.d;
+    const tab = this.state.tab ?? this.props.tab ?? 'edit';
+    const tpl = this.state.tpl ?? this.props.template ?? 'grammar';
+    const seg = on => ({ bg: on ? 'var(--surface)' : 'transparent', shadow: on ? 'var(--shadow-sm)' : 'none', color: on ? 'var(--text)' : 'var(--text-2)' });
+    const tabs = [['edit', 'Editar', 'ph ph-pencil-simple'], ['preview', 'Vista previa', 'ph ph-eye']].map(([k, label, icon]) => ({ key: k, label, icon, ...seg(tab === k), go: () => this.setState({ tab: k }) }));
+    const titles = { grammar: 'Present Perfect', vocab: 'to wonder', free: '/iː/ vs /ɪ/ · sheep, ship' };
+    const templates = [['free', 'Libre', 'ph ph-note-blank'], ['vocab', 'Vocabulario', 'ph ph-translate'], ['grammar', 'Gramática C1', 'ph ph-text-aa']].map(([k, label, icon]) => ({ key: k, label, icon, border: tpl === k ? '1.5px solid var(--accent)' : '1px solid var(--line-2)', bg: tpl === k ? 'var(--accent-tint)' : 'var(--surface)', go: () => this.setState({ tpl: k, title: null, blocks: null, pick: { grammar: 'L8', vocab: 'S10', free: 'S2' }[k] }) }));
+    const KINDS = { text: ['Texto', 'ph ph-text-align-left'], list: ['Lista', 'ph ph-list-bullets'], table: ['Tabla', 'ph ph-table'], example: ['Ejemplo EN/ES', 'ph ph-translate'], image: ['Imagen', 'ph ph-image'], error: ['Error ✗/✓', 'ph ph-x-circle'], note: ['Nota', 'ph ph-lightbulb'] };
+    const defBlocks = {
+      grammar: [['example', 'I [have never been] to Japan.'], ['example', 'She [has just finished] the report.'], ['error', '✗ I have seen him yesterday. ✓ I saw him yesterday.'], ['note', 'Si puedes añadir «hasta ahora» sin cambiar el sentido…']],
+      vocab: [['example', "I [wonder] if she'll come."], ['image', 'bola de cristal'], ['note', 'No confundir con to wander: vagar']],
+      free: [['text', 'El español solo tiene una /i/…'], ['image', 'labios en /iː/ y /ɪ/']]
+    };
+    const blocksRaw = this.state.blocks ?? defBlocks[tpl].map(([k, p], i) => ({ id: tpl + i, k, p }));
+    const blocks = blocksRaw.map((b, i) => ({ key: b.id, kind: KINDS[b.k][0], icon: KINDS[b.k][1], preview: b.p, first: i === 0,
+      up: () => { const a = blocksRaw.slice(); [a[i - 1], a[i]] = [a[i], a[i - 1]]; this.setState({ blocks: a }); },
+      del: () => this.setState({ blocks: blocksRaw.filter(x => x.id !== b.id) }) }));
+    const addBlocks = Object.entries(KINDS).map(([k, [kind, icon]]) => ({ key: k, kind, icon, go: () => this.setState({ blocks: [...blocksRaw, { id: 'b' + Date.now(), k, p: 'Vacío · toca para editar' }] }) }));
+    const heads = ['Persona', 'Afirmativa', 'Contracción', 'Negativa', 'Interrogativa', 'Resp. corta'];
+    const rows = this.state.table ?? (d ? d.CARDS[0].blocks.find(b => b.type === 'table').rows : []);
+    const tableCells = [];
+    rows.forEach((r, ri) => r.forEach((v, ci) => tableCells.push({ key: ri + '-' + ci, v, ro: ci === 0, aria: `${heads[ci]} · ${r[0]}`, bg: ci === 0 ? 'var(--surface-2)' : 'var(--surface)', color: ci === 0 ? 'var(--text-3)' : 'var(--text)',
+      set: e => { const t = rows.map(x => x.slice()); t[ri][ci] = e.target.value; this.setState({ table: t }); } })));
+    const S = [
+      ['have / has', 'auxiliar del aspecto perfecto', 'has solo con he/she/it; en la contracción ’s puede confundirse con is.', 'She has lived here for years.', 'En inglés británico, I’ve got se usa como presente de posesión aunque su forma es Present Perfect.'],
+      ['past participle', 'verbo principal', 'Regulares en -ed; irregulares en la 3.ª columna (go → gone).', 'I’ve written three emails today.', 'Get tiene dos participios: got (británico) y gotten (americano).'],
+      ['ever / never', 'experiencia vital', 'Van entre el auxiliar y el participio. Ever en preguntas; never ya es negativo.', 'Have you ever tried sushi?', 'Never no se combina con haven’t: ✗ I haven’t never.'],
+      ['just / already / yet', 'cercanía y expectativa', 'just = hace un momento; already = antes de lo esperado; yet = al final, en preguntas y negativas.', 'I haven’t finished yet.', 'En inglés americano es común el Past Simple con just y already: I just ate.'],
+      ['for / since', 'duración hasta ahora', 'for + duración (for ten years); since + punto de inicio (since 2015).', 'I’ve known her since 2015.', 'El español «hace… que» empuja al error ✗ I know her for years.'],
+      ['been vs gone', 'excepción de go', 'been = fue y volvió; gone = fue y sigue allí.', 'She’s gone to Paris. / She’s been to Paris.', 'Been funciona como participio de go cuando se habla de visitas.'],
+    ];
+    const open = this.state.open;
+    const subs = S.map(([piece, fn, note, ex, fact], i) => ({ key: i, piece, fn, note, ex, fact, open: !!open[i], caret: open[i] ? 'ph ph-caret-up' : 'ph ph-caret-down', border: i ? '1px solid var(--line)' : '0', toggle: () => this.setState({ open: { ...open, [i]: !open[i] } }) }));
+    const loci = (tpl === 'grammar' ? d?.LOCI : d?.STD45) ?? [];
+    const pick = loci.find(l => l.id === this.state.pick) ?? {};
+    const zone = (tpl === 'grammar' ? d?.ZONES : d?.STD45_ZONES)?.find(z => z.id === pick.zone);
+    const tags = this.state.tags.map((v, i) => ({ key: v, v, del: () => this.setState({ tags: this.state.tags.filter(x => x !== v) }) }));
+    const sched = this.state.sched;
+    const schedOpts = [['inherit', 'Heredado del mazo', 'R10'], ['own', 'Propio', 'Rápido examen']].map(([k, label, sub]) => ({ key: k, label, sub, ...seg(sched === k), go: () => this.setState({ sched: k }) }));
+    return {
+      theme, tabs, isEdit: tab === 'edit', isPreview: tab === 'preview', templates,
+      isGrammar: tpl === 'grammar', isVocab: tpl === 'vocab', isFree: tpl === 'free',
+      titleLabel: tpl === 'vocab' ? 'Palabra' : 'Título', title: this.state.title ?? titles[tpl], setTitle: e => this.setState({ title: e.target.value }),
+      tableHead: heads.map((v, i) => ({ key: i, v })), tableCells, subs, subCount: S.length,
+      blocks, blockCount: blocks.length, addBlocks,
+      loci, pick, pickIds: pick.id ? [pick.id] : [], pickZone: zone?.name ?? 'Sin zona', pickZoneColor: zone ? `var(--zone-${zone.id})` : 'var(--state-empty)',
+      pickLocus: l => this.setState({ pick: l.id }), pickPalace: tpl === 'grammar' ? 'Cuerpo 1' : 'Fonética 45',
+      tags, addTag: e => { if (e.key === 'Enter' && e.target.value.trim()) { this.setState({ tags: [...this.state.tags, e.target.value.trim()] }); e.target.value = ''; } },
+      schedOpts, previewIndex: { grammar: 0, vocab: 2, free: 4 }[tpl]
+    };
+  }
+}
+</script>
+</body>
+</html>

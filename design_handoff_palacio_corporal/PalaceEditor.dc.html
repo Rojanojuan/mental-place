@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="_ds/nocturne-b05dafec-65a9-46f7-a005-25140c24ba40/styles.css">
+  <script src="_ds/nocturne-b05dafec-65a9-46f7-a005-25140c24ba40/_ds_bundle.js"></script>
+  <link rel="stylesheet" href="pc-tokens.css">
+  <script src="https://unpkg.com/@phosphor-icons/web@2.1.1"></script>
+</helmet>
+<div data-pc-theme="{{ theme }}" style="position: relative; width: 390px; height: 844px; border-radius: 44px; overflow: hidden; background: var(--bg); color: var(--text); font-family: var(--font-ui); font-size: 15px; line-height: 1.45; box-shadow: var(--shadow-md); isolation: isolate; user-select: none;">
+  <div style="position: absolute; left: 0; right: 0; top: 0; height: 44px; display: flex; align-items: center; justify-content: space-between; padding: 0 28px 0 32px; font: 600 14px/1 var(--font-ui); z-index: 40;">
+    <span>19:40</span>
+    <div style="display: flex; gap: 6px; font-size: 15px;"><i class="ph-fill ph-cell-signal-high"></i><i class="ph-fill ph-wifi-high"></i><i class="ph-fill ph-battery-high"></i></div>
+  </div>
+
+  <div style="position: absolute; left: 0; right: 0; top: 44px; height: 56px; display: flex; align-items: center; gap: 4px; padding: 0 8px;">
+    <button aria-label="Volver" style="width: 44px; height: 44px; border: 0; border-radius: 10px; background: transparent; color: var(--text-2); font-size: 20px; cursor: pointer; display: grid; place-items: center;" style-hover="background: var(--surface);"><i class="ph ph-caret-left"></i></button>
+    <div style="flex: 1; min-width: 0; display: flex; flex-direction: column;">
+      <span style="font-size: 16px; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{ palName }}</span>
+      <span style="font-size: 12px; color: var(--text-3);">{{ subtitle }}</span>
+    </div>
+    <button onClick="{{ openLook }}" aria-label="Apariencia del cuerpo" title="Apariencia" style="width: 44px; height: 44px; border: 0; border-radius: 10px; background: var(--accent-tint); color: var(--accent-text); font-size: 20px; cursor: pointer; display: grid; place-items: center;"><i class="ph ph-paint-brush"></i></button>
+    <button onClick="{{ openTemplate }}" aria-label="Plantilla" style="width: 44px; height: 44px; border: 0; border-radius: 10px; background: transparent; color: var(--text-2); font-size: 20px; cursor: pointer; display: grid; place-items: center;" style-hover="background: var(--surface);"><i class="ph ph-layout"></i></button>
+    <button onClick="{{ toggleMenu }}" aria-label="Más opciones" style="width: 44px; height: 44px; border: 0; border-radius: 10px; background: transparent; color: var(--text-2); font-size: 20px; cursor: pointer; display: grid; place-items: center;" style-hover="background: var(--surface);"><i class="ph ph-dots-three-outline"></i></button>
+  </div>
+
+  <div style="position: absolute; left: 0; right: 0; top: 96px; height: 40px; display: flex; gap: 6px; padding: 0 16px; overflow-x: auto; scrollbar-width: none;">
+    <sc-for list="{{ palTabs }}" as="p" hint-placeholder-count="3">
+      <button onClick="{{ p.go }}" style="flex: none; height: 34px; display: flex; align-items: center; gap: 6px; padding: 0 12px 0 8px; border-radius: 999px; border: {{ p.border }}; background: {{ p.bg }}; color: var(--text); font: 500 12px var(--font-ui); cursor: pointer;"><span style="width: 10px; height: 10px; border-radius: 50%; background: {{ p.color }};"></span>{{ p.l }}</button>
+    </sc-for>
+  </div>
+  <div style="position: absolute; left: 0; right: 0; top: 136px; height: 48px; display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 0 16px;">
+    <div style="display: flex; padding: 3px; gap: 2px; border-radius: 10px; background: var(--sunken);">
+      <sc-for list="{{ modes }}" as="m" hint-placeholder-count="3">
+        <button onClick="{{ m.go }}" style="height: 36px; padding: 0 9px; display: flex; align-items: center; gap: 5px; border: 0; border-radius: 7px; background: {{ m.bg }}; box-shadow: {{ m.shadow }}; color: {{ m.color }}; font: 500 12px var(--font-ui); cursor: pointer;"><i class="{{ m.icon }}"></i>{{ m.label }}</button>
+      </sc-for>
+    </div>
+    <sc-if value="{{ sideToggle }}" hint-placeholder-val="{{ true }}">
+      <div style="display: flex; padding: 3px; gap: 2px; border-radius: 10px; background: var(--sunken);">
+        <sc-for list="{{ sides }}" as="s" hint-placeholder-count="2">
+          <button onClick="{{ s.go }}" style="height: 36px; padding: 0 8px; border: 0; border-radius: 7px; background: {{ s.bg }}; box-shadow: {{ s.shadow }}; color: {{ s.color }}; font: 500 12px var(--font-ui); cursor: pointer;">{{ s.label }}</button>
+        </sc-for>
+      </div>
+    </sc-if>
+  </div>
+
+  <div ref="{{ stageRef }}" onPointerDown="{{ pd }}" onPointerMove="{{ pm }}" onPointerUp="{{ pu }}" onPointerCancel="{{ pu }}" style="position: absolute; left: 0; top: 184px; width: 390px; height: 380px; touch-action: none; cursor: crosshair; background: radial-gradient(ellipse at 50% 45%, var(--surface) 0%, var(--bg) 70%);">
+    <sc-if value="{{ isBody }}" hint-placeholder-val="{{ true }}">
+      <dc-import name="BodyMap" loci="{{ sideLoci }}" side="{{ side }}" kind="{{ kind }}" aspect="{{ aspect }}" rooms="{{ rooms }}" plan-data="{{ planData }}" image-id="{{ imageId }}" width="390" height="380" pin-size="26" body-style="{{ bodyStyle }}" show-route="{{ true }}" selected-ids="{{ selectedIds }}" no-pulse="{{ true }}" hint-size="390px,380px"></dc-import>
+    </sc-if>
+    <sc-if value="{{ isCustom }}" hint-placeholder-val="{{ false }}">
+      <div style="position: absolute; inset: 20px 24px; border-radius: 14px; background: repeating-linear-gradient(135deg, var(--surface) 0 8px, var(--sunken) 8px 16px); box-shadow: inset 0 0 0 1px var(--line-2); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; text-align: center; padding: 24px;">
+        <span style="font: 500 12px var(--font-mono); color: var(--text-3);">imagen propia · casa, ruta, foto</span>
+        <button style="height: 44px; padding: 0 16px; border-radius: 10px; border: 1.5px solid var(--accent); background: var(--accent-tint); color: var(--accent-text); font: 500 14px var(--font-ui); cursor: pointer; display: flex; align-items: center; gap: 8px;"><i class="ph ph-upload-simple"></i>Subir imagen</button>
+        <span style="font-size: 12px; color: var(--text-3); max-width: 240px;">Después toca la imagen para crear puntos, igual que en el cuerpo.</span>
+      </div>
+    </sc-if>
+    <sc-if value="{{ lassoOn }}" hint-placeholder-val="{{ false }}">
+      <svg width="390" height="380" style="position: absolute; left: 0; top: 0; pointer-events: none;"><path d="{{ lassoD }}" fill="var(--accent-tint)" stroke="var(--accent)" stroke-width="1.5" stroke-dasharray="4 3"></path></svg>
+    </sc-if>
+    <div style="position: absolute; left: 12px; top: 10px; max-width: 140px; display: flex; flex-direction: column; gap: 6px; pointer-events: none;">
+      <span style="align-self: flex-start; display: flex; align-items: flex-start; gap: 6px; padding: 6px 10px; line-height: 1.35; border-radius: 8px; background: var(--surface); box-shadow: var(--shadow-sm); font-size: 12px; color: var(--text-2);"><i class="{{ hintIcon }}" style="color: var(--accent-text);"></i>{{ hint }}</span>
+    </div>
+    <sc-if value="{{ focusChip }}" hint-placeholder-val="{{ false }}">
+      <div style="position: absolute; right: 12px; bottom: 12px; display: flex; align-items: center; gap: 8px; height: 40px; padding: 0 6px 0 12px; border-radius: 10px; background: var(--surface); box-shadow: var(--shadow-md); font-size: 13px;" onPointerDown="{{ stop }}">
+        <span style="font-family: var(--font-mono); color: var(--text-3);">L{{ focusLocus.n }}</span><span>{{ focusLocus.name }}</span>
+        <button onClick="{{ editFocus }}" style="height: 30px; padding: 0 10px; border: 0; border-radius: 7px; background: var(--accent-tint); color: var(--accent-text); font: 500 12px var(--font-ui); cursor: pointer;">Editar</button>
+      </div>
+    </sc-if>
+  </div>
+
+  <div style="position: absolute; left: 0; right: 0; top: 564px; bottom: 0; display: flex; flex-direction: column; border-radius: 20px 20px 0 0; background: var(--surface); box-shadow: 0 -1px 0 var(--line);">
+    <sc-if value="{{ isPoints }}" hint-placeholder-val="{{ true }}">
+      <div style="display: flex; align-items: center; justify-content: space-between; padding: 12px 16px 6px;"><span style="font-size: 13px; font-weight: 500;">{{ sideLabel }} · {{ sideCount }} puntos</span><span style="font-size: 12px; color: var(--text-3);">nº · parte · zona · ítems</span></div>
+    </sc-if>
+    <sc-if value="{{ isZones }}" hint-placeholder-val="{{ false }}">
+      <div style="display: flex; flex-direction: column; gap: 8px; padding: 12px 16px 6px;">
+        <div style="display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none;">
+          <sc-for list="{{ zoneChips }}" as="z" hint-placeholder-count="5">
+            <button onClick="{{ z.go }}" style="flex: none; display: flex; align-items: center; gap: 6px; height: 34px; padding: 0 10px 0 8px; border-radius: 999px; border: {{ z.border }}; background: {{ z.bg }}; color: var(--text); font: 400 12px var(--font-ui); cursor: pointer;"><span style="width: 10px; height: 10px; border-radius: 50%; background: {{ z.color }}; box-shadow: 0 0 0 3px {{ z.halo }};"></span>{{ z.name }}<span style="font-family: var(--font-mono); color: var(--text-3);">{{ z.count }}</span></button>
+          </sc-for>
+          <button onClick="{{ addZone }}" style="flex: none; height: 34px; padding: 0 12px; border-radius: 999px; border: 1px dashed var(--line-2); background: transparent; color: var(--text-2); font: 500 12px var(--font-ui); cursor: pointer; display: flex; align-items: center; gap: 4px;"><i class="ph ph-plus"></i>Zona</button>
+        </div>
+        <div style="display: flex; align-items: center; gap: 8px; min-height: 44px;">
+          <span style="flex: 1; font-size: 13px; color: var(--text-2);">{{ selLabel }}</span>
+          <sc-if value="{{ hasSel }}" hint-placeholder-val="{{ false }}">
+            <button onClick="{{ clearSel }}" style="height: 40px; padding: 0 10px; border: 0; border-radius: 8px; background: transparent; color: var(--text-2); font: 500 13px var(--font-ui); cursor: pointer;">Limpiar</button>
+            <button onClick="{{ assignSel }}" style="height: 40px; padding: 0 12px; border-radius: 10px; border: 1.5px solid var(--accent); background: var(--accent-tint); color: var(--accent-text); font: 500 13px var(--font-ui); cursor: pointer;">Asignar a {{ activeZoneShort }}</button>
+          </sc-if>
+        </div>
+      </div>
+    </sc-if>
+    <sc-if value="{{ isRoute }}" hint-placeholder-val="{{ false }}">
+      <div style="display: flex; align-items: center; gap: 8px; padding: 10px 16px 6px; min-height: 56px;">
+        <span style="flex: 1; font-size: 13px; color: var(--text-2);">{{ routeLabel }}</span>
+        <button onClick="{{ toggleDraw }}" style="height: 40px; padding: 0 12px; border-radius: 10px; border: 1.5px solid var(--accent); background: {{ drawBg }}; color: var(--accent-text); font: 500 13px var(--font-ui); cursor: pointer; display: flex; align-items: center; gap: 6px;"><i class="{{ drawIcon }}"></i>{{ drawLabel }}</button>
+      </div>
+    </sc-if>
+    <div style="flex: 1; min-height: 0; overflow-y: auto; scrollbar-width: none; padding: 0 8px 28px;">
+      <sc-for list="{{ rows }}" as="r" hint-placeholder-count="6">
+        <div draggable="{{ r.draggable }}" onDragStart="{{ r.dragStart }}" onDragOver="{{ r.dragOver }}" onDrop="{{ r.drop }}" onClick="{{ r.tap }}" style="display: grid; grid-template-columns: 36px 1fr auto auto; align-items: center; gap: 8px; min-height: 48px; padding: 0 8px; border-radius: 10px; background: {{ r.bg }}; cursor: pointer;" style-hover="background: var(--surface-2);">
+          <dc-import name="LocusPin" n="{{ r.n }}" state="{{ r.state }}" size="24" hit="36" no-pulse="{{ true }}" label="{{ r.name }}" hint-size="36px,36px"></dc-import>
+          <div style="display: flex; flex-direction: column; min-width: 0;"><span style="font-size: 14px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{ r.name }}</span><span style="display: flex; align-items: center; gap: 5px; font-size: 12px; color: var(--text-3);"><span style="width: 7px; height: 7px; border-radius: 50%; background: {{ r.zc }};"></span>{{ r.zone }}</span></div>
+          <span style="font: 400 12px var(--font-mono); color: var(--text-3);">{{ r.items }}</span>
+          <i class="{{ r.trail }}" style="font-size: 18px; color: var(--text-3); width: 24px; text-align: center;"></i>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+
+  <sc-if value="{{ toastOn }}" hint-placeholder-val="{{ false }}">
+    <div style="position: absolute; left: 12px; right: 12px; top: 500px; z-index: 20; display: flex; align-items: center; gap: 10px; min-height: 44px; padding: 4px 4px 4px 14px; border-radius: 12px; background: var(--surface-2); box-shadow: var(--shadow-lg); animation: pc-in var(--dur-base) var(--ease-out) both; font-size: 13px;">
+      <i class="ph ph-check-circle" style="color: var(--ok);"></i><span style="flex: 1;">{{ toast }}</span>
+      <sc-if value="{{ toastAction }}" hint-placeholder-val="{{ false }}"><button onClick="{{ toastGo }}" style="height: 36px; padding: 0 12px; border: 0; border-radius: 8px; background: var(--accent-tint); color: var(--accent-text); font: 500 13px var(--font-ui); cursor: pointer;">Editar</button></sc-if>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ toggleMenu }}" style="position: absolute; inset: 0; z-index: 30;"></div>
+    <div style="position: absolute; right: 12px; top: 96px; width: 240px; z-index: 31; display: flex; flex-direction: column; padding: 6px; border-radius: 14px; background: var(--surface); box-shadow: var(--shadow-lg); animation: pc-in var(--dur-base) var(--ease-out) both;">
+      <button onClick="{{ duplicate }}" style="height: 44px; display: flex; align-items: center; gap: 10px; padding: 0 10px; border: 0; border-radius: 8px; background: transparent; color: var(--text); font: 400 14px var(--font-ui); text-align: left; cursor: pointer;" style-hover="background: var(--surface-2);"><i class="ph ph-copy"></i>Duplicar palacio</button>
+      <button style="height: 44px; display: flex; align-items: center; gap: 10px; padding: 0 10px; border: 0; border-radius: 8px; background: transparent; color: var(--text); font: 400 14px var(--font-ui); text-align: left; cursor: pointer;" style-hover="background: var(--surface-2);"><i class="ph ph-pencil-simple"></i>Renombrar</button>
+      <button style="height: 44px; display: flex; align-items: center; gap: 10px; padding: 0 10px; border: 0; border-radius: 8px; background: transparent; color: var(--text); font: 400 14px var(--font-ui); text-align: left; cursor: pointer;" style-hover="background: var(--surface-2);"><i class="ph ph-export"></i>Exportar JSON</button>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ editOn }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ closeEdit }}" style="position: absolute; inset: 0; z-index: 50; background: var(--scrim);"></div>
+    <div role="dialog" aria-label="Editar punto" style="position: absolute; left: 0; right: 0; bottom: 0; z-index: 51; display: flex; flex-direction: column; gap: 14px; padding: 8px 16px 30px; border-radius: 20px 20px 0 0; background: var(--surface); box-shadow: var(--shadow-lg); animation: pc-sheet var(--dur-base) var(--ease-out) both;">
+      <div style="width: 36px; height: 4px; border-radius: 2px; background: var(--line-2); align-self: center;"></div>
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <dc-import name="LocusPin" n="{{ edit.n }}" state="{{ edit.state }}" no-pulse="{{ true }}" label="{{ edit.name }}" hint-size="44px,44px"></dc-import>
+        <div style="display: flex; flex-direction: column;"><span style="font-size: 12px; color: var(--text-3);">Punto L{{ edit.n }} · {{ editSide }}</span><span style="font: 500 18px var(--font-ui);">{{ edit.name }}</span></div>
+      </div>
+      <label style="display: flex; flex-direction: column; gap: 5px; font-size: 12px; color: var(--text-2);">Nombre de la parte
+        <input value="{{ edit.name }}" onChange="{{ rename }}" style="height: 44px; padding: 0 12px; border-radius: 10px; border: 1px solid var(--line-2); background: var(--bg); color: var(--text); font: 400 15px var(--font-ui); caret-color: var(--accent);">
+      </label>
+      <div style="display: flex; flex-direction: column; gap: 6px;"><span style="font-size: 12px; color: var(--text-2);">Zona</span>
+        <div style="display: flex; flex-wrap: wrap; gap: 6px;">
+          <sc-for list="{{ editZones }}" as="z" hint-placeholder-count="5">
+            <button onClick="{{ z.go }}" style="display: flex; align-items: center; gap: 6px; height: 36px; padding: 0 10px 0 8px; border-radius: 999px; border: {{ z.border }}; background: {{ z.bg }}; color: var(--text); font: 400 12px var(--font-ui); cursor: pointer;"><span style="width: 10px; height: 10px; border-radius: 50%; background: {{ z.color }};"></span>{{ z.name }}</button>
+          </sc-for>
+        </div>
+      </div>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+        <button style="height: 48px; border-radius: 12px; border: 1px solid var(--line-2); background: transparent; color: var(--text); font: 500 14px var(--font-ui); cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 6px;"><i class="ph ph-arrow-square-out"></i>Abrir detalle</button>
+        <button onClick="{{ deleteEdit }}" style="height: 48px; border-radius: 12px; border: 1px solid var(--line-2); background: transparent; color: var(--bad); font: 500 14px var(--font-ui); cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 6px;"><i class="ph ph-trash"></i>Borrar punto</button>
+      </div>
+      <button onClick="{{ closeEdit }}" style="height: 52px; border-radius: 12px; border: 1.5px solid var(--accent); background: var(--accent-tint); color: var(--accent-text); font: 500 16px var(--font-ui); cursor: pointer;">Listo</button>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ lookOn }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ closeLook }}" style="position: absolute; inset: 0; z-index: 50; background: linear-gradient(to bottom, transparent 0, transparent 420px, var(--scrim) 440px);"></div>
+    <div role="dialog" aria-label="Apariencia del cuerpo" style="position: absolute; left: 0; right: 0; bottom: 0; z-index: 51; max-height: 400px; overflow-y: auto; scrollbar-width: none; display: flex; flex-direction: column; gap: 14px; padding: 8px 16px 30px; border-radius: 20px 20px 0 0; background: var(--surface); box-shadow: var(--shadow-lg); animation: pc-sheet var(--dur-base) var(--ease-out) both;">
+      <div style="width: 36px; height: 4px; border-radius: 2px; background: var(--line-2); align-self: center;"></div>
+      <div style="display: flex; align-items: center; justify-content: space-between;"><span style="font: 500 18px var(--font-ui);">{{ lookTitle }}</span><span style="font-size: 12px; color: var(--text-3);">se ve arriba en vivo</span></div>
+      <label style="display: flex; flex-direction: column; gap: 5px; font-size: 12px; color: var(--text-2);">Nombre del palacio<input value="{{ palName }}" onChange="{{ setName }}" style="height: 44px; padding: 0 12px; border-radius: 10px; border: 1px solid var(--line-2); background: var(--bg); color: var(--text); font: 500 15px var(--font-ui); caret-color: var(--accent);"></label>
+      <sc-for list="{{ lookGroups }}" as="g" hint-placeholder-count="5">
+        <div style="display: flex; flex-direction: column; gap: 6px;"><span style="font-size: 12px; color: var(--text-2);">{{ g.t }}</span>
+          <div style="display: flex; flex-wrap: wrap; gap: 6px;">
+            <sc-for list="{{ g.opts }}" as="o" hint-placeholder-count="4">
+              <button onClick="{{ o.go }}" aria-label="{{ o.l }}" style="min-width: 44px; height: 40px; padding: 0 10px; display: flex; align-items: center; justify-content: center; gap: 6px; border-radius: 10px; border: {{ o.border }}; background: {{ o.bg }}; color: var(--text); font: 500 12px var(--font-ui); cursor: pointer;"><sc-if value="{{ o.sw }}" hint-placeholder-val="{{ false }}"><span style="width: 18px; height: 18px; border-radius: 50%; background: {{ o.c }}; box-shadow: inset 0 0 0 1px var(--line-2);"></span></sc-if>{{ o.txt }}</button>
+            </sc-for>
+          </div>
+        </div>
+      </sc-for>
+      <button onClick="{{ closeLook }}" style="height: 52px; flex: none; border-radius: 12px; border: 1.5px solid var(--accent); background: var(--accent-tint); color: var(--accent-text); font: 500 16px var(--font-ui); cursor: pointer;">Listo</button>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ templateOn }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ closeTemplate }}" style="position: absolute; inset: 0; z-index: 50; background: var(--scrim);"></div>
+    <div role="dialog" aria-label="Plantilla del palacio" style="position: absolute; left: 0; right: 0; bottom: 0; z-index: 51; display: flex; flex-direction: column; gap: 14px; padding: 8px 16px 30px; border-radius: 20px 20px 0 0; background: var(--surface); box-shadow: var(--shadow-lg); animation: pc-sheet var(--dur-base) var(--ease-out) both;">
+      <div style="width: 36px; height: 4px; border-radius: 2px; background: var(--line-2); align-self: center;"></div>
+      <span style="font: 500 18px var(--font-ui);">Plantilla del palacio</span>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+        <sc-for list="{{ templates }}" as="t" hint-placeholder-count="4">
+          <button onClick="{{ t.go }}" style="display: flex; flex-direction: column; align-items: flex-start; gap: 8px; padding: 12px; border-radius: 12px; border: {{ t.border }}; background: {{ t.bg }}; color: var(--text); cursor: pointer; text-align: left; font-family: var(--font-ui);">
+            <i class="{{ t.icon }}" style="font-size: 24px; color: var(--text-2);"></i>
+            <span style="font-size: 14px; font-weight: 500;">{{ t.label }}</span>
+            <span style="font: 400 11px var(--font-mono); color: var(--text-3);">{{ t.type }}</span>
+          </button>
+        </sc-for>
+      </div>
+    </div>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:390,&quot;height&quot;:844},&quot;theme&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;dark&quot;,&quot;light&quot;],&quot;default&quot;:&quot;dark&quot;,&quot;tsType&quot;:&quot;'dark'|'light'&quot;},&quot;palace&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;c1&quot;,&quot;c2&quot;,&quot;f45&quot;,&quot;casa&quot;,&quot;ruta&quot;],&quot;default&quot;:&quot;c1&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;appearance&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;},&quot;mode&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;points&quot;,&quot;zones&quot;,&quot;route&quot;],&quot;default&quot;:&quot;points&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+class Component extends DCLogic {
+  state = { d: null, pal: null, looks: {}, lookOn: null, loci: null, zones: null, mode: null, side: 'front', tpl: 'body_both', selected: [], activeZone: 'hombros', lasso: null, editId: null, focusId: null, draw: null, toast: null, menu: false, templateOn: false };
+  stageRef = React.createRef();
+  componentDidMount() {
+    import('./pc-data.js').then(d => {
+      this.setState({ d }); this.loadPal(d, this.props.palace ?? 'c1');
+    });
+  }
+  ar() { const k = this.state.kind ?? 'body'; const P = this.state.d?.palaceOf(this.state.pal); return k === 'body' ? 200 / 480 : (P?.kind === k && P?.aspect) ? P.aspect : k === 'plan' ? 4 / 3 : 3 / 2; }
+  loadPal(d, id) {
+    const P = d.palaceOf(id), items = { L8: 3, L2: 2 };
+    this.setState(s => ({ pal: id, kind: P.kind ?? 'body', tpl: P.kind === 'plan' ? 'plan' : P.kind === 'image' ? 'image' : 'body_both', loci: P.loci.map(l => ({ ...l, items: l.state === 'empty' ? 0 : (items[l.id] ?? 1) })), zones: P.zones.map(z => ({ ...z })), side: 'front', selected: [], focusId: null, draw: null,
+      looks: s.looks[id] ? s.looks : { ...s.looks, [id]: { name: P.name, ...P.style } } }));
+  }
+  componentWillUnmount() { clearTimeout(this.lp); clearTimeout(this.tt); }
+  geo() { const H = 380, AR = this.ar(), bh = Math.min(H * 0.94, 390 * 0.96 / AR), bw = bh * AR; return { bh, bw, left: (390 - bw) / 2, top: (H - bh) / 2 }; }
+  local(e) { const r = this.stageRef.current.getBoundingClientRect(); const s = r.width / 390; return [(e.clientX - r.left) / s, (e.clientY - r.top) / s]; }
+  hit(x, y) {
+    const g = this.geo(); let best = null, bd = 22;
+    (this.state.loci || []).filter(l => this.state.kind !== 'body' || l.side === this.state.side).forEach(l => { const d = Math.hypot(g.left + l.x * g.bw - x, g.top + l.y * g.bh - y); if (d < bd) { bd = d; best = l; } });
+    return best;
+  }
+  showToast(t, action) { clearTimeout(this.tt); this.setState({ toast: { t, action } }); this.tt = setTimeout(() => this.setState({ toast: null }), 3500); }
+  mode() { return this.state.mode ?? this.props.mode ?? 'points'; }
+  pd = e => {
+    
+    const [x, y] = this.local(e); const l = this.hit(x, y);
+    e.currentTarget.setPointerCapture?.(e.pointerId);
+    this.g = { id: l?.id, x0: x, y0: y, moved: false, long: false };
+    if (l) this.lp = setTimeout(() => { if (this.g && !this.g.moved) { this.g.long = true; navigator.vibrate?.(15); this.setState({ editId: l.id, focusId: l.id }); } }, 500);
+    else if (this.mode() === 'zones') this.g.lasso = [[x, y]];
+  };
+  pm = e => {
+    const g = this.g; if (!g) return;
+    const [x, y] = this.local(e);
+    if (!g.moved && Math.hypot(x - g.x0, y - g.y0) > 6) { g.moved = true; clearTimeout(this.lp); }
+    if (!g.moved) return;
+    if (g.id && this.mode() === 'points') {
+      const G = this.geo(); const nx = Math.min(1, Math.max(0, (x - G.left) / G.bw)), ny = Math.min(1, Math.max(0, (y - G.top) / G.bh));
+      this.setState(s => ({ focusId: g.id, loci: s.loci.map(l => l.id === g.id ? { ...l, x: nx, y: ny } : l) }));
+    } else if (g.lasso) { g.lasso.push([x, y]); this.setState({ lasso: g.lasso.slice() }); }
+  };
+  pu = e => {
+    const g = this.g; this.g = null; clearTimeout(this.lp); if (!g || g.long) return;
+    const mode = this.mode();
+    if (g.lasso && g.moved) {
+      const P = g.lasso, G = this.geo();
+      const inside = (px, py) => { let c = false; for (let i = 0, j = P.length - 1; i < P.length; j = i++) { const [xi, yi] = P[i], [xj, yj] = P[j]; if ((yi > py) !== (yj > py) && px < (xj - xi) * (py - yi) / (yj - yi) + xi) c = !c; } return c; };
+      const ids = this.state.loci.filter(l => (this.state.kind !== 'body' || l.side === this.state.side) && inside(G.left + l.x * G.bw, G.top + l.y * G.bh)).map(l => l.id);
+      return this.setState(s => ({ lasso: null, selected: [...new Set([...s.selected, ...ids])] }));
+    }
+    this.setState({ lasso: null });
+    if (g.moved) { if (g.id) this.showToast('Punto movido'); return; }
+    if (g.id) {
+      if (mode === 'zones') return this.setState(s => ({ selected: s.selected.includes(g.id) ? s.selected.filter(i => i !== g.id) : [...s.selected, g.id] }));
+      if (mode === 'route' && this.state.draw) { if (!this.state.draw.includes(g.id)) this.setState(s => ({ draw: [...s.draw, g.id] })); return; }
+      return this.setState({ focusId: g.id });
+    }
+    if (mode === 'points') {
+      const G = this.geo(); const nx = (g.x0 - G.left) / G.bw, ny = (g.y0 - G.top) / G.bh;
+      if (nx < 0 || nx > 1 || ny < 0 || ny > 1) return;
+      const n = Math.max(0, ...this.state.loci.map(l => l.n)) + 1, id = 'N' + Date.now();
+      this.setState(s => ({ focusId: id, loci: [...s.loci, { id, n, name: 'Punto nuevo', zone: null, x: nx, y: ny, side: s.side, state: 'empty', items: 0 }] }));
+      this.showToast(`Punto L${n} creado · mantén presionado para editar`, id);
+    } else this.setState({ focusId: null });
+  };
+  renumber(order) { const idx = new Map(order.map((id, i) => [id, i + 1])); this.setState(s => ({ loci: s.loci.map(l => ({ ...l, n: idx.get(l.id) ?? l.n })) })); }
+  renderVals() {
+    const theme = this.props.theme ?? 'dark';
+    const { loci, zones, side, tpl, selected, activeZone, lasso, editId, focusId, draw, toast } = this.state;
+    const mode = this.mode();
+    const off = { theme, modes: [], sides: [], rows: [], zoneChips: [], sideLoci: [], selectedIds: [], subtitle: 'Cargando…', stop: e => e.stopPropagation() };
+    if (!loci) return off;
+    const zName = id => zones.find(z => z.id === id)?.name ?? 'Sin zona';
+    const zc = id => id ? `var(--zone-${id})` : 'var(--state-empty)';
+    const seg = (on) => ({ bg: on ? 'var(--surface)' : 'transparent', shadow: on ? 'var(--shadow-sm)' : 'none', color: on ? 'var(--text)' : 'var(--text-2)' });
+    const modes = [['points', 'Puntos', 'ph ph-map-pin-plus'], ['zones', 'Zonas', 'ph ph-selection-plus'], ['route', 'Ruta', 'ph ph-path']].map(([k, label, icon]) => ({ key: k, label, icon, ...seg(mode === k), go: () => this.setState({ mode: k, selected: [], draw: null, focusId: null }) }));
+    const sides = [['front', 'Frontal'], ['back', 'Posterior']].map(([k, label]) => ({ key: k, label, ...seg(side === k), go: () => this.setState({ side: k, selected: [], focusId: null }) }));
+    const kind = this.state.kind ?? 'body', isBodyK = kind === 'body';
+    const sideLoci = loci.filter(l => !isBodyK || l.side === side);
+    const sorted = sideLoci.slice().sort((a, b) => a.n - b.n);
+    let selectedIds = mode === 'zones' ? selected : mode === 'route' && draw ? draw : focusId ? [focusId] : [];
+    const drawNum = id => draw ? draw.indexOf(id) + 1 : 0;
+    const rows = sorted.map(l => ({
+      key: l.id, n: draw && drawNum(l.id) ? drawNum(l.id) : l.n, state: l.state, name: l.name, zone: zName(l.zone), zc: zc(l.zone), items: `${l.items} ítem${l.items === 1 ? '' : 's'}`,
+      trail: mode === 'route' ? 'ph ph-dots-six-vertical' : mode === 'zones' ? (selected.includes(l.id) ? 'ph-fill ph-check-square' : 'ph ph-square') : 'ph ph-caret-right',
+      bg: selectedIds.includes(l.id) ? 'var(--accent-tint)' : 'transparent', draggable: mode === 'route' ? 'true' : 'false',
+      dragStart: e => { this.dragRow = l.id; e.dataTransfer.effectAllowed = 'move'; },
+      dragOver: e => e.preventDefault(),
+      drop: e => { e.preventDefault(); const ids = sorted.map(x => x.id).filter(i => i !== this.dragRow); ids.splice(ids.indexOf(l.id), 0, this.dragRow); this.renumber(ids); },
+      tap: () => mode === 'zones' ? this.setState(s => ({ selected: s.selected.includes(l.id) ? s.selected.filter(i => i !== l.id) : [...s.selected, l.id] })) : this.setState({ focusId: l.id })
+    }));
+    const zoneChips = zones.map(z => { const on = z.id === activeZone; return { key: z.id, name: z.name.split(' · ')[0], count: loci.filter(l => l.zone === z.id).length, color: `var(--zone-${z.id})`, halo: `color-mix(in srgb, var(--zone-${z.id}) 25%, transparent)`, border: on ? '1.5px solid var(--accent)' : '1px solid transparent', bg: on ? 'var(--accent-tint)' : 'var(--surface-2)', go: () => this.setState({ activeZone: z.id }) }; });
+    const edit = loci.find(l => l.id === editId);
+    const editZones = edit ? zones.map(z => { const on = edit.zone === z.id; return { key: z.id, name: z.name, color: `var(--zone-${z.id})`, border: on ? '1.5px solid var(--accent)' : '1px solid var(--line-2)', bg: on ? 'var(--accent-tint)' : 'transparent', go: () => this.setState(s => ({ loci: s.loci.map(x => x.id === editId ? { ...x, zone: z.id } : x) })) }; }) : [];
+    const focusLocus = loci.find(l => l.id === focusId && l.side === side);
+    const tplList = [['body_front', 'Cuerpo frontal', 'ph ph-person-simple'], ['body_back', 'Cuerpo posterior', 'ph ph-person-simple-walk'], ['body_both', 'Frontal y posterior', 'ph ph-users'], ['plan', 'Plano de casa', 'ph ph-house-line'], ['image', 'Imagen propia', 'ph ph-image']].map(([k, label, icon]) => ({ key: k, label, icon, type: k === 'image' ? 'custom_image' : k === 'plan' ? 'custom_plan' : k, border: tpl === k ? '1.5px solid var(--accent)' : '1px solid var(--line-2)', bg: tpl === k ? 'var(--accent-tint)' : 'transparent', go: () => this.setState({ tpl: k, kind: k === 'plan' ? 'plan' : k === 'image' ? 'image' : 'body', templateOn: false, side: k === 'body_back' ? 'back' : 'front' }) }));
+    const az = zones.find(z => z.id === activeZone);
+    const hint = mode === 'points' ? ['ph ph-hand-tap', 'Toca para crear, arrastra para mover, mantén para editar'] : mode === 'zones' ? ['ph ph-lasso', 'Toca puntos o rodéalos con el dedo'] : draw ? ['ph ph-pencil-line', `Toca en orden · ${draw.length}/${sorted.length}`] : ['ph ph-path', 'Arrastra filas para reordenar'];
+    const d = this.state.d, pal = this.state.pal, look = this.state.looks[pal] ?? {};
+    const setLook = patch => this.setState(s => ({ looks: { ...s.looks, [pal]: { ...s.looks[pal], ...patch } } }));
+    const pk = on => ({ border: on ? '1.5px solid var(--accent)' : '1px solid var(--line-2)', bg: on ? 'var(--accent-tint)' : 'var(--bg)' });
+    const opt = (cur, list, key) => list.map(([v, txt, c]) => ({ key: v, l: txt || v, txt, c, sw: !!c, ...pk(cur === v), go: () => setLook({ [key]: v }) }));
+    const HC = ['oklch(0.30 0.03 50)', 'oklch(0.45 0.05 40)', 'oklch(0.62 0.06 60)', 'oklch(0.82 0.08 90)', 'oklch(0.62 0.12 25)', 'oklch(0.70 0.08 300)', 'oklch(0.80 0.01 260)'];
+    const lookGroupsAll = [
+      { key: 'c', t: 'Color del palacio (contorno y chip)', opts: opt(look.accent, ['cabeza', 'hombros', 'torso', 'brazos', 'piernas'].map(z => [z, '', `var(--zone-${z})`]), 'accent') },
+      { key: 'h', t: 'Cabello', opts: opt(look.hair, [['none', 'Sin cabello'], ['buzz', 'Rapado'], ['short', 'Corto'], ['curly', 'Rizado'], ['tail', 'Coleta'], ['bun', 'Moño'], ['long', 'Largo']], 'hair') },
+      { key: 'hc', t: 'Color de cabello', opts: opt(look.hairColor, HC.map(c => [c, '', c]), 'hairColor') },
+      { key: 'f', t: 'Vello facial y accesorios', opts: [...opt(look.facial ?? 'none', [['none', 'Sin vello'], ['stache', 'Bigote'], ['beard', 'Barba']], 'facial'), { key: 'gl', l: 'Gafas', txt: 'Gafas', sw: false, ...pk(!!look.glasses), go: () => setLook({ glasses: !look.glasses }) }] },
+      { key: 'd', t: 'Detalle anatómico', opts: opt(look.detail ?? 'full', [['min', 'Solo contorno'], ['med', 'Rasgos y articulaciones'], ['full', 'Completo con músculos']], 'detail') },
+      { key: 's', t: 'Estilo de dibujo', opts: opt(look.draw ?? 'atlas', [['atlas', 'Atlas'], ['lapiz', 'Lápiz'], ['neon', 'Neón']], 'draw') },
+      { key: 'v', t: 'Volumen', opts: opt(look.vol ?? 'shade', [['shade', 'Sombreado'], ['flat', 'Plano']], 'vol') },
+      { key: 'l', t: 'Línea del contorno', opts: opt(look.line, [['fine', 'Fina'], ['bold', 'Marcada']], 'line') },
+      { key: 't', t: 'Tono de piel', opts: opt(look.skin ?? look.tint ?? 'neutral', [['neutral', 'Neutro', 'var(--body-line)'], ['porcelana', '', 'oklch(0.92 0.03 70)'], ['arena', '', 'oklch(0.82 0.06 70)'], ['miel', '', 'oklch(0.70 0.08 60)'], ['canela', '', 'oklch(0.56 0.08 50)'], ['ebano', '', 'oklch(0.42 0.05 40)'], ['plano', 'Plano', 'oklch(0.72 0.09 250)']], 'skin') },
+    ];
+    const ORD = ['c', 's', 't', 'h', 'hc', 'f', 'd', 'v', 'l']; lookGroupsAll.sort((a, b) => ORD.indexOf(a.key) - ORD.indexOf(b.key));
+    const lookGroups = isBodyK ? lookGroupsAll : lookGroupsAll.filter(g => g.key === 'c' || g.key === 'l');
+    const P0 = d?.palaceOf(pal);
+    const palTabs = (d?.PALACES ?? []).map(P => { const L = this.state.looks[P.id] ?? { name: P.name, ...P.style }; const on = P.id === pal; return { key: P.id, l: (L.name || P.name).split(' · ')[0] + ' · ' + P.short, color: `var(--zone-${L.accent})`, border: on ? '1.5px solid var(--accent)' : '1px solid var(--line-2)', bg: on ? 'var(--accent-tint)' : 'transparent', go: () => this.loadPal(d, P.id) }; });
+    const lookOn = this.state.lookOn ?? !!this.props.appearance;
+    return {
+      palName: look.name ?? '', lookTitle: isBodyK ? 'Apariencia del cuerpo' : 'Apariencia del palacio', bodyStyle: look, lookGroups, palTabs, lookOn,
+      openLook: () => this.setState({ lookOn: true }), closeLook: () => this.setState({ lookOn: false }), setName: e => setLook({ name: e.target.value }),
+      theme, modes, sides, sideToggle: isBodyK && tpl === 'body_both', side, sideLoci, kind, aspect: this.ar(), rooms: kind === 'plan' ? (P0?.rooms ?? d?.HOUSE_ROOMS ?? []) : [], planData: kind === 'plan' ? P0?.planData : null, imageId: P0?.imageId ?? 'palace-' + pal, selectedIds, rows, zoneChips,
+      isBody: true, isCustom: false,
+      subtitle: `${loci.length} puntos · ${zones.length} zonas`, sideLabel: !isBodyK ? (kind === 'plan' ? 'Plano' : 'Imagen') : side === 'front' ? 'Frontal' : 'Posterior', sideCount: sideLoci.length,
+      isPoints: mode === 'points', isZones: mode === 'zones', isRoute: mode === 'route',
+      hint: hint[1], hintIcon: hint[0],
+      lassoOn: !!lasso, lassoD: lasso ? 'M' + lasso.map(p => p.map(v => v.toFixed(1)).join(',')).join(' L') + ' Z' : '',
+      selLabel: selected.length ? `${selected.length} seleccionado${selected.length === 1 ? '' : 's'}` : 'Elige una zona y selecciona puntos', hasSel: selected.length > 0, activeZoneShort: az?.name.split(' · ')[0],
+      clearSel: () => this.setState({ selected: [] }),
+      assignSel: () => { const n = selected.length; this.setState(s => ({ loci: s.loci.map(l => s.selected.includes(l.id) ? { ...l, zone: s.activeZone } : l), selected: [] })); this.showToast(`${n} punto${n === 1 ? '' : 's'} en ${az.name}`); },
+      addZone: () => { const k = zones.length; const id = ['cabeza', 'hombros', 'torso', 'brazos', 'piernas'][k % 5]; this.showToast('Nueva zona: elige nombre y color'); },
+      routeLabel: draw ? 'Toca los puntos en el orden del recorrido' : `Ruta 1 → ${sorted.length} · línea punteada en el mapa`,
+      drawLabel: draw ? 'Terminar' : 'Dibujar ruta', drawIcon: draw ? 'ph ph-check' : 'ph ph-pencil-line', drawBg: draw ? 'var(--accent-tint-2)' : 'var(--accent-tint)',
+      toggleDraw: () => { if (!draw) return this.setState({ draw: [] }); const rest = sorted.map(l => l.id).filter(i => !draw.includes(i)); this.renumber([...draw, ...rest]); this.setState({ draw: null }); this.showToast('Ruta actualizada'); },
+      focusChip: !!focusLocus && mode === 'points' && !editId, focusLocus: focusLocus ?? {}, editFocus: () => this.setState({ editId: focusId }),
+      editOn: !!edit, edit: edit ?? {}, editSide: edit?.side === 'back' ? 'posterior' : 'frontal', editZones,
+      rename: e => { const v = e.target.value; this.setState(s => ({ loci: s.loci.map(x => x.id === editId ? { ...x, name: v } : x) })); },
+      closeEdit: () => this.setState({ editId: null }),
+      deleteEdit: () => { this.setState(s => ({ loci: s.loci.filter(x => x.id !== editId), editId: null, focusId: null })); this.showToast('Punto borrado'); },
+      toastOn: !!toast, toast: toast?.t, toastAction: !!toast?.action, toastGo: () => this.setState({ editId: toast.action, toast: null }),
+      menuOpen: this.state.menu, toggleMenu: () => this.setState({ menu: !this.state.menu }),
+      duplicate: () => { this.setState({ menu: false }); this.showToast(`«Cuerpo 2» creado: ${loci.length} puntos y zonas, sin ítems`); },
+      templateOn: this.state.templateOn, templates: tplList, openTemplate: () => this.setState({ templateOn: true }), closeTemplate: () => this.setState({ templateOn: false }),
+      stageRef: this.stageRef, pd: this.pd, pm: this.pm, pu: this.pu, stop: e => e.stopPropagation()
+    };
+  }
+}
+</script>
+</body>
+</html>

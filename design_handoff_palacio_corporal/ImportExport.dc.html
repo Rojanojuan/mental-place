@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="_ds/nocturne-b05dafec-65a9-46f7-a005-25140c24ba40/styles.css">
+  <script src="_ds/nocturne-b05dafec-65a9-46f7-a005-25140c24ba40/_ds_bundle.js"></script>
+  <link rel="stylesheet" href="pc-tokens.css">
+  <script src="https://unpkg.com/@phosphor-icons/web@2.1.1"></script>
+</helmet>
+<div data-pc-theme="{{ theme }}" style="position: relative; width: 390px; height: 844px; border-radius: 44px; overflow: hidden; background: var(--bg); color: var(--text); font-family: var(--font-ui); font-size: 15px; line-height: 1.45; box-shadow: var(--shadow-md); isolation: isolate;">
+  <div style="position: absolute; left: 0; right: 0; top: 0; height: 44px; display: flex; align-items: center; justify-content: space-between; padding: 0 28px 0 32px; font: 600 14px/1 var(--font-ui); z-index: 40; background: var(--bg);">
+    <span>19:40</span>
+    <div style="display: flex; gap: 6px; font-size: 15px;"><i class="ph-fill ph-cell-signal-high"></i><i class="ph-fill ph-wifi-high"></i><i class="ph-fill ph-battery-high"></i></div>
+  </div>
+  <div style="position: absolute; left: 0; right: 0; top: 44px; display: flex; flex-direction: column; gap: 8px; padding: 0 8px 10px; z-index: 39; background: var(--bg); box-shadow: 0 1px 0 var(--line);">
+    <div style="height: 52px; display: flex; align-items: center; gap: 4px;">
+      <button aria-label="Volver" style="width: 44px; height: 44px; border: 0; border-radius: 10px; background: transparent; color: var(--text-2); font-size: 20px; cursor: pointer; display: grid; place-items: center;"><i class="ph ph-caret-left"></i></button>
+      <span style="flex: 1; font-size: 15px; font-weight: 500;">Importar y exportar</span>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(3, 1fr); padding: 3px; gap: 2px; margin: 0 8px; border-radius: 10px; background: var(--sunken);">
+      <sc-for list="{{ tabs }}" as="t" hint-placeholder-count="3"><button onClick="{{ t.go }}" style="height: 36px; border: 0; border-radius: 7px; background: {{ t.bg }}; box-shadow: {{ t.shadow }}; color: {{ t.color }}; font: 500 13px var(--font-ui); cursor: pointer;">{{ t.label }}</button></sc-for>
+    </div>
+  </div>
+
+  <div style="position: absolute; inset: 154px 0 0 0; overflow-y: auto; scrollbar-width: none; padding: 16px 16px 110px; display: flex; flex-direction: column; gap: 18px;">
+    <sc-if value="{{ isJson }}" hint-placeholder-val="{{ true }}">
+      <div style="display: flex; flex-direction: column; gap: 18px;">
+        <div style="display: flex; align-items: center; gap: 12px; padding: 12px; border-radius: 12px; background: var(--surface); box-shadow: var(--shadow-sm);">
+          <div style="width: 40px; height: 40px; border-radius: 10px; background: var(--surface-2); display: grid; place-items: center; font-size: 20px; color: var(--text-2);"><i class="ph ph-file-code"></i></div>
+          <div style="flex: 1; min-width: 0; display: flex; flex-direction: column;"><span style="font: 500 13px var(--font-mono); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">gramatica-c1-cuerpo2.json</span><span style="font-size: 12px; color: var(--text-3);">version 1 · 84 KB · válido</span></div>
+          <button style="height: 36px; padding: 0 10px; border: 0; border-radius: 8px; background: transparent; color: var(--accent-text); font: 500 13px var(--font-ui); cursor: pointer;">Cambiar</button>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          <span style="font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-3);">Se va a crear</span>
+          <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 6px;">
+            <sc-for list="{{ preview }}" as="p" hint-placeholder-count="6">
+              <div style="display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 10px; background: var(--surface); box-shadow: var(--shadow-sm);"><i class="{{ p.icon }}" style="font-size: 18px; color: var(--text-2);"></i><div style="display: flex; flex-direction: column;"><span style="font: 500 17px var(--font-mono);">{{ p.n }}</span><span style="font-size: 12px; color: var(--text-3);">{{ p.label }}</span></div></div>
+            </sc-for>
+          </div>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          <div style="display: flex; align-items: baseline; justify-content: space-between;"><span style="font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-3);">Conflictos · {{ pending }} sin resolver</span></div>
+          <sc-for list="{{ conflicts }}" as="c" hint-placeholder-count="3">
+            <div style="display: flex; flex-direction: column; gap: 8px; padding: 12px; border-radius: 12px; background: var(--surface); box-shadow: {{ c.shadow }};">
+              <div style="display: flex; gap: 8px; align-items: flex-start;"><i class="{{ c.icon }}" style="font-size: 18px; color: {{ c.iconColor }}; margin-top: 1px;"></i><div style="display: flex; flex-direction: column;"><span style="font-size: 14px; font-weight: 500;">{{ c.title }}</span><span style="font-size: 12px; color: var(--text-3);">{{ c.sub }}</span></div></div>
+              <div style="display: grid; grid-template-columns: repeat(3, 1fr); padding: 3px; gap: 2px; border-radius: 10px; background: var(--sunken);">
+                <sc-for list="{{ c.opts }}" as="o" hint-placeholder-count="3"><button onClick="{{ o.go }}" style="height: 36px; border: 0; border-radius: 7px; background: {{ o.bg }}; box-shadow: {{ o.shadow }}; color: {{ o.color }}; font: 500 12px var(--font-ui); cursor: pointer;">{{ o.l }}</button></sc-for>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ isCsv }}" hint-placeholder-val="{{ false }}">
+      <div style="display: flex; flex-direction: column; gap: 14px;">
+        <div style="display: flex; align-items: center; gap: 12px; padding: 12px; border-radius: 12px; background: var(--surface); box-shadow: var(--shadow-sm);">
+          <div style="width: 40px; height: 40px; border-radius: 10px; background: var(--surface-2); display: grid; place-items: center; font-size: 20px; color: var(--text-2);"><i class="ph ph-file-csv"></i></div>
+          <div style="flex: 1; display: flex; flex-direction: column;"><span style="font: 500 13px var(--font-mono);">vocabulario.csv</span><span style="font-size: 12px; color: var(--text-3);">5 columnas · 240 filas</span></div>
+        </div>
+        <label style="display: flex; flex-direction: column; gap: 5px; font-size: 12px; color: var(--text-2);">Plantilla de destino<select style="height: 44px; padding: 0 10px; border-radius: 10px; border: 1px solid var(--line-2); background: var(--surface); color: var(--text); font: 400 14px var(--font-ui);"><option>Vocabulario</option><option>Libre</option><option>Gramática C1</option></select></label>
+        <div style="display: flex; flex-direction: column; border-radius: 14px; background: var(--surface); box-shadow: var(--shadow-sm); overflow: hidden;">
+          <div style="display: grid; grid-template-columns: 1fr 20px 1fr; gap: 8px; padding: 8px 12px; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-3); background: var(--surface-2);"><span>Columna</span><span></span><span>Campo</span></div>
+          <sc-for list="{{ mapping }}" as="m" hint-placeholder-count="5">
+            <div style="display: grid; grid-template-columns: 1fr 20px 1fr; gap: 8px; align-items: center; min-height: 60px; padding: 0 12px; border-top: 1px solid var(--line);">
+              <div style="display: flex; flex-direction: column; min-width: 0;"><span style="font: 500 13px var(--font-mono);">{{ m.col }}</span><span style="font-size: 11px; color: var(--text-3); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">p. ej. {{ m.sample }}</span></div>
+              <i class="ph ph-arrow-right" style="color: var(--text-3);"></i>
+              <select onChange="{{ m.set }}" value="{{ m.field }}" style="height: 40px; padding: 0 8px; border-radius: 8px; border: 1px solid {{ m.selBorder }}; background: var(--bg); color: var(--text); font: 400 13px var(--font-ui); min-width: 0;">
+                <sc-for list="{{ fields }}" as="f" hint-placeholder-count="7"><option value="{{ f.v }}">{{ f.l }}</option></sc-for>
+              </select>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ isExport }}" hint-placeholder-val="{{ false }}">
+      <div style="display: flex; flex-direction: column; gap: 14px;">
+        <div style="display: flex; flex-direction: column; gap: 4px;"><span style="font: 500 20px var(--font-ui);">Copia de seguridad</span><span style="font-size: 13px; color: var(--text-2);">Un archivo JSON con todo: palacios, zonas, puntos, escenas, ítems, mazos, plantillas, horarios e historial.</span></div>
+        <div style="display: flex; flex-direction: column; border-radius: 14px; background: var(--surface); box-shadow: var(--shadow-sm); overflow: hidden;">
+          <sc-for list="{{ exportOpts }}" as="o" hint-placeholder-count="4">
+            <button onClick="{{ o.go }}" style="min-height: 52px; display: grid; grid-template-columns: 24px 1fr auto; align-items: center; gap: 10px; padding: 0 12px; border: 0; border-top: {{ o.border }}; background: transparent; color: var(--text); cursor: pointer; text-align: left; font-family: var(--font-ui);"><i class="{{ o.check }}" style="font-size: 20px; color: var(--accent);"></i><span style="font-size: 14px;">{{ o.l }}</span><span style="font: 400 12px var(--font-mono); color: var(--text-3);">{{ o.n }}</span></button>
+          </sc-for>
+        </div>
+        <div style="display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--text-3);"><i class="ph ph-clock-counter-clockwise"></i>Última copia: 10 oct, 9:12 p. m.</div>
+      </div>
+    </sc-if>
+  </div>
+
+  <div style="position: absolute; left: 0; right: 0; bottom: 0; padding: 12px 16px 30px; background: linear-gradient(to top, var(--bg) 80%, transparent);">
+    <button onClick="{{ primaryGo }}" disabled="{{ primaryDisabled }}" style="width: 100%; height: 56px; border-radius: 12px; border: 1.5px solid var(--accent); background: var(--accent-tint); color: var(--accent-text); font: 500 16px var(--font-ui); cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; opacity: {{ primaryOp }};"><i class="{{ primaryIcon }}"></i>{{ primaryLabel }}</button>
+  </div>
+  <sc-if value="{{ toastOn }}" hint-placeholder-val="{{ false }}">
+    <div style="position: absolute; left: 12px; right: 12px; bottom: 100px; z-index: 30; display: flex; align-items: center; gap: 10px; min-height: 48px; padding: 0 14px; border-radius: 12px; background: var(--surface-2); box-shadow: var(--shadow-lg); animation: pc-in var(--dur-base) var(--ease-out) both; font-size: 13px;"><i class="ph ph-check-circle" style="color: var(--ok);"></i>{{ toast }}</div>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:390,&quot;height&quot;:844},&quot;theme&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;dark&quot;,&quot;light&quot;],&quot;default&quot;:&quot;dark&quot;,&quot;tsType&quot;:&quot;'dark'|'light'&quot;},&quot;tab&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;json&quot;,&quot;csv&quot;,&quot;export&quot;],&quot;default&quot;:&quot;json&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+class Component extends DCLogic {
+  state = { tab: null, res: { c1: null, c2: 'merge', c3: null }, map: ['word', 'translation', 'example_en', 'example_es', 'skip'], exp: { all: true, hist: true, media: false }, toast: null };
+  componentWillUnmount() { clearTimeout(this.tt); }
+  renderVals() {
+    const theme = this.props.theme ?? 'dark';
+    const tab = this.state.tab ?? this.props.tab ?? 'json';
+    const seg = on => ({ bg: on ? 'var(--surface)' : 'transparent', shadow: on ? 'var(--shadow-sm)' : 'none', color: on ? 'var(--text)' : 'var(--text-2)' });
+    const tabs = [['json', 'JSON'], ['csv', 'CSV'], ['export', 'Exportar']].map(([k, label]) => ({ key: k, label, ...seg(tab === k), go: () => this.setState({ tab: k }) }));
+    const preview = [['ph ph-person-simple', 1, 'palacio'], ['ph ph-circles-four', 5, 'zonas'], ['ph ph-map-pin', 50, 'puntos'], ['ph ph-shapes', 212, 'objetos de escena'], ['ph ph-cards', 50, 'ítems'], ['ph ph-stack', 1, 'mazo']].map(([icon, n, label], i) => ({ key: i, icon, n, label }));
+    const res = this.state.res;
+    const C = [
+      ['c1', 'Ya existe «Cuerpo 2»', 'palaces[0].name coincide con un palacio tuyo', [['rename', 'Renombrar'], ['merge', 'Fusionar'], ['replace', 'Reemplazar']]],
+      ['c2', '3 ítems duplicados', 'Mismo título y plantilla: Past Perfect, used to, would', [['skip', 'Omitir'], ['merge', 'Actualizar'], ['dup', 'Duplicar']]],
+      ['c3', '2 ítems sin punto', 'locusRef «Cuerpo 2 · L51» y «L52» no existen', [['tray', 'A Sin asignar'], ['create', 'Crear puntos'], ['skip', 'Omitir']]],
+    ];
+    const conflicts = C.map(([id, title, sub, opts]) => { const ok = !!res[id]; return { key: id, title, sub, icon: ok ? 'ph-fill ph-check-circle' : 'ph ph-warning-circle', iconColor: ok ? 'var(--ok)' : 'var(--state-learning)', shadow: ok ? 'var(--shadow-sm)' : 'inset 0 0 0 1px var(--state-learning)',
+      opts: opts.map(([k, l]) => ({ key: k, l, ...seg(res[id] === k), go: () => this.setState({ res: { ...res, [id]: k } }) })) }; });
+    const pending = C.filter(([id]) => !res[id]).length;
+    const fields = [['word', 'Palabra'], ['translation', 'Traducción'], ['example_en', 'Ejemplo EN'], ['example_es', 'Ejemplo ES'], ['ipa', 'Pronunciación'], ['tags', 'Etiquetas'], ['skip', 'No importar']].map(([v, l]) => ({ key: v, v, l }));
+    const cols = [['palabra', 'wonder'], ['significado', 'preguntarse'], ['frase', 'I wonder why…'], ['frase_es', 'Me pregunto por qué…'], ['nota_interna', 'revisar']];
+    const mapping = cols.map(([col, sample], i) => ({ key: col, col, sample, field: this.state.map[i], selBorder: this.state.map[i] === 'skip' ? 'var(--line-2)' : 'var(--accent)', set: e => { const m = this.state.map.slice(); m[i] = e.target.value; this.setState({ map: m }); } }));
+    const E = this.state.exp;
+    const exportOpts = [['all', 'Todos los palacios y contenido', '2 · 100 ítems'], ['hist', 'Historial de repasos (ReviewLog)', '1.284'], ['media', 'Imágenes incrustadas', '+3,2 MB']].map(([k, l, n], i) => ({ key: k, l, n, border: i ? '1px solid var(--line)' : '0', check: E[k] ? 'ph-fill ph-check-square' : 'ph ph-square', go: () => this.setState({ exp: { ...E, [k]: !E[k] } }) }));
+    const toastIt = t => { clearTimeout(this.tt); this.setState({ toast: t }); this.tt = setTimeout(() => this.setState({ toast: null }), 3000); };
+    const P = { json: [pending ? `Resuelve ${pending} conflicto${pending > 1 ? 's' : ''}` : 'Importar 50 ítems', 'ph ph-download-simple', !!pending, () => toastIt('Importado · 50 ítems en «Cuerpo 2»')], csv: ['Importar 240 ítems', 'ph ph-download-simple', false, () => toastIt('240 ítems en Sin asignar')], export: ['Descargar copia (.json)', 'ph ph-export', false, () => toastIt('palacio-corporal-2026-10-14.json')] }[tab];
+    return { theme, tabs, isJson: tab === 'json', isCsv: tab === 'csv', isExport: tab === 'export', preview, conflicts, pending, fields, mapping, exportOpts,
+      primaryLabel: P[0], primaryIcon: P[1], primaryDisabled: P[2], primaryOp: P[2] ? 0.45 : 1, primaryGo: P[3], toastOn: !!this.state.toast, toast: this.state.toast };
+  }
+}
+</script>
+</body>
+</html>

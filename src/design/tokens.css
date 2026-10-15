@@ -1,0 +1,46 @@
+/* Palacio Corporal — design tokens (claro + oscuro). Base: Nocturne. */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap');
+[data-pc-theme] {
+  --font-ui: "Inter", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+  --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px; --space-5: 20px; --space-6: 24px; --space-8: 32px;
+  --radius-sm: 4px; --radius-md: 8px; --radius-lg: 14px; --radius-sheet: 20px; --radius-pill: 999px;
+  --dur-fast: 140ms; --dur-base: 240ms; --dur-camera: 700ms; --dur-reveal: 420ms; --dur-pulse: 1800ms;
+  --ease-out: cubic-bezier(.2,.8,.2,1); --ease-camera: cubic-bezier(.65,0,.25,1);
+  --hit: 44px; --pin: 28px;
+  font-family: var(--font-ui);
+}
+[data-pc-theme="dark"] {
+  --bg: #161826; --surface: #232532; --surface-2: #2b2e3d; --sunken: #11131e;
+  --text: #e9e9ed; --text-2: #b2b6ca; --text-3: #8b8fa3; --line: rgba(233,233,237,.14); --line-2: rgba(233,233,237,.24);
+  --accent: #9184d9; --accent-text: #d2cefd; --accent-tint: rgba(145,132,217,.14); --accent-tint-2: rgba(145,132,217,.26);
+  --ink-on-state: #161826; --scrim: rgba(10,11,18,.62);
+  --shadow-sm: 0 0 0 1px #3f424d; --shadow-md: 0 0 0 1px #595d6c, 0 6px 18px rgba(0,0,0,.55); --shadow-lg: 0 0 0 1px #75798c, 0 16px 40px rgba(0,0,0,.65);
+  --body-line: #9397ab; --body-fill: rgba(147,151,171,.05);
+  --state-empty: #5f6375; --state-new: oklch(0.74 0.12 245); --state-learning: oklch(0.80 0.13 75); --state-due: oklch(0.72 0.16 25);
+  --state-review: oklch(0.80 0.11 150); --state-mastered: oklch(0.83 0.13 95); --state-suspended: #75798c;
+  --state-edge: transparent;
+  --zone-cabeza: oklch(0.70 0.10 300); --zone-hombros: oklch(0.70 0.10 200); --zone-torso: oklch(0.70 0.10 340); --zone-brazos: oklch(0.70 0.10 60); --zone-piernas: oklch(0.70 0.10 255);
+  --ok: oklch(0.80 0.11 150); --bad: oklch(0.72 0.16 25);
+}
+[data-pc-theme="light"] {
+  --bg: #f6f6f9; --surface: #ffffff; --surface-2: #eef0f6; --sunken: #e9ebf2;
+  --text: #1d1f2b; --text-2: #4a4e5e; --text-3: #6a6e80; --line: rgba(29,31,43,.12); --line-2: rgba(29,31,43,.22);
+  --accent: #6457b3; --accent-text: #4f4396; --accent-tint: rgba(100,87,179,.09); --accent-tint-2: rgba(100,87,179,.18);
+  --ink-on-state: #161826; --scrim: rgba(29,31,43,.38);
+  --shadow-sm: 0 0 0 1px rgba(29,31,43,.10); --shadow-md: 0 0 0 1px rgba(29,31,43,.08), 0 6px 18px rgba(29,31,43,.10); --shadow-lg: 0 0 0 1px rgba(29,31,43,.10), 0 16px 40px rgba(29,31,43,.18);
+  --body-line: #6a6e80; --body-fill: rgba(106,110,128,.05);
+  --state-empty: #9397ab; --state-new: oklch(0.74 0.12 245); --state-learning: oklch(0.80 0.13 75); --state-due: oklch(0.72 0.16 25);
+  --state-review: oklch(0.80 0.11 150); --state-mastered: oklch(0.83 0.13 95); --state-suspended: #b2b6ca;
+  --state-edge: rgba(22,24,38,.55);
+  --zone-cabeza: oklch(0.62 0.12 300); --zone-hombros: oklch(0.62 0.12 200); --zone-torso: oklch(0.62 0.12 340); --zone-brazos: oklch(0.62 0.12 60); --zone-piernas: oklch(0.62 0.12 255);
+  --ok: oklch(0.52 0.12 150); --bad: oklch(0.55 0.17 25);
+}
+@keyframes pc-pulse { 0% { transform: scale(1); opacity: .7 } 100% { transform: scale(2.1); opacity: 0 } }
+@keyframes pc-in { from { opacity: 0; transform: translateY(8px) scale(.96) } to { opacity: 1; transform: none } }
+@keyframes pc-sheet { from { transform: translateY(100%) } to { transform: none } }
+@keyframes pc-shimmer { 0% { background-position: -200px 0 } 100% { background-position: 200px 0 } }
+@media (prefers-reduced-motion: reduce) {
+  [data-pc-theme] * { animation-duration: 1ms !important; animation-iteration-count: 1 !important; transition-duration: 1ms !important; }
+  [data-pc-pulse] { display: none; }
+}

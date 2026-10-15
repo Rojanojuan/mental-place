@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="_ds/nocturne-b05dafec-65a9-46f7-a005-25140c24ba40/styles.css">
+  <script src="_ds/nocturne-b05dafec-65a9-46f7-a005-25140c24ba40/_ds_bundle.js"></script>
+  <meta name="design_doc_mode" content="canvas">
+  <link rel="stylesheet" href="pc-tokens.css">
+  <script src="https://unpkg.com/@phosphor-icons/web@2.1.1"></script>
+  <style>body { margin: 0; background: #11131e; } a { color: #b5abfc; } a:hover { color: #d2cefd; }</style>
+</helmet>
+<div data-pc-theme="dark" style="min-width: 2200px; padding: 64px 72px 120px; background: #11131e; color: var(--text); display: flex; flex-direction: column; gap: 96px;">
+  <header style="display: flex; flex-direction: column; gap: 10px; max-width: 760px;">
+    <span style="font: 500 12px var(--font-mono); color: var(--text-3); letter-spacing: 0.04em;">PALACIO CORPORAL · DISEÑO COMPLETO</span>
+    <h1 style="margin: 0; font: 500 48px/1.05 var(--font-ui); letter-spacing: -0.025em;">Móvil, escritorio, componentes y tokens</h1>
+    <p style="margin: 0; font-size: 16px; color: var(--text-2); text-wrap: pretty;">Base visual: Nocturne (oscuro), con una variante clara derivada de sus rampas. Los dos teléfonos de arriba son navegables: pulsa «Repasar ahora» y recorre las 4 tarjetas. Debajo, cada fase y estado en estático, los componentes, los tokens y la silueta con coordenadas 0–1.</p>
+    <div style="display: flex; gap: 16px; flex-wrap: wrap; font-size: 14px;"><a href="#casas">10 casas</a><a href="#lugares">Casa / imagen</a><a href="#apariencia">Apariencia del cuerpo</a><a href="#responsivo">Responsivo</a><a href="#palacios">3 palacios</a><a href="#estandar45">Estándar 45</a><a href="#mapa">Mapa</a><a href="#escritorio">Escritorio</a><a href="#resto">Recorrido · stats · horarios · import · onboarding</a><a href="#item">Ítem y biblioteca</a><a href="#editor">Editor de palacio</a><a href="#proto">Prototipo</a><a href="#fases">Fases de la sesión</a><a href="#estados">Estados</a><a href="#componentes">Componentes</a><a href="#tokens">Tokens</a><a href="#silueta">Silueta SVG</a><a href="#traspaso">Traspaso</a></div>
+  </header>
+
+  <section id="casas" style="display: flex; flex-direction: column; gap: 24px;">
+    <div style="display: flex; align-items: baseline; gap: 14px;"><span style="font: 500 12px var(--font-mono); padding: 3px 8px; border-radius: 6px; background: var(--accent-tint); color: var(--accent-text);">11a</span><h2 style="margin: 0; font: 500 28px var(--font-ui);">10 casas amuebladas · más de 130 puntos cada una</h2></div>
+    <p style="margin: 0; max-width: 900px; color: var(--text-2); font-size: 14px; text-wrap: pretty;">Cada casa tiene 12 a 15 habitaciones y cada mueble es un punto. La ruta está optimizada para el método de loci: se entra por la puerta principal, se recorren las habitaciones en serpentina (fila de arriba de izquierda a derecha, la siguiente de vuelta) y dentro de cada habitación se avanza en sentido horario desde la puerta, pegado a las paredes, terminando en el mueble central. Las puertas están siempre entre habitaciones consecutivas, así la ruta nunca salta ni se cruza. Las zonas agrupan habitaciones: día, cocina y servicio, noche, trabajo y ocio, exterior.</p>
+    <dc-import name="Casas" theme="dark" hint-size="1440px,900px"></dc-import>
+    <dc-import name="Casas" theme="light" house="h10" hint-size="1440px,900px"></dc-import>
+  </section>
+
+  <section id="lugares" style="display: flex; flex-direction: column; gap: 24px;">
+    <div style="display: flex; align-items: baseline; gap: 14px;"><span style="font: 500 12px var(--font-mono); padding: 3px 8px; border-radius: 6px; background: var(--accent-tint); color: var(--accent-text);">10a</span><h2 style="margin: 0; font: 500 28px var(--font-ui);">Palacios que no son cuerpos: casa, ruta o tu propia imagen</h2></div>
+    <p style="margin: 0; max-width: 860px; color: var(--text-2); font-size: 14px; text-wrap: pretty;">El palacio puede ser un cuerpo, un <strong style="font-weight: 500; color: var(--text);">plano de casa</strong> o <strong style="font-weight: 500; color: var(--text);">cualquier imagen</strong> (tu casa real, tu calle, una foto del trayecto). Todo funciona igual: puntos con coordenadas 0–1, zonas (en una casa, las habitaciones), ruta numerada, repaso y apariencia. En el editor, el botón de plantilla elige el tipo de palacio. En «Imagen propia», arrastra tu foto al recuadro y luego toca encima para crear puntos. Ejemplos: «Mi casa · Phrasal verbs» (22 puntos en 7 habitaciones) y «Ruta al trabajo · Conectores» (8 puntos sobre una foto).</p>
+    <div style="display: flex; gap: 40px; align-items: flex-start;">
+      <div style="display: flex; flex-direction: column; gap: 10px;"><dc-import name="PalaceEditor" theme="dark" palace="casa" hint-size="390px,844px"></dc-import><span style="font-size: 13px; color: var(--text-3);">10a · Editor · plano de casa</span></div>
+      <div style="display: flex; flex-direction: column; gap: 10px;"><dc-import name="PalaceEditor" theme="light" palace="casa" mode="zones" hint-size="390px,844px"></dc-import><span style="font-size: 13px; color: var(--text-3);">10b · Habitaciones como zonas (claro)</span></div>
+      <div style="display: flex; flex-direction: column; gap: 10px;"><dc-import name="PalaceEditor" theme="dark" palace="ruta" hint-size="390px,844px"></dc-import><span style="font-size: 13px; color: var(--text-3);">10c · Editor · imagen propia (arrastra tu foto)</span></div>
+      <div style="display: flex; flex-direction: column; gap: 10px;"><dc-import name="PalacioApp" theme="dark" palace="casa" hint-size="390px,844px"></dc-import><span style="font-size: 13px; color: var(--text-3);">10d · Hoy · Mi casa</span></div>
+      <div style="display: flex; flex-direction: column; gap: 10px;"><dc-import name="PalaceEditor" theme="dark" palace="casa" appearance="{{ true }}" hint-size="390px,844px"></dc-import><span style="font-size: 13px; color: var(--text-3);">10e · Apariencia de un palacio sin cuerpo</span></div>
+    </div>
+  </section>
+
+  <section id="apariencia" style="display: flex; flex-direction: column; gap: 24px;">
+    <div style="display: flex; align-items: baseline; gap: 14px;"><span style="font: 500 12px var(--font-mono); padding: 3px 8px; border-radius: 6px; background: var(--accent-tint); color: var(--accent-text);">9a</span><h2 style="margin: 0; font: 500 28px var(--font-ui);">Editor de palacio · apariencia de cada cuerpo</h2></div>
+    <p style="margin: 0; max-width: 860px; color: var(--text-2); font-size: 14px; text-wrap: pretty;">Dentro del editor de palacio: los chips de arriba cambian entre Cuerpo 1, Cuerpo 2 y Fonética 45, y el botón del pincel <i class="ph ph-paint-brush"></i> abre «Apariencia del cuerpo». Ahí cambias el nombre, el color del palacio (contorno y chip), el cabello (sin cabello, corto, largo o moño) y su color, la línea del contorno y el tono. El cambio se ve en vivo sobre el cuerpo y cada palacio guarda su propio estilo.</p>
+    <div style="display: flex; gap: 40px; align-items: flex-start;">
+      <div style="display: flex; flex-direction: column; gap: 10px;"><dc-import name="PalaceEditor" theme="dark" palace="c1" appearance="{{ true }}" hint-size="390px,844px"></dc-import><span style="font-size: 13px; color: var(--text-3);">9a · Cuerpo 1 · apariencia abierta</span></div>
+      <div style="display: flex; flex-direction: column; gap: 10px;"><dc-import name="PalaceEditor" theme="light" palace="c2" appearance="{{ true }}" hint-size="390px,844px"></dc-import><span style="font-size: 13px; color: var(--text-3);">9b · Cuerpo 2 · apariencia (claro)</span></div>
+      <div style="display: flex; flex-direction: column; gap: 10px;"><dc-import name="PalaceEditor" theme="dark" palace="f45" appearance="{{ true }}" hint-size="390px,844px"></dc-import><span style="font-size: 13px; color: var(--text-3);">9c · Fonética 45 · apariencia</span></div>
+      <div style="display: flex; flex-direction: column; gap: 10px;"><dc-import name="PalaceEditor" theme="dark" palace="c2" hint-size="390px,844px"></dc-import><span style="font-size: 13px; color: var(--text-3);">9d · Cuerpo 2 en el editor (con su estilo)</span></div>
+      <div style="display: flex; flex-direction: column; gap: 10px;"><dc-import name="PalaceEditor" theme="dark" palace="f45" hint-size="390px,844px"></dc-import><span style="font-size: 13px; color: var(--text-3);">9e · Fonética 45 en el editor</span></div>
+    </div>
+  </section>
+
+  <section id="responsivo" style="display: flex; flex-direction: column; gap: 24px;">
+    <div style="display: flex; align-items: baseline; gap: 14px;"><span style="font: 500 12px var(--font-mono); padding: 3px 8px; border-radius: 6px; background: var(--accent-tint); color: var(--accent-text);">8a</span><h2 style="margin: 0; font: 500 28px var(--font-ui);">Responsivo y proporción de puntos</h2></div>
+    <p style="margin: 0; max-width: 860px; color: var(--text-2); font-size: 14px; text-wrap: pretty;">El cuerpo ocupa ahora todo el espacio disponible: se ajusta al alto y al ancho del contenedor, con menos margen y menos hueco entre la vista frontal y la posterior. Los puntos se dimensionan solos según el tamaño real del cuerpo en pantalla (5,2 % de su alto, entre 11 y 28 px). En zonas densas como la cabeza bajan al 78 % si no hay zoom. La versión de escritorio se reorganiza según el ancho: ≥1280 px con 3 columnas y menú completo; 960–1279 px con menú de iconos y paneles laterales más estrechos; &lt;960 px (tablet) en una sola columna con el mapa arriba.</p>
+    <div style="display: flex; gap: 40px; align-items: flex-start; flex-wrap: wrap;">
+      <div style="display: flex; flex-direction: column; gap: 10px;"><dc-import name="Desktop" width="{{ 1100 }}" height="{{ 800 }}" theme="dark" screen="hoy" hint-size="1100px,800px"></dc-import><span style="font-size: 13px; color: var(--text-3);">8a · Hoy · 1100 px (menú de iconos)</span></div>
+      <div style="display: flex; flex-direction: column; gap: 10px;"><dc-import name="Desktop" width="{{ 820 }}" height="{{ 1100 }}" theme="light" screen="session" hint-size="820px,1100px"></dc-import><span style="font-size: 13px; color: var(--text-3);">8b · Sesión · tablet 820 px</span></div>
+      <div style="display: flex; flex-direction: column; gap: 10px;"><dc-import name="Desktop" width="{{ 820 }}" height="{{ 1100 }}" theme="dark" screen="palace" hint-size="820px,1100px"></dc-import><span style="font-size: 13px; color: var(--text-3);">8c · Editor de palacio · tablet</span></div>
+    </div>
+    <p style="margin: 0; max-width: 860px; color: var(--text-3); font-size: 13px;">Para verlo a pantalla completa, abre <a href="Desktop.dc.html">Desktop.dc.html</a> directamente y cambia el tamaño de la ventana.</p>
+  </section>
+
+  <section id="palacios" style="display: flex; flex-direction: column; gap: 28px;">
+    <div style="display: flex; align-items: baseline; gap: 14px;"><span style="font: 500 12px var(--font-mono); padding: 3px 8px; border-radius: 6px; background: var(--accent-tint); color: var(--accent-text);">7a</span><h2 style="margin: 0; font: 500 28px var(--font-ui);">Tus 3 palacios: gramática (2 × 50) y fonética (45)</h2></div>
+    <p style="margin: 0; max-width: 860px; color: var(--text-2); font-size: 14px; text-wrap: pretty;">Plantilla «Gramática 50»: las mismas 50 partes y el mismo orden de ruta en los dos cuerpos (36 delante, 14 detrás), así que el recorrido se aprende una vez y sirve para los 100 elementos. Cuerpo 1 lleva los tiempos verbales, los modales, los condicionales, la voz pasiva y los nombres; Cuerpo 2, la oración y el discurso. «Estándar 45» es el palacio de fonética: los 44 fonemas del inglés en tu orden, más el acento y el ritmo en la Nuca. En Hoy, el selector C1 · C2 · F45 cambia de palacio, y la cola de repaso mezcla los tres.</p>
+    <sc-for list="{{ palaces }}" as="p" hint-placeholder-count="3">
+      <div style="display: grid; grid-template-columns: 540px minmax(0, 1fr); gap: 40px; align-items: start; max-width: 2000px; padding-top: 12px; border-top: 1px solid var(--line);">
+        <div style="display: flex; flex-direction: column; gap: 10px;">
+          <div style="display: flex; align-items: baseline; gap: 10px;"><span style="font: 500 12px var(--font-mono); color: var(--accent-text);">{{ p.short }}</span><span style="font: 500 22px var(--font-ui);">{{ p.name }}</span></div>
+          <span style="font-size: 13px; color: var(--text-3);">{{ p.meta }}</span>
+          <div style="border-radius: 14px; background: var(--bg); box-shadow: var(--shadow-sm);"><dc-import name="BodyMap" loci="{{ p.loci }}" side="both" kind="{{ p.kind }}" aspect="{{ p.aspect }}" rooms="{{ p.rooms }}" plan-data="{{ p.planData }}" image-id="{{ p.imageId }}" width="540" height="{{ p.mapH }}" pin-size="22" show-route="{{ true }}" no-pulse="{{ true }}" body-style="{{ p.style }}" hint-size="540px,680px"></dc-import></div>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(330px, 1fr)); gap: 20px 28px; align-content: start;">
+          <sc-for list="{{ p.groups }}" as="g" hint-placeholder-count="5">
+            <div style="display: flex; flex-direction: column;">
+              <div style="display: flex; align-items: center; gap: 8px; padding-bottom: 6px;"><span style="width: 10px; height: 10px; border-radius: 50%; background: {{ g.color }}; box-shadow: 0 0 0 3px {{ g.halo }};"></span><span style="font-size: 13px; font-weight: 500;">{{ g.name }}</span><span style="font: 400 11px var(--font-mono); color: var(--text-3);">{{ g.range }}</span></div>
+              <sc-for list="{{ g.rows }}" as="r" hint-placeholder-count="7">
+                <div style="display: grid; grid-template-columns: 28px 132px minmax(0, 1fr); align-items: center; gap: 8px; min-height: 28px; border-top: 1px solid var(--line); font-size: 13px;">
+                  <dc-import name="LocusPin" n="{{ r.n }}" state="{{ r.state }}" size="20" hit="24" no-pulse="{{ true }}" label="{{ r.name }}" hint-size="24px,24px"></dc-import>
+                  <span style="color: var(--text-2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{ r.name }}</span>
+                  <span style="font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{ r.item }}</span>
+                </div>
+              </sc-for>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </sc-for>
+    <div style="display: flex; gap: 40px; align-items: flex-start;">
+      <div style="display: flex; flex-direction: column; gap: 10px;"><dc-import name="PalacioApp" theme="dark" palace="c1" hint-size="390px,844px"></dc-import><span style="font-size: 13px; color: var(--text-3);">7b · Hoy · Cuerpo 1 (50)</span></div>
+      <div style="display: flex; flex-direction: column; gap: 10px;"><dc-import name="PalacioApp" theme="light" palace="c2" hint-size="390px,844px"></dc-import><span style="font-size: 13px; color: var(--text-3);">7c · Hoy · Cuerpo 2 (50, claro)</span></div>
+      <div style="display: flex; flex-direction: column; gap: 10px;"><dc-import name="PalacioApp" theme="dark" palace="f45" hint-size="390px,844px"></dc-import><span style="font-size: 13px; color: var(--text-3);">7d · Hoy · Fonética 45</span></div>
+      <div style="display: flex; flex-direction: column; gap: 10px;"><dc-import name="PalacioApp" theme="dark" screen="session" phase="point" card-index="{{ 3 }}" hint-size="390px,844px"></dc-import><span style="font-size: 13px; color: var(--text-3);">7e · Sesión en Cuerpo 2 · Abdomen</span></div>
+      <div style="display: flex; flex-direction: column; gap: 10px;"><dc-import name="PalacioApp" theme="dark" screen="session" phase="content" card-index="{{ 2 }}" hint-size="390px,844px"></dc-import><span style="font-size: 13px; color: var(--text-3);">7f · Sesión en Fonética 45 · Lengua /ʌ/</span></div>
+    </div>
+  </section>
+
+  <section id="estandar45" style="display: flex; flex-direction: column; gap: 24px;">
+    <div style="display: flex; align-items: baseline; gap: 14px;"><span style="font: 500 12px var(--font-mono); padding: 3px 8px; border-radius: 6px; background: var(--accent-tint); color: var(--accent-text);">6a</span><h2 style="margin: 0; font: 500 28px var(--font-ui);">Plantilla «Estándar 45» y cuerpos personalizables</h2></div>
+    <p style="margin: 0; max-width: 820px; color: var(--text-2); font-size: 14px; text-wrap: pretty;">Nueva plantilla de palacio con 45 partes en tu orden de ruta: de la cabeza a los pies por delante, y de las nalgas a la nuca por detrás. Convive con la plantilla «Gramática 50» de Cuerpo 1 y Cuerpo 2 (ver 7a). Cada cuerpo guarda su propio estilo (nombre, color, pelo, línea y tono) en <code style="font-family: var(--font-mono);">Palace.style</code>. Tras calificar, el próximo repaso usa el intervalo estándar de tu panel; el ajuste manual queda dentro de «Avanzado» en la hoja.</p>
+    <div style="display: flex; gap: 40px; align-items: flex-start;">
+      <div style="padding: 24px; border-radius: 14px; background: var(--bg); box-shadow: var(--shadow-sm);"><dc-import name="BodyMap" loci="{{ std45 }}" side="both" width="560" height="720" pin-size="22" show-route="{{ true }}" no-pulse="{{ true }}" body-style="{{ std45Style }}" hint-size="560px,720px"></dc-import></div>
+      <div style="display: grid; grid-template-columns: repeat(3, 220px); gap: 4px 20px; align-content: start;">
+        <sc-for list="{{ std45Rows }}" as="r" hint-placeholder-count="45"><div style="display: grid; grid-template-columns: 30px 1fr 50px; align-items: center; gap: 6px; min-height: 28px; border-top: 1px solid var(--line); font-size: 13px;"><span style="font-family: var(--font-mono); color: var(--text-3);">{{ r.n }}</span><span style="display: flex; align-items: center; gap: 6px;"><span style="width: 7px; height: 7px; flex: none; border-radius: 50%; background: {{ r.zc }};"></span>{{ r.name }}</span><span style="font: 400 11px var(--font-mono); color: var(--text-3);">{{ r.side }}</span></div></sc-for>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 6px; max-width: 220px;"><span style="font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-3);">Zonas</span><sc-for list="{{ std45Zones }}" as="z" hint-placeholder-count="5"><span style="display: flex; align-items: center; gap: 8px; font-size: 13px;"><span style="width: 10px; height: 10px; border-radius: 50%; background: {{ z.color }};"></span>{{ z.name }}</span></sc-for></div>
+    </div>
+    <div style="display: flex; gap: 40px; align-items: flex-start;">
+      <div style="display: flex; flex-direction: column; gap: 10px;"><dc-import name="BodyStyler" theme="dark" body="f45" hint-size="390px,844px"></dc-import><span style="font-size: 13px; color: var(--text-3);">6b · Mis cuerpos · Fonética 45</span></div>
+      <div style="display: flex; flex-direction: column; gap: 10px;"><dc-import name="BodyStyler" theme="light" body="c2" hint-size="390px,844px"></dc-import><span style="font-size: 13px; color: var(--text-3);">6c · Cuerpo 2 con pelo largo y tono cálido (claro)</span></div>
+      <div style="display: flex; flex-direction: column; gap: 10px;"><dc-import name="PalacioApp" theme="dark" screen="session" phase="content" sheet-open="{{ true }}" hint-size="390px,844px"></dc-import><span style="font-size: 13px; color: var(--text-3);">6d · Hoja estándar (Avanzado plegado)</span></div>
+      <div style="display: flex; flex-direction: column; gap: 10px;"><dc-import name="PalacioApp" theme="dark" screen="session" phase="content" sheet-open="{{ true }}" sheet-sub="picker" hint-size="390px,844px"></dc-import><span style="font-size: 13px; color: var(--text-3);">6e · Avanzado abierto</span></div>
+      <div style="display: flex; flex-direction: column; gap: 10px;"><dc-import name="Schedules" theme="dark" hint-size="390px,844px"></dc-import><span style="font-size: 13px; color: var(--text-3);">6f · Panel de repasos: opción «Tras calificar»</span></div>
+    </div>
+  </section>
+
+  <section id="mapa" style="display: flex; flex-direction: column; gap: 20px;">
+    <div style="display: flex; align-items: baseline; gap: 14px;"><span style="font: 500 12px var(--font-mono); padding: 3px 8px; border-radius: 6px; background: var(--accent-tint); color: var(--accent-text);">0</span><h2 style="margin: 0; font: 500 28px var(--font-ui);">Mapa de navegación</h2></div>
+    <div style="display: flex; flex-wrap: wrap; gap: 8px; align-items: center; max-width: 1500px;"><div style="display: flex; flex-direction: column; gap: 2px; padding: 10px 14px; border-radius: 10px; background: var(--surface); box-shadow: var(--shadow-sm);"><span style="font-size: 14px; font-weight: 500;">Onboarding</span><span style="font-size: 12px; color: var(--text-3);">4 pantallas</span></div><i class="ph ph-arrow-right" style="color: var(--text-3);"></i><div style="display: flex; flex-direction: column; gap: 2px; padding: 10px 14px; border-radius: 10px; background: var(--surface); box-shadow: var(--shadow-sm);"><span style="font-size: 14px; font-weight: 500;">Hoy</span><span style="font-size: 12px; color: var(--text-3);">inicio</span></div><div style="display: flex; flex-direction: column; gap: 2px; padding: 10px 14px; border-radius: 10px; background: var(--surface); box-shadow: var(--shadow-sm);"><span style="font-size: 14px; font-weight: 500;">Sesión</span><span style="font-size: 12px; color: var(--text-3);">Señalar → Revelar → Calificar → Hoja</span></div><i class="ph ph-arrow-right" style="color: var(--text-3);"></i><div style="display: flex; flex-direction: column; gap: 2px; padding: 10px 14px; border-radius: 10px; background: var(--surface); box-shadow: var(--shadow-sm);"><span style="font-size: 14px; font-weight: 500;">Resumen</span><span style="font-size: 12px; color: var(--text-3);">—</span></div><div style="display: flex; flex-direction: column; gap: 2px; padding: 10px 14px; border-radius: 10px; background: var(--surface); box-shadow: var(--shadow-sm);"><span style="font-size: 14px; font-weight: 500;">Recorrido</span><span style="font-size: 12px; color: var(--text-3);">ruta 1 → n</span></div><div style="display: flex; flex-direction: column; gap: 2px; padding: 10px 14px; border-radius: 10px; background: var(--surface); box-shadow: var(--shadow-sm);"><span style="font-size: 14px; font-weight: 500;">Palacios</span><span style="font-size: 12px; color: var(--text-3);">editor · detalle del punto</span></div><div style="display: flex; flex-direction: column; gap: 2px; padding: 10px 14px; border-radius: 10px; background: var(--surface); box-shadow: var(--shadow-sm);"><span style="font-size: 14px; font-weight: 500;">Biblioteca</span><span style="font-size: 12px; color: var(--text-3);">sin asignar · lote</span></div><div style="display: flex; flex-direction: column; gap: 2px; padding: 10px 14px; border-radius: 10px; background: var(--surface); box-shadow: var(--shadow-sm);"><span style="font-size: 14px; font-weight: 500;">Editor de ítem</span><span style="font-size: 12px; color: var(--text-3);">plantillas · vista previa</span></div><div style="display: flex; flex-direction: column; gap: 2px; padding: 10px 14px; border-radius: 10px; background: var(--surface); box-shadow: var(--shadow-sm);"><span style="font-size: 14px; font-weight: 500;">Estadísticas</span><span style="font-size: 12px; color: var(--text-3);">—</span></div><div style="display: flex; flex-direction: column; gap: 2px; padding: 10px 14px; border-radius: 10px; background: var(--surface); box-shadow: var(--shadow-sm);"><span style="font-size: 14px; font-weight: 500;">Horarios</span><span style="font-size: 12px; color: var(--text-3);">presets · intervalos</span></div><div style="display: flex; flex-direction: column; gap: 2px; padding: 10px 14px; border-radius: 10px; background: var(--surface); box-shadow: var(--shadow-sm);"><span style="font-size: 14px; font-weight: 500;">Importar / exportar</span><span style="font-size: 12px; color: var(--text-3);">—</span></div></div>
+    <p style="margin: 0; max-width: 820px; color: var(--text-2); font-size: 14px;">Pestañas principales: Hoy · Palacios · Biblioteca · Estadísticas. Desde Hoy se entra en Sesión, Aprender nuevos y Recorrido. Desde un punto (Palacios o la sesión) se abre su detalle, y de ahí el editor de ítem. Horarios e Importar/exportar están en Ajustes.</p>
+  </section>
+
+  <section id="escritorio" style="display: flex; flex-direction: column; gap: 24px;">
+    <div style="display: flex; align-items: baseline; gap: 14px;"><span style="font: 500 12px var(--font-mono); padding: 3px 8px; border-radius: 6px; background: var(--accent-tint); color: var(--accent-text);">4a</span><h2 style="margin: 0; font: 500 28px var(--font-ui);">Escritorio · 1440×900</h2></div>
+    <p style="margin: 0; max-width: 820px; color: var(--text-2); font-size: 14px;">Navegación lateral (cambia de pantalla). En Sesión: espacio para revelar, 1–4 para calificar y Enter para aceptar la hoja. En Palacios, la lista, el mapa y el inspector están sincronizados: haz clic en un punto o en una fila. En Biblioteca, los clics en filas activan la barra de lote.</p>
+    <div style="display: flex; flex-direction: column; gap: 40px;">
+      <div style="display: flex; gap: 40px;"><div style="display: flex; flex-direction: column; gap: 10px;"><dc-import name="Desktop" width="{{ 1440 }}" height="{{ 900 }}" theme="dark" screen="hoy" hint-size="1440px,900px"></dc-import><span style="font-size: 13px; color: var(--text-3);">4a · Hoy</span></div><div style="display: flex; flex-direction: column; gap: 10px;"><dc-import name="Desktop" width="{{ 1440 }}" height="{{ 900 }}" theme="dark" screen="session" hint-size="1440px,900px"></dc-import><span style="font-size: 13px; color: var(--text-3);">4b · Sesión</span></div></div>
+      <div style="display: flex; gap: 40px;"><div style="display: flex; flex-direction: column; gap: 10px;"><dc-import name="Desktop" width="{{ 1440 }}" height="{{ 900 }}" theme="light" screen="palace" hint-size="1440px,900px"></dc-import><span style="font-size: 13px; color: var(--text-3);">4c · Editor de palacio (claro)</span></div><div style="display: flex; flex-direction: column; gap: 10px;"><dc-import name="Desktop" width="{{ 1440 }}" height="{{ 900 }}" theme="dark" screen="item" hint-size="1440px,900px"></dc-import><span style="font-size: 13px; color: var(--text-3);">4d · Editor de ítem</span></div></div>
+      <div style="display: flex; gap: 40px;"><div style="display: flex; flex-direction: column; gap: 10px;"><dc-import name="Desktop" width="{{ 1440 }}" height="{{ 900 }}" theme="dark" screen="library" hint-size="1440px,900px"></dc-import><span style="font-size: 13px; color: var(--text-3);">4e · Biblioteca</span></div><div style="display: flex; flex-direction: column; gap: 10px;"><dc-import name="Desktop" width="{{ 1440 }}" height="{{ 900 }}" theme="light" screen="session" sheet-open="{{ true }}" adv="{{ true }}" hint-size="1440px,900px"></dc-import><span style="font-size: 13px; color: var(--text-3);">4f · Sesión con hoja · Avanzado abierto (claro)</span></div></div>
+    </div>
+  </section>
+
+  <section id="resto" style="display: flex; flex-direction: column; gap: 24px;">
+    <div style="display: flex; align-items: baseline; gap: 14px;"><span style="font: 500 12px var(--font-mono); padding: 3px 8px; border-radius: 6px; background: var(--accent-tint); color: var(--accent-text);">5a</span><h2 style="margin: 0; font: 500 28px var(--font-ui);">Recorrido, estadísticas, horarios, importar y onboarding</h2></div>
+    <div style="display: flex; gap: 40px; align-items: flex-start;">
+      <div style="display: flex; flex-direction: column; gap: 10px;"><dc-import name="PalaceWalk" theme="dark" hint-size="390px,844px"></dc-import><span style="font-size: 13px; color: var(--text-3);">5a · Recorrido del palacio</span></div>
+      <div style="display: flex; flex-direction: column; gap: 10px;"><dc-import name="PalaceWalk" theme="light" scope="cabeza" index="{{ 1 }}" hint-size="390px,844px"></dc-import><span style="font-size: 13px; color: var(--text-3);">5b · Recorrido limitado a una zona (claro)</span></div>
+      <div style="display: flex; flex-direction: column; gap: 10px;"><dc-import name="Stats" theme="dark" hint-size="390px,844px"></dc-import><span style="font-size: 13px; color: var(--text-3);">5c · Calendario y estadísticas</span></div>
+      <div style="display: flex; flex-direction: column; gap: 10px;"><dc-import name="Schedules" theme="dark" hint-size="390px,844px"></dc-import><span style="font-size: 13px; color: var(--text-3);">5d · Horarios · editor de intervalos</span></div>
+      <div style="display: flex; flex-direction: column; gap: 10px;"><dc-import name="Schedules" theme="light" preset="exam" hint-size="390px,844px"></dc-import><span style="font-size: 13px; color: var(--text-3);">5e · Preset Rápido examen (claro)</span></div>
+    </div>
+    <div style="display: flex; gap: 40px; align-items: flex-start;">
+      <div style="display: flex; flex-direction: column; gap: 10px;"><dc-import name="ImportExport" theme="dark" hint-size="390px,844px"></dc-import><span style="font-size: 13px; color: var(--text-3);">5f · Importar JSON + conflictos</span></div>
+      <div style="display: flex; flex-direction: column; gap: 10px;"><dc-import name="ImportExport" theme="light" tab="csv" hint-size="390px,844px"></dc-import><span style="font-size: 13px; color: var(--text-3);">5g · Mapeo CSV (claro)</span></div>
+      <div style="display: flex; flex-direction: column; gap: 10px;"><dc-import name="ImportExport" theme="dark" tab="export" hint-size="390px,844px"></dc-import><span style="font-size: 13px; color: var(--text-3);">5h · Copia de seguridad</span></div>
+    </div>
+    <div style="display: flex; gap: 40px; align-items: flex-start;">
+      <div style="display: flex; flex-direction: column; gap: 10px;"><dc-import name="Onboarding" theme="dark" step="{{ 1 }}" hint-size="390px,844px"></dc-import><span style="font-size: 13px; color: var(--text-3);">5i · Onboarding 1 · Qué es</span></div>
+      <div style="display: flex; flex-direction: column; gap: 10px;"><dc-import name="Onboarding" theme="dark" step="{{ 2 }}" hint-size="390px,844px"></dc-import><span style="font-size: 13px; color: var(--text-3);">5j · 2 · Elegir cuerpo</span></div>
+      <div style="display: flex; flex-direction: column; gap: 10px;"><dc-import name="Onboarding" theme="light" step="{{ 3 }}" hint-size="390px,844px"></dc-import><span style="font-size: 13px; color: var(--text-3);">5k · 3 · Horario (claro)</span></div>
+      <div style="display: flex; flex-direction: column; gap: 10px;"><dc-import name="Onboarding" theme="dark" step="{{ 4 }}" hint-size="390px,844px"></dc-import><span style="font-size: 13px; color: var(--text-3);">5l · 4 · Primer repaso guiado</span></div>
+    </div>
+  </section>
+
+  <section id="item" style="display: flex; flex-direction: column; gap: 24px;">
+    <div style="display: flex; align-items: baseline; gap: 14px;"><span style="font: 500 12px var(--font-mono); padding: 3px 8px; border-radius: 6px; background: var(--accent-tint); color: var(--accent-text);">3a</span><h2 style="margin: 0; font: 500 28px var(--font-ui);">Editor de ítem y biblioteca</h2></div>
+    <p style="margin: 0; max-width: 760px; color: var(--text-2); font-size: 14px; text-wrap: pretty;">Editor de ítem: cambia entre las plantillas Libre, Vocabulario y Gramática C1. En la tabla de conjugación las celdas se editan directamente, los sub-elementos se despliegan, los bloques se añaden, se suben o se quitan, y el punto se asigna tocándolo en el cuerpo. «Vista previa» muestra la tarjeta tal como se verá al repasar. Biblioteca: búsqueda, filtros («Vencidos» funciona), «Seleccionar» activa las acciones en lote, y en «Sin asignar» arrastras un ítem hasta un punto del cuerpo.</p>
+    <div style="display: flex; gap: 40px; align-items: flex-start;">
+      <div style="display: flex; flex-direction: column; gap: 10px;"><dc-import name="ItemEditor" theme="dark" template="grammar" hint-size="390px,844px"></dc-import><span style="font-size: 13px; color: var(--text-3);">3a · Gramática C1 · Present Perfect</span></div>
+      <div style="display: flex; flex-direction: column; gap: 10px;"><dc-import name="ItemEditor" theme="light" template="vocab" hint-size="390px,844px"></dc-import><span style="font-size: 13px; color: var(--text-3);">3b · Vocabulario (claro)</span></div>
+      <div style="display: flex; flex-direction: column; gap: 10px;"><dc-import name="ItemEditor" theme="dark" tab="preview" hint-size="390px,844px"></dc-import><span style="font-size: 13px; color: var(--text-3);">3c · Vista previa</span></div>
+      <div style="display: flex; flex-direction: column; gap: 10px;"><dc-import name="Library" theme="dark" hint-size="390px,844px"></dc-import><span style="font-size: 13px; color: var(--text-3);">3d · Biblioteca</span></div>
+      <div style="display: flex; flex-direction: column; gap: 10px;"><dc-import name="Library" theme="light" selecting="{{ true }}" hint-size="390px,844px"></dc-import><span style="font-size: 13px; color: var(--text-3);">3e · Selección en lote (claro)</span></div>
+      <div style="display: flex; flex-direction: column; gap: 10px;"><dc-import name="Library" theme="dark" tab="tray" hint-size="390px,844px"></dc-import><span style="font-size: 13px; color: var(--text-3);">3f · Sin asignar · arrastrar al cuerpo</span></div>
+    </div>
+  </section>
+
+  <section id="editor" style="display: flex; flex-direction: column; gap: 24px;">
+    <div style="display: flex; align-items: baseline; gap: 14px;"><span style="font: 500 12px var(--font-mono); padding: 3px 8px; border-radius: 6px; background: var(--accent-tint); color: var(--accent-text);">2a</span><h2 style="margin: 0; font: 500 28px var(--font-ui);">Editor de palacio y detalle del punto</h2></div>
+    <p style="margin: 0; max-width: 760px; color: var(--text-2); font-size: 14px; text-wrap: pretty;">Los tres editores funcionan. En Puntos: toca el cuerpo para crear un punto, arrástralo para moverlo y mantén presionado para editarlo o borrarlo. En Zonas: toca puntos o rodéalos con el dedo (lazo) y asígnalos a la zona activa. En Ruta: «Dibujar ruta» numera los puntos en el orden en que los tocas; la lista también se reordena arrastrando filas. En el botón de plantilla eliges cuerpo frontal, posterior, ambos o imagen propia, y en «⋯» está «Duplicar palacio».</p>
+    <div style="display: flex; gap: 40px; align-items: flex-start;">
+      <div style="display: flex; flex-direction: column; gap: 10px;"><dc-import name="PalaceEditor" theme="dark" mode="points" hint-size="390px,844px"></dc-import><span style="font-size: 13px; color: var(--text-3);">2a · Puntos (oscuro)</span></div>
+      <div style="display: flex; flex-direction: column; gap: 10px;"><dc-import name="PalaceEditor" theme="light" mode="zones" hint-size="390px,844px"></dc-import><span style="font-size: 13px; color: var(--text-3);">2b · Zonas con lazo (claro)</span></div>
+      <div style="display: flex; flex-direction: column; gap: 10px;"><dc-import name="PalaceEditor" theme="dark" mode="route" hint-size="390px,844px"></dc-import><span style="font-size: 13px; color: var(--text-3);">2c · Ruta</span></div>
+      <div style="display: flex; flex-direction: column; gap: 10px;"><dc-import name="LocusDetail" theme="dark" hint-size="390px,844px"></dc-import><span style="font-size: 13px; color: var(--text-3);">2d · Detalle del punto (oscuro)</span></div>
+      <div style="display: flex; flex-direction: column; gap: 10px;"><dc-import name="LocusDetail" theme="light" hint-size="390px,844px"></dc-import><span style="font-size: 13px; color: var(--text-3);">2e · Detalle del punto (claro)</span></div>
+    </div>
+  </section>
+
+  <section id="proto" style="display: flex; flex-direction: column; gap: 24px;">
+    <div style="display: flex; align-items: baseline; gap: 14px;"><span style="font: 500 12px var(--font-mono); padding: 3px 8px; border-radius: 6px; background: var(--accent-tint); color: var(--accent-text);">1a</span><h2 style="margin: 0; font: 500 28px var(--font-ui);">Prototipo navegable · oscuro y claro</h2></div>
+    <p style="margin: 0; max-width: 720px; color: var(--text-2); font-size: 14px;">Flujo: Hoy → Señalar → Revelar (escena → contenido) → Calificar → hoja de próximo repaso → siguiente punto con transición de cámara → Resumen. En «⋯» puedes cambiar la hoja a «Solo al tocar el intervalo»: se califica con un toque y aparece un aviso con «Ajustar».</p>
+    <div style="display: flex; gap: 64px; align-items: flex-start;">
+      <div style="display: flex; flex-direction: column; gap: 10px;"><dc-import name="PalacioApp" theme="dark" hint-size="390px,844px"></dc-import><span style="font-size: 13px; color: var(--text-3);">Oscuro</span></div>
+      <div style="display: flex; flex-direction: column; gap: 10px;"><dc-import name="PalacioApp" theme="light" hint-size="390px,844px"></dc-import><span style="font-size: 13px; color: var(--text-3);">Claro</span></div>
+      <div style="max-width: 380px; display: flex; flex-direction: column; gap: 14px; font-size: 14px; color: var(--text-2);">
+        <h3 style="margin: 0; font: 500 18px var(--font-ui); color: var(--text);">Decisiones</h3>
+        <p style="margin: 0;">El mapa de Hoy muestra frontal y posterior a la vez. La cabeza tiene 4 puntos en muy poco espacio, así que en el mapa compacto se dibujan como marcas pequeñas y una lupa fija los amplía con su número y estado.</p>
+        <p style="margin: 0;">El CTA principal es contorno + tinte de acento (Nocturne no usa rellenos sólidos). «Bien» va resaltado como la calificación por defecto.</p>
+        <p style="margin: 0;">Tres toques por tarjeta: Revelar → Calificar → Aceptar. Tocar fuera de la hoja también acepta.</p>
+        <p style="margin: 0;">Los botones de calificación no usan colores de estado; se distinguen por icono, texto e intervalo.</p>
+        <p style="margin: 0;">Reloj simulado: miércoles 14 oct 2026, 19:40. Repasos de días completos a la hora preferida (8:00 a. m.).</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="fases" style="display: flex; flex-direction: column; gap: 24px;">
+    <div style="display: flex; align-items: baseline; gap: 14px;"><span style="font: 500 12px var(--font-mono); padding: 3px 8px; border-radius: 6px; background: var(--accent-tint); color: var(--accent-text);">1b</span><h2 style="margin: 0; font: 500 28px var(--font-ui);">Sesión de repaso · fase a fase</h2></div>
+    <div style="display: flex; gap: 40px; align-items: flex-start;">
+      <div style="display: flex; flex-direction: column; gap: 10px;"><dc-import name="PalacioApp" theme="dark" screen="session" phase="point" hint-size="390px,844px"></dc-import><span style="font-size: 13px; color: var(--text-3);">Fase 1 · Señalar (zoom + pulso)</span></div>
+      <div style="display: flex; flex-direction: column; gap: 10px;"><dc-import name="PalacioApp" theme="dark" screen="session" phase="scene" hint-size="390px,844px"></dc-import><span style="font-size: 13px; color: var(--text-3);">Fase 2 · Escena (máx. 5 objetos, emoji o imagen)</span></div>
+      <div style="display: flex; flex-direction: column; gap: 10px;"><dc-import name="PalacioApp" theme="dark" screen="session" phase="content" hint-size="390px,844px"></dc-import><span style="font-size: 13px; color: var(--text-3);">Fase 3 · Contenido + calificación fija</span></div>
+      <div style="display: flex; flex-direction: column; gap: 10px;"><dc-import name="PalacioApp" theme="dark" screen="session" phase="content" sheet-open="{{ true }}" hint-size="390px,844px"></dc-import><span style="font-size: 13px; color: var(--text-3);">Hoja de próximo repaso</span></div>
+      <div style="display: flex; flex-direction: column; gap: 10px;"><dc-import name="PalacioApp" theme="light" screen="session" phase="content" sheet-open="{{ true }}" sheet-sub="picker" hint-size="390px,844px"></dc-import><span style="font-size: 13px; color: var(--text-3);">Elegir fecha y hora (claro)</span></div>
+      <div style="display: flex; flex-direction: column; gap: 10px;"><dc-import name="PalacioApp" theme="dark" screen="summary" hint-size="390px,844px"></dc-import><span style="font-size: 13px; color: var(--text-3);">Resumen final</span></div>
+    </div>
+    <div style="display: flex; gap: 40px; align-items: flex-start;">
+      <div style="display: flex; flex-direction: column; gap: 10px;"><dc-import name="PalacioApp" theme="light" screen="session" phase="point" card-index="{{ 1 }}" hint-size="390px,844px"></dc-import><span style="font-size: 13px; color: var(--text-3);">Punto en zona densa (Frente): zoom ×5</span></div>
+      <div style="display: flex; flex-direction: column; gap: 10px;"><dc-import name="PalacioApp" theme="light" screen="session" phase="content" card-index="{{ 2 }}" hint-size="390px,844px"></dc-import><span style="font-size: 13px; color: var(--text-3);">Fonética 45 · to wonder (vocabulario)</span></div>
+      <div style="display: flex; flex-direction: column; gap: 10px;"><dc-import name="PalacioApp" theme="dark" screen="session" phase="content" card-index="{{ 3 }}" hint-size="390px,844px"></dc-import><span style="font-size: 13px; color: var(--text-3);">Cuerpo 2 · Inversión</span></div>
+      <div style="display: flex; flex-direction: column; gap: 10px;"><dc-import name="PalacioApp" theme="dark" screen="session" phase="content" sheet-open="{{ true }}" sheet-sub="stage" hint-size="390px,844px"></dc-import><span style="font-size: 13px; color: var(--text-3);">Saltar a etapa</span></div>
+    </div>
+  </section>
+
+  <section id="estados" style="display: flex; flex-direction: column; gap: 24px;">
+    <div style="display: flex; align-items: baseline; gap: 14px;"><span style="font: 500 12px var(--font-mono); padding: 3px 8px; border-radius: 6px; background: var(--accent-tint); color: var(--accent-text);">1c</span><h2 style="margin: 0; font: 500 28px var(--font-ui);">Estados vacío, cargando y error</h2></div>
+    <div style="display: flex; gap: 40px; align-items: flex-start;">
+      <div style="display: flex; flex-direction: column; gap: 10px;"><dc-import name="PalacioApp" theme="dark" screen="hoy-loading" hint-size="390px,844px"></dc-import><span style="font-size: 13px; color: var(--text-3);">Hoy · cargando</span></div>
+      <div style="display: flex; flex-direction: column; gap: 10px;"><dc-import name="PalacioApp" theme="light" screen="hoy-empty" hint-size="390px,844px"></dc-import><span style="font-size: 13px; color: var(--text-3);">Hoy · sin palacio</span></div>
+      <div style="display: flex; flex-direction: column; gap: 10px;"><dc-import name="PalacioApp" theme="dark" screen="hoy-error" hint-size="390px,844px"></dc-import><span style="font-size: 13px; color: var(--text-3);">Hoy · error</span></div>
+      <div style="display: flex; flex-direction: column; gap: 10px;"><dc-import name="PalacioApp" theme="light" screen="session-empty" hint-size="390px,844px"></dc-import><span style="font-size: 13px; color: var(--text-3);">Sesión · nada pendiente</span></div>
+    </div>
+  </section>
+
+  <section id="componentes" style="display: flex; flex-direction: column; gap: 24px;">
+    <div style="display: flex; align-items: baseline; gap: 14px;"><span style="font: 500 12px var(--font-mono); padding: 3px 8px; border-radius: 6px; background: var(--accent-tint); color: var(--accent-text);">1d</span><h2 style="margin: 0; font: 500 28px var(--font-ui);">LocusPin · todos los estados</h2></div>
+    <p style="margin: 0; max-width: 760px; color: var(--text-2); font-size: 14px;">Cada estado tiene una señal que no depende del color. El punto visible mide 28 px; el área táctil, 44 px. En el mapa compacto baja a 20 px, y a 7–10 px en mini-cuerpos sin número.</p>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; max-width: 1500px;">
+      <div style="padding: 24px; border-radius: 14px; background: var(--bg); box-shadow: var(--shadow-sm); display: grid; grid-template-columns: repeat(7, 1fr); gap: 12px;">
+        <sc-for list="{{ pinStates }}" as="s" hint-placeholder-count="7">
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 8px; text-align: center;">
+            <dc-import name="LocusPin" n="{{ s.n }}" state="{{ s.id }}" label="Ejemplo" hint-size="44px,44px"></dc-import>
+            <span style="font: 500 12px var(--font-mono);">{{ s.id }}</span>
+            <span style="font-size: 11px; color: var(--text-3); line-height: 1.35;">{{ s.cue }}</span>
+          </div>
+        </sc-for>
+      </div>
+      <div data-pc-theme="light" style="padding: 24px; border-radius: 14px; background: var(--bg); color: var(--text); display: grid; grid-template-columns: repeat(7, 1fr); gap: 12px;">
+        <sc-for list="{{ pinStates }}" as="s" hint-placeholder-count="7">
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 8px; text-align: center;">
+            <dc-import name="LocusPin" n="{{ s.n }}" state="{{ s.id }}" label="Ejemplo" hint-size="44px,44px"></dc-import>
+            <span style="font: 500 12px var(--font-mono);">{{ s.id }}</span>
+            <span style="font-size: 11px; color: var(--text-3); line-height: 1.35;">{{ s.token }}</span>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+    <div style="display: flex; gap: 24px; flex-wrap: wrap;">
+      <div style="padding: 20px 24px; border-radius: 14px; background: var(--bg); box-shadow: var(--shadow-sm); display: flex; align-items: center; gap: 24px;">
+        <dc-import name="LocusPin" n="5" state="due" focus="{{ true }}" label="Hombro derecho" hint-size="44px,44px"></dc-import>
+        <dc-import name="LocusPin" n="5" state="due" size="20" label="Hombro derecho" hint-size="44px,44px"></dc-import>
+        <dc-import name="LocusPin" n="5" state="due" size="9" mini="{{ true }}" hit="{{ 0 }}" no-pulse="{{ true }}" label="Hombro derecho" hint-size="10px,10px"></dc-import>
+        <dc-import name="LocusPin" n="6" state="new" dim="{{ true }}" label="Hombro izquierdo" hint-size="44px,44px"></dc-import>
+        <span style="font-size: 12px; color: var(--text-3); max-width: 220px;">Activo (anillo de foco) · compacto 20 px · mini 9 px · vecino atenuado al 40 % durante el zoom</span>
+      </div>
+      <div style="padding: 20px 24px; border-radius: 14px; background: var(--bg); box-shadow: var(--shadow-sm); display: flex; align-items: center; gap: 10px; flex-wrap: wrap; max-width: 640px;">
+        <sc-for list="{{ zones }}" as="z" hint-placeholder-count="5">
+          <div style="display: flex; align-items: center; gap: 6px; height: 30px; padding: 0 10px 0 8px; border-radius: 999px; background: var(--surface-2); font-size: 12px;"><span style="width: 10px; height: 10px; border-radius: 50%; background: {{ z.color }}; box-shadow: 0 0 0 3px {{ z.halo }};"></span>{{ z.name }}</div>
+        </sc-for>
+        <span style="width: 100%; font-size: 12px; color: var(--text-3);">ZoneChip. El color de zona solo aparece como punto en el chip y como halo difuso (32 % de opacidad) detrás de los puntos; nunca rellena un punto.</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="tokens" style="display: flex; flex-direction: column; gap: 24px;">
+    <div style="display: flex; align-items: baseline; gap: 14px;"><span style="font: 500 12px var(--font-mono); padding: 3px 8px; border-radius: 6px; background: var(--accent-tint); color: var(--accent-text);">1e</span><h2 style="margin: 0; font: 500 28px var(--font-ui);">Tokens · claro y oscuro</h2></div>
+    <p style="margin: 0; max-width: 760px; color: var(--text-2); font-size: 14px;">Archivo fuente: <a href="pc-tokens.css">pc-tokens.css</a>. Los temas se activan con <code style="font-family: var(--font-mono);">data-pc-theme="dark|light"</code>. Los colores de estado son los mismos en ambos temas; en claro el punto suma un borde de tinta (<code style="font-family: var(--font-mono);">--state-edge</code>) para llegar a 3:1 sobre el fondo.</p>
+    <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px; max-width: 1600px;">
+      <sc-for list="{{ tokenGroups }}" as="g" hint-placeholder-count="3">
+        <div style="display: flex; flex-direction: column; gap: 4px;">
+          <div style="display: grid; grid-template-columns: 1fr 56px 56px; gap: 8px; padding-bottom: 6px; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-3);"><span>{{ g.name }}</span><span>Oscuro</span><span>Claro</span></div>
+          <sc-for list="{{ g.items }}" as="t" hint-placeholder-count="6">
+            <div style="display: grid; grid-template-columns: 1fr 56px 56px; gap: 8px; align-items: center; min-height: 34px; border-top: 1px solid var(--line);">
+              <span style="font: 400 12px var(--font-mono);">{{ t.name }}</span>
+              <div data-pc-theme="dark" style="height: 24px; border-radius: 6px; background: {{ t.v }}; box-shadow: inset 0 0 0 1px rgba(255,255,255,.08);"></div>
+              <div data-pc-theme="light" style="height: 24px; border-radius: 6px; background: {{ t.v }}; box-shadow: inset 0 0 0 1px rgba(0,0,0,.08);"></div>
+            </div>
+          </sc-for>
+        </div>
+      </sc-for>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 32px; max-width: 1600px; font-size: 13px;">
+      <div style="display: flex; flex-direction: column; gap: 8px;"><span style="font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-3);">Tipografía</span><span style="font: 500 26px/1.2 var(--font-ui);">Inter 500 · títulos</span><span style="font: 400 15px/1.45 var(--font-ui);">Inter 400 · cuerpo 15/1.45</span><span style="font: 500 11px var(--font-ui); letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-3);">Inter 500 · etiqueta 11</span><span style="font: 500 14px var(--font-mono); color: var(--accent-text);">IBM Plex Mono · fórmulas</span></div>
+      <div style="display: flex; flex-direction: column; gap: 6px;"><span style="font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-3);">Espaciado</span>
+        <sc-for list="{{ spaces }}" as="s" hint-placeholder-count="7"><div style="display: flex; align-items: center; gap: 10px;"><span style="font: 400 12px var(--font-mono); width: 76px;">{{ s.n }}</span><div style="height: 10px; width: {{ s.v }}px; background: var(--accent);"></div><span style="font: 400 12px var(--font-mono); color: var(--text-3);">{{ s.v }}</span></div></sc-for>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 8px;"><span style="font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-3);">Radios y sombras</span>
+        <div style="display: flex; gap: 10px;"><div style="width: 48px; height: 48px; border-radius: 4px; background: var(--surface);"></div><div style="width: 48px; height: 48px; border-radius: 8px; background: var(--surface);"></div><div style="width: 48px; height: 48px; border-radius: 14px; background: var(--surface);"></div><div style="width: 48px; height: 48px; border-radius: 20px 20px 0 0; background: var(--surface);"></div></div>
+        <span style="font: 400 12px var(--font-mono); color: var(--text-3);">sm 4 · md 8 · lg 14 · sheet 20</span>
+        <div style="display: flex; gap: 10px;"><div style="width: 48px; height: 48px; border-radius: 8px; background: var(--surface); box-shadow: var(--shadow-sm);"></div><div style="width: 48px; height: 48px; border-radius: 8px; background: var(--surface); box-shadow: var(--shadow-md);"></div><div style="width: 48px; height: 48px; border-radius: 8px; background: var(--surface); box-shadow: var(--shadow-lg);"></div></div>
+        <span style="font: 400 12px var(--font-mono); color: var(--text-3);">shadow-sm · md · lg</span>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 4px;"><span style="font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-3); padding-bottom: 4px;">Movimiento</span>
+        <sc-for list="{{ motion }}" as="m" hint-placeholder-count="6"><div style="display: grid; grid-template-columns: 110px 1fr; gap: 8px; padding: 6px 0; border-top: 1px solid var(--line);"><span style="font: 400 12px var(--font-mono);">{{ m.n }}</span><span style="color: var(--text-2); font-size: 12px;">{{ m.d }}</span></div></sc-for>
+      </div>
+    </div>
+  </section>
+
+  <section id="silueta" style="display: flex; flex-direction: column; gap: 24px;">
+    <div style="display: flex; align-items: baseline; gap: 14px;"><span style="font: 500 12px var(--font-mono); padding: 3px 8px; border-radius: 6px; background: var(--accent-tint); color: var(--accent-text);">1f</span><h2 style="margin: 0; font: 500 28px var(--font-ui);">Silueta SVG · coordenadas normalizadas</h2></div>
+    <p style="margin: 0; max-width: 760px; color: var(--text-2); font-size: 14px;">viewBox 0 0 200 480 (proporción 5:12). Un punto se coloca con <code style="font-family: var(--font-mono);">{x, y}</code> en 0–1: <code style="font-family: var(--font-mono);">px = x·200, py = y·480</code>. Lado del cuerpo: en la vista frontal, la derecha de la persona queda a la izquierda del espectador. Archivos: <a href="silueta/body-front.svg">body-front.svg</a> · <a href="silueta/body-back.svg">body-back.svg</a>. La línea punteada es la ruta (1 → n).</p>
+    <div style="display: flex; gap: 48px; align-items: flex-start;">
+      <div style="padding: 24px; border-radius: 14px; background: var(--bg); box-shadow: var(--shadow-sm); display: flex; flex-direction: column; gap: 8px;"><dc-import name="BodyMap" loci="{{ loci }}" side="front" width="300" height="680" show-grid="{{ true }}" show-route="{{ true }}" no-pulse="{{ true }}" hint-size="300px,680px"></dc-import><span style="font: 400 12px var(--font-mono); color: var(--text-3);">body_front · rejilla 0.1</span></div>
+      <div data-pc-theme="light" style="padding: 24px; border-radius: 14px; background: var(--bg); color: var(--text); display: flex; flex-direction: column; gap: 8px;"><dc-import name="BodyMap" loci="{{ loci }}" side="back" width="300" height="680" show-grid="{{ true }}" show-route="{{ true }}" no-pulse="{{ true }}" hint-size="300px,680px"></dc-import><span style="font: 400 12px var(--font-mono); color: var(--text-3);">body_back · rejilla 0.1</span></div>
+      <div style="display: flex; flex-direction: column; min-width: 520px;">
+        <div style="display: grid; grid-template-columns: 44px 1fr 70px 60px 60px 150px; gap: 8px; padding-bottom: 6px; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-3);"><span>Ruta</span><span>Parte</span><span>Lado</span><span>x</span><span>y</span><span>Zona</span></div>
+        <sc-for list="{{ lociRows }}" as="l" hint-placeholder-count="22">
+          <div style="display: grid; grid-template-columns: 44px 1fr 70px 60px 60px 150px; gap: 8px; align-items: center; min-height: 28px; border-top: 1px solid var(--line); font-size: 13px;"><span style="font-family: var(--font-mono);">L{{ l.n }}</span><span>{{ l.name }}</span><span style="font-family: var(--font-mono); color: var(--text-3);">{{ l.side }}</span><span style="font-family: var(--font-mono);">{{ l.x }}</span><span style="font-family: var(--font-mono);">{{ l.y }}</span><span style="display: flex; align-items: center; gap: 6px; color: var(--text-2);"><span style="width: 8px; height: 8px; border-radius: 50%; background: {{ l.zc }};"></span>{{ l.zone }}</span></div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <section id="traspaso" style="display: flex; flex-direction: column; gap: 24px;">
+    <div style="display: flex; align-items: baseline; gap: 14px;"><span style="font: 500 12px var(--font-mono); padding: 3px 8px; border-radius: 6px; background: var(--accent-tint); color: var(--accent-text);">1g</span><h2 style="margin: 0; font: 500 28px var(--font-ui);">Notas de traspaso</h2></div>
+    <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 48px; max-width: 1500px;">
+      <div style="display: flex; flex-direction: column;">
+        <span style="font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-3); padding-bottom: 6px;">Componente → entidad del contrato</span>
+        <sc-for list="{{ handoff }}" as="h" hint-placeholder-count="10"><div style="display: grid; grid-template-columns: 190px 150px 1fr; gap: 12px; padding: 8px 0; border-top: 1px solid var(--line); font-size: 13px;"><span style="font-family: var(--font-mono);">{{ h.c }}</span><span style="font-family: var(--font-mono); color: var(--accent-text);">{{ h.e }}</span><span style="color: var(--text-2);">{{ h.d }}</span></div></sc-for>
+      </div>
+      <div style="display: flex; flex-direction: column;">
+        <span style="font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-3); padding-bottom: 6px;">Comportamientos</span>
+        <sc-for list="{{ behaviors }}" as="b" hint-placeholder-count="8"><div style="display: grid; grid-template-columns: 170px 1fr; gap: 12px; padding: 8px 0; border-top: 1px solid var(--line); font-size: 13px;"><span style="font-weight: 500;">{{ b.t }}</span><span style="color: var(--text-2); text-wrap: pretty;">{{ b.d }}</span></div></sc-for>
+      </div>
+    </div>
+  </section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { d: null };
+  componentDidMount() { import('./pc-data.js').then(d => this.setState({ d })); }
+  renderVals() {
+    const d = this.state.d;
+    const pinStates = [
+      ['empty', 'contorno discontinuo, sin relleno'], ['new', 'anillo sólido, centro vacío'], ['learning', 'relleno con anillo interior'],
+      ['due', 'doble anillo + pulso'], ['review', 'relleno liso'], ['mastered', 'relleno + estrella'], ['suspended', 'rayado diagonal']
+    ].map(([id, cue], i) => ({ key: id, id, cue, n: i + 1, token: `--state-${id}` }));
+    const T = (names) => names.map(n => ({ key: n, name: n, v: `var(${n})` }));
+    const tokenGroups = [
+      { key: 'b', name: 'Base', items: T(['--bg', '--surface', '--surface-2', '--sunken', '--text', '--text-2', '--text-3', '--line-2']) },
+      { key: 'a', name: 'Marca y cuerpo', items: T(['--accent', '--accent-text', '--accent-tint-2', '--body-line', '--ok', '--bad', '--scrim']) },
+      { key: 's', name: 'Estado y zona', items: T(['--state-empty', '--state-new', '--state-learning', '--state-due', '--state-review', '--state-mastered', '--state-suspended', '--zone-cabeza', '--zone-hombros', '--zone-torso', '--zone-brazos', '--zone-piernas']) },
+    ];
+    const spaces = [1, 2, 3, 4, 5, 6, 8].map(i => ({ key: i, n: `--space-${i}`, v: i * 4 }));
+    const motion = [
+      { n: 'dur-fast 140', d: 'hover, presión de botones' },
+      { n: 'dur-base 240', d: 'hoja inferior (sube desde abajo), menú, aviso' },
+      { n: 'dur-camera 700', d: 'zoom y paneo del cuerpo hacia el punto; ease (.65,0,.25,1)' },
+      { n: 'dur-reveal 420', d: 'cada objeto de escena entra con 90 ms de desfase; el contenido llega a los 1300 ms' },
+      { n: 'dur-pulse 1800', d: 'anillo del punto vencido: escala 1→2.1, opacidad .7→0, en bucle' },
+      { n: 'reduced-motion', d: 'sin pulso (queda el doble anillo estático), cámara y revelado instantáneos' },
+    ];
+    const zones = (d?.ZONES ?? []).map(z => ({ key: z.id, name: z.name, color: `var(--zone-${z.id})`, halo: `color-mix(in srgb, var(--zone-${z.id}) 25%, transparent)` }));
+    const loci = d?.LOCI ?? [];
+    const lociRows = loci.map(l => ({ key: l.id, n: l.n, name: l.name, side: l.side, x: l.x.toFixed(3), y: l.y.toFixed(3), zone: d.ZONES.find(z => z.id === l.zone).name, zc: `var(--zone-${l.zone})` }));
+    const handoff = [
+      { c: 'BodyMap', e: 'Palace', d: 'Silueta + puntos + halos + ruta. Props: loci, side, focusId, zoom, focusY, showRoute, mini.' },
+      { c: 'LocusPin', e: 'Locus', d: 'Círculo numerado. state = estado más urgente de sus ítems (due > learning > new > review > mastered > empty).' },
+      { c: 'ZoneChip', e: 'Zone', d: 'Nombre + color + contador de vencidos.' },
+      { c: 'SceneObjectChip', e: 'SceneObject', d: 'Emoji o imagen + texto + «representa». Máx. 5 alrededor del punto.' },
+      { c: 'ItemBlocks', e: 'Item.blocks', d: 'text, formula, table, example (EN/ES con [resaltado]), error ✗/✓, tip, word, answer.' },
+      { c: 'RatingBar', e: 'ReviewLog.grade', d: 'Otra vez · Difícil · Bien · Fácil, cada uno con el intervalo resultante del Schedule.' },
+      { c: 'NextReviewSheet', e: 'ReviewState.dueAt', d: 'Fecha propuesta + atajos. Cualquier cambio guarda manual = true en el ReviewLog.' },
+      { c: 'DateTimePicker', e: 'ReviewState.dueAt', d: 'Tira de 14 días + horas frecuentes.' },
+      { c: 'StageJumper', e: 'ReviewState.stage', d: 'E1–E10 con su intervalo; el horario sigue desde la etapa elegida.' },
+      { c: 'ReviewSummary', e: 'ReviewLog[]', d: 'Conteo por calificación, tiempo, cuerpo antes/después y próxima sesión.' },
+    ];
+    const behaviors = [
+      { t: 'Zoom al punto', d: 'Transform de cámara: translate(W/2 − x·z, H·focusY − y·z) scale(z). z = 2,6 (5 en zonas densas). Los puntos se contraescalan (1/z) para mantener 28 px; el trazo de la silueta se compensa para seguir a 1,2 px.' },
+      { t: 'Zonas densas', d: 'Loci con dense = true (cabeza, dedos). En mapas compactos se dibujan como marcas de 7 px y se ofrece una lupa circular con zoom ×10.' },
+      { t: 'Revelar', d: 'Un toque: fase scene (objetos escalonados) y a los 1300 ms fase content; la escena se pliega en una fila de chips y el escenario baja de 440 a 200 px.' },
+      { t: 'Calificar', d: 'Barra fija de 4 botones (68 px de alto). Con preferencia «siempre», abre la hoja; con «al tocar el intervalo», avanza y muestra un aviso de 4,5 s con «Ajustar», que edita el último ReviewLog.' },
+      { t: 'Hoja', d: 'Tocar fuera o «Aceptar y seguir» acepta. Atajos: +10 min, esta noche 21:30, mañana / +3 d / +1 sem / +1 mes a la hora preferida.' },
+      { t: 'Intervalos ≥ 1 día', d: 'dueAt = fecha + N días a la hora preferida (8:00). Difícil = intervalo × 0,5, mínimo 10 min.' },
+      { t: 'Avanzar', d: 'La cámara viaja del punto anterior al siguiente sin cortar; el punto recién calificado muestra su nuevo estado.' },
+      { t: 'Accesibilidad', d: 'Áreas de 44 px, aria-label con nombre y estado en cada punto, señales sin color (ver 1d) y prefers-reduced-motion.' },
+    ];
+    const S45 = d?.STD45 ?? [], Z45 = d?.STD45_ZONES ?? [];
+    const std45Rows = S45.map(l => ({ key: l.id, n: l.n, name: l.name, side: l.side === 'back' ? 'post.' : 'front.', zc: `var(--zone-${l.zone})` }));
+    const std45Zones = Z45.map(z => ({ key: z.id, name: z.name, color: `var(--zone-${z.id})` }));
+    const palaces = (d?.PALACES ?? []).filter(P => !P.planData).map(P => ({ key: P.id, short: P.short, name: P.name, style: P.style, loci: P.loci, kind: P.kind ?? 'body', aspect: P.aspect, rooms: P.rooms ?? [], planData: P.planData, imageId: P.imageId, mapH: P.kind ? 420 : 680,
+      meta: P.kind ? `${P.template} · ${P.loci.length} puntos` : `${P.template} · ${P.loci.length} puntos · ${P.loci.filter(l => l.side === 'front').length} delante, ${P.loci.filter(l => l.side === 'back').length} detrás`,
+      groups: P.zones.map(z => { const rows = P.loci.filter(l => l.zone === z.id).sort((a, b) => a.n - b.n); return { key: z.id, name: z.name, color: `var(--zone-${z.id})`, halo: `color-mix(in srgb, var(--zone-${z.id}) 25%, transparent)`, range: rows.length ? `${rows[0].n}–${rows[rows.length - 1].n}` : '', rows: rows.map(l => ({ key: l.id, n: l.n, state: l.state, name: l.name, item: l.item })) }; }) }));
+    return { palaces, std45: S45, std45Rows, std45Zones, std45Style: { hair: 'bun', hairColor: 'oklch(0.70 0.08 300)', line: 'fine', tint: 'cool', accent: 'hombros' }, pinStates, tokenGroups, spaces, motion, zones, loci, lociRows, handoff, behaviors };
+  }
+}
+</script>
+</body>
+</html>

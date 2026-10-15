@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="_ds/nocturne-b05dafec-65a9-46f7-a005-25140c24ba40/styles.css">
+  <script src="_ds/nocturne-b05dafec-65a9-46f7-a005-25140c24ba40/_ds_bundle.js"></script>
+  <link rel="stylesheet" href="pc-tokens.css">
+  <script src="https://unpkg.com/@phosphor-icons/web@2.1.1"></script>
+</helmet>
+<div data-pc-theme="{{ theme }}" style="position: relative; width: 390px; height: 844px; border-radius: 44px; overflow: hidden; background: var(--bg); color: var(--text); font-family: var(--font-ui); font-size: 15px; line-height: 1.45; box-shadow: var(--shadow-md); isolation: isolate;">
+  <div style="position: absolute; left: 0; right: 0; top: 0; height: 44px; display: flex; align-items: center; justify-content: space-between; padding: 0 28px 0 32px; font: 600 14px/1 var(--font-ui); z-index: 40;">
+    <span>19:40</span>
+    <div style="display: flex; gap: 6px; font-size: 15px;"><i class="ph-fill ph-cell-signal-high"></i><i class="ph-fill ph-wifi-high"></i><i class="ph-fill ph-battery-high"></i></div>
+  </div>
+  <div style="position: absolute; left: 0; right: 0; top: 44px; display: flex; flex-direction: column; gap: 6px; padding: 0 8px 8px; z-index: 5;">
+    <div style="height: 48px; display: flex; align-items: center; gap: 6px;">
+      <button aria-label="Salir del recorrido" style="width: 44px; height: 44px; border: 0; border-radius: 10px; background: transparent; color: var(--text-2); font-size: 20px; cursor: pointer; display: grid; place-items: center;"><i class="ph ph-x"></i></button>
+      <div style="flex: 1; display: flex; flex-direction: column;"><span style="font-size: 15px; font-weight: 500;">Recorrido del palacio</span><span style="font-size: 12px; color: var(--text-3);">{{ scopeLabel }} · {{ pos }}/{{ total }}</span></div>
+    </div>
+    <div style="display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; padding: 0 8px;">
+      <sc-for list="{{ scopes }}" as="s" hint-placeholder-count="6">
+        <button onClick="{{ s.go }}" style="flex: none; height: 34px; padding: 0 10px 0 8px; display: flex; align-items: center; gap: 6px; border-radius: 999px; border: {{ s.border }}; background: {{ s.bg }}; color: var(--text); font: 400 12px var(--font-ui); cursor: pointer;"><span style="width: 8px; height: 8px; border-radius: 50%; background: {{ s.color }};"></span>{{ s.label }}</button>
+      </sc-for>
+    </div>
+  </div>
+
+  <div style="position: absolute; left: 0; right: 0; top: 140px; height: 400px; overflow: hidden; background: radial-gradient(ellipse at 50% 50%, var(--surface) 0%, var(--bg) 70%);">
+    <dc-import name="BodyMap" loci="{{ loci }}" side="{{ side }}" width="390" height="400" focus-id="{{ cur.id }}" zoom="{{ zoom }}" pin-size="30" show-route="{{ true }}" dim-others="{{ true }}" hint-size="390px,400px"></dc-import>
+    <div style="position: absolute; left: 12px; right: 12px; bottom: 10px; display: flex; gap: 3px;">
+      <sc-for list="{{ dots }}" as="d" hint-placeholder-count="17"><div style="flex: 1; height: 3px; border-radius: 2px; background: {{ d.bg }};"></div></sc-for>
+    </div>
+  </div>
+
+  <div style="position: absolute; left: 0; right: 0; top: 540px; bottom: 0; padding: 16px 20px 30px; display: flex; flex-direction: column; gap: 12px;">
+    <div style="display: flex; align-items: center; gap: 8px;">
+      <span style="font: 500 12px var(--font-mono); color: var(--text-3);">L{{ cur.n }}</span>
+      <span style="display: flex; align-items: center; gap: 6px; height: 24px; padding: 0 8px; border-radius: 999px; background: var(--surface-2); font-size: 12px; color: var(--text-2);"><span style="width: 7px; height: 7px; border-radius: 50%; background: {{ zoneColor }};"></span>{{ zoneName }}</span>
+      <span style="font-size: 12px; color: var(--text-3);">{{ stateTxt }}</span>
+    </div>
+    <h2 style="margin: 0; font: 500 26px/1.15 var(--font-ui); letter-spacing: -0.015em;">{{ cur.name }}</h2>
+    <sc-if value="{{ peeked }}" hint-placeholder-val="{{ false }}">
+      <div style="display: flex; flex-direction: column; gap: 4px; padding: 10px 12px; border-radius: 12px; background: var(--surface); box-shadow: var(--shadow-sm); animation: pc-in var(--dur-reveal) var(--ease-out) both;"><span style="font-size: 15px; font-weight: 500;">{{ peekTitle }}</span><span style="font-size: 13px; color: var(--text-2);">{{ peekSub }}</span></div>
+    </sc-if>
+    <sc-if value="{{ notPeeked }}" hint-placeholder-val="{{ true }}">
+      <p style="margin: 0; font-size: 14px; color: var(--text-3);">{{ prompt }}</p>
+    </sc-if>
+    <div style="flex: 1;"></div>
+    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px;">
+      <button onClick="{{ peek }}" style="height: 56px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; border-radius: 12px; border: 1px solid var(--line-2); background: transparent; color: var(--text); font: 500 13px var(--font-ui); cursor: pointer;"><i class="ph ph-eye" style="font-size: 18px; color: var(--text-2);"></i>Revisar</button>
+      <button onClick="{{ grade }}" style="height: 56px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; border-radius: 12px; border: 1.5px solid var(--accent); background: var(--accent-tint); color: var(--accent-text); font: 500 13px var(--font-ui); cursor: pointer;"><i class="ph ph-check-square" style="font-size: 18px;"></i>Calificar</button>
+      <button onClick="{{ next }}" style="height: 56px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; border-radius: 12px; border: 1px solid var(--line-2); background: transparent; color: var(--text); font: 500 13px var(--font-ui); cursor: pointer;"><i class="ph ph-skip-forward" style="font-size: 18px; color: var(--text-2);"></i>Saltar</button>
+    </div>
+    <div style="display: flex; justify-content: space-between;">
+      <button onClick="{{ prev }}" disabled="{{ atStart }}" style="height: 44px; padding: 0 8px; border: 0; background: transparent; color: var(--text-2); font: 500 13px var(--font-ui); cursor: pointer; display: flex; align-items: center; gap: 6px;"><i class="ph ph-arrow-left"></i>Anterior</button>
+      <button onClick="{{ next }}" style="height: 44px; padding: 0 8px; border: 0; background: transparent; color: var(--accent-text); font: 500 13px var(--font-ui); cursor: pointer; display: flex; align-items: center; gap: 6px;">Siguiente: {{ nextName }}<i class="ph ph-arrow-right"></i></button>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:390,&quot;height&quot;:844},&quot;theme&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;dark&quot;,&quot;light&quot;],&quot;default&quot;:&quot;dark&quot;,&quot;tsType&quot;:&quot;'dark'|'light'&quot;},&quot;scope&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;all&quot;,&quot;cabeza&quot;,&quot;hombros&quot;,&quot;torso&quot;,&quot;brazos&quot;,&quot;piernas&quot;],&quot;default&quot;:&quot;all&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;index&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:4,&quot;tsType&quot;:&quot;number&quot;}}">
+class Component extends DCLogic {
+  state = { d: null, i: null, scope: null, peek: false };
+  componentDidMount() { import('./pc-data.js').then(d => this.setState({ d })); }
+  renderVals() {
+    const theme = this.props.theme ?? 'dark', d = this.state.d;
+    if (!d) return { theme, loci: [], scopes: [], dots: [], cur: { name: '', n: '' }, scopeLabel: '', pos: '', total: '', zoneName: '', zoneColor: 'transparent', stateTxt: '', prompt: '', nextName: '', side: 'front', zoom: 1, peeked: false, notPeeked: true };
+    const scope = this.state.scope ?? this.props.scope ?? 'all';
+    const route = d.LOCI.filter(l => scope === 'all' || l.zone === scope).sort((a, b) => a.n - b.n);
+    const i = Math.min(this.state.i ?? this.props.index ?? 7, route.length - 1);
+    const cur = route[i], z = d.ZONES.find(x => x.id === cur.zone);
+    const card = d.CARDS.find(c => c.locusId === cur.id);
+    const ST = { empty: 'sin ítems', new: 'nuevo', learning: 'aprendiendo', due: 'vencido', review: 'al día', mastered: 'dominado', suspended: 'suspendido' };
+    const go = k => this.setState({ i: (k + route.length) % route.length, peek: false });
+    const scopes = [{ id: 'all', name: 'Todo el cuerpo' }, ...d.ZONES].map(s => { const on = s.id === scope; return { key: s.id, label: s.name.split(' · ')[0], color: s.id === 'all' ? 'var(--text-3)' : `var(--zone-${s.id})`, border: on ? '1.5px solid var(--accent)' : '1px solid var(--line-2)', bg: on ? 'var(--accent-tint)' : 'transparent', go: () => this.setState({ scope: s.id, i: 0, peek: false }) }; });
+    return {
+      theme, loci: d.LOCI.filter(l => l.side === cur.side), side: cur.side, cur, zoom: cur.dense ? 5 : 2.4, pos: i + 1, total: route.length,
+      scopeLabel: scope === 'all' ? 'Cuerpo 1 · orden de ruta' : z.name, scopes,
+      dots: route.map((l, k) => ({ key: l.id, bg: k < i ? 'var(--accent)' : k === i ? 'var(--text-2)' : 'var(--line-2)' })),
+      zoneName: z.name + (cur.side === 'back' ? ' · posterior' : ''), zoneColor: `var(--zone-${z.id})`, stateTxt: ST[cur.state],
+      peeked: this.state.peek, notPeeked: !this.state.peek,
+      prompt: cur.state === 'empty' ? 'Punto libre: puedes asignarle un ítem desde la biblioteca.' : 'Recorre la escena antes de mirar.',
+      peekTitle: card ? `${card.anchor.emoji} ${card.title}` : cur.state === 'empty' ? 'Sin ítems' : 'Ítem de este punto',
+      peekSub: card ? card.scene.map(s => s.e + ' ' + s.r).join(' · ') : 'Ancla y escena sin rellenar todavía',
+      peek: () => this.setState({ peek: !this.state.peek }), next: () => go(i + 1), prev: () => go(i - 1), grade: () => go(i + 1),
+      atStart: i === 0, nextName: route[(i + 1) % route.length].name
+    };
+  }
+}
+</script>
+</body>
+</html>

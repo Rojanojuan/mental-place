@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="_ds/nocturne-b05dafec-65a9-46f7-a005-25140c24ba40/styles.css">
+  <script src="_ds/nocturne-b05dafec-65a9-46f7-a005-25140c24ba40/_ds_bundle.js"></script>
+  <link rel="stylesheet" href="pc-tokens.css">
+  <script src="https://unpkg.com/@phosphor-icons/web@2.1.1"></script>
+</helmet>
+<div data-pc-theme="{{ theme }}" style="position: relative; width: 390px; height: 844px; border-radius: 44px; overflow: hidden; background: var(--bg); color: var(--text); font-family: var(--font-ui); font-size: 15px; line-height: 1.45; box-shadow: var(--shadow-md); isolation: isolate;">
+  <div style="position: absolute; left: 0; right: 0; top: 0; height: 44px; display: flex; align-items: center; justify-content: space-between; padding: 0 28px 0 32px; font: 600 14px/1 var(--font-ui); z-index: 40; color: var(--text);">
+    <span>19:40</span>
+    <div style="display: flex; gap: 6px; font-size: 15px;"><i class="ph-fill ph-cell-signal-high"></i><i class="ph-fill ph-wifi-high"></i><i class="ph-fill ph-battery-high"></i></div>
+  </div>
+
+  <sc-if value="{{ isHoy }}" hint-placeholder-val="{{ true }}">
+    <div style="position: absolute; inset: 44px 0 80px 0; overflow-y: auto; scrollbar-width: none; padding: 8px 16px 24px; display: flex; flex-direction: column; gap: 16px;">
+      <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; padding-top: 8px;">
+        <div style="display: flex; flex-direction: column; gap: 2px;">
+          <span style="font-size: 13px; color: var(--text-3);">Miércoles 14 oct</span>
+          <h1 style="margin: 0; font: 500 26px/1.15 var(--font-ui); letter-spacing: -0.02em;">Buenas tardes, Marta</h1>
+        </div>
+        <div style="display: flex; align-items: center; gap: 6px; height: 32px; padding: 0 12px; border-radius: 999px; background: var(--surface); box-shadow: var(--shadow-sm); font-size: 13px; font-weight: 500; white-space: nowrap; flex: none;" title="Racha de días seguidos"><i class="ph-fill ph-flame" style="color: var(--accent);"></i><span>12 días</span></div>
+      </div>
+
+      <sc-if value="{{ hoyFull }}" hint-placeholder-val="{{ true }}">
+        <div style="display: flex; flex-direction: column; gap: 16px;">
+          <div style="display: flex; align-items: baseline; gap: 8px; font-size: 14px; color: var(--text-2);">
+            <span style="font: 500 34px/1 var(--font-ui); color: var(--text); letter-spacing: -0.02em; font-variant-numeric: tabular-nums;">10</span>
+            <span>repasos hoy · 4 vencidos + 6 nuevos</span>
+          </div>
+
+          <div style="display: flex; flex-direction: column; border-radius: 14px; background: var(--surface); box-shadow: var(--shadow-sm); overflow: hidden;">
+            <div style="display: flex; align-items: center; gap: 8px; padding: 10px 10px 0 14px;">
+              <div style="display: flex; flex-direction: column; flex: 1; min-width: 0;">
+                <span style="font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-3);">Palacio activo</span>
+                <span style="font-size: 15px; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{ palaceName }}</span>
+              </div>
+              <div style="display: flex; padding: 3px; gap: 2px; border-radius: 10px; background: var(--sunken);">
+                <sc-for list="{{ palaceTabs }}" as="pt" hint-placeholder-count="3"><button onClick="{{ pt.go }}" style="height: 32px; padding: 0 8px; border: 0; border-radius: 7px; background: {{ pt.bg }}; box-shadow: {{ pt.shadow }}; color: {{ pt.color }}; font: 500 12px var(--font-ui); cursor: pointer;">{{ pt.l }}</button></sc-for>
+                <button style="width: 32px; height: 32px; border: 0; border-radius: 7px; background: transparent; color: var(--text-2); cursor: pointer;" aria-label="Otro palacio"><i class="ph ph-plus"></i></button>
+              </div>
+            </div>
+            <sc-if value="{{ hasLupa }}" hint-placeholder-val="{{ true }}">
+            <div style="position: relative; height: 300px; display: flex;">
+              <div style="width: 104px; flex: none; display: flex; flex-direction: column; align-items: center; gap: 6px; padding-top: 14px;">
+                <div style="width: 92px; height: 92px; border-radius: 50%; overflow: hidden; background: var(--bg); box-shadow: 0 0 0 1px var(--line-2), var(--shadow-md);">
+                  <dc-import name="BodyMap" loci="{{ headLoci }}" side="front" width="92" height="92" focus-id="{{ lupaId }}" focus-y="0.45" zoom="{{ lupaZoom }}" pin-size="16" hit="{{ 0 }}" dim-others="{{ false }}" show-halos="{{ false }}" no-pulse="{{ true }}" hint-size="92px,92px"></dc-import>
+                </div>
+                <span style="font-size: 11px; color: var(--text-3);">Lupa · Cabeza</span>
+              </div>
+              <dc-import name="BodyMap" loci="{{ loci }}" side="both" width="254" height="300" pin-size="20" body-style="{{ palStyle }}" dense-mini="{{ true }}" hint-size="254px,300px"></dc-import>
+            </div>
+            </sc-if>
+            <sc-if value="{{ noLupa }}" hint-placeholder-val="{{ false }}">
+              <div style="position: relative; height: 300px; margin: 0 8px;"><dc-import name="BodyMap" loci="{{ loci }}" kind="{{ palKind }}" aspect="{{ palAspect }}" rooms="{{ palRooms }}" plan-data="{{ palPlan }}" image-id="{{ palImage }}" width="342" height="300" pin-size="22" body-style="{{ palStyle }}" show-route="{{ true }}" hint-size="342px,300px"></dc-import></div>
+            </sc-if>
+            <div style="display: flex; flex-wrap: wrap; gap: 6px; padding: 4px 12px 12px;">
+              <sc-for list="{{ zoneChips }}" as="z" hint-placeholder-count="5">
+                <div style="display: flex; align-items: center; gap: 6px; height: 30px; padding: 0 10px 0 8px; border-radius: 999px; background: var(--surface-2); font-size: 12px;">
+                  <span style="width: 10px; height: 10px; border-radius: 50%; background: {{ z.color }}; box-shadow: 0 0 0 3px {{ z.halo }};"></span>
+                  <span style="color: var(--text-2);">{{ z.short }}</span>
+                  <sc-if value="{{ z.hasDue }}" hint-placeholder-val="{{ false }}"><span style="display: flex; align-items: center; gap: 3px; font-weight: 600; color: var(--text);"><i class="ph-bold ph-warning-circle" style="color: var(--state-due);"></i>{{ z.due }}</span></sc-if>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <button onClick="{{ startSession }}" style="height: 56px; display: flex; align-items: center; justify-content: center; gap: 10px; border-radius: 12px; border: 1.5px solid var(--accent); background: var(--accent-tint); color: var(--accent-text); font: 500 17px var(--font-ui); cursor: pointer;" style-hover="background: var(--accent-tint-2);"><i class="ph ph-play"></i><span>Repasar ahora (4)</span></button>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+              <button style="height: 48px; display: flex; align-items: center; justify-content: center; gap: 8px; border-radius: 12px; border: 1px solid var(--line-2); background: transparent; color: var(--text); font: 500 14px var(--font-ui); cursor: pointer;" style-hover="background: var(--surface);"><i class="ph ph-sparkle"></i>Aprender nuevos (6)</button>
+              <button style="height: 48px; display: flex; align-items: center; justify-content: center; gap: 8px; border-radius: 12px; border: 1px solid var(--line-2); background: transparent; color: var(--text); font: 500 14px var(--font-ui); cursor: pointer;" style-hover="background: var(--surface);"><i class="ph ph-path"></i>Recorrido</button>
+            </div>
+          </div>
+
+          <div style="display: flex; flex-direction: column; gap: 10px; padding: 14px; border-radius: 14px; background: var(--surface); box-shadow: var(--shadow-sm);">
+            <div style="display: flex; justify-content: space-between; font-size: 13px;"><span style="font-weight: 500;">Próximos 7 días</span><span style="color: var(--text-3);">49 repasos</span></div>
+            <div style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; align-items: end; height: 84px;">
+              <sc-for list="{{ forecast }}" as="f" hint-placeholder-count="7">
+                <div style="display: flex; flex-direction: column; align-items: center; gap: 4px; height: 100%; justify-content: flex-end;">
+                  <span style="font: 500 11px var(--font-mono); color: var(--text-2);">{{ f.n }}</span>
+                  <div style="width: 100%; height: {{ f.h }}px; border-radius: 4px; background: {{ f.bg }};"></div>
+                  <span style="font-size: 11px; color: var(--text-3);">{{ f.d }}</span>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ hoyLoading }}" hint-placeholder-val="{{ false }}">
+        <div style="display: flex; flex-direction: column; gap: 16px;" aria-busy="true">
+          <div style="width: 200px; height: 34px; border-radius: 6px; background: linear-gradient(90deg, var(--surface) 0, var(--surface-2) 50%, var(--surface) 100%) 0 0 / 400px 100%; animation: pc-shimmer 1.4s linear infinite;"></div>
+          <div style="height: 380px; border-radius: 14px; background: linear-gradient(90deg, var(--surface) 0, var(--surface-2) 50%, var(--surface) 100%) 0 0 / 400px 100%; animation: pc-shimmer 1.4s linear infinite; display: grid; place-items: center; color: var(--text-3); font-size: 13px;">Abriendo tu palacio…</div>
+          <div style="height: 56px; border-radius: 12px; background: var(--surface);"></div>
+          <div style="height: 120px; border-radius: 14px; background: var(--surface);"></div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ hoyEmpty }}" hint-placeholder-val="{{ false }}">
+        <div style="display: flex; flex-direction: column; gap: 16px;">
+          <div style="position: relative; height: 380px; border-radius: 14px; border: 1.5px dashed var(--line-2); display: grid; place-items: center;">
+            <dc-import name="BodyMap" loci="{{ noLoci }}" side="front" width="300" height="340" hint-size="300px,340px"></dc-import>
+            <div style="position: absolute; left: 50%; top: 27%; transform: translate(-50%,-50%); width: 40px; height: 40px; border-radius: 50%; border: 1.5px dashed var(--accent); display: grid; place-items: center; color: var(--accent);"><i class="ph ph-plus"></i></div>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 6px;">
+            <h2 style="margin: 0; font: 500 21px/1.2 var(--font-ui);">Tu palacio aún está vacío</h2>
+            <p style="margin: 0; color: var(--text-2); font-size: 14px; text-wrap: pretty;">Toca el cuerpo para crear tu primer punto, o empieza con un palacio de ejemplo y adáptalo.</p>
+          </div>
+          <button style="height: 52px; border-radius: 12px; border: 1.5px solid var(--accent); background: var(--accent-tint); color: var(--accent-text); font: 500 16px var(--font-ui); cursor: pointer;">Usar un cuerpo de ejemplo</button>
+          <button style="height: 48px; border-radius: 12px; border: 1px solid var(--line-2); background: transparent; color: var(--text); font: 500 14px var(--font-ui); cursor: pointer;">Crear el mío desde cero</button>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ hoyError }}" hint-placeholder-val="{{ false }}">
+        <div style="display: flex; flex-direction: column; gap: 14px; padding-top: 80px;">
+          <div style="width: 48px; height: 48px; border-radius: 12px; display: grid; place-items: center; background: var(--surface); box-shadow: var(--shadow-sm); font-size: 24px; color: var(--text-2);"><i class="ph ph-cloud-warning"></i></div>
+          <h2 style="margin: 0; font: 500 21px/1.2 var(--font-ui);">No pudimos abrir tu palacio</h2>
+          <p style="margin: 0; color: var(--text-2); font-size: 14px; text-wrap: pretty;">Tus ítems y tu historial siguen guardados en este dispositivo. Reintenta, o restaura la última copia de seguridad.</p>
+          <div style="font: 400 12px var(--font-mono); color: var(--text-3);">Error DB_OPEN · 14 oct 19:40</div>
+          <div style="display: flex; gap: 8px;">
+            <button style="height: 48px; padding: 0 18px; border-radius: 12px; border: 1.5px solid var(--accent); background: var(--accent-tint); color: var(--accent-text); font: 500 15px var(--font-ui); cursor: pointer;">Reintentar</button>
+            <button style="height: 48px; padding: 0 18px; border-radius: 12px; border: 1px solid var(--line-2); background: transparent; color: var(--text); font: 500 14px var(--font-ui); cursor: pointer;">Restaurar copia</button>
+          </div>
+        </div>
+      </sc-if>
+    </div>
+
+    <div style="position: absolute; left: 0; right: 0; bottom: 0; height: 80px; display: grid; grid-template-columns: repeat(4, 1fr); padding: 6px 8px 22px; background: var(--bg); box-shadow: 0 -1px 0 var(--line);">
+      <sc-for list="{{ tabs }}" as="t" hint-placeholder-count="4">
+        <button style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; border: 0; background: transparent; color: {{ t.color }}; font: 500 11px var(--font-ui); cursor: pointer;"><i class="{{ t.icon }}" style="font-size: 22px;"></i>{{ t.label }}</button>
+      </sc-for>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ isSession }}" hint-placeholder-val="{{ false }}">
+    <div style="position: absolute; inset: 44px 0 0 0; display: flex; flex-direction: column;">
+      <div style="height: 52px; flex: none; display: flex; align-items: center; gap: 8px; padding: 0 8px; z-index: 5;">
+        <button onClick="{{ exitSession }}" aria-label="Salir de la sesión" style="width: 44px; height: 44px; border: 0; border-radius: 10px; background: transparent; color: var(--text-2); font-size: 20px; cursor: pointer; display: grid; place-items: center;" style-hover="background: var(--surface);"><i class="ph ph-x"></i></button>
+        <div style="flex: 1; display: flex; gap: 4px;">
+          <sc-for list="{{ progress }}" as="g" hint-placeholder-count="4">
+            <div style="flex: 1; height: 4px; border-radius: 2px; background: {{ g.bg }}; transition: background var(--dur-base);"></div>
+          </sc-for>
+        </div>
+        <span style="font: 500 12px var(--font-mono); color: var(--text-3); min-width: 28px; text-align: right;">{{ progressLabel }}</span>
+        <button onClick="{{ toggleMenu }}" aria-label="Opciones del ítem" style="width: 44px; height: 44px; border: 0; border-radius: 10px; background: transparent; color: var(--text-2); font-size: 20px; cursor: pointer; display: grid; place-items: center;" style-hover="background: var(--surface);"><i class="ph ph-dots-three-outline"></i></button>
+      </div>
+
+      <div style="position: relative; flex: none; height: {{ stageH }}px; transition: height var(--dur-camera) var(--ease-camera); overflow: hidden; background: radial-gradient(ellipse at 50% 50%, var(--surface) 0%, var(--bg) 70%);">
+        <dc-import name="BodyMap" loci="{{ loci }}" side="front" width="390" height="{{ stageMapH }}" focus-id="{{ card.locusId }}" zoom="{{ zoom }}" focus-y="{{ focusY }}" pin-size="30" hint-size="390px,470px"></dc-import>
+        <sc-if value="{{ showSceneOverlay }}" hint-placeholder-val="{{ false }}">
+          <sc-for list="{{ sceneChips }}" as="s" hint-placeholder-count="0">
+            <div style="position: absolute; left: {{ s.x }}px; top: {{ s.y }}px; transform: {{ s.tf }};">
+              <div style="display: flex; align-items: center; gap: 8px; width: max-content; max-width: 150px; padding: 6px 10px 6px 6px; border-radius: 12px; background: var(--surface); box-shadow: var(--shadow-md); animation: pc-in var(--dur-reveal) var(--ease-out) both; animation-delay: {{ s.delay }}ms;">
+                <sc-if value="{{ s.img }}" hint-placeholder-val="{{ false }}">
+                  <div style="width: 34px; height: 34px; flex: none; border-radius: 8px; background: repeating-linear-gradient(135deg, var(--surface-2) 0 4px, var(--sunken) 4px 8px); display: grid; place-items: center; font: 500 8px var(--font-mono); color: var(--text-3);">img</div>
+                </sc-if>
+                <sc-if value="{{ s.noImg }}" hint-placeholder-val="{{ true }}">
+                  <div style="width: 34px; height: 34px; flex: none; border-radius: 8px; background: var(--surface-2); display: grid; place-items: center; font-size: 20px;">{{ s.e }}</div>
+                </sc-if>
+                <div style="display: flex; flex-direction: column; min-width: 0;">
+                  <span style="font-size: 12px; font-weight: 500; line-height: 1.25;">{{ s.t }}</span>
+                  <span style="font-size: 11px; color: var(--text-3); line-height: 1.25;">{{ s.r }}</span>
+                </div>
+              </div>
+            </div>
+          </sc-for>
+        </sc-if>
+      </div>
+
+      <div style="flex: 1; min-height: 0; overflow-y: auto; scrollbar-width: none; padding: 16px 20px 128px; display: flex; flex-direction: column; gap: 14px;">
+        <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+          <span style="display: flex; align-items: center; gap: 6px; height: 26px; padding: 0 10px 0 8px; border-radius: 999px; background: var(--surface-2); font-size: 12px; color: var(--text-2);"><span style="width: 8px; height: 8px; border-radius: 50%; background: {{ zoneColor }};"></span>{{ zoneName }}</span>
+          <span style="font: 500 12px var(--font-mono); color: var(--text-3);">{{ palShort }} · {{ locus.n }}</span>
+          <span style="font-size: 12px; color: var(--text-3);">· {{ card.deck }}</span>
+        </div>
+        <sc-if value="{{ isPoint }}" hint-placeholder-val="{{ true }}">
+          <div style="display: flex; flex-direction: column; gap: 14px;">
+            <h2 style="margin: 0; font: 500 26px/1.2 var(--font-ui); letter-spacing: -0.015em; text-wrap: pretty;">¿Qué hay en tu <em style="font-style: italic; color: var(--accent-text);">{{ locus.name }}</em>?</h2>
+            <div style="display: flex; align-items: center; gap: 12px; padding: 10px 12px; border-radius: 12px; background: var(--surface); box-shadow: var(--shadow-sm);">
+              <div style="width: 40px; height: 40px; border-radius: 10px; background: var(--surface-2); display: grid; place-items: center; font-size: 22px;">{{ card.anchor.emoji }}</div>
+              <div style="display: flex; flex-direction: column;"><span style="font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-3);">Ancla</span><span style="font-size: 15px;">{{ card.anchor.text }}</span></div>
+            </div>
+            <p style="margin: 0; font-size: 13px; color: var(--text-3);">Recorre la escena en tu cabeza antes de revelar.</p>
+          </div>
+        </sc-if>
+        <sc-if value="{{ isContent }}" hint-placeholder-val="{{ false }}">
+          <div style="display: flex; flex-direction: column; gap: 14px; animation: pc-in var(--dur-reveal) var(--ease-out) both;">
+            <div style="display: flex; flex-direction: column; gap: 2px;">
+              <span style="font-size: 13px; color: var(--text-3);">{{ locus.name }} · {{ card.anchor.emoji }} {{ card.anchor.text }}</span>
+              <h2 style="margin: 0; font: 500 26px/1.15 var(--font-ui); letter-spacing: -0.015em;">{{ card.title }}</h2>
+            </div>
+            <div style="display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; margin: 0 -20px; padding: 0 20px;">
+              <sc-for list="{{ sceneChips }}" as="s" hint-placeholder-count="3">
+                <div style="flex: none; display: flex; align-items: center; gap: 6px; height: 36px; padding: 0 10px 0 6px; border-radius: 10px; background: var(--surface); box-shadow: var(--shadow-sm); font-size: 12px; white-space: nowrap;"><span style="font-size: 17px;">{{ s.e }}</span><span>{{ s.r }}</span></div>
+              </sc-for>
+            </div>
+            <sc-for list="{{ blocks }}" as="b" hint-placeholder-count="3">
+              <div style="display: flex; flex-direction: column; gap: 6px;">
+                <sc-if value="{{ b.isText }}" hint-placeholder-val="{{ false }}">
+                  <div style="display: flex; flex-direction: column; gap: 4px;"><span style="font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-3);">{{ b.label }}</span><p style="margin: 0; font-size: 15px; text-wrap: pretty;">{{ b.text }}</p></div>
+                </sc-if>
+                <sc-if value="{{ b.isFormula }}" hint-placeholder-val="{{ false }}">
+                  <div style="padding: 12px 14px; border-radius: 10px; background: var(--sunken); font: 500 14px/1.4 var(--font-mono); color: var(--accent-text);">{{ b.text }}</div>
+                </sc-if>
+                <sc-if value="{{ b.isAnswer }}" hint-placeholder-val="{{ false }}">
+                  <div style="display: flex; flex-direction: column; gap: 2px; padding: 14px; border-radius: 12px; background: var(--surface); box-shadow: var(--shadow-sm);"><span style="font: 500 28px/1.15 var(--font-ui); letter-spacing: -0.02em;">{{ b.text }}</span><span style="font-size: 13px; color: var(--text-3);">{{ b.sub }}</span></div>
+                </sc-if>
+                <sc-if value="{{ b.isWord }}" hint-placeholder-val="{{ false }}">
+                  <div style="display: flex; flex-direction: column; gap: 4px; padding: 14px; border-radius: 12px; background: var(--surface); box-shadow: var(--shadow-sm);"><div style="display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap;"><span style="font: 500 24px/1.2 var(--font-ui);">{{ b.word }}</span><span style="font: 400 13px var(--font-mono); color: var(--text-3);">{{ b.ipa }}</span></div><span style="font-size: 15px; color: var(--text-2);">{{ b.tr }}</span></div>
+                </sc-if>
+                <sc-if value="{{ b.isTable }}" hint-placeholder-val="{{ false }}">
+                  <div style="display: flex; flex-direction: column; gap: 6px;">
+                    <span style="font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-3);">{{ b.label }}</span>
+                    <div style="overflow-x: auto; margin: 0 -20px; padding: 0 20px; scrollbar-width: thin;">
+                      <table style="border-collapse: collapse; font: 400 12px/1.35 var(--font-mono); white-space: nowrap;">
+                        <thead><tr><sc-for list="{{ b.cols }}" as="c" hint-placeholder-count="6"><th style="text-align: left; padding: 6px 12px 6px 0; font: 500 10px var(--font-ui); letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-3); border-bottom: 1px solid var(--line-2);">{{ c }}</th></sc-for></tr></thead>
+                        <tbody><sc-for list="{{ b.rowsX }}" as="r" hint-placeholder-count="3"><tr><sc-for list="{{ r.cells }}" as="cell" hint-placeholder-count="6"><td style="padding: 7px 12px 7px 0; border-bottom: 1px solid var(--line); color: {{ cell.color }};">{{ cell.v }}</td></sc-for></tr></sc-for></tbody>
+                      </table>
+                    </div>
+                    <span style="font-size: 11px; color: var(--text-3);">Desliza para ver más columnas →</span>
+                  </div>
+                </sc-if>
+                <sc-if value="{{ b.isExample }}" hint-placeholder-val="{{ false }}">
+                  <div style="display: grid; grid-template-columns: 26px 1fr; row-gap: 4px; padding: 10px 12px; border-radius: 10px; background: var(--surface); box-shadow: var(--shadow-sm); font-size: 14px;">
+                    <span style="font: 500 11px/20px var(--font-mono); color: var(--text-3);">EN</span>
+                    <span>{{ b.en0 }}<span style="color: var(--accent-text); font-weight: 500;">[{{ b.en1 }}]</span>{{ b.en2 }}</span>
+                    <span style="font: 500 11px/20px var(--font-mono); color: var(--text-3);">ES</span>
+                    <span style="color: var(--text-2);">{{ b.es0 }}<span style="font-weight: 500; color: var(--text);">[{{ b.es1 }}]</span>{{ b.es2 }}</span>
+                  </div>
+                </sc-if>
+                <sc-if value="{{ b.isError }}" hint-placeholder-val="{{ false }}">
+                  <div style="display: flex; flex-direction: column; gap: 6px; padding: 12px; border-radius: 10px; background: var(--surface); box-shadow: var(--shadow-sm);">
+                    <span style="font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-3);">Error típico</span>
+                    <div style="display: flex; gap: 8px; align-items: baseline; font-size: 14px;"><i class="ph-bold ph-x" style="color: var(--bad);" aria-label="Incorrecto"></i><span style="text-decoration: line-through; text-decoration-color: var(--bad); color: var(--text-2);">{{ b.bad }}</span></div>
+                    <div style="display: flex; gap: 8px; align-items: baseline; font-size: 14px;"><i class="ph-bold ph-check" style="color: var(--ok);" aria-label="Correcto"></i><span style="font-weight: 500;">{{ b.good }}</span></div>
+                    <span style="font-size: 13px; color: var(--text-3); text-wrap: pretty;">{{ b.note }}</span>
+                  </div>
+                </sc-if>
+                <sc-if value="{{ b.isTip }}" hint-placeholder-val="{{ false }}">
+                  <div style="display: flex; gap: 10px; padding: 10px 12px; border-radius: 10px; border: 1px dashed var(--line-2); font-size: 14px; color: var(--text-2);"><i class="ph ph-lightbulb" style="font-size: 18px; color: var(--accent-text);"></i><span style="text-wrap: pretty;">{{ b.text }}</span></div>
+                </sc-if>
+              </div>
+            </sc-for>
+          </div>
+        </sc-if>
+      </div>
+
+      <div style="position: absolute; left: 0; right: 0; bottom: 0; padding: 12px 12px 30px; background: linear-gradient(to top, var(--bg) 78%, transparent); z-index: 6;">
+        <sc-if value="{{ isPoint }}" hint-placeholder-val="{{ true }}">
+          <button onClick="{{ reveal }}" style="width: 100%; height: 60px; border-radius: 14px; border: 1.5px solid var(--accent); background: var(--accent-tint); color: var(--accent-text); font: 500 18px var(--font-ui); cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px;" style-hover="background: var(--accent-tint-2);"><i class="ph ph-eye"></i>Revelar</button>
+        </sc-if>
+        <sc-if value="{{ isScene }}" hint-placeholder-val="{{ false }}">
+          <div style="height: 60px; display: grid; place-items: center; font-size: 13px; color: var(--text-3);">Escena · luego el contenido…</div>
+        </sc-if>
+        <sc-if value="{{ isContent }}" hint-placeholder-val="{{ false }}">
+          <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px;">
+            <sc-for list="{{ ratings }}" as="r" hint-placeholder-count="4">
+              <button onClick="{{ r.go }}" aria-label="{{ r.aria }}" style="height: 68px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; border-radius: 12px; border: {{ r.border }}; background: {{ r.bg }}; color: var(--text); cursor: pointer; font-family: var(--font-ui);" style-hover="background: var(--surface-2);">
+                <span style="display: flex; align-items: center; gap: 4px; font-size: 13px; font-weight: 500; white-space: nowrap;"><i class="{{ r.icon }}" style="font-size: 12px; color: var(--text-2);"></i>{{ r.label }}</span>
+                <span style="font: 500 12px var(--font-mono); color: var(--text-3);">{{ r.iv }}</span>
+              </button>
+            </sc-for>
+          </div>
+        </sc-if>
+      </div>
+    </div>
+  </sc-if>
+  <sc-if value="{{ isSessionEmpty }}" hint-placeholder-val="{{ false }}">
+    <div style="position: absolute; inset: 44px 0 0 0; display: flex; flex-direction: column; padding: 8px 20px 34px;">
+      <button aria-label="Volver" style="width: 44px; height: 44px; margin-left: -12px; border: 0; background: transparent; color: var(--text-2); font-size: 20px;"><i class="ph ph-x"></i></button>
+      <div style="flex: 1; display: flex; flex-direction: column; justify-content: center; gap: 14px;">
+        <div style="display: flex; gap: 6px;"><dc-import name="LocusPin" n="5" state="review" hint-size="44px,44px"></dc-import><dc-import name="LocusPin" n="6" state="review" hint-size="44px,44px"></dc-import><dc-import name="LocusPin" n="7" state="mastered" hint-size="44px,44px"></dc-import></div>
+        <h2 style="margin: 0; font: 500 26px/1.2 var(--font-ui); letter-spacing: -0.015em;">Todo al día</h2>
+        <p style="margin: 0; color: var(--text-2); font-size: 15px; text-wrap: pretty;">No queda nada vencido en tus palacios. Tu próximo repaso es <strong style="font-weight: 500; color: var(--text);">mañana, 8:00 a. m.</strong> con 7 tarjetas.</p>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 8px;">
+        <button style="height: 56px; border-radius: 12px; border: 1.5px solid var(--accent); background: var(--accent-tint); color: var(--accent-text); font: 500 16px var(--font-ui);">Aprender nuevos (6)</button>
+        <button style="height: 48px; border-radius: 12px; border: 1px solid var(--line-2); background: transparent; color: var(--text); font: 500 14px var(--font-ui);">Recorrido del palacio</button>
+      </div>
+    </div>
+  </sc-if>
+  <sc-if value="{{ isSummary }}" hint-placeholder-val="{{ false }}">
+    <div style="position: absolute; inset: 44px 0 0 0; overflow-y: auto; scrollbar-width: none; padding: 16px 20px 34px; display: flex; flex-direction: column; gap: 18px;">
+      <div style="display: flex; flex-direction: column; gap: 4px;">
+        <span style="font-size: 13px; color: var(--text-3);">Sesión terminada · {{ sum.palaces }}</span>
+        <h1 style="margin: 0; font: 500 30px/1.15 var(--font-ui); letter-spacing: -0.02em;">{{ sum.count }} tarjetas en {{ sum.time }}</h1>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 8px;">
+        <div style="display: flex; height: 10px; border-radius: 5px; overflow: hidden; gap: 2px;">
+          <sc-for list="{{ sum.grades }}" as="g" hint-placeholder-count="4"><div style="flex: {{ g.n }}; background: {{ g.bg }};"></div></sc-for>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px;">
+          <sc-for list="{{ sum.grades }}" as="g" hint-placeholder-count="4">
+            <div style="display: flex; flex-direction: column; gap: 2px;"><span style="display: flex; align-items: center; gap: 5px; font-size: 12px; color: var(--text-2);"><span style="width: 8px; height: 8px; border-radius: 2px; background: {{ g.bg }};"></span>{{ g.label }}</span><span style="font: 500 20px var(--font-mono);">{{ g.n }}</span></div>
+          </sc-for>
+        </div>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 10px; padding: 14px; border-radius: 14px; background: var(--surface); box-shadow: var(--shadow-sm);">
+        <span style="font-size: 13px; font-weight: 500;">Puntos que cambiaron</span>
+        <div style="display: grid; grid-template-columns: 1fr 24px 1fr; align-items: center;">
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 4px;"><dc-import name="BodyMap" loci="{{ sum.before }}" side="front" width="140" height="210" mini="{{ true }}" pin-size="10" show-halos="{{ false }}" hint-size="140px,210px"></dc-import><span style="font-size: 11px; color: var(--text-3);">Antes</span></div>
+          <i class="ph ph-arrow-right" style="color: var(--text-3); text-align: center;"></i>
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 4px;"><dc-import name="BodyMap" loci="{{ sum.after }}" side="front" width="140" height="210" mini="{{ true }}" pin-size="10" show-halos="{{ false }}" hint-size="140px,210px"></dc-import><span style="font-size: 11px; color: var(--text-3);">Después</span></div>
+        </div>
+        <div style="display: flex; flex-direction: column;">
+          <sc-for list="{{ sum.changes }}" as="c" hint-placeholder-count="4">
+            <div style="display: grid; grid-template-columns: 30px 1fr auto; gap: 10px; align-items: center; min-height: 48px; border-top: 1px solid var(--line);">
+              <dc-import name="LocusPin" n="{{ c.n }}" state="{{ c.after }}" size="24" hit="30" no-pulse="{{ true }}" label="{{ c.name }}" hint-size="30px,30px"></dc-import>
+              <div style="display: flex; flex-direction: column; min-width: 0;"><span style="font-size: 14px;">{{ c.name }}</span><span style="font-size: 12px; color: var(--text-3);">{{ c.title }} · {{ c.stateTxt }}</span></div>
+              <div style="display: flex; flex-direction: column; align-items: flex-end;"><span style="font: 500 12px var(--font-mono); color: var(--text-2);">{{ c.when }}</span><sc-if value="{{ c.manual }}" hint-placeholder-val="{{ false }}"><span style="font-size: 11px; color: var(--accent-text);">fijado a mano</span></sc-if></div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+      <div style="display: flex; align-items: center; gap: 12px; padding: 14px; border-radius: 14px; border: 1px solid var(--line-2);">
+        <i class="ph ph-calendar-check" style="font-size: 22px; color: var(--accent-text);"></i>
+        <div style="display: flex; flex-direction: column;"><span style="font-size: 12px; color: var(--text-3);">Próxima sesión</span><span style="font-size: 15px; font-weight: 500;">{{ sum.next }}</span></div>
+      </div>
+      <button onClick="{{ goHoy }}" style="height: 56px; flex: none; border-radius: 12px; border: 1.5px solid var(--accent); background: var(--accent-tint); color: var(--accent-text); font: 500 16px var(--font-ui); cursor: pointer;">Volver a Hoy</button>
+    </div>
+  </sc-if>
+  <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ toggleMenu }}" style="position: absolute; inset: 0; z-index: 30;"></div>
+    <div style="position: absolute; right: 12px; top: 92px; width: 248px; z-index: 31; display: flex; flex-direction: column; padding: 6px; border-radius: 14px; background: var(--surface); box-shadow: var(--shadow-lg); animation: pc-in var(--dur-base) var(--ease-out) both;">
+      <button style="height: 44px; display: flex; align-items: center; gap: 10px; padding: 0 10px; border: 0; border-radius: 8px; background: transparent; color: var(--text); font: 400 14px var(--font-ui); text-align: left; cursor: pointer;" style-hover="background: var(--surface-2);"><i class="ph ph-pencil-simple"></i>Editar ítem</button>
+      <button onClick="{{ suspend }}" style="height: 44px; display: flex; align-items: center; gap: 10px; padding: 0 10px; border: 0; border-radius: 8px; background: transparent; color: var(--text); font: 400 14px var(--font-ui); text-align: left; cursor: pointer;" style-hover="background: var(--surface-2);"><i class="ph ph-pause-circle"></i>Suspender ítem</button>
+      <div style="height: 1px; margin: 4px 8px; background: var(--line);"></div>
+      <span style="padding: 6px 10px 4px; font-size: 11px; color: var(--text-3);">Hoja de próximo repaso</span>
+      <button onClick="{{ setPrefAlways }}" style="height: 40px; display: flex; align-items: center; gap: 10px; padding: 0 10px; border: 0; border-radius: 8px; background: transparent; color: var(--text); font: 400 14px var(--font-ui); text-align: left; cursor: pointer;" style-hover="background: var(--surface-2);"><i class="{{ prefAlwaysIcon }}" style="color: var(--accent-text);"></i>Mostrar siempre</button>
+      <button onClick="{{ setPrefTap }}" style="height: 40px; display: flex; align-items: center; gap: 10px; padding: 0 10px; border: 0; border-radius: 8px; background: transparent; color: var(--text); font: 400 14px var(--font-ui); text-align: left; cursor: pointer;" style-hover="background: var(--surface-2);"><i class="{{ prefTapIcon }}" style="color: var(--accent-text);"></i>Solo al tocar el intervalo</button>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ toastOn }}" hint-placeholder-val="{{ false }}">
+    <div style="position: absolute; left: 12px; right: 12px; bottom: 122px; z-index: 20; display: flex; align-items: center; gap: 10px; min-height: 48px; padding: 4px 4px 4px 14px; border-radius: 12px; background: var(--surface); box-shadow: var(--shadow-lg); animation: pc-in var(--dur-base) var(--ease-out) both; font-size: 13px;">
+      <i class="ph ph-clock-clockwise" style="color: var(--text-3);"></i>
+      <span style="flex: 1; min-width: 0;">{{ toastTxt }}</span>
+      <button onClick="{{ toastAdjust }}" style="height: 40px; padding: 0 12px; border: 0; border-radius: 8px; background: var(--accent-tint); color: var(--accent-text); font: 500 13px var(--font-ui); cursor: pointer;">Ajustar</button>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ sheetOn }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ accept }}" title="Tocar fuera acepta" style="position: absolute; inset: 0; z-index: 50; background: var(--scrim);"></div>
+    <div role="dialog" aria-label="Próximo repaso" style="position: absolute; left: 0; right: 0; bottom: 0; z-index: 51; max-height: 760px; overflow-y: auto; scrollbar-width: none; display: flex; flex-direction: column; gap: 14px; padding: 8px 16px 30px; border-radius: 20px 20px 0 0; background: var(--surface); box-shadow: var(--shadow-lg); animation: pc-sheet var(--dur-base) var(--ease-out) both;">
+      <div style="width: 36px; height: 4px; border-radius: 2px; background: var(--line-2); align-self: center;"></div>
+      <div style="display: flex; flex-direction: column; gap: 4px;">
+        <div style="display: flex; align-items: center; gap: 8px;"><span style="font-size: 13px; color: var(--text-3);">Próximo repaso</span><span style="height: 22px; display: inline-flex; align-items: center; padding: 0 8px; border-radius: 6px; background: var(--surface-2); font-size: 11px; color: var(--text-2);">{{ sh.gradeLabel }}</span><sc-if value="{{ sh.manual }}" hint-placeholder-val="{{ false }}"><span style="height: 22px; display: inline-flex; align-items: center; gap: 4px; padding: 0 8px; border-radius: 6px; background: var(--accent-tint); font-size: 11px; color: var(--accent-text);"><i class="ph ph-hand-pointing"></i>fijado a mano</span></sc-if></div>
+        <div style="font: 500 26px/1.2 var(--font-ui); letter-spacing: -0.015em;">{{ sh.day }}, <span style="color: var(--accent-text);">{{ sh.t }}</span></div>
+        <div style="display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--text-2);"><span>Etapa {{ sh.stage }}/10 · R10</span><span style="color: var(--text-3);">·</span><span style="font-family: var(--font-mono); font-size: 12px;">{{ sh.rel }}</span></div>
+      </div>
+      <div style="display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 10px; background: var(--sunken); font-size: 13px; color: var(--text-2);"><i class="ph ph-sliders-horizontal" style="color: var(--accent-text);"></i><span style="flex: 1;">Según tu panel de repasos · R10</span><span style="font: 400 11px var(--font-mono); color: var(--text-3);">estándar</span></div>
+      <button onClick="{{ sh.toggleAdv }}" aria-expanded="{{ sh.adv }}" style="height: 44px; display: flex; align-items: center; gap: 8px; padding: 0 4px; border: 0; background: transparent; color: var(--text-2); font: 500 13px var(--font-ui); cursor: pointer; text-align: left;"><i class="{{ sh.advIcon }}"></i>Avanzado · cambiar fecha o etapa</button>
+      <sc-if value="{{ sh.adv }}" hint-placeholder-val="{{ false }}">
+        <div style="display: flex; flex-direction: column; gap: 14px;">
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px;">
+        <sc-for list="{{ sh.shortcuts }}" as="c" hint-placeholder-count="6">
+          <button onClick="{{ c.go }}" style="height: 44px; border-radius: 10px; border: {{ c.border }}; background: {{ c.bg }}; color: {{ c.color }}; font: 500 13px var(--font-ui); cursor: pointer;">{{ c.label }}</button>
+        </sc-for>
+      </div>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 6px;">
+        <button onClick="{{ sh.openPicker }}" style="height: 44px; display: flex; align-items: center; justify-content: center; gap: 6px; border-radius: 10px; border: {{ sh.pickerBorder }}; background: transparent; color: var(--text); font: 500 13px var(--font-ui); cursor: pointer;"><i class="ph ph-calendar-dots"></i>Elegir fecha y hora</button>
+        <button onClick="{{ sh.openStage }}" style="height: 44px; display: flex; align-items: center; justify-content: center; gap: 6px; border-radius: 10px; border: {{ sh.stageBorder }}; background: transparent; color: var(--text); font: 500 13px var(--font-ui); cursor: pointer;"><i class="ph ph-steps"></i>Saltar a etapa…</button>
+      </div>
+      <sc-if value="{{ sh.isPicker }}" hint-placeholder-val="{{ false }}">
+        <div style="display: flex; flex-direction: column; gap: 10px; padding: 12px; border-radius: 12px; background: var(--sunken);">
+          <span style="font-size: 12px; color: var(--text-3);">Octubre 2026</span>
+          <div style="display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none;">
+            <sc-for list="{{ sh.days }}" as="d" hint-placeholder-count="10">
+              <button onClick="{{ d.go }}" style="flex: none; width: 46px; height: 58px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; border-radius: 10px; border: {{ d.border }}; background: {{ d.bg }}; color: var(--text); cursor: pointer; font-family: var(--font-ui);"><span style="font-size: 11px; color: var(--text-3);">{{ d.wd }}</span><span style="font: 500 16px var(--font-mono);">{{ d.n }}</span></button>
+            </sc-for>
+          </div>
+          <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+            <sc-for list="{{ sh.times }}" as="t" hint-placeholder-count="5">
+              <button onClick="{{ t.go }}" style="height: 40px; padding: 0 12px; border-radius: 8px; border: {{ t.border }}; background: {{ t.bg }}; color: var(--text); font: 500 13px var(--font-mono); cursor: pointer;">{{ t.label }}</button>
+            </sc-for>
+          </div>
+        </div>
+      </sc-if>
+      <sc-if value="{{ sh.isStage }}" hint-placeholder-val="{{ false }}">
+        <div style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; padding: 12px; border-radius: 12px; background: var(--sunken);">
+          <sc-for list="{{ sh.stages }}" as="s" hint-placeholder-count="10">
+            <button onClick="{{ s.go }}" style="height: 52px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1px; border-radius: 8px; border: {{ s.border }}; background: {{ s.bg }}; color: var(--text); cursor: pointer; font-family: var(--font-ui);"><span style="font-size: 13px; font-weight: 500;">E{{ s.n }}</span><span style="font: 400 10px var(--font-mono); color: var(--text-3);">{{ s.iv }}</span></button>
+          </sc-for>
+        </div>
+      </sc-if>
+              </div>
+      </sc-if>
+      <button onClick="{{ accept }}" style="height: 56px; flex: none; border-radius: 12px; border: 1.5px solid var(--accent); background: var(--accent-tint); color: var(--accent-text); font: 500 16px var(--font-ui); cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px;" style-hover="background: var(--accent-tint-2);">Aceptar y seguir<i class="ph ph-arrow-right"></i></button>
+      <span style="font-size: 12px; color: var(--text-3); text-align: center;">Toca fuera de la hoja para aceptar sin cambios</span>
+    </div>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:390,&quot;height&quot;:844},&quot;theme&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;dark&quot;,&quot;light&quot;],&quot;default&quot;:&quot;dark&quot;,&quot;tsType&quot;:&quot;'dark'|'light'&quot;},&quot;screen&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;hoy&quot;,&quot;hoy-loading&quot;,&quot;hoy-empty&quot;,&quot;hoy-error&quot;,&quot;session&quot;,&quot;session-empty&quot;,&quot;summary&quot;],&quot;default&quot;:&quot;hoy&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;phase&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;point&quot;,&quot;scene&quot;,&quot;content&quot;],&quot;default&quot;:&quot;point&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;cardIndex&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:0,&quot;tsType&quot;:&quot;number&quot;},&quot;sheetOpen&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;},&quot;sheetSub&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;none&quot;,&quot;picker&quot;,&quot;stage&quot;],&quot;default&quot;:&quot;none&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;pref&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;always&quot;,&quot;ontap&quot;],&quot;default&quot;:&quot;always&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+class Component extends DCLogic {
+  state = { data: null, screen: null, phase: null, idx: null, sheet: undefined, logs: null, pref: null, toast: null, menu: false, start: 0 };
+  componentDidMount() {
+    import('./pc-data.js').then(d => this.setState({ data: d }));
+  }
+  componentWillUnmount() { clearTimeout(this.t1); clearTimeout(this.t2); }
+  D() { return this.state.data; }
+  cur(k, prop, def) { return this.state[k] ?? this.props[prop] ?? def; }
+  fmtIv(m) {
+    if (m < 60) return `${Math.round(m)} min`;
+    if (m < 1440) return `${Math.round(m / 60)} h`;
+    const d = Math.round(m / 1440);
+    if (d < 30) return `${d} d`;
+    if (d < 365) return `${Math.round(d / 30)} ${Math.round(d / 30) === 1 ? 'mes' : 'meses'}`;
+    return '1 año';
+  }
+  dueFrom(m) {
+    const N = this.D().NOW;
+    if (m < 1440) return new Date(N.getTime() + m * 60000);
+    const d = new Date(N); d.setDate(d.getDate() + Math.round(m / 1440)); d.setHours(this.D().PREF_HOUR, 0, 0, 0); return d;
+  }
+  fmtDate(d) {
+    const N = this.D().NOW;
+    const days = ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'];
+    const mon = ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic'];
+    const a = new Date(N); a.setHours(0, 0, 0, 0); const b = new Date(d); b.setHours(0, 0, 0, 0);
+    const diff = Math.round((b - a) / 86400000);
+    let h = d.getHours(), mi = d.getMinutes(); const ap = h < 12 ? 'a. m.' : 'p. m.'; h = h % 12 || 12;
+    const t = `${h}:${String(mi).padStart(2, '0')} ${ap}`;
+    let day = diff === 0 ? 'Hoy' : diff === 1 ? 'Mañana' : diff < 7 ? `${days[d.getDay()][0].toUpperCase() + days[d.getDay()].slice(1)} ${d.getDate()}` : `${days[d.getDay()].slice(0, 3)} ${d.getDate()} ${mon[d.getMonth()]}`;
+    if (diff >= 7) day = day[0].toUpperCase() + day.slice(1);
+    return { day, t, full: `${day}, ${t}` };
+  }
+  outcome(s, g) {
+    const R = this.D().R10;
+    if (g === 'again') return { ns: 1, m: R[0] };
+    if (g === 'hard') return { ns: s, m: Math.max(10, R[s - 1] * 0.5) };
+    const ns = Math.min(11, s + (g === 'good' ? 1 : 2));
+    return { ns, m: R[Math.min(ns, 10) - 1] };
+  }
+  renderVals() {
+    const theme = this.props.theme ?? 'dark';
+    const D = this.D();
+    const screen = this.cur('screen', 'screen', 'hoy');
+    const base = { theme, isHoy: screen.startsWith('hoy'), hoyFull: screen === 'hoy' && !!D, hoyLoading: screen === 'hoy-loading' || (screen === 'hoy' && !D), hoyEmpty: screen === 'hoy-empty', hoyError: screen === 'hoy-error', noLoci: [] };
+    base.tabs = [['ph-fill ph-sun-horizon', 'Hoy', 1], ['ph ph-person-simple', 'Palacios'], ['ph ph-books', 'Biblioteca'], ['ph ph-chart-bar', 'Estadísticas']].map(([icon, label, on]) => ({ icon, label, color: on ? 'var(--accent-text)' : 'var(--text-3)' }));
+    if (!D) return { ...base, isSession: false, isSummary: false, loci: [], headLoci: [], zoneChips: [], forecast: [] };
+    const pid = this.state.palace ?? this.props.palace ?? 'c1';
+    const PAL = D.palaceOf(pid);
+    const loci = PAL.loci.map(l => ({ ...l }));
+    const headLoci = loci.filter(l => l.dense);
+    const palaceTabs = D.PALACES.map(x => { const on = x.id === pid; return { key: x.id, l: x.short, bg: on ? 'var(--surface)' : 'transparent', shadow: on ? 'var(--shadow-sm)' : 'none', color: on ? 'var(--text)' : 'var(--text-2)', go: () => this.setState({ palace: x.id }) }; });
+    const lupa = headLoci.find(l => l.n === 3) ?? headLoci[0];
+    const zoneChips = PAL.zones.map(z => { const due = loci.filter(l => l.zone === z.id && l.state === 'due').length; return { key: z.id, short: z.name.split(' · ')[0], due, hasDue: due > 0, color: `var(--zone-${z.id})`, halo: `color-mix(in srgb, var(--zone-${z.id}) 25%, transparent)` }; });
+    const mx = Math.max(...D.FORECAST.map(f => f.n));
+    const forecast = D.FORECAST.map((f, i) => ({ ...f, key: i, h: Math.round(4 + (f.n / mx) * 52), bg: i === 0 ? 'var(--accent)' : 'var(--line-2)' }));
+    const startSession = () => this.setState({ screen: 'session', phase: 'point', idx: 0, sheet: null, logs: [], toast: null, start: Date.now() });
+    return { ...base, loci, headLoci, palaceTabs, palaceName: PAL.name, hasLupa: (PAL.kind ?? 'body') === 'body', noLupa: (PAL.kind ?? 'body') !== 'body', palKind: PAL.kind ?? 'body', palAspect: PAL.aspect, palRooms: PAL.rooms ?? [], palPlan: PAL.planData, palImage: PAL.imageId, palStyle: PAL.style, lupaId: lupa?.id, lupaZoom: headLoci.length > 8 ? 7 : 10, zoneChips, forecast, startSession, ...this.sessionVals(screen) };
+  }
+  afterState(lg) { return lg.suspended ? 'suspended' : lg.ns > 10 ? 'mastered' : lg.ns <= 3 ? 'learning' : 'review'; }
+  makeSheet(card, g, sub) { const o = this.outcome(card.stage, g); return { grade: g, ns: o.ns, due: +this.dueFrom(o.m), manual: false, key: null, sub: sub && sub !== 'none' ? sub : null, editLog: null }; }
+  demoLogs() {
+    const C = this.D().CARDS.filter(c => c.queue !== false), gs = ['good', 'good', 'again', 'easy'];
+    return C.map((c, i) => { const o = this.outcome(c.stage, gs[i]); return { cardId: c.id, locusId: c.locusId, grade: gs[i], before: c.stage, ns: o.ns, due: +this.dueFrom(o.m), manual: i === 1 }; });
+  }
+  sessionVals(screen) {
+    const D = this.D(), N = D.NOW;
+    const C = this.props.cardIndex === 4 && this.state.idx == null ? [D.CARDS[4]] : D.CARDS.filter(c => c.queue !== false);
+    const idx = Math.min(C.length === 1 ? 0 : this.cur('idx', 'cardIndex', 0), C.length - 1);
+    const phase = this.cur('phase', 'phase', 'point');
+    const pref = this.cur('pref', 'pref', 'always');
+    const logs = this.state.logs ?? (screen === 'summary' ? this.demoLogs() : []);
+    const card = C[idx];
+    let sheet = this.state.sheet !== undefined ? this.state.sheet : (this.props.sheetOpen && screen === 'session' ? this.makeSheet(card, 'good', this.props.sheetSub) : null);
+    const PAL = D.palaceOf(card.palace), lociIn = PAL.loci;
+    const applyL = arr => arr.map(l => { const lg = logs.filter(x => x.locusId === l.id).pop(); return lg ? { ...l, state: this.afterState(lg) } : l; });
+    const applied = applyL(lociIn);
+    const locus = applied.find(l => l.id === card.locusId);
+    const zone = PAL.zones.find(z => z.id === locus.zone);
+    const isContent = phase === 'content', isScene = phase === 'scene';
+    const stageH = isContent ? 200 : 440;
+    const advance = (newLogs, extra = {}) => {
+      if (idx + 1 < C.length) this.setState({ logs: newLogs, idx: idx + 1, phase: 'point', sheet: null, menu: false, ...extra });
+      else this.setState({ logs: newLogs, screen: 'summary', sheet: null, menu: false, toast: null, ...extra });
+    };
+    const logFor = (sh) => ({ cardId: card.id, locusId: card.locusId, grade: sh.grade, before: card.stage, ns: sh.ns, due: sh.due, manual: sh.manual });
+    const rate = g => {
+      const sh = this.makeSheet(card, g);
+      if (pref === 'always') return this.setState({ sheet: sh, logs });
+      const nl = [...logs, logFor(sh)];
+      clearTimeout(this.t2); this.t2 = setTimeout(() => this.setState({ toast: null }), 4500);
+      advance(nl, { toast: { i: nl.length - 1 } });
+    };
+    const LBL = { again: 'Otra vez', hard: 'Difícil', good: 'Bien', easy: 'Fácil' };
+    const ICO = { again: 'ph-bold ph-arrow-counter-clockwise', hard: 'ph-bold ph-hourglass-medium', good: 'ph-bold ph-check', easy: 'ph-bold ph-lightning' };
+    const ratings = ['again', 'hard', 'good', 'easy'].map(g => { const o = this.outcome(card.stage, g); const iv = this.fmtIv(o.m); return { key: g, label: LBL[g], icon: ICO[g], iv, aria: `${LBL[g]}, próximo en ${iv}`, go: () => rate(g), border: g === 'good' ? '1.5px solid var(--accent)' : '1px solid var(--line-2)', bg: g === 'good' ? 'var(--accent-tint)' : 'var(--surface)' }; });
+    const pos = [[-1, -130], [1, -90], [-1, -30], [1, 40], [-1, 110]];
+    const sceneChips = card.scene.map((s, i) => ({ ...s, key: i, img: !!s.img, noImg: !s.img, x: 195 + pos[i][0] * 34, y: 220 + pos[i][1], tf: pos[i][0] < 0 ? 'translate(-100%,-50%)' : 'translate(0,-50%)', delay: i * 90 }));
+    const blocks = card.blocks.map((b, i) => ({ ...b, key: i, isText: b.type === 'text', isFormula: b.type === 'formula', isTable: b.type === 'table', isExample: b.type === 'example', isError: b.type === 'error', isTip: b.type === 'tip', isWord: b.type === 'word', isAnswer: b.type === 'answer',
+      en0: b.en?.[0], en1: b.en?.[1], en2: b.en?.[2], es0: b.es?.[0], es1: b.es?.[1], es2: b.es?.[2],
+      rowsX: (b.rows || []).map((r, ri) => ({ key: ri, cells: r.map((v, ci) => ({ key: ci, v, color: ci === 0 ? 'var(--text-3)' : 'var(--text)' })) })) }));
+    const progress = C.map((c, i) => ({ key: i, bg: screen === 'summary' || i < idx ? 'var(--accent)' : i === idx ? 'var(--text-2)' : 'var(--line-2)' }));
+    const accept = () => {
+      const sh = sheet; if (!sh) return;
+      if (sh.editLog != null) { const nl = logs.slice(); nl[sh.editLog] = { ...nl[sh.editLog], ns: sh.ns, due: sh.due, manual: sh.manual }; return this.setState({ logs: nl, sheet: null, toast: null }); }
+      advance([...logs, logFor(sh)]);
+    };
+    const setSheet = patch => this.setState({ sheet: { ...sheet, ...patch }, logs });
+    let sh = null;
+    if (sheet) {
+      const due = new Date(sheet.due), f = this.fmtDate(due);
+      const at = (days, h, m) => { const d = new Date(N); d.setDate(d.getDate() + days); d.setHours(h, m, 0, 0); return +d; };
+      const sc = [['10m', '+10 min', +N + 600000], ['night', 'Esta noche', at(0, 21, 30)], ['tom', 'Mañana', at(1, 8, 0)], ['3d', '+3 d', at(3, 8, 0)], ['1w', '+1 sem', at(7, 8, 0)], ['1m', '+1 mes', at(30, 8, 0)]];
+      const sel = on => ({ border: on ? '1.5px solid var(--accent)' : '1px solid var(--line-2)', bg: on ? 'var(--accent-tint)' : 'transparent' });
+      const wd = ['dom', 'lun', 'mar', 'mié', 'jue', 'vie', 'sáb'];
+      const days = Array.from({ length: 14 }, (_, i) => { const d = new Date(N); d.setDate(d.getDate() + i); const on = d.toDateString() === due.toDateString(); return { key: i, wd: i === 0 ? 'hoy' : wd[d.getDay()], n: d.getDate(), ...sel(on), go: () => { const nd = new Date(due); nd.setFullYear(d.getFullYear(), d.getMonth(), d.getDate()); setSheet({ due: +nd, manual: true, key: 'pick' }); } }; });
+      const times = [[7, 0], [8, 0], [12, 0], [18, 0], [21, 30]].map(([h, m], i) => ({ key: i, label: `${h}:${String(m).padStart(2, '0')}`, ...sel(due.getHours() === h && due.getMinutes() === m), go: () => { const nd = new Date(due); nd.setHours(h, m, 0, 0); setSheet({ due: +nd, manual: true, key: 'pick' }); } }));
+      const stages = D.R10.map((m, i) => ({ key: i, n: i + 1, iv: this.fmtIv(m), ...sel(sheet.key === 'stage' && sheet.ns === i + 1), go: () => setSheet({ ns: i + 1, due: +this.dueFrom(m), manual: true, key: 'stage' }) }));
+      sh = {
+        gradeLabel: LBL[sheet.grade], manual: sheet.manual, day: f.day, t: f.t, stage: Math.min(sheet.ns, 10), rel: 'en ' + this.fmtIv(Math.max(1, (sheet.due - N) / 60000)),
+        shortcuts: sc.map(([k, label, d]) => { const on = sheet.key === k; return { key: k, label, border: on ? '1.5px solid var(--accent)' : '1px solid var(--line-2)', bg: on ? 'var(--accent-tint)' : 'transparent', color: on ? 'var(--accent-text)' : 'var(--text)', go: () => setSheet({ due: d, manual: true, key: k }) }; }),
+        isPicker: sheet.sub === 'picker', isStage: sheet.sub === 'stage', adv: !!(sheet.adv || sheet.sub || sheet.manual), advIcon: (sheet.adv || sheet.sub || sheet.manual) ? 'ph ph-caret-down' : 'ph ph-caret-right', toggleAdv: () => setSheet({ adv: !(sheet.adv || sheet.sub) , sub: null }),
+        pickerBorder: sheet.sub === 'picker' ? '1.5px solid var(--accent)' : '1px solid var(--line-2)', stageBorder: sheet.sub === 'stage' ? '1.5px solid var(--accent)' : '1px solid var(--line-2)',
+        openPicker: () => setSheet({ sub: sheet.sub === 'picker' ? null : 'picker' }), openStage: () => setSheet({ sub: sheet.sub === 'stage' ? null : 'stage' }),
+        days, times, stages
+      };
+    }
+    const toast = this.state.toast;
+    let toastTxt = '';
+    if (toast && logs[toast.i]) { const lg = logs[toast.i]; const l = D.findLocus(lg.locusId); toastTxt = `${l.name} → ${this.fmtDate(new Date(lg.due)).full}`; }
+    const toastAdjust = () => { const lg = logs[toast.i]; const cc = C.find(c => c.id === lg.cardId); this.setState({ sheet: { grade: lg.grade, ns: lg.ns, due: lg.due, manual: lg.manual, key: null, sub: null, editLog: toast.i }, toast: null, logs }); };
+    let sum = null;
+    if (screen === 'summary') {
+      const cnt = g => logs.filter(l => l.grade === g).length;
+      const GB = { again: 'var(--line-2)', hard: 'color-mix(in srgb, var(--accent) 45%, transparent)', good: 'var(--accent)', easy: 'var(--accent-text)' };
+      const el = this.state.start ? Math.round((Date.now() - this.state.start) / 1000) : 252;
+      const ST = { due: 'vencido', learning: 'aprendiendo', review: 'al día', mastered: 'dominado', suspended: 'suspendido' };
+      const real = logs.filter(l => !l.suspended);
+      const soon = real.slice().sort((a, b) => a.due - b.due)[0];
+      sum = {
+        count: logs.length, time: `${Math.floor(el / 60)}:${String(el % 60).padStart(2, '0')}`,
+        grades: ['again', 'hard', 'good', 'easy'].map(g => ({ key: g, label: LBL[g], n: cnt(g), bg: GB[g] })),
+        before: D.LOCI, after: applyL(D.LOCI), palaces: [...new Set(logs.map(l => D.palaceOf(C.find(c => c.id === l.cardId)?.palace ?? 'c1').short))].join(' · '),
+        changes: logs.map((lg, i) => { const l0 = D.findLocus(lg.locusId); const l = { ...l0, state: this.afterState(lg) }; const c = C.find(x => x.id === lg.cardId); const a = this.afterState(lg); return { key: i, n: l.n, name: l.name, title: c.title, after: a, stateTxt: `vencido → ${ST[a]}`, when: lg.suspended ? '—' : this.fmtDate(new Date(lg.due)).full, manual: !!lg.manual }; }),
+        next: soon && soon.due - N < 86400000 / 2 ? `${this.fmtDate(new Date(soon.due)).full} · ${real.filter(l => l.due - N < 43200000).length} tarjeta` : 'Mañana, 8:00 a. m. · 7 repasos'
+      };
+    }
+    return {
+      isSession: screen === 'session', isSessionEmpty: screen === 'session-empty', isSummary: screen === 'summary', sum,
+      card, locus, palShort: PAL.short, zoneName: zone.name, zoneColor: `var(--zone-${zone.id})`, loci: applied,
+      isPoint: phase === 'point', isScene, isContent, showSceneOverlay: isScene,
+      stageH, stageMapH: 440, zoom: locus.dense ? (isContent ? 4 : 5) : (isContent ? 2 : 2.6), focusY: isContent ? 100 / 440 : 0.5,
+      sceneChips, blocks, ratings, progress, progressLabel: `${Math.min(idx + 1, C.length)}/${C.length}`,
+      reveal: () => { this.setState({ phase: 'scene', logs }); clearTimeout(this.t1); this.t1 = setTimeout(() => this.setState({ phase: 'content' }), 1300); },
+      exitSession: () => this.setState({ screen: 'hoy', sheet: null, menu: false, toast: null }),
+      goHoy: () => this.setState({ screen: 'hoy', logs: null, sheet: null, toast: null }),
+      toggleMenu: () => this.setState({ menu: !this.state.menu }), menuOpen: !!this.state.menu,
+      suspend: () => advance([...logs, { cardId: card.id, locusId: card.locusId, grade: 'skip', suspended: true, ns: card.stage, due: 0 }]),
+      setPrefAlways: () => this.setState({ pref: 'always', menu: false }), setPrefTap: () => this.setState({ pref: 'ontap', menu: false }),
+      prefAlwaysIcon: pref === 'always' ? 'ph-fill ph-radio-button' : 'ph ph-circle', prefTapIcon: pref === 'ontap' ? 'ph-fill ph-radio-button' : 'ph ph-circle',
+      sheetOn: !!sh, sh, accept, toastOn: !!toastTxt, toastTxt, toastAdjust
+    };
+  }
+}
+</script>
+</body>
+</html>

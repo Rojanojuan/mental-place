@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="_ds/nocturne-b05dafec-65a9-46f7-a005-25140c24ba40/styles.css">
+  <script src="_ds/nocturne-b05dafec-65a9-46f7-a005-25140c24ba40/_ds_bundle.js"></script>
+  <link rel="stylesheet" href="pc-tokens.css">
+  <script src="https://unpkg.com/@phosphor-icons/web@2.1.1"></script>
+</helmet>
+<div data-pc-theme="{{ theme }}" style="position: relative; width: 390px; height: 844px; border-radius: 44px; overflow: hidden; background: var(--bg); color: var(--text); font-family: var(--font-ui); font-size: 15px; line-height: 1.45; box-shadow: var(--shadow-md); isolation: isolate;">
+  <div style="position: absolute; left: 0; right: 0; top: 0; height: 44px; display: flex; align-items: center; justify-content: space-between; padding: 0 28px 0 32px; font: 600 14px/1 var(--font-ui); z-index: 40;">
+    <span>19:40</span>
+    <div style="display: flex; gap: 6px; font-size: 15px;"><i class="ph-fill ph-cell-signal-high"></i><i class="ph-fill ph-wifi-high"></i><i class="ph-fill ph-battery-high"></i></div>
+  </div>
+  <div style="position: absolute; left: 0; right: 0; top: 44px; height: 52px; display: flex; align-items: center; gap: 4px; padding: 0 8px; z-index: 5;">
+    <button aria-label="Volver" style="width: 44px; height: 44px; border: 0; border-radius: 10px; background: transparent; color: var(--text-2); font-size: 20px; cursor: pointer; display: grid; place-items: center;"><i class="ph ph-caret-left"></i></button>
+    <span style="flex: 1; font-size: 15px; font-weight: 500;">Mis cuerpos</span>
+    <button onClick="{{ save }}" style="height: 40px; padding: 0 14px; border-radius: 10px; border: 1.5px solid var(--accent); background: var(--accent-tint); color: var(--accent-text); font: 500 14px var(--font-ui); cursor: pointer;">Guardar</button>
+  </div>
+  <div style="position: absolute; left: 0; right: 0; top: 96px; display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; padding: 0 16px 8px; z-index: 5;">
+    <sc-for list="{{ bodies }}" as="b" hint-placeholder-count="3">
+      <button onClick="{{ b.go }}" style="flex: none; display: flex; align-items: center; gap: 8px; height: 44px; padding: 0 12px 0 6px; border-radius: 12px; border: {{ b.border }}; background: {{ b.bg }}; color: var(--text); font: 500 13px var(--font-ui); cursor: pointer;"><span style="width: 30px; height: 30px; border-radius: 8px; background: var(--surface-2); display: grid; place-items: center;"><span style="width: 10px; height: 10px; border-radius: 50%; background: {{ b.color }};"></span></span>{{ b.short }}</button>
+    </sc-for>
+    <button style="flex: none; height: 44px; padding: 0 12px; border-radius: 12px; border: 1px dashed var(--line-2); background: transparent; color: var(--text-2); font: 500 13px var(--font-ui); display: flex; align-items: center; gap: 6px;"><i class="ph ph-plus"></i>Nuevo</button>
+  </div>
+  <div style="position: absolute; left: 0; right: 0; top: 152px; height: 330px; background: radial-gradient(ellipse at 50% 45%, var(--surface) 0%, var(--bg) 70%);">
+    <dc-import name="BodyMap" loci="{{ loci }}" side="{{ side }}" width="390" height="330" pin-size="18" dense-mini="{{ true }}" no-pulse="{{ true }}" show-route="{{ true }}" body-style="{{ style }}" hint-size="390px,330px"></dc-import>
+    <span style="position: absolute; left: 14px; bottom: 10px; font: 400 11px var(--font-mono); color: var(--text-3);">{{ meta }}</span>
+  </div>
+  <div style="position: absolute; left: 0; right: 0; top: 482px; bottom: 0; overflow-y: auto; scrollbar-width: none; padding: 14px 16px 36px; display: flex; flex-direction: column; gap: 16px; border-radius: 20px 20px 0 0; background: var(--surface); box-shadow: 0 -1px 0 var(--line);">
+    <label style="display: flex; flex-direction: column; gap: 5px; font-size: 12px; color: var(--text-2);">Nombre<input value="{{ name }}" onChange="{{ setName }}" style="height: 44px; padding: 0 12px; border-radius: 10px; border: 1px solid var(--line-2); background: var(--bg); color: var(--text); font: 500 15px var(--font-ui); caret-color: var(--accent);"></label>
+    <sc-for list="{{ groups }}" as="g" hint-placeholder-count="6">
+      <div style="display: flex; flex-direction: column; gap: 6px;"><span style="font-size: 12px; color: var(--text-2);">{{ g.t }}</span>
+        <div style="display: flex; flex-wrap: wrap; gap: 6px;">
+          <sc-for list="{{ g.opts }}" as="o" hint-placeholder-count="4">
+            <button onClick="{{ o.go }}" aria-label="{{ o.l }}" style="min-width: 44px; height: 40px; padding: 0 10px; display: flex; align-items: center; justify-content: center; gap: 6px; border-radius: 10px; border: {{ o.border }}; background: {{ o.bg }}; color: var(--text); font: 500 12px var(--font-ui); cursor: pointer;"><sc-if value="{{ o.sw }}" hint-placeholder-val="{{ false }}"><span style="width: 16px; height: 16px; border-radius: 50%; background: {{ o.c }}; box-shadow: inset 0 0 0 1px var(--line-2);"></span></sc-if>{{ o.txt }}</button>
+          </sc-for>
+        </div>
+      </div>
+    </sc-for>
+    <span style="font-size: 12px; color: var(--text-3); text-wrap: pretty;">Cambiar la plantilla no borra ítems: los puntos que coinciden por nombre conservan su contenido y el resto va a «Sin asignar».</span>
+  </div>
+  <sc-if value="{{ toastOn }}" hint-placeholder-val="{{ false }}">
+    <div style="position: absolute; left: 12px; right: 12px; top: 440px; z-index: 30; display: flex; align-items: center; gap: 10px; min-height: 44px; padding: 0 14px; border-radius: 12px; background: var(--surface-2); box-shadow: var(--shadow-lg); animation: pc-in var(--dur-base) var(--ease-out) both; font-size: 13px;"><i class="ph ph-check-circle" style="color: var(--ok);"></i>{{ toast }}</div>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:390,&quot;height&quot;:844},&quot;theme&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;dark&quot;,&quot;light&quot;],&quot;default&quot;:&quot;dark&quot;,&quot;tsType&quot;:&quot;'dark'|'light'&quot;},&quot;body&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;c1&quot;,&quot;c2&quot;,&quot;f45&quot;],&quot;default&quot;:&quot;f45&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+class Component extends DCLogic {
+  state = { d: null, cur: null, bodies: null, toast: null };
+  componentDidMount() { import('./pc-data.js').then(d => this.setState({ d, bodies: d.BODIES.map(b => ({ ...b, style: { ...b.style }, side: b.base === 'Estándar 45' ? 'both' : 'front' })), cur: this.props.body ?? 'f45' })); }
+  componentWillUnmount() { clearTimeout(this.tt); }
+  renderVals() {
+    const theme = this.props.theme ?? 'dark', d = this.state.d;
+    if (!d || !this.state.bodies) return { theme, bodies: [], groups: [], loci: [] };
+    const bodies = this.state.bodies, b = bodies.find(x => x.id === this.state.cur);
+    const upd = patch => this.setState({ bodies: bodies.map(x => x.id === b.id ? { ...x, ...patch, style: { ...x.style, ...(patch.style || {}) } } : x) });
+    const pick = (on) => ({ border: on ? '1.5px solid var(--accent)' : '1px solid var(--line-2)', bg: on ? 'var(--accent-tint)' : 'var(--bg)' });
+    const st = b.style;
+    const opt = (cur, list, set) => list.map(([v, txt, c]) => ({ key: v, l: txt || v, txt, c, sw: !!c, ...pick(cur === v), go: () => set(v) }));
+    const groups = [
+      { t: 'Plantilla base', opts: opt(b.base, [['Estándar 45', 'Estándar 45'], ['Gramática C1', 'Gramática (22)'], ['En blanco', 'En blanco']], v => upd({ base: v, side: v === 'Estándar 45' ? 'both' : b.side })) },
+      { t: 'Vista', opts: opt(b.side, [['front', 'Frontal'], ['back', 'Posterior'], ['both', 'Ambas']], v => upd({ side: v })) },
+      { t: 'Color del palacio', opts: opt(st.accent, ['cabeza', 'hombros', 'torso', 'brazos', 'piernas'].map(z => [z, '', `var(--zone-${z})`]), v => upd({ style: { accent: v } })) },
+      { t: 'Pelo', opts: opt(st.hair, [['none', 'Sin cabello'], ['buzz', 'Rapado'], ['short', 'Corto'], ['curly', 'Rizado'], ['tail', 'Coleta'], ['bun', 'Moño'], ['long', 'Largo']], v => upd({ style: { hair: v } })) },
+      { t: 'Color de pelo', opts: opt(st.hairColor, [['oklch(0.45 0.05 40)', '', 'oklch(0.45 0.05 40)'], ['oklch(0.62 0.06 60)', '', 'oklch(0.62 0.06 60)'], ['oklch(0.82 0.08 90)', '', 'oklch(0.82 0.08 90)'], ['oklch(0.70 0.08 300)', '', 'oklch(0.70 0.08 300)'], ['oklch(0.72 0.02 260)', '', 'oklch(0.72 0.02 260)']], v => upd({ style: { hairColor: v } })) },
+      { t: 'Estilo de dibujo', opts: opt(st.draw ?? 'atlas', [['atlas', 'Atlas'], ['lapiz', 'Lápiz'], ['neon', 'Neón']], v => upd({ style: { draw: v } })) },
+      { t: 'Tono de piel', opts: opt(st.skin ?? st.tint ?? 'neutral', [['neutral', 'Neutro', 'var(--body-line)'], ['porcelana', '', 'oklch(0.92 0.03 70)'], ['arena', '', 'oklch(0.82 0.06 70)'], ['miel', '', 'oklch(0.70 0.08 60)'], ['canela', '', 'oklch(0.56 0.08 50)'], ['ebano', '', 'oklch(0.42 0.05 40)'], ['plano', 'Plano', 'oklch(0.72 0.09 250)']], v => upd({ style: { skin: v } })) },
+      { t: 'Vello facial y accesorios', opts: [...opt(st.facial ?? 'none', [['none', 'Sin vello'], ['stache', 'Bigote'], ['beard', 'Barba']], v => upd({ style: { facial: v } })), { key: 'gl', l: 'Gafas', txt: 'Gafas', sw: false, ...pick(!!st.glasses), go: () => upd({ style: { glasses: !st.glasses } }) }] },
+      { t: 'Detalle anatómico', opts: opt(st.detail ?? 'full', [['min', 'Solo contorno'], ['med', 'Rasgos'], ['full', 'Completo']], v => upd({ style: { detail: v } })) },
+      { t: 'Volumen y línea', opts: [...opt(st.vol ?? 'shade', [['shade', 'Sombreado'], ['flat', 'Plano']], v => upd({ style: { vol: v } })), ...opt(st.line, [['fine', 'Fina'], ['bold', 'Marcada']], v => upd({ style: { line: v } }))] },
+    ];
+    const loci = b.base === 'Estándar 45' ? d.STD45 : b.base === 'Gramática C1' ? d.LOCI : [];
+    return {
+      theme, groups, loci, side: b.side, style: st, name: b.name, setName: e => upd({ name: e.target.value }),
+      meta: `${b.base} · ${loci.length} puntos`,
+      bodies: bodies.map(x => ({ key: x.id, short: x.name.split(' · ')[0] + (x.base === 'Estándar 45' ? ' · 45' : ''), color: `var(--zone-${x.style.accent})`, ...pick(x.id === b.id), go: () => this.setState({ cur: x.id }) })),
+      save: () => { clearTimeout(this.tt); this.setState({ toast: `«${b.name}» guardado` }); this.tt = setTimeout(() => this.setState({ toast: null }), 2500); },
+      toastOn: !!this.state.toast, toast: this.state.toast
+    };
+  }
+}
+</script>
+</body>
+</html>

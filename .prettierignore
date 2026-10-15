@@ -1,0 +1,7 @@
+dist/
+coverage/
+dev-dist/
+node_modules/
+design_handoff_palacio_corporal/
+src/design/tokens.css
+*.svg

@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="_ds/nocturne-b05dafec-65a9-46f7-a005-25140c24ba40/styles.css">
+  <script src="_ds/nocturne-b05dafec-65a9-46f7-a005-25140c24ba40/_ds_bundle.js"></script>
+  <link rel="stylesheet" href="pc-tokens.css">
+  <script src="https://unpkg.com/@phosphor-icons/web@2.1.1"></script>
+</helmet>
+<div ref="{{ rootRef }}" data-pc-theme="{{ theme }}" style="position: relative; width: {{ rootW }}; height: {{ rootH }}; overflow: hidden; border-radius: {{ rootRadius }}; background: var(--bg); color: var(--text); font-family: var(--font-ui); font-size: 14px; line-height: 1.45; box-shadow: var(--shadow-md); display: grid; grid-template-columns: {{ navW }} minmax(0, 1fr); isolation: isolate;">
+  <nav style="display: flex; flex-direction: column; gap: 4px; padding: 20px 12px; background: var(--sunken); box-shadow: 1px 0 0 var(--line);">
+    <div style="display: flex; align-items: center; gap: 10px; padding: 0 8px 18px;"><div style="width: 28px; height: 28px; flex: none; border-radius: 8px; border: 1.5px solid var(--accent); display: grid; place-items: center; color: var(--accent);"><i class="ph ph-person-simple"></i></div><sc-if value="{{ navFull }}" hint-placeholder-val="{{ true }}"><span style="font: 500 16px var(--font-ui); white-space: nowrap;">Palacio Corporal</span></sc-if></div>
+    <sc-for list="{{ nav }}" as="n" hint-placeholder-count="7">
+      <button onClick="{{ n.go }}" title="{{ n.label }}" aria-label="{{ n.label }}" style="height: 44px; display: flex; align-items: center; gap: 10px; padding: 0 10px; border: 0; border-radius: 8px; background: {{ n.bg }}; color: {{ n.color }}; font: 500 14px var(--font-ui); cursor: pointer; text-align: left;" style-hover="background: var(--surface);"><i class="{{ n.icon }}" style="font-size: 18px;"></i><sc-if value="{{ navFull }}" hint-placeholder-val="{{ true }}"><span style="flex: 1; white-space: nowrap;">{{ n.label }}</span><span style="font: 500 11px var(--font-mono); color: var(--text-3);">{{ n.badge }}</span></sc-if></button>
+    </sc-for>
+    <div style="flex: 1;"></div>
+    <sc-if value="{{ navFull }}" hint-placeholder-val="{{ true }}"><div style="display: flex; flex-direction: column; gap: 4px; padding: 10px; border-radius: 10px; background: var(--surface); box-shadow: var(--shadow-sm);">
+      <span style="font-size: 11px; color: var(--text-3);">Palacio activo</span>
+      <span style="font-size: 13px; font-weight: 500;">Cuerpo 1 · Verbal + Nominal</span>
+      <span style="font-size: 12px; color: var(--text-3);">50 puntos · 50 ítems · + C2 y F45</span>
+    </div></sc-if>
+  </nav>
+  <main style="position: relative; min-width: 0; min-height: 0; overflow-x: hidden; overflow-y: {{ mainOverflow }};">
+    <sc-if value="{{ isHoy }}" hint-placeholder-val="{{ true }}">
+      <div style="height: {{ gridH }}; display: grid; grid-template-columns: {{ hoyCols }};">
+        <div style="position: relative; display: flex; flex-direction: column; padding: 28px 32px; gap: 16px; min-width: 0;">
+          <div style="display: flex; align-items: flex-end; justify-content: space-between;">
+            <div style="display: flex; flex-direction: column; gap: 2px;"><span style="font-size: 13px; color: var(--text-3);">Miércoles 14 oct · racha de 12 días</span><h1 style="margin: 0; font: 500 32px/1.1 var(--font-ui); letter-spacing: -0.02em;">Buenas tardes, Marta</h1></div>
+            <div style="display: flex; padding: 3px; gap: 2px; border-radius: 10px; background: var(--sunken);"><button style="height: 34px; padding: 0 12px; border: 0; border-radius: 7px; background: var(--surface); box-shadow: var(--shadow-sm); color: var(--text); font: 500 13px var(--font-ui);">Cuerpo 1</button><button style="height: 34px; padding: 0 12px; border: 0; border-radius: 7px; background: transparent; color: var(--text-2); font: 500 13px var(--font-ui);">Cuerpo 2</button><button aria-label="Nuevo palacio" style="width: 34px; height: 34px; border: 0; border-radius: 7px; background: transparent; color: var(--text-2);"><i class="ph ph-plus"></i></button></div>
+          </div>
+          <div style="flex: 1; min-height: {{ mapMinH }}; border-radius: 16px; background: radial-gradient(ellipse at 50% 45%, var(--surface) 0%, var(--bg) 75%); box-shadow: var(--shadow-sm); position: relative; overflow: hidden;">
+            <dc-import name="BodyMap" loci="{{ loci }}" side="both" fill="{{ true }}" pin-size="28" show-route="{{ true }}" hint-size="100%,100%"></dc-import>
+            <div style="position: absolute; left: 16px; right: 16px; bottom: 14px; display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 12px; color: var(--text-3);">
+              <sc-for list="{{ legend }}" as="l" hint-placeholder-count="7"><span style="display: flex; align-items: center; gap: 4px;"><dc-import name="LocusPin" n="" state="{{ l.id }}" size="12" hit="14" mini="{{ true }}" no-pulse="{{ true }}" label="{{ l.t }}" hint-size="14px,14px"></dc-import>{{ l.t }}</span></sc-for>
+            </div>
+          </div>
+        </div>
+        <aside style="display: flex; flex-direction: column; gap: 18px; padding: {{ asidePad }}; overflow-y: auto; scrollbar-width: none;">
+          <div style="display: flex; flex-direction: column; gap: 10px; padding: 18px; border-radius: 16px; background: var(--surface); box-shadow: var(--shadow-sm);">
+            <div style="display: flex; align-items: baseline; gap: 8px;"><span style="font: 500 40px/1 var(--font-ui); letter-spacing: -0.02em;">10</span><span style="color: var(--text-2);">repasos hoy · 4 vencidos + 6 nuevos</span></div>
+            <button onClick="{{ goSession }}" style="height: 52px; display: flex; align-items: center; justify-content: center; gap: 10px; border-radius: 12px; border: 1.5px solid var(--accent); background: var(--accent-tint); color: var(--accent-text); font: 500 16px var(--font-ui); cursor: pointer;" style-hover="background: var(--accent-tint-2);"><i class="ph ph-play"></i>Repasar ahora (4)<span style="font: 400 11px var(--font-mono); color: var(--text-3); margin-left: 4px;">Enter</span></button>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;"><button style="height: 44px; border-radius: 10px; border: 1px solid var(--line-2); background: transparent; color: var(--text); font: 500 13px var(--font-ui); display: flex; align-items: center; justify-content: center; gap: 6px;"><i class="ph ph-sparkle"></i>Aprender nuevos (6)</button><button style="height: 44px; border-radius: 10px; border: 1px solid var(--line-2); background: transparent; color: var(--text); font: 500 13px var(--font-ui); display: flex; align-items: center; justify-content: center; gap: 6px;"><i class="ph ph-path"></i>Recorrido</button></div>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 4px;">
+            <span style="font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-3); padding-bottom: 4px;">Cola de hoy</span>
+            <sc-for list="{{ queue }}" as="q" hint-placeholder-count="4">
+              <div style="display: grid; grid-template-columns: 34px 1fr auto; align-items: center; gap: 10px; min-height: 48px; padding: 0 10px 0 6px; border-radius: 10px;" style-hover="background: var(--surface);">
+                <dc-import name="LocusPin" n="{{ q.n }}" state="due" size="24" hit="32" no-pulse="{{ true }}" label="{{ q.name }}" hint-size="32px,32px"></dc-import>
+                <div style="display: flex; flex-direction: column; min-width: 0;"><span style="font-weight: 500;">{{ q.title }}</span><span style="font-size: 12px; color: var(--text-3);">{{ q.name }} · {{ q.deck }}</span></div>
+                <span style="font: 400 12px var(--font-mono); color: var(--text-3);">{{ q.ago }}</span>
+              </div>
+            </sc-for>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 4px;">
+            <span style="font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-3); padding-bottom: 4px;">Zonas</span>
+            <sc-for list="{{ zoneRows }}" as="z" hint-placeholder-count="5">
+              <div style="display: grid; grid-template-columns: 1fr 70px 50px; align-items: center; gap: 10px; min-height: 36px; border-top: 1px solid var(--line);"><span style="display: flex; align-items: center; gap: 8px;"><span style="width: 10px; height: 10px; border-radius: 50%; background: {{ z.color }}; box-shadow: 0 0 0 3px {{ z.halo }};"></span>{{ z.name }}</span><span style="font: 400 12px var(--font-mono); color: var(--text-3);">{{ z.n }} puntos</span><span style="display: flex; align-items: center; justify-content: flex-end; gap: 4px; font: 500 12px var(--font-mono); color: {{ z.dueColor }};"><i class="{{ z.icon }}" style="color: var(--state-due);"></i>{{ z.due }}</span></div>
+            </sc-for>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 10px; padding: 16px; border-radius: 16px; background: var(--surface); box-shadow: var(--shadow-sm);">
+            <div style="display: flex; justify-content: space-between; font-size: 13px;"><span style="font-weight: 500;">Próximos 7 días</span><span style="color: var(--text-3);">49 repasos</span></div>
+            <div style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 10px; align-items: end; height: 90px;">
+              <sc-for list="{{ forecast }}" as="f" hint-placeholder-count="7"><div style="display: flex; flex-direction: column; align-items: center; gap: 4px; height: 100%; justify-content: flex-end;"><span style="font: 500 11px var(--font-mono); color: var(--text-2);">{{ f.n }}</span><div style="width: 100%; height: {{ f.h }}px; border-radius: 4px; background: {{ f.bg }};"></div><span style="font-size: 11px; color: var(--text-3);">{{ f.d }}</span></div></sc-for>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </sc-if>
+    <sc-if value="{{ isSession }}" hint-placeholder-val="{{ false }}">
+      <div style="height: {{ gridH }}; display: grid; grid-template-columns: {{ sesCols }}; grid-template-rows: {{ sesRows }};">
+        <div style="position: relative; overflow: hidden; background: radial-gradient(ellipse at 50% 50%, var(--surface) 0%, var(--bg) 70%);">
+          <dc-import name="BodyMap" loci="{{ sLoci }}" side="{{ sSide }}" fill="{{ true }}" focus-id="{{ card.locusId }}" zoom="{{ sZoom }}" focus-y="0.5" pin-size="34" hint-size="100%,100%"></dc-import>
+          <div style="position: absolute; left: 20px; top: 20px; right: 20px; display: flex; align-items: center; gap: 12px;">
+            <button onClick="{{ exit }}" aria-label="Salir" style="width: 40px; height: 40px; border-radius: 10px; border: 1px solid var(--line-2); background: var(--surface); color: var(--text-2); cursor: pointer;"><i class="ph ph-x"></i></button>
+            <div style="flex: 1; display: flex; gap: 4px;"><sc-for list="{{ sProg }}" as="g" hint-placeholder-count="4"><div style="flex: 1; height: 4px; border-radius: 2px; background: {{ g.bg }};"></div></sc-for></div>
+            <span style="font: 500 12px var(--font-mono); color: var(--text-3);">{{ sPos }}</span>
+          </div>
+          <sc-if value="{{ sContent }}" hint-placeholder-val="{{ false }}">
+            <sc-for list="{{ sScene }}" as="s" hint-placeholder-count="0">
+              <div style="position: absolute; left: {{ s.x }}px; top: {{ s.y }}px; transform: {{ s.tf }}; display: flex; align-items: center; gap: 8px; padding: 6px 12px 6px 6px; border-radius: 12px; background: var(--surface); box-shadow: var(--shadow-md); animation: pc-in var(--dur-reveal) var(--ease-out) both; animation-delay: {{ s.delay }}ms;">
+                <span style="width: 36px; height: 36px; border-radius: 8px; background: var(--surface-2); display: grid; place-items: center; font-size: 20px;">{{ s.e }}</span>
+                <div style="display: flex; flex-direction: column;"><span style="font-size: 13px; font-weight: 500;">{{ s.t }}</span><span style="font-size: 12px; color: var(--text-3);">{{ s.r }}</span></div>
+              </div>
+            </sc-for>
+          </sc-if>
+        </div>
+        <aside style="position: relative; display: flex; flex-direction: column; background: var(--bg); box-shadow: -1px 0 0 var(--line);">
+          <div style="flex: 1; min-height: 0; overflow-y: auto; scrollbar-width: none; padding: 32px 32px 140px; display: flex; flex-direction: column; gap: 16px;">
+            <div style="display: flex; align-items: center; gap: 8px;"><span style="display: flex; align-items: center; gap: 6px; height: 26px; padding: 0 10px 0 8px; border-radius: 999px; background: var(--surface-2); font-size: 12px; color: var(--text-2);"><span style="width: 8px; height: 8px; border-radius: 50%; background: {{ sZoneColor }};"></span>{{ sZone }}</span><span style="font: 500 12px var(--font-mono); color: var(--text-3);">{{ sPal }} · {{ sLocus.n }} · {{ card.deck }}</span></div>
+            <sc-if value="{{ sPoint }}" hint-placeholder-val="{{ true }}">
+              <div style="display: flex; flex-direction: column; gap: 16px;">
+                <h2 style="margin: 0; font: 500 34px/1.15 var(--font-ui); letter-spacing: -0.02em;">¿Qué hay en tu <em style="color: var(--accent-text);">{{ sLocus.name }}</em>?</h2>
+                <div style="display: flex; align-items: center; gap: 12px; padding: 12px; border-radius: 12px; background: var(--surface); box-shadow: var(--shadow-sm);"><span style="width: 44px; height: 44px; border-radius: 10px; background: var(--surface-2); display: grid; place-items: center; font-size: 24px;">{{ card.anchor.emoji }}</span><div style="display: flex; flex-direction: column;"><span style="font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-3);">Ancla</span><span style="font-size: 16px;">{{ card.anchor.text }}</span></div></div>
+              </div>
+            </sc-if>
+            <sc-if value="{{ sContent }}" hint-placeholder-val="{{ false }}">
+              <div style="display: flex; flex-direction: column; gap: 14px; animation: pc-in var(--dur-reveal) var(--ease-out) both;">
+                <h2 style="margin: 0; font: 500 32px/1.15 var(--font-ui); letter-spacing: -0.02em;">{{ card.title }}</h2>
+                <sc-for list="{{ sBlocks }}" as="b" hint-placeholder-count="4">
+                  <div style="display: flex; flex-direction: column; gap: 6px;">
+                    <sc-if value="{{ b.isText }}" hint-placeholder-val="{{ false }}"><div style="display: flex; flex-direction: column; gap: 3px;"><span style="font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-3);">{{ b.label }}</span><p style="margin: 0; font-size: 15px; text-wrap: pretty;">{{ b.text }}</p></div></sc-if>
+                    <sc-if value="{{ b.isFormula }}" hint-placeholder-val="{{ false }}"><div style="padding: 12px 14px; border-radius: 10px; background: var(--sunken); font: 500 15px var(--font-mono); color: var(--accent-text);">{{ b.text }}</div></sc-if>
+                    <sc-if value="{{ b.isAnswer }}" hint-placeholder-val="{{ false }}"><div style="display: flex; flex-direction: column; padding: 14px; border-radius: 12px; background: var(--surface); box-shadow: var(--shadow-sm);"><span style="font: 500 30px var(--font-ui);">{{ b.text }}</span><span style="font-size: 13px; color: var(--text-3);">{{ b.sub }}</span></div></sc-if>
+                    <sc-if value="{{ b.isWord }}" hint-placeholder-val="{{ false }}"><div style="display: flex; flex-direction: column; padding: 14px; border-radius: 12px; background: var(--surface); box-shadow: var(--shadow-sm);"><span style="font: 500 26px var(--font-ui);">{{ b.word }} <span style="font: 400 14px var(--font-mono); color: var(--text-3);">{{ b.ipa }}</span></span><span style="color: var(--text-2);">{{ b.tr }}</span></div></sc-if>
+                    <sc-if value="{{ b.isTable }}" hint-placeholder-val="{{ false }}">
+                      <table style="border-collapse: collapse; font: 400 12px/1.35 var(--font-mono); width: 100%;">
+                        <thead><tr><sc-for list="{{ b.cols }}" as="c" hint-placeholder-count="6"><th style="text-align: left; padding: 6px 8px 6px 0; font: 500 10px var(--font-ui); letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-3); border-bottom: 1px solid var(--line-2);">{{ c }}</th></sc-for></tr></thead>
+                        <tbody><sc-for list="{{ b.rowsX }}" as="r" hint-placeholder-count="3"><tr><sc-for list="{{ r.cells }}" as="cell" hint-placeholder-count="6"><td style="padding: 7px 8px 7px 0; border-bottom: 1px solid var(--line); color: {{ cell.color }};">{{ cell.v }}</td></sc-for></tr></sc-for></tbody>
+                      </table>
+                    </sc-if>
+                    <sc-if value="{{ b.isExample }}" hint-placeholder-val="{{ false }}"><div style="display: grid; grid-template-columns: 26px 1fr; row-gap: 4px; padding: 10px 12px; border-radius: 10px; background: var(--surface); box-shadow: var(--shadow-sm);"><span style="font: 500 11px/20px var(--font-mono); color: var(--text-3);">EN</span><span>{{ b.en0 }}<span style="color: var(--accent-text); font-weight: 500;">[{{ b.en1 }}]</span>{{ b.en2 }}</span><span style="font: 500 11px/20px var(--font-mono); color: var(--text-3);">ES</span><span style="color: var(--text-2);">{{ b.es0 }}<span style="font-weight: 500; color: var(--text);">[{{ b.es1 }}]</span>{{ b.es2 }}</span></div></sc-if>
+                    <sc-if value="{{ b.isError }}" hint-placeholder-val="{{ false }}"><div style="display: flex; flex-direction: column; gap: 6px; padding: 12px; border-radius: 10px; background: var(--surface); box-shadow: var(--shadow-sm);"><div style="display: flex; gap: 8px;"><i class="ph-bold ph-x" style="color: var(--bad);"></i><span style="text-decoration: line-through; color: var(--text-2);">{{ b.bad }}</span></div><div style="display: flex; gap: 8px;"><i class="ph-bold ph-check" style="color: var(--ok);"></i><span style="font-weight: 500;">{{ b.good }}</span></div><span style="font-size: 13px; color: var(--text-3);">{{ b.note }}</span></div></sc-if>
+                    <sc-if value="{{ b.isTip }}" hint-placeholder-val="{{ false }}"><div style="display: flex; gap: 10px; padding: 10px 12px; border-radius: 10px; border: 1px dashed var(--line-2); color: var(--text-2);"><i class="ph ph-lightbulb" style="font-size: 18px; color: var(--accent-text);"></i>{{ b.text }}</div></sc-if>
+                  </div>
+                </sc-for>
+              </div>
+            </sc-if>
+          </div>
+          <div style="position: absolute; left: 0; right: 0; bottom: 0; padding: 16px 32px 24px; background: linear-gradient(to top, var(--bg) 80%, transparent);">
+            <sc-if value="{{ sPoint }}" hint-placeholder-val="{{ true }}">
+              <button onClick="{{ sReveal }}" style="width: 100%; height: 60px; border-radius: 14px; border: 1.5px solid var(--accent); background: var(--accent-tint); color: var(--accent-text); font: 500 18px var(--font-ui); cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px;"><i class="ph ph-eye"></i>Revelar<span style="font: 400 12px var(--font-mono); color: var(--text-3);">espacio</span></button>
+            </sc-if>
+            <sc-if value="{{ sRating }}" hint-placeholder-val="{{ false }}">
+              <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px;">
+                <sc-for list="{{ sRatings }}" as="r" hint-placeholder-count="4">
+                  <button onClick="{{ r.go }}" style="height: 72px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; border-radius: 12px; border: {{ r.border }}; background: {{ r.bg }}; color: var(--text); cursor: pointer; font-family: var(--font-ui);"><span style="font-size: 14px; font-weight: 500;">{{ r.label }}</span><span style="font: 500 12px var(--font-mono); color: var(--text-3);">{{ r.iv }}</span><span style="font: 400 10px var(--font-mono); color: var(--text-3);">{{ r.k }}</span></button>
+                </sc-for>
+              </div>
+            </sc-if>
+            <sc-if value="{{ sSheetOn }}" hint-placeholder-val="{{ false }}">
+              <div style="display: flex; flex-direction: column; gap: 12px; padding: 16px; border-radius: 16px; background: var(--surface); box-shadow: var(--shadow-lg); animation: pc-in var(--dur-base) var(--ease-out) both;">
+                <div style="display: flex; align-items: baseline; justify-content: space-between;"><span style="font-size: 13px; color: var(--text-3);">Próximo repaso · {{ sSheet.label }}</span><span style="font: 400 12px var(--font-mono); color: var(--text-3);">Etapa {{ sSheet.ns }}/10</span></div>
+                <span style="font: 500 24px var(--font-ui);">{{ sSheet.when }}</span>
+                <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; color: var(--text-3);"><span><i class="ph ph-sliders-horizontal" style="color: var(--accent-text);"></i> Según tu panel de repasos · R10</span><button onClick="{{ sToggleAdv }}" style="height: 32px; padding: 0 8px; border: 0; background: transparent; color: var(--text-2); font: 500 12px var(--font-ui); cursor: pointer; display: flex; align-items: center; gap: 4px;"><i class="{{ sAdvIcon }}"></i>Avanzado</button></div>
+                <sc-if value="{{ sAdv }}" hint-placeholder-val="{{ false }}"><div style="display: flex; flex-direction: column; gap: 10px;"><div style="display: grid; grid-template-columns: repeat(6, 1fr); gap: 6px;"><sc-for list="{{ sShort }}" as="c" hint-placeholder-count="6"><button onClick="{{ c.go }}" style="height: 40px; border-radius: 8px; border: {{ c.border }}; background: {{ c.bg }}; color: var(--text); font: 500 12px var(--font-ui); cursor: pointer;">{{ c.l }}</button></sc-for></div>
+                <div style="display: flex; gap: 8px;"><button style="flex: 1; height: 40px; border-radius: 8px; border: 1px solid var(--line-2); background: transparent; color: var(--text); font: 500 13px var(--font-ui); display: flex; align-items: center; justify-content: center; gap: 6px;"><i class="ph ph-calendar-dots"></i>Elegir fecha y hora</button><button style="flex: 1; height: 40px; border-radius: 8px; border: 1px solid var(--line-2); background: transparent; color: var(--text); font: 500 13px var(--font-ui); display: flex; align-items: center; justify-content: center; gap: 6px;"><i class="ph ph-steps"></i>Saltar a etapa…</button></div>
+                </div></sc-if>
+                <button onClick="{{ sAccept }}" style="height: 48px; border-radius: 12px; border: 1.5px solid var(--accent); background: var(--accent-tint); color: var(--accent-text); font: 500 15px var(--font-ui); cursor: pointer;">Aceptar y seguir <span style="font: 400 11px var(--font-mono); color: var(--text-3);">Enter</span></button>
+              </div>
+            </sc-if>
+          </div>
+        </aside>
+      </div>
+    </sc-if>
+    <sc-if value="{{ isPalace }}" hint-placeholder-val="{{ false }}">
+      <div style="height: {{ gridH }}; display: grid; grid-template-columns: {{ palCols }}; grid-template-rows: {{ palRows }};">
+        <div style="display: flex; flex-direction: column; min-height: 0; box-shadow: 1px 0 0 var(--line);">
+          <div style="display: flex; flex-direction: column; gap: 10px; padding: 20px 16px 10px;">
+            <span style="font: 500 18px var(--font-ui);">Cuerpo 1 · Verbal + Nominal</span>
+            <div style="display: flex; padding: 3px; gap: 2px; border-radius: 10px; background: var(--sunken);"><sc-for list="{{ pModes }}" as="m" hint-placeholder-count="3"><button onClick="{{ m.go }}" style="flex: 1; height: 32px; border: 0; border-radius: 7px; background: {{ m.bg }}; box-shadow: {{ m.shadow }}; color: {{ m.color }}; font: 500 12px var(--font-ui); cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 5px;"><i class="{{ m.icon }}"></i>{{ m.l }}</button></sc-for></div>
+          </div>
+          <div style="display: grid; grid-template-columns: 34px 1fr 54px 18px; gap: 8px; padding: 6px 16px; font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-3);"><span>Nº</span><span>Parte · zona</span><span>Ítems</span><span></span></div>
+          <div style="flex: 1; overflow-y: auto; scrollbar-width: none; padding: 0 8px 16px;">
+            <sc-for list="{{ pRows }}" as="r" hint-placeholder-count="12">
+              <div onClick="{{ r.go }}" style="display: grid; grid-template-columns: 34px 1fr 54px 18px; align-items: center; gap: 8px; min-height: 40px; padding: 0 8px; border-radius: 8px; background: {{ r.bg }}; cursor: pointer;" style-hover="background: var(--surface);">
+                <dc-import name="LocusPin" n="{{ r.n }}" state="{{ r.state }}" size="22" hit="30" no-pulse="{{ true }}" label="{{ r.name }}" hint-size="30px,30px"></dc-import>
+                <div style="display: flex; flex-direction: column; min-width: 0;"><span style="font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{ r.name }}</span><span style="display: flex; align-items: center; gap: 5px; font-size: 11px; color: var(--text-3);"><span style="width: 6px; height: 6px; border-radius: 50%; background: {{ r.zc }};"></span>{{ r.zone }}</span></div>
+                <span style="font: 400 12px var(--font-mono); color: var(--text-3);">{{ r.items }}</span>
+                <i class="ph ph-dots-six-vertical" style="color: var(--text-3);"></i>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+        <div style="position: relative; overflow: hidden; order: {{ palMapOrder }}; background: radial-gradient(ellipse at 50% 45%, var(--surface) 0%, var(--bg) 70%); cursor: crosshair;">
+          <dc-import name="BodyMap" loci="{{ loci }}" side="both" fill="{{ true }}" pin-size="28" show-route="{{ true }}" no-pulse="{{ true }}" selected-ids="{{ pSelIds }}" on-pin-tap="{{ pPick }}" hint-size="100%,100%"></dc-import>
+          <div style="position: absolute; left: 16px; bottom: 16px; max-width: 420px; display: flex; align-items: center; gap: 8px; padding: 8px 12px; border-radius: 10px; background: var(--surface); box-shadow: var(--shadow-sm); font-size: 12px; color: var(--text-2);"><i class="ph ph-cursor-click" style="color: var(--accent-text);"></i>Clic: crear · arrastrar: mover · Mayús: lazo · clic derecho: editar</div>
+          <div style="position: absolute; right: 16px; top: 16px; display: flex; gap: 6px;"><button style="height: 36px; padding: 0 12px; border-radius: 8px; border: 1px solid var(--line-2); background: var(--surface); color: var(--text); font: 500 12px var(--font-ui); display: flex; align-items: center; gap: 6px;"><i class="ph ph-layout"></i>Vista</button><button style="height: 36px; padding: 0 12px; border-radius: 8px; border: 1px solid var(--line-2); background: var(--surface); color: var(--text); font: 500 12px var(--font-ui); display: flex; align-items: center; gap: 6px;"><i class="ph ph-copy"></i>Duplicar</button></div>
+        </div>
+        <aside style="display: {{ palInspector }}; flex-direction: column; gap: 16px; padding: 20px; overflow-y: auto; scrollbar-width: none; box-shadow: -1px 0 0 var(--line);">
+          <div style="display: flex; align-items: center; gap: 10px;"><dc-import name="LocusPin" n="{{ pSel.n }}" state="{{ pSel.state }}" no-pulse="{{ true }}" label="{{ pSel.name }}" hint-size="44px,44px"></dc-import><div style="display: flex; flex-direction: column;"><span style="font-size: 12px; color: var(--text-3);">Punto L{{ pSel.n }} · x {{ pSelX }} · y {{ pSelY }}</span><span style="font: 500 18px var(--font-ui);">{{ pSel.name }}</span></div></div>
+          <label style="display: flex; flex-direction: column; gap: 5px; font-size: 12px; color: var(--text-2);">Nombre de la parte<input value="{{ pSel.name }}" style="height: 40px; padding: 0 10px; border-radius: 8px; border: 1px solid var(--line-2); background: var(--surface); color: var(--text); font: 400 14px var(--font-ui);"></label>
+          <div style="display: flex; flex-direction: column; gap: 6px;"><span style="font-size: 12px; color: var(--text-2);">Zona</span>
+            <sc-for list="{{ pZones }}" as="z" hint-placeholder-count="5"><div style="display: grid; grid-template-columns: 14px 1fr 30px; align-items: center; gap: 8px; min-height: 36px; padding: 0 10px; border-radius: 8px; border: {{ z.border }}; background: {{ z.bg }};"><span style="width: 12px; height: 12px; border-radius: 50%; background: {{ z.color }}; box-shadow: 0 0 0 3px {{ z.halo }};"></span><span style="font-size: 13px;">{{ z.name }}</span><span style="font: 400 11px var(--font-mono); color: var(--text-3); text-align: right;">{{ z.n }}</span></div></sc-for>
+            <button style="height: 36px; border-radius: 8px; border: 1px dashed var(--line-2); background: transparent; color: var(--text-2); font: 500 12px var(--font-ui); display: flex; align-items: center; justify-content: center; gap: 6px;"><i class="ph ph-plus"></i>Nueva zona</button>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 6px;"><span style="font-size: 12px; color: var(--text-2);">Ancla</span><div style="display: flex; align-items: center; gap: 10px; padding: 10px; border-radius: 10px; background: var(--surface); box-shadow: var(--shadow-sm);"><span style="font-size: 22px;">{{ pAnchorE }}</span><span>{{ pAnchorT }}</span></div></div>
+          <button style="height: 44px; border-radius: 10px; border: 1.5px solid var(--accent); background: var(--accent-tint); color: var(--accent-text); font: 500 14px var(--font-ui);">Abrir detalle del punto</button>
+        </aside>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ isItem }}" hint-placeholder-val="{{ false }}">
+      <div style="height: {{ gridH }}; display: grid; grid-template-columns: {{ itemCols }};">
+        <div style="overflow-y: auto; scrollbar-width: none; padding: 28px 40px 60px; display: flex; flex-direction: column; gap: 22px;">
+          <div style="display: flex; align-items: center; justify-content: space-between;"><h1 style="margin: 0; font: 500 28px var(--font-ui); letter-spacing: -0.02em;">Editar ítem</h1><div style="display: flex; gap: 8px;"><button style="height: 40px; padding: 0 14px; border-radius: 10px; border: 1px solid var(--line-2); background: transparent; color: var(--text); font: 500 13px var(--font-ui);">Descartar</button><button style="height: 40px; padding: 0 16px; border-radius: 10px; border: 1.5px solid var(--accent); background: var(--accent-tint); color: var(--accent-text); font: 500 13px var(--font-ui);">Guardar</button></div></div>
+          <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; max-width: 520px;"><sc-for list="{{ iTpl }}" as="t" hint-placeholder-count="3"><div style="height: 52px; display: flex; align-items: center; gap: 10px; padding: 0 12px; border-radius: 10px; border: {{ t.border }}; background: {{ t.bg }};"><i class="{{ t.icon }}" style="font-size: 18px; color: var(--text-2);"></i><span style="font-weight: 500;">{{ t.l }}</span></div></sc-for></div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+            <label style="display: flex; flex-direction: column; gap: 5px; font-size: 12px; color: var(--text-2);">Título<input value="Present Perfect" style="height: 44px; padding: 0 12px; border-radius: 10px; border: 1px solid var(--line-2); background: var(--surface); color: var(--text); font: 500 16px var(--font-ui);"></label>
+            <label style="display: flex; flex-direction: column; gap: 5px; font-size: 12px; color: var(--text-2);">Fórmula<input value="S + have/has + past participle" style="height: 44px; padding: 0 12px; border-radius: 10px; border: 1px solid var(--line-2); background: var(--sunken); color: var(--accent-text); font: 500 14px var(--font-mono);"></label>
+          </div>
+          <label style="display: flex; flex-direction: column; gap: 5px; font-size: 12px; color: var(--text-2);">Regla en una frase<input value="Conecta una acción pasada con el presente: importa el resultado o la experiencia, no el momento." style="height: 44px; padding: 0 12px; border-radius: 10px; border: 1px solid var(--line-2); background: var(--surface); color: var(--text); font: 400 14px var(--font-ui);"></label>
+          <div style="display: flex; flex-direction: column; gap: 8px;"><span style="font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-3);">Tabla de conjugación · work</span>
+            <div style="overflow-x: auto;"><div style="display: grid; grid-template-columns: 110px repeat(5, minmax(120px, 1fr)); min-width: 720px; border-radius: 10px; overflow: hidden; box-shadow: 0 0 0 1px var(--line-2);">
+              <sc-for list="{{ iHead }}" as="h" hint-placeholder-count="6"><div style="height: 34px; display: flex; align-items: center; padding: 0 10px; background: var(--surface-2); font: 500 10px var(--font-ui); letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-3);">{{ h.v }}</div></sc-for>
+              <sc-for list="{{ iCells }}" as="c" hint-placeholder-count="18"><input value="{{ c.v }}" style="height: 40px; padding: 0 10px; border: 0; border-top: 1px solid var(--line); background: {{ c.bg }}; color: {{ c.color }}; font: 400 12px var(--font-mono); min-width: 0;"></sc-for>
+            </div></div>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 8px;"><span style="font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-3);">Sub-elementos</span>
+            <div style="display: flex; flex-direction: column; border-radius: 12px; background: var(--surface); box-shadow: var(--shadow-sm); overflow: hidden;">
+              <div style="display: grid; grid-template-columns: {{ subCols }}; gap: 12px; padding: 8px 14px; font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-3); background: var(--surface-2);"><span>Pieza</span><span>Función</span><span>Apreciación</span><span>Dato interesante</span></div>
+              <sc-for list="{{ iSubs }}" as="s" hint-placeholder-count="6"><div style="display: grid; grid-template-columns: {{ subCols }}; gap: 12px; padding: 10px 14px; border-top: 1px solid var(--line); font-size: 13px;"><span style="font: 500 13px var(--font-mono); color: var(--accent-text);">{{ s.p }}</span><span style="color: var(--text-2);">{{ s.f }}</span><span style="text-wrap: pretty;">{{ s.a }}</span><span style="color: var(--text-2); text-wrap: pretty;">{{ s.d }}</span></div></sc-for>
+            </div>
+          </div>
+        </div>
+        <aside style="display: flex; flex-direction: column; gap: 14px; padding: 28px 28px; overflow-y: auto; scrollbar-width: none; background: var(--sunken); box-shadow: -1px 0 0 var(--line);">
+          <span style="font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-3);">Ubicación</span>
+          <div style="height: 360px; flex: none; position: relative; border-radius: 14px; background: var(--surface); box-shadow: var(--shadow-sm); overflow: hidden;"><dc-import name="BodyMap" loci="{{ loci }}" side="front" fill="{{ true }}" pin-size="20" selected-ids="{{ iPickIds }}" no-pulse="{{ true }}" on-pin-tap="{{ iPick }}" hint-size="100%,360px"></dc-import></div>
+          <div style="display: flex; align-items: center; gap: 6px; font-size: 13px;"><span style="height: 28px; display: inline-flex; align-items: center; padding: 0 10px; border-radius: 7px; background: var(--surface);">Cuerpo 1</span><i class="ph ph-caret-right" style="color: var(--text-3);"></i><span style="height: 28px; display: inline-flex; align-items: center; padding: 0 10px; border-radius: 7px; background: var(--surface);">{{ iPickZone }}</span><i class="ph ph-caret-right" style="color: var(--text-3);"></i><span style="height: 28px; display: inline-flex; align-items: center; padding: 0 10px; border-radius: 7px; background: var(--accent-tint); color: var(--accent-text);">L{{ iPickL.n }} · {{ iPickL.name }}</span></div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+            <label style="display: flex; flex-direction: column; gap: 5px; font-size: 12px; color: var(--text-2);">Mazo<select style="height: 40px; padding: 0 8px; border-radius: 8px; border: 1px solid var(--line-2); background: var(--surface); color: var(--text); font: 400 13px var(--font-ui);"><option>Gramática C1</option></select></label>
+            <label style="display: flex; flex-direction: column; gap: 5px; font-size: 12px; color: var(--text-2);">Horario<select style="height: 40px; padding: 0 8px; border-radius: 8px; border: 1px solid var(--line-2); background: var(--surface); color: var(--text); font: 400 13px var(--font-ui);"><option>Heredado · R10</option><option>Rápido examen</option></select></label>
+          </div>
+          <div style="display: flex; flex-wrap: wrap; gap: 6px;"><span style="height: 28px; display: inline-flex; align-items: center; padding: 0 10px; border-radius: 7px; background: var(--surface-2); font-size: 12px;">C1</span><span style="height: 28px; display: inline-flex; align-items: center; padding: 0 10px; border-radius: 7px; background: var(--surface-2); font-size: 12px;">tiempos</span><span style="height: 28px; display: inline-flex; align-items: center; padding: 0 10px; border-radius: 7px; background: var(--surface-2); font-size: 12px;">perfectos</span><span style="height: 28px; display: inline-flex; align-items: center; padding: 0 10px; border-radius: 7px; border: 1px dashed var(--line-2); font-size: 12px; color: var(--text-3);">+ etiqueta</span></div>
+          <div style="display: flex; gap: 10px; padding: 12px; border-radius: 10px; border: 1px dashed var(--line-2); font-size: 13px; color: var(--text-2);"><i class="ph ph-eye" style="font-size: 18px; color: var(--accent-text);"></i>La vista previa de repaso se abre con ⌘P y muestra el panel derecho de la sesión con este contenido.</div>
+        </aside>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ isLibrary }}" hint-placeholder-val="{{ false }}">
+      <div style="height: {{ gridH }}; display: grid; grid-template-columns: {{ libCols }};">
+        <div style="display: {{ libFilters }}; flex-direction: column; gap: 14px; padding: 24px 16px; box-shadow: 1px 0 0 var(--line); overflow-y: auto; scrollbar-width: none;">
+          <span style="font: 500 22px var(--font-ui);">Biblioteca</span>
+          <sc-for list="{{ lGroups }}" as="g" hint-placeholder-count="4">
+            <div style="display: flex; flex-direction: column; gap: 2px;"><span style="font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-3); padding-bottom: 4px;">{{ g.t }}</span>
+              <sc-for list="{{ g.opts }}" as="o" hint-placeholder-count="4"><button onClick="{{ o.go }}" style="height: 32px; display: flex; align-items: center; gap: 8px; padding: 0 8px; border: 0; border-radius: 7px; background: {{ o.bg }}; color: var(--text); font: 400 13px var(--font-ui); cursor: pointer; text-align: left;"><i class="{{ o.check }}" style="color: {{ o.cc }};"></i><span style="flex: 1;">{{ o.l }}</span><span style="font: 400 11px var(--font-mono); color: var(--text-3);">{{ o.n }}</span></button></sc-for>
+            </div>
+          </sc-for>
+        </div>
+        <div style="display: flex; flex-direction: column; min-width: 0; min-height: 0;">
+          <div style="display: flex; align-items: center; gap: 10px; padding: 20px 24px 12px;">
+            <div style="flex: 1; display: flex; align-items: center; gap: 8px; height: 40px; padding: 0 12px; border-radius: 10px; background: var(--surface); box-shadow: inset 0 0 0 1px var(--line-2);"><i class="ph ph-magnifying-glass" style="color: var(--text-3);"></i><input placeholder="Buscar en títulos, etiquetas y contenido" style="flex: 1; border: 0; background: transparent; color: var(--text); font: 400 14px var(--font-ui);"><span style="font: 400 11px var(--font-mono); color: var(--text-3);">⌘K</span></div>
+            <button style="height: 40px; padding: 0 14px; border-radius: 10px; border: 1.5px solid var(--accent); background: var(--accent-tint); color: var(--accent-text); font: 500 13px var(--font-ui); display: flex; align-items: center; gap: 6px;"><i class="ph ph-plus"></i>Nuevo ítem</button>
+          </div>
+          <sc-if value="{{ lHasSel }}" hint-placeholder-val="{{ false }}">
+            <div style="display: flex; align-items: center; gap: 6px; margin: 0 24px 8px; padding: 6px 6px 6px 14px; border-radius: 10px; background: var(--accent-tint); font-size: 13px;"><span style="flex: 1; color: var(--accent-text); font-weight: 500;">{{ lSelN }} seleccionados</span><sc-for list="{{ lBulk }}" as="b" hint-placeholder-count="4"><button style="height: 32px; padding: 0 10px; border: 0; border-radius: 7px; background: var(--surface); color: var(--text); font: 500 12px var(--font-ui); display: flex; align-items: center; gap: 6px; cursor: pointer;"><i class="{{ b.i }}"></i>{{ b.l }}</button></sc-for></div>
+          </sc-if>
+          <div style="flex: 1; min-height: 0; overflow-y: auto; scrollbar-width: none; padding: 0 24px 24px;">
+            <div style="display: grid; grid-template-columns: {{ libRowCols }}; gap: 10px; padding: 8px 8px; font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-3); box-shadow: 0 1px 0 var(--line-2);"><span></span><span>Nº</span><span>Título</span><span>Punto</span><span>Estado</span><span>Etapa</span><span>Próximo</span><span>Mazo</span></div>
+            <sc-for list="{{ lRows }}" as="r" hint-placeholder-count="12">
+              <div onClick="{{ r.go }}" style="display: grid; grid-template-columns: {{ libRowCols }}; gap: 10px; align-items: center; min-height: 44px; padding: 0 8px; border-radius: 8px; background: {{ r.bg }}; cursor: pointer; font-size: 13px;" style-hover="background: var(--surface);">
+                <i class="{{ r.check }}" style="font-size: 18px; color: {{ r.cc }};"></i>
+                <dc-import name="LocusPin" n="{{ r.n }}" state="{{ r.state }}" size="22" hit="28" no-pulse="{{ true }}" label="{{ r.title }}" hint-size="28px,28px"></dc-import>
+                <span style="font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{ r.title }}</span>
+                <span style="display: flex; align-items: center; gap: 6px; color: var(--text-2); white-space: nowrap; overflow: hidden;"><span style="width: 7px; height: 7px; flex: none; border-radius: 50%; background: {{ r.zc }};"></span>{{ r.where }}</span>
+                <span style="color: var(--text-2);">{{ r.st }}</span>
+                <span style="font: 400 12px var(--font-mono); color: var(--text-2);">{{ r.stage }}</span>
+                <span style="font: 400 12px var(--font-mono);">{{ r.next }}</span>
+                <span style="color: var(--text-3); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{ r.deck }}</span>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+        <aside style="display: {{ libTray }}; flex-direction: column; gap: 10px; padding: 20px 16px; background: var(--sunken); box-shadow: -1px 0 0 var(--line); min-height: 0; overflow-y: auto; scrollbar-width: none;">
+          <div style="display: flex; justify-content: space-between; align-items: baseline;"><span style="font: 500 15px var(--font-ui);">Sin asignar · 5</span><span style="font-size: 12px; color: var(--text-3);">arrastra al cuerpo</span></div>
+          <div style="height: 380px; flex: none; position: relative; border-radius: 14px; background: var(--surface); box-shadow: var(--shadow-sm); overflow: hidden;"><dc-import name="BodyMap" loci="{{ loci }}" side="front" fill="{{ true }}" pin-size="18" dense-mini="{{ true }}" no-pulse="{{ true }}" hint-size="100%,380px"></dc-import></div>
+          <sc-for list="{{ lTray }}" as="t" hint-placeholder-count="5"><div style="display: grid; grid-template-columns: 18px 1fr; align-items: center; gap: 8px; min-height: 44px; padding: 0 10px; border-radius: 10px; background: var(--surface); box-shadow: var(--shadow-sm); cursor: grab;"><i class="ph ph-dots-six-vertical" style="color: var(--text-3);"></i><div style="display: flex; flex-direction: column; min-width: 0;"><span style="font-size: 13px;">{{ t.t }}</span><span style="font-size: 11px; color: var(--text-3);">{{ t.d }}</span></div></div></sc-for>
+        </aside>
+      </div>
+    </sc-if>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:900},&quot;theme&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;dark&quot;,&quot;light&quot;],&quot;default&quot;:&quot;dark&quot;,&quot;tsType&quot;:&quot;'dark'|'light'&quot;},&quot;screen&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;hoy&quot;,&quot;session&quot;,&quot;palace&quot;,&quot;item&quot;,&quot;library&quot;],&quot;default&quot;:&quot;hoy&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+class Component extends DCLogic {
+  state = { d: null, screen: null, phase: 'point', idx: 0, sheet: null, sel: 'L8', zoneSel: null, libSel: [] };
+  componentDidMount() {
+    this.watch();
+    import('./pc-data.js').then(d => { this.setState({ d, phase: this.props.sheetOpen ? 'content' : 'point', adv: !!this.props.adv }, () => { if (this.props.sheetOpen) this.rate('good'); }); });
+    this.onKey = e => {
+      if ((this.state.screen ?? this.props.screen) !== 'session' || e.target.tagName === 'INPUT') return;
+      if (e.code === 'Space' && this.state.phase === 'point') { e.preventDefault(); this.setState({ phase: 'content' }); }
+      const g = { Digit1: 'again', Digit2: 'hard', Digit3: 'good', Digit4: 'easy' }[e.code];
+      if (g && this.state.phase === 'content' && !this.state.sheet) this.rate(g);
+      if (e.code === 'Enter' && this.state.sheet) this.accept();
+    };
+    window.addEventListener('keydown', this.onKey);
+  }
+  componentWillUnmount() { window.removeEventListener('keydown', this.onKey); this.ro?.disconnect(); }
+  rootRef = React.createRef();
+  componentDidUpdate() { this.watch(); }
+  watch() { const el = this.rootRef.current; if (!el || this.ro) return; this.ro = new ResizeObserver(([e]) => { const w = Math.round(e.contentRect.width); if (Math.abs(w - (this.state.w || 0)) > 4) this.setState({ w }); }); this.ro.observe(el); }
+  layout() {
+    const w = this.state.w || (typeof this.props.width === 'number' ? this.props.width : 1440);
+    const bp = w >= 1280 ? 'xl' : w >= 960 ? 'lg' : 'md';
+    const xl = bp === 'xl', md = bp === 'md';
+    return {
+      rootRef: this.rootRef, rootW: typeof this.props.width === 'number' ? this.props.width + 'px' : (this.props.width ?? '100%'),
+      rootH: typeof this.props.height === 'number' ? this.props.height + 'px' : (this.props.height ?? '100vh'), rootRadius: this.props.width ? '12px' : '0',
+      bp, navFull: xl, navW: xl ? '232px' : '68px', mainOverflow: md ? 'auto' : 'hidden', gridH: md ? 'auto' : '100%', mapMinH: md ? '560px' : '0',
+      hoyCols: xl ? 'minmax(0, 1fr) 420px' : bp === 'lg' ? 'minmax(0, 1fr) 360px' : 'minmax(0, 1fr)', asidePad: md ? '0 24px 28px' : '28px 28px 28px 0',
+      sesCols: xl ? 'minmax(0, 1fr) 520px' : bp === 'lg' ? 'minmax(0, 1fr) 440px' : 'minmax(0, 1fr)', sesRows: md ? '480px minmax(520px, auto)' : 'none',
+      palCols: xl ? '300px minmax(0, 1fr) 320px' : bp === 'lg' ? '260px minmax(0, 1fr)' : 'minmax(0, 1fr)', palRows: md ? '560px auto' : 'none', palMapOrder: md ? -1 : 0, palInspector: xl ? 'flex' : 'none',
+      itemCols: xl ? 'minmax(0, 1fr) 460px' : bp === 'lg' ? 'minmax(0, 1fr) 380px' : 'minmax(0, 1fr)', subCols: md ? '120px minmax(0, 1fr)' : xl ? '160px 180px 1fr 1fr' : '140px 150px 1fr 1fr',
+      libCols: xl ? '220px minmax(0, 1fr) 340px' : bp === 'lg' ? 'minmax(0, 1fr) 300px' : 'minmax(0, 1fr)', libFilters: xl ? 'flex' : 'none', libTray: md ? 'none' : 'flex',
+      libRowCols: xl ? '28px 34px minmax(0, 1.6fr) minmax(0, 1.2fr) 100px 70px 110px minmax(0, 1fr)' : '28px 30px minmax(0, 1.6fr) minmax(0, 1fr) 84px 48px 84px 0px'
+    };
+  }
+  rate(g) { const c = this.state.d.CARDS.filter(c => c.queue !== false)[this.state.idx]; const R = this.state.d.R10; const s = c.stage; const o = g === 'again' ? [1, R[0]] : g === 'hard' ? [s, Math.max(10, R[s - 1] / 2)] : [Math.min(10, s + (g === 'good' ? 1 : 2)), R[Math.min(10, s + (g === 'good' ? 1 : 2)) - 1]]; this.setState({ sheet: { g, ns: o[0], m: o[1], key: null } }); }
+  accept() { const n = this.state.idx + 1; this.setState({ sheet: null, phase: 'point', idx: n % this.state.d.CARDS.filter(c => c.queue !== false).length }); }
+  iv(m) { return m < 60 ? `${m} min` : m < 1440 ? `${Math.round(m / 60)} h` : m < 43200 ? `${Math.round(m / 1440)} d` : `${Math.round(m / 43200)} mes`; }
+  due(m) { const N = new Date(2026, 9, 14, 19, 40); const d = new Date(+N + m * 60000); if (m >= 1440) d.setHours(8, 0); const W = ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado']; const diff = Math.round((new Date(d).setHours(0, 0, 0, 0) - new Date(N).setHours(0, 0, 0, 0)) / 864e5); const h = d.getHours() % 12 || 12; return `${diff === 0 ? 'Hoy' : diff === 1 ? 'Mañana' : W[d.getDay()][0].toUpperCase() + W[d.getDay()].slice(1) + ' ' + d.getDate()}, ${h}:${String(d.getMinutes()).padStart(2, '0')} ${d.getHours() < 12 ? 'a. m.' : 'p. m.'}`; }
+  renderVals() {
+    const theme = this.props.theme ?? 'dark', d = this.state.d;
+    const screen = this.state.screen ?? this.props.screen ?? 'hoy';
+    const NAV = [['hoy', 'Hoy', 'ph ph-sun-horizon', '10'], ['session', 'Sesión', 'ph ph-play-circle', '4'], ['palace', 'Palacios', 'ph ph-person-simple', '2'], ['library', 'Biblioteca', 'ph ph-books', '100'], ['item', 'Nuevo ítem', 'ph ph-plus-square', ''], ['stats', 'Estadísticas', 'ph ph-chart-bar', ''], ['sched', 'Horarios', 'ph ph-timer', '']];
+    const nav = NAV.map(([k, label, icon, badge]) => ({ key: k, label, icon, badge, bg: screen === k ? 'var(--surface)' : 'transparent', color: screen === k ? 'var(--text)' : 'var(--text-2)', go: () => ['stats', 'sched'].includes(k) ? null : this.setState({ screen: k }) }));
+    const base = { ...this.layout(), theme, nav, isHoy: screen === 'hoy', isSession: screen === 'session', isPalace: screen === 'palace', isItem: screen === 'item', isLibrary: screen === 'library', goSession: () => this.setState({ screen: 'session' }) };
+    if (!d) return { ...base, loci: [], legend: [], queue: [], zoneRows: [], forecast: [] };
+    const ST = { empty: 'vacío', new: 'nuevo', learning: 'aprendiendo', due: 'vencido', review: 'al día', mastered: 'dominado', suspended: 'suspendido' };
+    const legend = Object.entries(ST).map(([id, t]) => ({ key: id, id, t }));
+    const queue = d.CARDS.filter(c => c.queue !== false).map((c, i) => { const l = d.findLocus(c.locusId); return { key: c.id, n: l.n, name: l.name, title: c.title, deck: c.deck, ago: ['hace 2 d', 'hace 1 d', 'hace 3 h', 'hace 1 h'][i] }; });
+    const zoneRows = d.ZONES.map(z => { const due = d.LOCI.filter(l => l.zone === z.id && l.state === 'due').length; return { key: z.id, name: z.name, n: d.LOCI.filter(l => l.zone === z.id).length, due: due || '—', icon: due ? 'ph-bold ph-warning-circle' : '', dueColor: due ? 'var(--text)' : 'var(--text-3)', color: `var(--zone-${z.id})`, halo: `color-mix(in srgb, var(--zone-${z.id}) 25%, transparent)` }; });
+    const mx = 12;
+    const forecast = d.FORECAST.map((f, i) => ({ ...f, key: i, h: Math.round(4 + f.n / mx * 56), bg: i === 0 ? 'var(--accent)' : 'var(--line-2)' }));
+    return { ...base, loci: d.LOCI, legend, queue, zoneRows, forecast, ...this.more(screen, d) };
+  }
+  more(screen, d) {
+    const C = d.CARDS.filter(c => c.queue !== false), idx = this.state.idx, card = C[idx];
+    const PL = d.palaceOf(card.palace);
+    const l = PL.loci.find(x => x.id === card.locusId), z = PL.zones.find(x => x.id === l.zone);
+    const phase = this.state.phase, sh = this.state.sheet;
+    const R = d.R10, s = card.stage;
+    const out = g => g === 'again' ? R[0] : g === 'hard' ? Math.max(10, R[s - 1] / 2) : R[Math.min(10, s + (g === 'good' ? 1 : 2)) - 1];
+    const LBL = { again: 'Otra vez', hard: 'Difícil', good: 'Bien', easy: 'Fácil' };
+    const sRatings = ['again', 'hard', 'good', 'easy'].map((g, i) => ({ key: g, label: LBL[g], iv: this.iv(out(g)), k: String(i + 1), border: g === 'good' ? '1.5px solid var(--accent)' : '1px solid var(--line-2)', bg: g === 'good' ? 'var(--accent-tint)' : 'var(--surface)', go: () => this.rate(g) }));
+    const pos = [[-1, -190], [1, -130], [-1, -40], [1, 50], [-1, 150]];
+    const sScene = card.scene.map((x, i) => ({ ...x, key: i, x: 344 + pos[i][0] * 44, y: 450 + pos[i][1], tf: pos[i][0] < 0 ? 'translate(-100%,-50%)' : 'translate(0,-50%)', delay: i * 90 }));
+    const sBlocks = card.blocks.map((b, i) => ({ ...b, key: i, isText: b.type === 'text', isFormula: b.type === 'formula', isTable: b.type === 'table', isExample: b.type === 'example', isError: b.type === 'error', isTip: b.type === 'tip', isWord: b.type === 'word', isAnswer: b.type === 'answer',
+      en0: b.en?.[0], en1: b.en?.[1], en2: b.en?.[2], es0: b.es?.[0], es1: b.es?.[1], es2: b.es?.[2],
+      rowsX: (b.rows || []).map((r, ri) => ({ key: ri, cells: r.map((v, ci) => ({ key: ci, v, color: ci === 0 ? 'var(--text-3)' : 'var(--text)' })) })) }));
+    const SC = [['+10 min', 10], ['Esta noche', 110], ['Mañana', 1440], ['+3 d', 4320], ['+1 sem', 10080], ['+1 mes', 43200]];
+    const sShort = SC.map(([lb, m]) => { const on = sh && sh.key === lb; return { key: lb, l: lb, border: on ? '1.5px solid var(--accent)' : '1px solid var(--line-2)', bg: on ? 'var(--accent-tint)' : 'transparent', go: () => this.setState({ sheet: { ...sh, m, key: lb } }) }; });
+    return {
+      sPal: PL.short, card, sLoci: PL.loci.filter(x => x.side === l.side), sSide: l.side, sLocus: l, sZone: z.name, sZoneColor: `var(--zone-${z.id})`, sZoom: l.dense ? 5 : 2.4,
+      sPoint: phase === 'point', sContent: phase === 'content', sRating: phase === 'content' && !sh, sSheetOn: !!sh,
+      sProg: C.map((_, i) => ({ key: i, bg: i < idx ? 'var(--accent)' : i === idx ? 'var(--text-2)' : 'var(--line-2)' })), sPos: `${idx + 1}/${C.length}`,
+      sScene, sBlocks, sRatings, sShort, sSheet: sh ? { label: LBL[sh.g], ns: sh.ns, when: this.due(sh.m === 110 ? 110 : sh.m) } : {},
+      sAdv: !!this.state.adv, sAdvIcon: this.state.adv ? 'ph ph-caret-down' : 'ph ph-caret-right', sToggleAdv: () => this.setState({ adv: !this.state.adv }),
+      sReveal: () => this.setState({ phase: 'content' }), sAccept: () => this.accept(), exit: () => this.setState({ screen: 'hoy' }),
+      ...this.more2(screen, d)
+    };
+  }
+  more2(screen, d) {
+    const ST = { empty: 'vacío', new: 'nuevo', learning: 'aprendiendo', due: 'vencido', review: 'al día', mastered: 'dominado', suspended: 'suspendido' };
+    const seg = on => ({ bg: on ? 'var(--surface)' : 'transparent', shadow: on ? 'var(--shadow-sm)' : 'none', color: on ? 'var(--text)' : 'var(--text-2)' });
+    const sel = d.LOCI.find(l => l.id === this.state.sel) ?? d.LOCI[0];
+    const zn = id => d.ZONES.find(z => z.id === id);
+    const pRows = d.LOCI.slice().sort((a, b) => a.n - b.n).map(l => ({ key: l.id, n: l.n, state: l.state, name: l.name, zone: zn(l.zone).name.split(' · ')[0] + (l.side === 'back' ? ' · post.' : ''), zc: `var(--zone-${l.zone})`, items: l.state === 'empty' ? '0' : l.id === 'L8' ? '3' : '1', bg: l.id === sel.id ? 'var(--accent-tint)' : 'transparent', go: () => this.setState({ sel: l.id }) }));
+    const pm = this.state.pMode ?? 'points';
+    const pModes = [['points', 'Puntos', 'ph ph-map-pin-plus'], ['zones', 'Zonas', 'ph ph-selection-plus'], ['route', 'Ruta', 'ph ph-path']].map(([k, l, icon]) => ({ key: k, l, icon, ...seg(pm === k), go: () => this.setState({ pMode: k }) }));
+    const pZones = d.ZONES.map(z => { const on = z.id === sel.zone; return { key: z.id, name: z.name, n: d.LOCI.filter(l => l.zone === z.id).length, color: `var(--zone-${z.id})`, halo: `color-mix(in srgb, var(--zone-${z.id}) 25%, transparent)`, border: on ? '1.5px solid var(--accent)' : '1px solid transparent', bg: on ? 'var(--accent-tint)' : 'var(--surface)' }; });
+    const card = d.CARDS.find(c => c.locusId === sel.id);
+    const iTpl = [['Libre', 'ph ph-note-blank'], ['Vocabulario', 'ph ph-translate'], ['Gramática C1', 'ph ph-text-aa', 1]].map(([l, icon, on]) => ({ key: l, l, icon, border: on ? '1.5px solid var(--accent)' : '1px solid var(--line-2)', bg: on ? 'var(--accent-tint)' : 'var(--surface)' }));
+    const tb = d.CARDS[0].blocks.find(b => b.type === 'table');
+    const iCells = []; tb.rows.forEach((r, ri) => r.forEach((v, ci) => iCells.push({ key: ri + '-' + ci, v, bg: ci === 0 ? 'var(--surface-2)' : 'var(--surface)', color: ci === 0 ? 'var(--text-3)' : 'var(--text)' })));
+    const iSubs = [
+      ['have / has', 'auxiliar', 'has solo con he/she/it; ’s puede confundirse con is.', 'I’ve got es presente de posesión en británico.'],
+      ['past participle', 'verbo principal', 'Regulares en -ed; irregulares, 3.ª columna.', 'got (UK) / gotten (US).'],
+      ['ever / never', 'experiencia vital', 'Entre auxiliar y participio.', '✗ I haven’t never.'],
+      ['just / already / yet', 'cercanía y expectativa', 'yet al final, en preguntas y negativas.', 'En EE. UU. es común I just ate.'],
+      ['for / since', 'duración hasta ahora', 'for + duración; since + inicio.', '«hace… que» provoca ✗ I know her for years.'],
+      ['been vs gone', 'excepción de go', 'been = fue y volvió; gone = sigue allí.', 'been actúa como participio de go en visitas.'],
+    ].map(([p, f, a, dd], i) => ({ key: i, p, f, a, d: dd }));
+    const ip = d.LOCI.find(l => l.id === (this.state.iPick ?? 'L8'));
+    const ls = this.state.libSel, toggle = id => this.setState({ libSel: ls.includes(id) ? ls.filter(x => x !== id) : [...ls, id] });
+    const NX = ['21 oct', 'mañana', 'vie 16', 'sáb 17', '3 nov', '25 oct', '—', '28 oct'];
+    const lItems = [...d.CARDS.filter(c => c.queue !== false).map(c => [c.id, c.title, c.locusId, c.stage, 'vencido', c.deck]), ...d.LOCI.filter(l => l.state !== 'due').slice(0, 14).map((l, i) => ['g' + l.id, l.item, l.id, l.state === 'mastered' ? 10 : l.state === 'new' ? 0 : 2 + (i % 6), l.state === 'new' ? 'nuevo' : l.state === 'mastered' ? 'dominado' : l.state === 'suspended' ? '—' : NX[i % 8], 'Gramática C1'])]; const _unused = [['x1', 'Present Simple', 'L1', 5, '21 oct', 'Gramática C1'], ['x2', 'Stative verbs', 'L3', 10, 'dominado', 'Gramática C1'], ['x3', 'Questions & Negatives', 'L4', 2, 'mañana', 'Gramática C1'], ['x4', 'Present Perfect Continuous', 'L6', 0, 'nuevo', 'Gramática C1'], ['x5', 'Past Simple', 'L7', 6, '3 nov', 'Gramática C1'], ['x6', 'Past Continuous', 'L8', 4, 'sáb 17', 'Gramática C1'], ['x7', 'Past Perfect', 'L9', 3, 'vie 16', 'Gramática C1'], ['x8', 'Modales de deducción', 'L10', 4, '—', 'Gramática C1'], ['x9', 'Modales de obligación', 'L11', 5, '25 oct', 'Gramática C1'], ['x10', 'Nuca · Reported speech', 'L18', 0, 'nuevo', 'Gramática C1']];
+    const lRows = lItems.map(([id, title, lid, stage, next, deck]) => { const l = d.findLocus(lid); const on = ls.includes(id); return { key: id, title, n: l.n, state: l.state, st: ST[l.state], where: `L${l.n} · ${l.name}`, zc: `var(--zone-${l.zone})`, stage: stage ? `${stage}/10` : '—', next, deck, bg: on ? 'var(--accent-tint)' : 'transparent', check: on ? 'ph-fill ph-check-square' : 'ph ph-square', cc: on ? 'var(--accent)' : 'var(--text-3)', go: () => toggle(id) }; });
+    const lf = this.state.lf ?? { due: true };
+    const lGroups = [['Palacio', [['Cuerpo 1', 50, 'c1', true], ['Cuerpo 2', 50, 'c2']]], ['Estado', [['Vencidos', 4, 'due'], ['Aprendiendo', 14], ['Nuevos', 6], ['Suspendidos', 2]]], ['Zona', d.ZONES.map(z => [z.name.split(' · ')[0], d.LOCI.filter(l => l.zone === z.id).length])], ['Otros', [['Sin asignar', 5], ['Etiqueta: C1', 50]]]].map(([t, opts]) => ({ key: t, t, opts: opts.map(([l, n, k, fixed]) => { const on = fixed || (k && lf[k]); return { key: l, l, n, bg: on ? 'var(--accent-tint)' : 'transparent', check: on ? 'ph-fill ph-check-square' : 'ph ph-square', cc: on ? 'var(--accent)' : 'var(--text-3)', go: () => k && !fixed && this.setState({ lf: { ...lf, [k]: !lf[k] } }) }; }) }));
+    const lTray = [['Past Perfect Continuous', 'Gramática C1 · sugerido: Torso'], ['to wander', 'Vocabulario EN'], ['Future Perfect', 'Gramática C1 · sugerido: Piernas'], ['Capital de Kazajistán', 'Geografía'], ['Mixed conditionals', 'Gramática C1 · sugerido: Brazos']].map(([t, dd]) => ({ key: t, t, d: dd }));
+    return {
+      pRows, pModes, pSel: sel, pSelIds: [sel.id], pSelX: sel.x.toFixed(3), pSelY: sel.y.toFixed(3), pPick: l => this.setState({ sel: l.id }), pZones,
+      pAnchorE: card?.anchor.emoji ?? '—', pAnchorT: card?.anchor.text ?? 'Sin ancla todavía',
+      iTpl, iHead: ['Persona', 'Afirmativa', 'Contracción', 'Negativa', 'Interrogativa', 'Resp. corta'].map((v, i) => ({ key: i, v })), iCells, iSubs,
+      iPickIds: [ip.id], iPickL: ip, iPickZone: zn(ip.zone).name, iPick: l => this.setState({ iPick: l.id }),
+      lRows, lGroups, lTray, lHasSel: ls.length > 0, lSelN: ls.length, lBulk: [['ph ph-map-pin', 'Asignar'], ['ph ph-calendar-dots', 'Horario'], ['ph ph-pause-circle', 'Suspender'], ['ph ph-export', 'Exportar']].map(([i, l]) => ({ key: l, i, l }))
+    };
+  }
+}
+</script>
+</body>
+</html>

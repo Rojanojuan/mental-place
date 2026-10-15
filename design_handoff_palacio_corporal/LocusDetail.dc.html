@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="_ds/nocturne-b05dafec-65a9-46f7-a005-25140c24ba40/styles.css">
+  <script src="_ds/nocturne-b05dafec-65a9-46f7-a005-25140c24ba40/_ds_bundle.js"></script>
+  <link rel="stylesheet" href="pc-tokens.css">
+  <script src="https://unpkg.com/@phosphor-icons/web@2.1.1"></script>
+</helmet>
+<div data-pc-theme="{{ theme }}" style="position: relative; width: 390px; height: 844px; border-radius: 44px; overflow: hidden; background: var(--bg); color: var(--text); font-family: var(--font-ui); font-size: 15px; line-height: 1.45; box-shadow: var(--shadow-md); isolation: isolate;">
+  <div style="position: absolute; left: 0; right: 0; top: 0; height: 44px; display: flex; align-items: center; justify-content: space-between; padding: 0 28px 0 32px; font: 600 14px/1 var(--font-ui); z-index: 40; background: var(--bg);">
+    <span>19:40</span>
+    <div style="display: flex; gap: 6px; font-size: 15px;"><i class="ph-fill ph-cell-signal-high"></i><i class="ph-fill ph-wifi-high"></i><i class="ph-fill ph-battery-high"></i></div>
+  </div>
+  <div style="position: absolute; left: 0; right: 0; top: 44px; height: 52px; display: flex; align-items: center; gap: 4px; padding: 0 8px; z-index: 39; background: var(--bg);">
+    <button aria-label="Volver" style="width: 44px; height: 44px; border: 0; border-radius: 10px; background: transparent; color: var(--text-2); font-size: 20px; cursor: pointer; display: grid; place-items: center;" style-hover="background: var(--surface);"><i class="ph ph-caret-left"></i></button>
+    <span style="flex: 1; font-size: 15px; font-weight: 500;">Detalle del punto</span>
+    <button aria-label="Repasar este punto" style="height: 40px; padding: 0 12px; border-radius: 10px; border: 1.5px solid var(--accent); background: var(--accent-tint); color: var(--accent-text); font: 500 13px var(--font-ui); cursor: pointer; display: flex; align-items: center; gap: 6px;"><i class="ph ph-play"></i>Repasar (3)</button>
+  </div>
+
+  <div style="position: absolute; inset: 96px 0 0 0; overflow-y: auto; scrollbar-width: none; padding: 8px 16px 40px; display: flex; flex-direction: column; gap: 22px;">
+    <div style="display: grid; grid-template-columns: 112px 1fr; gap: 14px; align-items: center;">
+      <div style="height: 168px; border-radius: 14px; background: var(--surface); box-shadow: var(--shadow-sm); overflow: hidden;">
+        <dc-import name="BodyMap" loci="{{ loci }}" side="front" width="112" height="168" mini="{{ true }}" pin-size="8" focus-id="L8" zoom="1.6" focus-y="0.45" show-halos="{{ false }}" hint-size="112px,168px"></dc-import>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 6px;">
+        <span style="font: 500 12px var(--font-mono); color: var(--text-3);">L8 · ruta 8 de 50 · frontal</span>
+        <h1 style="margin: 0; font: 500 26px/1.15 var(--font-ui); letter-spacing: -0.015em;">Hombro derecho</h1>
+        <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+          <span style="display: flex; align-items: center; gap: 6px; height: 28px; padding: 0 10px 0 8px; border-radius: 999px; background: var(--surface-2); font-size: 12px; color: var(--text-2);"><span style="width: 9px; height: 9px; border-radius: 50%; background: var(--zone-hombros);"></span>Hombros · Perfectos</span>
+          <span style="display: flex; align-items: center; gap: 4px; font-size: 12px; color: var(--text-2);"><dc-import name="LocusPin" n="8" state="due" size="18" hit="22" no-pulse="{{ true }}" label="Hombro derecho" hint-size="22px,22px"></dc-import>vencido</span>
+        </div>
+      </div>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 8px;">
+      <span style="font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-3);">Ancla</span>
+      <div style="display: grid; grid-template-columns: 52px 1fr 52px; gap: 8px; align-items: center;">
+        <button aria-label="Cambiar emoji" style="height: 52px; border-radius: 12px; border: 1px solid var(--line-2); background: var(--surface); font-size: 26px; cursor: pointer;">🌉</button>
+        <input value="{{ anchor }}" onChange="{{ setAnchor }}" aria-label="Texto del ancla" style="height: 52px; padding: 0 12px; border-radius: 12px; border: 1px solid var(--line-2); background: var(--surface); color: var(--text); font: 400 15px var(--font-ui); caret-color: var(--accent); min-width: 0;">
+        <div title="Imagen opcional" style="height: 52px; border-radius: 12px; background: repeating-linear-gradient(135deg, var(--surface) 0 4px, var(--sunken) 4px 8px); box-shadow: inset 0 0 0 1px var(--line-2); display: grid; place-items: center; font: 500 9px var(--font-mono); color: var(--text-3);">img</div>
+      </div>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 8px;">
+      <div style="display: flex; align-items: baseline; justify-content: space-between;"><span style="font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-3);">Objetos de escena</span><span style="font: 400 12px var(--font-mono); color: {{ countColor }};">{{ sceneCount }}/5</span></div>
+      <div style="display: flex; flex-direction: column; border-radius: 14px; background: var(--surface); box-shadow: var(--shadow-sm); overflow: hidden;">
+        <sc-for list="{{ scene }}" as="s" hint-placeholder-count="5">
+          <div style="display: grid; grid-template-columns: 20px 40px 1fr auto; align-items: center; gap: 10px; min-height: 60px; padding: 0 4px 0 12px; border-top: {{ s.border }};">
+            <span style="font: 500 12px var(--font-mono); color: var(--text-3);">{{ s.i }}</span>
+            <div style="width: 40px; height: 40px; border-radius: 10px; background: var(--surface-2); display: grid; place-items: center; font-size: 22px;">{{ s.e }}</div>
+            <div style="display: flex; flex-direction: column; min-width: 0;"><span style="font-size: 14px;">{{ s.t }}</span><span style="font-size: 12px; color: var(--text-3);">representa: {{ s.r }}</span></div>
+            <div style="display: flex;">
+              <button onClick="{{ s.up }}" aria-label="Subir" disabled="{{ s.first }}" style="width: 36px; height: 44px; border: 0; background: transparent; color: var(--text-2); cursor: pointer; font-size: 16px;"><i class="ph ph-caret-up"></i></button>
+              <button onClick="{{ s.down }}" aria-label="Bajar" disabled="{{ s.last }}" style="width: 36px; height: 44px; border: 0; background: transparent; color: var(--text-2); cursor: pointer; font-size: 16px;"><i class="ph ph-caret-down"></i></button>
+              <button onClick="{{ s.del }}" aria-label="Quitar" style="width: 36px; height: 44px; border: 0; background: transparent; color: var(--text-3); cursor: pointer; font-size: 16px;"><i class="ph ph-x"></i></button>
+            </div>
+          </div>
+        </sc-for>
+        <button onClick="{{ addScene }}" style="height: 48px; display: flex; align-items: center; gap: 8px; padding: 0 14px; border: 0; border-top: 1px solid var(--line); background: transparent; color: var(--accent-text); font: 500 14px var(--font-ui); cursor: pointer; text-align: left;" style-hover="background: var(--surface-2);"><i class="ph ph-plus"></i>Añadir objeto</button>
+      </div>
+      <sc-if value="{{ over }}" hint-placeholder-val="{{ false }}">
+        <div style="display: flex; gap: 10px; padding: 10px 12px; border-radius: 10px; border: 1px dashed var(--line-2); font-size: 13px; color: var(--text-2);"><i class="ph ph-info" style="font-size: 18px; color: var(--state-learning);"></i><span style="text-wrap: pretty;">Más de 5 objetos suele costar más de recordar. Puedes mover parte de la escena a otro punto.</span></div>
+      </sc-if>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 8px;">
+      <span style="font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-3);">Ítems asignados · 3</span>
+      <div style="display: flex; flex-direction: column; border-radius: 14px; background: var(--surface); box-shadow: var(--shadow-sm); overflow: hidden;">
+        <sc-for list="{{ items }}" as="it" hint-placeholder-count="3">
+          <div style="display: grid; grid-template-columns: 30px 1fr auto 40px; align-items: center; gap: 10px; min-height: 60px; padding: 0 4px 0 10px; border-top: {{ it.border }};">
+            <dc-import name="LocusPin" n="{{ it.stage }}" state="{{ it.state }}" size="22" hit="30" no-pulse="{{ true }}" label="{{ it.title }}" hint-size="30px,30px"></dc-import>
+            <div style="display: flex; flex-direction: column; min-width: 0;"><span style="font-size: 14px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{ it.title }}</span><span style="font-size: 12px; color: var(--text-3);">{{ it.meta }}</span></div>
+            <span style="font: 500 12px var(--font-mono); color: var(--text-2); text-align: right;">{{ it.next }}</span>
+            <button aria-label="Mover a otro punto" style="width: 40px; height: 44px; border: 0; background: transparent; color: var(--text-3); cursor: pointer; font-size: 18px;"><i class="ph ph-arrows-out-cardinal"></i></button>
+          </div>
+        </sc-for>
+        <button style="height: 48px; display: flex; align-items: center; gap: 8px; padding: 0 14px; border: 0; border-top: 1px solid var(--line); background: transparent; color: var(--accent-text); font: 500 14px var(--font-ui); cursor: pointer; text-align: left;" style-hover="background: var(--surface-2);"><i class="ph ph-plus"></i>Agregar ítem</button>
+      </div>
+      <span style="font-size: 12px; color: var(--text-3);">El número del círculo es la etapa actual del ítem (1–10).</span>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 8px;">
+      <span style="font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-3);">Historial del punto</span>
+      <div style="display: flex; flex-direction: column; padding-left: 6px;">
+        <sc-for list="{{ history }}" as="h" hint-placeholder-count="5">
+          <div style="display: grid; grid-template-columns: 14px 1fr; gap: 12px;">
+            <div style="display: flex; flex-direction: column; align-items: center;"><span style="width: 9px; height: 9px; margin-top: 6px; border-radius: 50%; border: 1.5px solid {{ h.dot }}; background: {{ h.fill }};"></span><span style="flex: 1; width: 1px; background: var(--line-2);"></span></div>
+            <div style="display: flex; flex-direction: column; gap: 2px; padding-bottom: 14px;">
+              <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;"><span style="font-size: 14px; font-weight: 500;">{{ h.grade }}</span><span style="font: 400 12px var(--font-mono); color: var(--text-3);">{{ h.stage }}</span><sc-if value="{{ h.manual }}" hint-placeholder-val="{{ false }}"><span style="height: 20px; display: inline-flex; align-items: center; padding: 0 6px; border-radius: 5px; background: var(--accent-tint); font-size: 11px; color: var(--accent-text);">fijado a mano</span></sc-if></div>
+              <span style="font-size: 12px; color: var(--text-3);">{{ h.when }} · {{ h.item }}</span>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:390,&quot;height&quot;:844},&quot;theme&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;dark&quot;,&quot;light&quot;],&quot;default&quot;:&quot;dark&quot;,&quot;tsType&quot;:&quot;'dark'|'light'&quot;}}">
+class Component extends DCLogic {
+  state = { d: null, scene: null, anchor: 'Puente pasado→presente' };
+  componentDidMount() { import('./pc-data.js').then(d => this.setState({ d, scene: d.CARDS[0].scene.map((s, i) => ({ ...s, id: 's' + i })) })); }
+  renderVals() {
+    const d = this.state.d, scene = this.state.scene ?? [];
+    const mv = (i, dir) => { const a = scene.slice(); const j = i + dir; [a[i], a[j]] = [a[j], a[i]]; this.setState({ scene: a }); };
+    const n = scene.length;
+    return {
+      theme: this.props.theme ?? 'dark', loci: d?.LOCI ?? [], anchor: this.state.anchor, setAnchor: e => this.setState({ anchor: e.target.value }),
+      scene: scene.map((s, i) => ({ ...s, key: s.id, i: i + 1, border: i ? '1px solid var(--line)' : '0', first: i === 0, last: i === n - 1, up: () => mv(i, -1), down: () => mv(i, 1), del: () => this.setState({ scene: scene.filter(x => x.id !== s.id) }) })),
+      sceneCount: n, over: n > 5, countColor: n > 5 ? 'var(--state-learning)' : 'var(--text-3)',
+      addScene: () => this.setState({ scene: [...scene, { id: 's' + Date.now(), e: '✨', t: 'Objeto nuevo', r: 'toca para editar' }] }),
+      items: [
+        { title: 'Present Perfect', meta: 'Gramática C1 · etapa 2', state: 'due', stage: 2, next: 'vencido' },
+        { title: 'Present Perfect · been vs gone', meta: 'Gramática C1 · etapa 3', state: 'learning', stage: 3, next: 'mañana' },
+        { title: 'Present Perfect · for / since', meta: 'Gramática C1 · etapa 5', state: 'review', stage: 5, next: '28 oct' },
+      ].map((x, i) => ({ ...x, key: i, border: i ? '1px solid var(--line)' : '0' })),
+      history: [
+        { grade: 'Bien', stage: 'E1 → E2', when: '13 oct, 8:04 a. m.', item: 'Present Perfect', manual: true },
+        { grade: 'Fácil', stage: 'E3 → E5', when: '12 oct, 8:10 a. m.', item: 'for / since' },
+        { grade: 'Otra vez', stage: 'E2 → E1', when: '11 oct, 9:30 p. m.', item: 'Present Perfect' },
+        { grade: 'Bien', stage: 'E2 → E3', when: '11 oct, 8:02 a. m.', item: 'been vs gone' },
+        { grade: 'Creado', stage: 'importado', when: '9 oct', item: '3 ítems desde JSON' },
+      ].map((h, i) => ({ ...h, key: i, manual: !!h.manual, dot: i === 0 ? 'var(--accent)' : 'var(--line-2)', fill: i === 0 ? 'var(--accent)' : 'var(--bg)' }))
+    };
+  }
+}
+</script>
+</body>
+</html>

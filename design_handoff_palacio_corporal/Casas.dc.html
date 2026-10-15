@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="_ds/nocturne-b05dafec-65a9-46f7-a005-25140c24ba40/styles.css">
+  <script src="_ds/nocturne-b05dafec-65a9-46f7-a005-25140c24ba40/_ds_bundle.js"></script>
+  <link rel="stylesheet" href="pc-tokens.css">
+  <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
+  <style>body { margin: 0; } a { color: var(--accent-text); } a:hover { color: var(--text); } .pc-in:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }</style>
+</helmet>
+<div data-pc-theme="{{ theme }}" style="position: relative; width: 1440px; height: 900px; display: grid; grid-template-columns: minmax(0, 1fr) 400px; grid-template-rows: auto minmax(0, 1fr); background: var(--bg); color: var(--text); font-family: var(--font-ui); font-size: 14px; border-radius: 12px; overflow: hidden; box-shadow: var(--shadow-md);">
+  <div style="grid-column: 1 / -1; display: flex; flex-direction: column; gap: 14px; padding: 22px 28px 14px;">
+    <div style="display: flex; align-items: center; gap: 12px;">
+      <i class="ph ph-house-line" style="font-size: 22px; color: var(--accent);"></i>
+      <span style="font: 500 22px var(--font-ui);">{{ title }}</span>
+      <span style="font: 500 12px var(--font-mono); color: var(--text-3);">{{ meta }}</span>
+      <span style="flex: 1;"></span>
+      <div style="display: flex; padding: 3px; gap: 2px; border-radius: 10px; background: var(--sunken);">
+        <sc-for list="{{ modes }}" as="m" hint-placeholder-count="2">
+          <button onClick="{{ m.go }}" style="height: 34px; padding: 0 12px; display: flex; align-items: center; gap: 6px; border-radius: 8px; border: 0; background: {{ m.bg }}; box-shadow: {{ m.sh }}; color: {{ m.color }}; font: 500 13px var(--font-ui); cursor: pointer;"><i class="{{ m.icon }}"></i>{{ m.l }}</button>
+        </sc-for>
+      </div>
+      <button onClick="{{ openBulk }}" style="height: 40px; padding: 0 14px; display: flex; align-items: center; gap: 6px; border-radius: 8px; border: 1px solid var(--accent); background: var(--accent-tint); color: var(--accent-text); font: 500 13px var(--font-ui); cursor: pointer;"><i class="ph ph-list-plus"></i>Ingreso rápido</button>
+      <button onClick="{{ toggleRoute }}" aria-label="Ruta" title="Mostrar ruta" style="width: 40px; height: 40px; border-radius: 8px; border: {{ routeBorder }}; background: {{ routeBg }}; color: var(--text); cursor: pointer; display: grid; place-items: center;"><i class="ph ph-path"></i></button>
+      <button onClick="{{ toggleLabels }}" aria-label="Habitaciones" title="Nombres de habitaciones" style="width: 40px; height: 40px; border-radius: 8px; border: {{ labBorder }}; background: {{ labBg }}; color: var(--text); cursor: pointer; display: grid; place-items: center;"><i class="ph ph-text-aa"></i></button>
+    </div>
+    <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+      <sc-for list="{{ tabs }}" as="t" hint-placeholder-count="10">
+        <button onClick="{{ t.go }}" style="height: 34px; padding: 0 12px; display: flex; align-items: center; gap: 8px; border-radius: 999px; border: {{ t.border }}; background: {{ t.bg }}; color: var(--text); font: 500 12px var(--font-ui); cursor: pointer;"><span style="width: 9px; height: 9px; border-radius: 50%; background: {{ t.color }};"></span>{{ t.l }}<span style="font: 500 11px var(--font-mono); color: var(--text-3);">{{ t.n }}</span></button>
+      </sc-for>
+    </div>
+  </div>
+
+  <div ref="{{ mapRef }}" style="position: relative; margin: 0 0 24px 24px; border-radius: 14px; background: radial-gradient(ellipse at 50% 45%, var(--surface) 0%, var(--bg) 80%); box-shadow: var(--shadow-sm); overflow: hidden;">
+    <dc-import name="BodyMap" loci="{{ loci }}" kind="plan" aspect="{{ aspect }}" rooms="{{ rooms }}" plan-data="{{ planData }}" fill="{{ true }}" pin-size="24" focus-id="{{ focusId }}" selected-ids="{{ selIds }}" zoom="{{ zoom }}" show-route="{{ showRoute }}" show-labels="{{ showLabels }}" body-style="{{ bstyle }}" on-pin-tap="{{ pick }}" hint-size="100%,100%"></dc-import>
+    <sc-if value="{{ editMode }}" hint-placeholder-val="{{ false }}">
+      <div onPointerDown="{{ pd }}" onPointerMove="{{ pm }}" onPointerUp="{{ pu }}" onPointerCancel="{{ pu }}" style="position: absolute; inset: 0; cursor: crosshair; touch-action: none;"></div>
+      <div style="position: absolute; left: 16px; top: 14px; display: flex; align-items: center; gap: 8px; padding: 8px 12px; border-radius: 10px; background: var(--surface); box-shadow: var(--shadow-md); font-size: 12px; color: var(--text-2); pointer-events: none;"><i class="ph ph-hand-pointing" style="color: var(--accent);"></i>Toca un mueble para editarlo · arrástralo para moverlo · toca un hueco para crear un punto</div>
+    </sc-if>
+    <sc-if value="{{ zoomed }}" hint-placeholder-val="{{ false }}">
+      <button onClick="{{ unfocus }}" style="position: absolute; right: 16px; top: 14px; height: 36px; padding: 0 12px; display: flex; align-items: center; gap: 6px; border-radius: 8px; border: 1px solid var(--line-2); background: var(--surface); color: var(--text); font: 500 12px var(--font-ui); cursor: pointer;"><i class="ph ph-corners-out"></i>Ver casa completa</button>
+    </sc-if>
+  </div>
+
+  <aside style="display: flex; flex-direction: column; min-height: 0; padding: 0 24px 24px 16px;">
+    <sc-if value="{{ noFocus }}" hint-placeholder-val="{{ true }}">
+      <div style="display: flex; flex-direction: column; gap: 10px; min-height: 0; overflow-y: auto; scrollbar-width: none;">
+        <div style="display: flex; align-items: center; gap: 10px; padding: 12px; border-radius: 12px; background: var(--surface);">
+          <div style="flex: 1; display: flex; flex-direction: column; gap: 6px;"><span style="font-size: 12px; color: var(--text-2);">{{ fillTxt }}</span><div style="height: 6px; border-radius: 3px; background: var(--sunken); overflow: hidden;"><div style="height: 100%; width: {{ fillPct }}; background: var(--accent); border-radius: 3px;"></div></div></div>
+          <button onClick="{{ nextEmpty }}" style="height: 36px; padding: 0 10px; border-radius: 8px; border: 1px solid var(--line-2); background: transparent; color: var(--text); font: 500 12px var(--font-ui); cursor: pointer;">Primer vacío</button>
+        </div>
+        <span style="font-size: 12px; color: var(--text-3);">Ruta por habitaciones</span>
+        <sc-for list="{{ roomRows }}" as="r" hint-placeholder-count="12">
+          <div style="display: flex; flex-direction: column; gap: 6px;">
+            <button onClick="{{ r.go }}" style="min-height: 44px; display: grid; grid-template-columns: 22px 10px minmax(0, 1fr) auto auto; align-items: center; gap: 10px; padding: 0 10px; border-radius: 10px; border: 0; background: {{ r.bg }}; color: var(--text); font: 500 13px var(--font-ui); text-align: left; cursor: pointer;">
+              <span style="font: 500 11px var(--font-mono); color: var(--text-3);">{{ r.i }}</span><span style="width: 10px; height: 10px; border-radius: 3px; background: {{ r.color }};"></span><span>{{ r.label }}</span><span style="font: 500 11px var(--font-mono); color: var(--text-3);">{{ r.filled }}</span><span style="font: 500 11px var(--font-mono); color: var(--text-2);">{{ r.range }}</span>
+            </button>
+            <sc-if value="{{ r.open }}" hint-placeholder-val="{{ false }}">
+              <div style="display: flex; flex-direction: column; gap: 2px; padding: 0 0 6px 32px;">
+                <sc-for list="{{ r.items }}" as="it" hint-placeholder-count="8">
+                  <button onClick="{{ it.go }}" style="min-height: 36px; display: grid; grid-template-columns: 30px minmax(0, 1fr) minmax(0, 1fr); align-items: center; gap: 8px; padding: 0 8px; border-radius: 8px; border: 0; background: transparent; color: var(--text-2); font: 400 12px var(--font-ui); text-align: left; cursor: pointer;" style-hover="background: var(--surface);"><span style="font: 500 10px var(--font-mono); color: var(--text-3);">{{ it.n }}</span><span style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{ it.name }}</span><span style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: {{ it.ic }};">{{ it.item }}</span></button>
+                </sc-for>
+              </div>
+            </sc-if>
+          </div>
+        </sc-for>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ hasFocus }}" hint-placeholder-val="{{ false }}">
+      <div style="display: flex; flex-direction: column; gap: 14px; min-height: 0; height: 100%;">
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <button onClick="{{ unfocus }}" aria-label="Volver a la ruta" style="width: 36px; height: 36px; border-radius: 8px; border: 0; background: transparent; color: var(--text-2); cursor: pointer; display: grid; place-items: center;"><i class="ph ph-caret-left"></i></button>
+          <span style="font: 500 13px var(--font-mono); color: var(--accent-text);">{{ fN }}</span>
+          <span style="flex: 1; font-size: 12px; color: var(--text-3);">{{ fRoom }}</span>
+          <button onClick="{{ prev }}" aria-label="Punto anterior" style="width: 36px; height: 36px; border-radius: 8px; border: 1px solid var(--line-2); background: transparent; color: var(--text); cursor: pointer; display: grid; place-items: center;"><i class="ph ph-arrow-left"></i></button>
+          <button onClick="{{ next }}" aria-label="Punto siguiente" style="width: 36px; height: 36px; border-radius: 8px; border: 1px solid var(--accent); background: var(--accent-tint); color: var(--accent-text); cursor: pointer; display: grid; place-items: center;"><i class="ph ph-arrow-right"></i></button>
+        </div>
+        <div style="flex: 1; min-height: 0; overflow-y: auto; scrollbar-width: none; display: flex; flex-direction: column; gap: 14px;">
+          <label style="display: flex; flex-direction: column; gap: 5px; font-size: 12px; color: var(--text-2);">Mueble o lugar
+            <input class="pc-in" value="{{ f.name }}" onChange="{{ set.name }}" style="height: 44px; padding: 0 12px; border-radius: 10px; border: 1px solid var(--line-2); background: var(--surface); color: var(--text); font: 500 16px var(--font-ui);">
+          </label>
+          <div style="display: flex; flex-direction: column; gap: 8px; padding: 14px; border-radius: 12px; background: var(--surface); box-shadow: var(--shadow-sm);">
+            <span style="font: 500 13px var(--font-ui);">Qué guardas aquí</span>
+            <input class="pc-in" value="{{ f.item }}" onChange="{{ set.item }}" placeholder="Título del ítem (p. ej. however)" style="height: 42px; padding: 0 12px; border-radius: 8px; border: 1px solid var(--line-2); background: var(--bg); color: var(--text); font: 500 15px var(--font-ui);">
+            <input class="pc-in" value="{{ f.front }}" onChange="{{ set.front }}" placeholder="Pista o pregunta (frente)" style="height: 40px; padding: 0 12px; border-radius: 8px; border: 1px solid var(--line-2); background: var(--bg); color: var(--text); font: 400 14px var(--font-ui);">
+            <textarea class="pc-in" value="{{ f.back }}" onChange="{{ set.back }}" placeholder="Respuesta o contenido (reverso)" rows="3" style="padding: 10px 12px; border-radius: 8px; border: 1px solid var(--line-2); background: var(--bg); color: var(--text); font: 400 14px var(--font-ui); resize: vertical;"></textarea>
+            <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+              <sc-for list="{{ stateOpts }}" as="s" hint-placeholder-count="5">
+                <button onClick="{{ s.go }}" style="height: 30px; padding: 0 10px; display: flex; align-items: center; gap: 6px; border-radius: 999px; border: {{ s.border }}; background: transparent; color: var(--text-2); font: 500 11px var(--font-ui); cursor: pointer;"><span style="width: 8px; height: 8px; border-radius: 50%; background: {{ s.c }};"></span>{{ s.l }}</button>
+              </sc-for>
+            </div>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <span style="font: 500 13px var(--font-ui);">Ancla</span>
+            <div style="display: grid; grid-template-columns: 52px minmax(0, 1fr); gap: 6px;">
+              <input class="pc-in" value="{{ f.anchorEmoji }}" onChange="{{ set.anchorEmoji }}" placeholder="🙂" aria-label="Emoji del ancla" style="height: 42px; text-align: center; border-radius: 8px; border: 1px solid var(--line-2); background: var(--surface); color: var(--text); font-size: 20px;">
+              <input class="pc-in" value="{{ f.anchor }}" onChange="{{ set.anchor }}" placeholder="Imagen mental que une el mueble y el ítem" style="height: 42px; padding: 0 12px; border-radius: 8px; border: 1px solid var(--line-2); background: var(--surface); color: var(--text); font: 400 14px var(--font-ui);">
+            </div>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <div style="display: flex; align-items: center; gap: 8px;"><span style="flex: 1; font: 500 13px var(--font-ui);">Objetos de escena</span><span style="font: 500 11px var(--font-mono); color: {{ sceneCountColor }};">{{ sceneCount }}</span></div>
+            <sc-for list="{{ scene }}" as="o" hint-placeholder-count="2">
+              <div style="display: grid; grid-template-columns: 44px minmax(0, 1fr) minmax(0, 1fr) 32px; gap: 6px; align-items: center;">
+                <input class="pc-in" value="{{ o.e }}" onChange="{{ o.setE }}" aria-label="Emoji" style="height: 40px; text-align: center; border-radius: 8px; border: 1px solid var(--line-2); background: var(--surface); color: var(--text); font-size: 18px;">
+                <input class="pc-in" value="{{ o.t }}" onChange="{{ o.setT }}" placeholder="Objeto" style="height: 40px; padding: 0 10px; border-radius: 8px; border: 1px solid var(--line-2); background: var(--surface); color: var(--text); font: 400 13px var(--font-ui); min-width: 0;">
+                <input class="pc-in" value="{{ o.r }}" onChange="{{ o.setR }}" placeholder="Qué representa" style="height: 40px; padding: 0 10px; border-radius: 8px; border: 1px solid var(--line-2); background: var(--surface); color: var(--text-2); font: 400 13px var(--font-ui); min-width: 0;">
+                <button onClick="{{ o.del }}" aria-label="Quitar objeto" style="width: 32px; height: 32px; border-radius: 8px; border: 0; background: transparent; color: var(--text-3); cursor: pointer; display: grid; place-items: center;"><i class="ph ph-x"></i></button>
+              </div>
+            </sc-for>
+            <sc-if value="{{ sceneWarn }}" hint-placeholder-val="{{ false }}"><span style="font-size: 12px; color: var(--state-learning);">Más de 5 objetos dificulta recordar la escena.</span></sc-if>
+            <button onClick="{{ addScene }}" style="height: 40px; border-radius: 8px; border: 1px dashed var(--line-2); background: transparent; color: var(--text-2); font: 500 13px var(--font-ui); cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 6px;"><i class="ph ph-plus"></i>Añadir objeto</button>
+          </div>
+          <label style="display: flex; flex-direction: column; gap: 5px; font-size: 12px; color: var(--text-2);">Notas
+            <textarea class="pc-in" value="{{ f.notes }}" onChange="{{ set.notes }}" rows="2" placeholder="Detalles del mueble que ayudan a recordar" style="padding: 10px 12px; border-radius: 8px; border: 1px solid var(--line-2); background: var(--surface); color: var(--text); font: 400 13px var(--font-ui); resize: vertical;"></textarea>
+          </label>
+        </div>
+        <div style="display: flex; gap: 8px;">
+          <button onClick="{{ delPoint }}" aria-label="Borrar punto" title="Borrar punto" style="width: 48px; height: 48px; border-radius: 10px; border: 1px solid var(--line-2); background: transparent; color: var(--text-2); cursor: pointer; display: grid; place-items: center; font-size: 18px;"><i class="ph ph-trash"></i></button>
+          <button onClick="{{ saveNext }}" style="flex: 1; height: 48px; border-radius: 10px; border: 1.5px solid var(--accent); background: var(--accent-tint); color: var(--accent-text); font: 500 15px var(--font-ui); cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px;">Guardar y siguiente<i class="ph ph-arrow-right"></i></button>
+        </div>
+        <span style="font-size: 11px; color: var(--text-3); text-align: center;">{{ savedTxt }}</span>
+      </div>
+    </sc-if>
+  </aside>
+
+  <sc-if value="{{ bulkOn }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ closeBulk }}" style="position: absolute; inset: 0; z-index: 40; background: var(--scrim);"></div>
+    <div role="dialog" aria-label="Ingreso rápido" style="position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); z-index: 41; width: 640px; display: flex; flex-direction: column; gap: 14px; padding: 24px; border-radius: 16px; background: var(--surface); box-shadow: var(--shadow-lg);">
+      <div style="display: flex; align-items: center; gap: 10px;"><span style="flex: 1; font: 500 20px var(--font-ui);">Ingreso rápido</span><button onClick="{{ closeBulk }}" aria-label="Cerrar" style="width: 36px; height: 36px; border-radius: 8px; border: 0; background: transparent; color: var(--text-2); cursor: pointer; display: grid; place-items: center;"><i class="ph ph-x"></i></button></div>
+      <p style="margin: 0; font-size: 13px; color: var(--text-2); text-wrap: pretty;">Pega una línea por elemento. Usa <code style="font-family: var(--font-mono); color: var(--text);">título | respuesta</code> si quieres añadir el reverso. Se asignan en orden de ruta a partir del punto que elijas.</p>
+      <textarea class="pc-in" value="{{ bulkText }}" onChange="{{ setBulk }}" rows="10" placeholder="however | sin embargo&#10;moreover | además&#10;therefore | por lo tanto" style="padding: 12px; border-radius: 10px; border: 1px solid var(--line-2); background: var(--bg); color: var(--text); font: 400 13px/1.5 var(--font-mono); resize: vertical;"></textarea>
+      <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
+        <label style="display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--text-2);">Empezar en el punto<input class="pc-in" type="number" min="1" value="{{ bulkStart }}" onChange="{{ setBulkStart }}" style="width: 72px; height: 38px; padding: 0 10px; border-radius: 8px; border: 1px solid var(--line-2); background: var(--bg); color: var(--text); font: 500 14px var(--font-mono);"></label>
+        <label style="display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--text-2); cursor: pointer;"><input type="checkbox" checked="{{ bulkSkip }}" onChange="{{ toggleSkip }}" style="width: 18px; height: 18px; accent-color: var(--accent);">Saltar puntos ya ocupados</label>
+        <span style="flex: 1;"></span>
+        <span style="font: 500 12px var(--font-mono); color: {{ bulkInfoC }}; text-wrap: pretty; max-width: 360px; text-align: right;">{{ bulkInfo }}</span>
+      </div>
+      <div style="display: flex; justify-content: flex-end; gap: 8px;">
+        <button onClick="{{ closeBulk }}" style="height: 44px; padding: 0 16px; border-radius: 10px; border: 1px solid var(--line-2); background: transparent; color: var(--text); font: 500 14px var(--font-ui); cursor: pointer;">Cancelar</button>
+        <button onClick="{{ applyBulk }}" aria-disabled="{{ bulkDis }}" style="height: 44px; padding: 0 16px; border-radius: 10px; border: 1.5px solid var(--accent); background: var(--accent-tint); color: var(--accent-text); font: 500 14px var(--font-ui); cursor: {{ bulkCur }}; opacity: {{ bulkOp }};">{{ bulkBtn }}</button>
+      </div>
+    </div>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:900},&quot;theme&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;dark&quot;,&quot;light&quot;],&quot;default&quot;:&quot;dark&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;house&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;h1&quot;,&quot;h2&quot;,&quot;h3&quot;,&quot;h4&quot;,&quot;h5&quot;,&quot;h6&quot;,&quot;h7&quot;,&quot;h8&quot;,&quot;h9&quot;,&quot;h10&quot;],&quot;default&quot;:&quot;h1&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+class Component extends DCLogic {
+  state = { d: null, house: null, room: null, focus: null, route: true, labels: true, mode: 'explore', edits: {}, bulkOn: false, bulkText: '', bulkStart: 1, bulkSkip: true, saved: null };
+  mapRef = React.createRef();
+  componentDidMount() {
+    import('./pc-data.js').then(d => this.setState({ d }));
+    try { const e = JSON.parse(localStorage.getItem('pc-houses-v1') || '{}'); this.setState({ edits: e }); } catch (_) {}
+  }
+  hid() { return this.state.house ?? this.props.house ?? 'h1'; }
+  base() { return (this.state.d?.HOUSES ?? []).find(h => h.id === this.hid()); }
+  loci() { const P = this.base(); return this.state.edits[this.hid()] ?? P?.loci ?? []; }
+  commit(loci, extra = {}) {
+    const n = loci.map((l, i) => ({ ...l, n: i + 1 }));
+    const edits = { ...this.state.edits, [this.hid()]: n };
+    try { localStorage.setItem('pc-houses-v1', JSON.stringify(edits)); } catch (_) {}
+    this.setState({ edits, saved: 'Guardado en este dispositivo', ...extra });
+  }
+  upd(id, patch) { this.commit(this.loci().map(l => l.id === id ? { ...l, ...patch } : l)); }
+  geo() {
+    const el = this.mapRef.current, P = this.base(); if (!el || !P) return null;
+    const W = el.clientWidth, H = el.clientHeight, AR = P.aspect;
+    const bh = Math.min(H * 0.94, W * 0.96 / AR), bw = bh * AR; return { left: (W - bw) / 2, top: (H - bh) / 2, bw, bh, rect: el.getBoundingClientRect() };
+  }
+  pd = e => {
+    const g = this.geo(); if (!g) return; const x = e.clientX - g.rect.left, y = e.clientY - g.rect.top;
+    let best = null, bd = 14; this.loci().forEach(l => { const dx = g.left + l.x * g.bw - x, dy = g.top + l.y * g.bh - y, dd = Math.hypot(dx, dy); if (dd < bd) { bd = dd; best = l; } });
+    if (best) { e.currentTarget.setPointerCapture?.(e.pointerId); this.drag = { id: best.id, x0: x, y0: y, moved: false }; this.setState({ focus: best.id, room: best.room }); return; }
+    const P = this.base(); const ux = (x - g.left) / g.bw, uy = (y - g.top) / g.bh; if (ux < 0 || ux > 1 || uy < 0 || uy > 1) return;
+    const R = P.rooms.find(r => ux * P.planData.w >= r.x && ux * P.planData.w <= r.x + r.w && uy * P.planData.h >= r.y && uy * P.planData.h <= r.y + r.h); if (!R) return;
+    const L = this.loci(); let at = -1; L.forEach((l, i) => { if (l.room === R.label) at = i; });
+    const nl = { id: `${this.hid()}-u${Date.now()}`, name: 'Nuevo punto', room: R.label, zone: R.zone, x: +ux.toFixed(4), y: +uy.toFixed(4), side: 'front', state: 'empty', item: '' };
+    const next = [...L]; next.splice(at + 1, 0, nl); this.commit(next, { focus: nl.id, room: R.label });
+  };
+  pm = e => { const dr = this.drag; if (!dr) return; const g = this.geo(); const x = e.clientX - g.rect.left, y = e.clientY - g.rect.top; if (!dr.moved && Math.hypot(x - dr.x0, y - dr.y0) < 4) return; dr.moved = true;
+    const ux = Math.max(0, Math.min(1, (x - g.left) / g.bw)), uy = Math.max(0, Math.min(1, (y - g.top) / g.bh));
+    this.setState(s => ({ edits: { ...s.edits, [this.hid()]: this.loci().map(l => l.id === dr.id ? { ...l, x: +ux.toFixed(4), y: +uy.toFixed(4) } : l) } })); };
+  pu = () => { if (this.drag?.moved) this.commit(this.loci()); this.drag = null; };
+  renderVals() {
+    const d = this.state.d; const theme = this.props.theme ?? 'dark';
+    const H = d?.HOUSES ?? []; const hid = this.hid(); const P = this.base();
+    const pk = on => ({ border: on ? '1.5px solid var(--accent)' : '1px solid var(--line-2)', bg: on ? 'var(--accent-tint)' : 'transparent' });
+    const tabs = H.map(h => ({ key: h.id, l: h.name.split(' · ')[0], n: (this.state.edits[h.id] ?? h.loci).length, color: `var(--zone-${h.style.accent})`, ...pk(h.id === hid), go: () => this.setState({ house: h.id, room: null, focus: null }) }));
+    const modes = [['explore', 'Explorar', 'ph ph-magnifying-glass'], ['edit', 'Mover y añadir', 'ph ph-cursor-click']].map(([k, l, icon]) => { const on = this.state.mode === k; return { key: k, l, icon, bg: on ? 'var(--surface)' : 'transparent', sh: on ? 'var(--shadow-sm)' : 'none', color: on ? 'var(--text)' : 'var(--text-2)', go: () => this.setState({ mode: k }) }; });
+    const base = { theme, tabs, modes, mapRef: this.mapRef, pd: this.pd, pm: this.pm, pu: this.pu };
+    if (!P) return { ...base, loci: [], rooms: [], roomRows: [], title: 'Casas', meta: '', noFocus: true, scene: [], stateOpts: [], set: {}, f: {} };
+    const loci = this.loci(); const order = [...new Set(loci.map(l => l.room))];
+    const fIdx = loci.findIndex(l => l.id === this.state.focus); const f = loci[fIdx];
+    const edit = this.state.mode === 'edit';
+    const go = i => { const l = loci[(i + loci.length) % loci.length]; this.setState({ focus: l.id, room: l.room }); };
+    const filled = loci.filter(l => l.item).length;
+    const roomRows = order.map((rm, i) => { const ls = loci.filter(l => l.room === rm); const open = this.state.room === rm; return { key: rm, i: String(i + 1).padStart(2, '0'), label: rm, range: `${ls[0].n}–${ls[ls.length - 1].n}`, filled: `${ls.filter(l => l.item).length}/${ls.length}`, color: `var(--zone-${ls[0].zone})`, bg: open ? 'var(--surface)' : 'transparent', open,
+      go: () => this.setState({ room: open ? null : rm }),
+      items: ls.map(l => ({ key: l.id, n: l.n, name: l.name.split(' · ')[0], item: l.item || 'vacío', ic: l.item ? 'var(--text)' : 'var(--text-3)', go: () => this.setState({ focus: l.id }) })) }; });
+    const rt = this.state.route, lb = this.state.labels;
+    const field = k => e => f && this.upd(f.id, { [k]: e.target.value, ...(k === 'item' && e.target.value && f.state === 'empty' ? { state: 'new' } : {}) });
+    const set = Object.fromEntries(['name', 'item', 'front', 'back', 'anchor', 'anchorEmoji', 'notes'].map(k => [k, field(k)]));
+    const sc = f?.scene ?? [];
+    const setSc = arr => this.upd(f.id, { scene: arr });
+    const scene = sc.map((o, i) => ({ key: i, ...o, setE: e => setSc(sc.map((x, j) => j === i ? { ...x, e: e.target.value } : x)), setT: e => setSc(sc.map((x, j) => j === i ? { ...x, t: e.target.value } : x)), setR: e => setSc(sc.map((x, j) => j === i ? { ...x, r: e.target.value } : x)), del: () => setSc(sc.filter((_, j) => j !== i)) }));
+    const ST = [['new', 'Nuevo'], ['learning', 'Aprendiendo'], ['review', 'Al día'], ['mastered', 'Dominado'], ['suspended', 'Suspendido']];
+    const stateOpts = ST.map(([k, l]) => ({ key: k, l, c: `var(--state-${k})`, border: f?.state === k ? '1.5px solid var(--accent)' : '1px solid var(--line-2)', go: () => f && this.upd(f.id, { state: k }) }));
+    const lines = this.state.bulkText.split('\n').map(s => s.trim()).filter(Boolean);
+    const start = Math.max(1, +this.state.bulkStart || 1);
+    const targets = loci.slice(start - 1).filter(l => !this.state.bulkSkip || !l.item);
+    const nAssign = Math.min(lines.length, targets.length);
+    const fillFrom = () => { const ids = new Map(targets.slice(0, nAssign).map((l, i) => [l.id, lines[i]])); this.commit(loci.map(l => { if (!ids.has(l.id)) return l; const [t, ...rest] = ids.get(l.id).split('|'); return { ...l, item: t.trim(), back: rest.join('|').trim() || l.back, state: 'new' }; }), { bulkOn: false, bulkText: '' }); };
+    return {
+      ...base, loci, rooms: P.rooms, planData: P.planData, aspect: P.aspect, bstyle: P.style, roomRows,
+      title: P.name.split(' · ')[0], meta: `${loci.length} puntos · ${order.length} habitaciones · ${P.zones.length} zonas`,
+      fillTxt: `${filled} de ${loci.length} puntos con contenido`, fillPct: `${Math.round(filled / Math.max(1, loci.length) * 100)}%`,
+      nextEmpty: () => { const l = loci.find(x => !x.item); if (l) this.setState({ focus: l.id, room: l.room }); },
+      editMode: edit, focusId: edit ? null : (f?.id ?? null), selIds: edit && f ? [f.id] : [], zoom: 2.2, zoomed: !edit && !!f,
+      showRoute: rt, showLabels: lb && (edit || !f),
+      routeBorder: pk(rt).border, routeBg: pk(rt).bg, labBorder: pk(lb).border, labBg: pk(lb).bg,
+      toggleRoute: () => this.setState({ route: !rt }), toggleLabels: () => this.setState({ labels: !lb }),
+      pick: l => this.setState({ focus: l.id, room: l.room }), hasFocus: !!f, noFocus: !f,
+      f: f ? { name: f.name ?? '', item: f.item ?? '', front: f.front ?? '', back: f.back ?? '', anchor: f.anchor ?? '', anchorEmoji: f.anchorEmoji ?? '', notes: f.notes ?? '' } : {},
+      fN: f ? `Punto ${f.n} de ${loci.length}` : '', fRoom: f?.room ?? '', set, scene, stateOpts,
+      sceneCount: `${sc.length}/5`, sceneCountColor: sc.length > 5 ? 'var(--state-learning)' : 'var(--text-3)', sceneWarn: sc.length > 5,
+      addScene: () => f && setSc([...sc, { e: '', t: '', r: '' }]),
+      prev: () => go(fIdx - 1), next: () => go(fIdx + 1), saveNext: () => { this.commit(loci); go(fIdx + 1); },
+      delPoint: () => { if (!f) return; const nx = loci[fIdx + 1] ?? loci[fIdx - 1]; this.commit(loci.filter(l => l.id !== f.id), { focus: nx?.id ?? null }); },
+      unfocus: () => this.setState({ focus: null }), savedTxt: this.state.saved ?? 'Los cambios se guardan solos',
+      bulkOn: this.state.bulkOn, openBulk: () => this.setState({ bulkOn: true, bulkStart: f ? f.n : 1, bulkSkip: loci.some(l => !l.item) }), closeBulk: () => this.setState({ bulkOn: false }),
+      bulkText: this.state.bulkText, setBulk: e => this.setState({ bulkText: e.target.value }), bulkStart: start, setBulkStart: e => this.setState({ bulkStart: e.target.value }),
+      bulkSkip: this.state.bulkSkip, toggleSkip: () => this.setState(s => ({ bulkSkip: !s.bulkSkip })),
+      bulkInfo: !lines.length ? `${targets.length} puntos disponibles desde el ${start}` : nAssign ? `${lines.length} líneas → puntos ${targets[0].n}–${targets[nAssign - 1].n}${lines.length > nAssign ? ` · ${lines.length - nAssign} sin sitio` : ''}` : (this.state.bulkSkip ? `No hay puntos vacíos desde el ${start} · desmarca «Saltar puntos ya ocupados» para sobrescribir` : `No hay puntos desde el ${start}`), bulkOp: nAssign ? 1 : 0.45, bulkCur: nAssign ? 'pointer' : 'not-allowed', bulkInfoC: lines.length && !nAssign ? 'var(--state-learning)' : 'var(--text-3)',
+      bulkDis: nAssign ? 'false' : 'true', bulkBtn: nAssign ? `Asignar ${nAssign} elementos` : 'Asignar', applyBulk: () => nAssign && fillFrom()
+    };
+  }
+}
+</script>
+</body>
+</html>
