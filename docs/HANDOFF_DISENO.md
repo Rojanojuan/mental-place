@@ -169,6 +169,26 @@ orden de ruta fijo dado por el usuario, no reordenable) y **10 casas** de ≥ 13
 de ruta no negociables (`PROMPT_MEJORAS.md` §4.2). Al crear un palacio el usuario elige:
 «Gramática 50» · «Estándar 45» · «Vacío» · «Plano de casa / Imagen propia».
 
+### 3.9 bis · El reparto de sonidos de `pc-data.js` era dato de ejemplo
+
+El array `PH` de `pc-data.js` asigna los 45 sonidos a las partes del cuerpo **en un orden distinto**
+al de `documentación/Guia_Fonetica 2026.docx`: el prototipo pone `/iː/` en el pelo y `/ɪ/` en la
+frente, mientras el documento del usuario pone `/j/` en el pelo y `/iː/` en la frente.
+
+→ **Manda el documento del usuario.** `PH` era contenido de relleno para que el prototipo tuviera
+algo que pintar. Lo que sí se toma de `pc-data.js`, y es correcto, es la **geometría**: `STD45`
+(coordenadas, lado y puntos densos de los 45 loci, con nombres idénticos a los del Word),
+`STD45_ZONES` y el estilo `f45` de `BODIES`.
+
+Lo mismo vale para los campos `state` e `item` de cada locus en `pc-data.js`: en la app el estado
+se calcula desde `ReviewState` y el contenido vive en `Item`.
+
+### 3.9 ter · Los nombres de zona no cuadran del todo con el reparto real
+
+`STD45_ZONES` llama a la primera zona «Cabeza · Vocales», pero con el reparto del documento el
+punto 1 (Pelo) es `/j/`, una aproximante. Las cinco zonas se conservan tal cual —son la
+agrupación geométrica del diseño—; renombrarlas es decisión del usuario.
+
 ### 3.9 Import/export: campos extra
 
 `palaces` añade `rooms`, `planData`, `style`; `loci` añade `room`, `dense`.

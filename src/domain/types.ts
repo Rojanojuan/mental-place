@@ -1,18 +1,54 @@
-// Tipos base del CONTRATO COMPARTIDO §2 (punto de partida de la Fase 0).
-// La Fase 1 los amplía con Deck, Template y los campos añadidos en diseño
-// (Palace.style / planData / rooms, Locus.room / dense, tipo `custom_plan`).
+// Tipos base del CONTRATO COMPARTIDO §2.
+// Los campos añadidos durante el diseño están marcados y documentados en
+// docs/HANDOFF_DISENO.md §3. Los planos de casa (planData / rooms) llegan en su fase.
 
 export type ID = string;
 export type LocusState = 'empty' | 'new' | 'learning' | 'due' | 'review' | 'mastered' | 'suspended';
 export type Grade = 'again' | 'hard' | 'good' | 'easy';
 export type Unit = 'min' | 'h' | 'd' | 'w' | 'mo';
 
+/** Zonas del cuerpo que dan nombre a los tokens `--zone-*`. */
+export type ZoneAccent = 'cabeza' | 'hombros' | 'torso' | 'brazos' | 'piernas';
+
+/**
+ * Apariencia del cuerpo. [AMPLÍA CONTRATO] — PROMPT_MEJORAS.md §2.
+ * En palacios sin cuerpo solo aplican `accent` y `line`.
+ */
+export interface PalaceStyle {
+  accent: ZoneAccent;
+  draw: 'atlas' | 'lapiz' | 'neon';
+  skin: 'neutral' | 'porcelana' | 'arena' | 'miel' | 'canela' | 'ebano' | 'plano';
+  hair: 'none' | 'buzz' | 'short' | 'curly' | 'tail' | 'bun' | 'long';
+  hairColor: string;
+  facial: 'none' | 'stache' | 'beard';
+  glasses: boolean;
+  detail: 'min' | 'med' | 'full';
+  vol: 'shade' | 'flat';
+  line: 'fine' | 'bold';
+}
+
+export const PALACE_STYLE_DEFAULTS: PalaceStyle = {
+  accent: 'cabeza',
+  draw: 'atlas',
+  skin: 'neutral',
+  hair: 'none',
+  hairColor: 'var(--line-2)',
+  facial: 'none',
+  glasses: false,
+  detail: 'full',
+  vol: 'shade',
+  line: 'fine',
+};
+
 export interface Palace {
   id: ID;
   name: string;
-  kind: 'body_front' | 'body_back' | 'body_both' | 'custom_image';
+  /** `custom_plan` (plano de casa generado) [AMPLÍA CONTRATO] — PROMPT_MEJORAS.md §4. */
+  kind: 'body_front' | 'body_back' | 'body_both' | 'custom_image' | 'custom_plan';
   imageRef?: string;
   color?: string;
+  /** [AMPLÍA CONTRATO] Apariencia del cuerpo. */
+  style?: PalaceStyle;
   order: number;
   createdAt: string;
   updatedAt: string;
@@ -36,6 +72,10 @@ export interface Locus {
   pos: { x: number; y: number };
   anchor?: { text: string; media?: string };
   notes?: string;
+  /** [AMPLÍA CONTRATO] Punto agrupado (cabeza, manos): se dibuja más pequeño. */
+  dense?: boolean;
+  /** [AMPLÍA CONTRATO] Nombre de la habitación, en palacios `custom_plan`. */
+  room?: string;
 }
 
 export interface SceneObject {
@@ -71,6 +111,31 @@ export interface Item {
   origin: 'manual' | 'import' | 'ai';
   createdAt: string;
   updatedAt: string;
+}
+
+export interface Deck {
+  id: ID;
+  name: string;
+  description?: string;
+  templateId?: ID;
+  scheduleId?: ID;
+}
+
+/** Un campo declarado por una plantilla. El valor vive en `Item.fields`. */
+export interface TemplateField {
+  key: string;
+  label: string;
+  kind: 'text' | 'longtext' | 'number' | 'list' | 'table' | 'object';
+  hint?: string;
+}
+
+export interface Template {
+  id: ID;
+  name: string;
+  description?: string;
+  fields: TemplateField[];
+  /** Orden sugerido de los bloques al crear un ítem con esta plantilla. */
+  blockOrder: Block['type'][];
 }
 
 export interface Interval {
@@ -117,4 +182,21 @@ export interface ReviewLog {
   dueAt: string;
   manual: boolean;
   durationSec?: number;
+}
+
+/**
+ * Paquete de importación / exportación, formato JSON v1 (contrato §5).
+ * Todas las colecciones son opcionales: se permite el import parcial.
+ * Los esquemas Zod que lo validan llegan en la Fase 3.
+ */
+export interface Bundle {
+  version: 1;
+  palaces?: Palace[];
+  zones?: Zone[];
+  loci?: Locus[];
+  sceneObjects?: SceneObject[];
+  items?: Item[];
+  decks?: Deck[];
+  templates?: Template[];
+  schedules?: Schedule[];
 }

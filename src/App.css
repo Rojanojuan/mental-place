@@ -1,5 +1,5 @@
 .shell {
-  max-width: 880px;
+  max-width: 1180px;
   margin: 0 auto;
   padding: var(--space-5) var(--space-4) var(--space-8);
   display: flex;
@@ -97,4 +97,40 @@
 .bodies__img {
   height: min(60dvh, 420px);
   width: auto;
+}
+
+.shell__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+
+.tabs {
+  display: flex;
+  gap: 2px;
+  padding: 3px;
+  background: var(--surface-2);
+  border-radius: var(--radius-pill);
+}
+
+.tabs__btn {
+  min-height: 36px;
+  padding: 0 var(--space-4);
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: none;
+  color: var(--text-2);
+  cursor: pointer;
+  transition: background var(--dur-fast) var(--ease-out);
+}
+
+.tabs__btn:hover {
+  color: var(--text);
+}
+
+.tabs__btn.is-sel {
+  background: var(--surface);
+  color: var(--text);
+  box-shadow: var(--shadow-sm);
 }

@@ -57,3 +57,71 @@
   la plantilla «Gramática C1», asignados por su campo `palacio`). No está en el repositorio.
   Hasta que llegue, la Fase 3 se hará contra un archivo de ejemplo reducido.
 - Confirmación de que **`dexie-react-hooks`** puede quedarse en el stack (D-005).
+
+---
+
+## Ingesta · Palacio «Fonética · Estándar 45» — ✅ terminada (2026-10-15)
+
+Fuera del orden de fases: el usuario pidió cargar ya su primer palacio real. Se hizo como **datos**
+(formato JSON v1 del contrato) más un visor provisional, sin adelantar las fases 1–3.
+
+### Hecho
+
+- **Conversor** `scripts/ingest_fonetica.py` (`npm run seed:fonetica`): lee
+  `documentación/Guia_Fonetica 2026.docx` y la geometría de `STD45` en el traspaso de diseño, y
+  emite la semilla y un informe. Reproducible: si se corrige el Word, se vuelve a correr.
+- **Semilla** `seed/fonetica45.json` — 1 palacio, 5 zonas, **45 puntos**, **44 ítems**, 80 objetos
+  de escena, la plantilla «Fonética», 1 mazo y el horario R10 con hora preferida 8:00.
+- **Contenido por ítem**: equivalente en español, teoría de producción con las etiquetas del
+  documento, diferencias británico/americano, y cuatro tablas — Ejemplos, Patrones del sonido,
+  Restricciones (excepciones) y Minimal pairs — más la rima con su transcripción y traducción.
+- **Hallazgo**: el «comodín» de cada sonido (Globo, Silla, Nalgas…) **codifica cuántos patrones de
+  escritura tiene**. Verificado en 32 de 37 secciones con comodín; va como objeto de escena y como
+  `fields.comodin`, y los desajustes están en el informe.
+- **1 737 enlaces** al diccionario de Cambridge indexados por palabra, más los audios de las rimas.
+- **Visor** `src/features/inspector/`: las dos siluetas con los 45 pines sobre el viewBox 200×480 y
+  el detalle del punto con sus bloques. `BlockView` renderiza los tipos de `Block` del contrato sin
+  saber nada de fonética, así que servirá igual para el palacio de gramática.
+- **Dominio**: `Deck`, `Template`, `TemplateField`, `PalaceStyle`, `Bundle`; `Palace.style`,
+  `Locus.dense`, `Locus.room` y el tipo `custom_plan`.
+
+### Volumen ingresado
+
+| Contenido                      | Cantidad |
+| ------------------------------ | -------- |
+| Secciones del documento        | 44       |
+| Grupos de patrón               | 161      |
+| Palabras en tablas de patrones | 962      |
+| Ejemplos                       | 351      |
+| Restricciones (excepciones)    | 171      |
+| Minimal pairs                  | 301      |
+| Enlaces de diccionario         | 1 737    |
+
+### Comprobaciones
+
+| Comando                 | Resultado                                                  |
+| ----------------------- | ---------------------------------------------------------- |
+| `npm run seed:fonetica` | ✅ 45 puntos / 44 ítems · 20 anomalías del Word reportadas |
+| `npm run check`         | ✅ typecheck + lint + **23 tests**                         |
+| `npm run build`         | ✅ JSON como asset aparte (693 kB, 93 kB gzip)             |
+
+Los tests cubren las invariantes de la semilla (ruta 1–45 sin huecos, integridad referencial,
+≤ 5 objetos de escena por punto, IPA normalizada, tablas completas) y el renderizado real del
+visor, incluido el aviso del punto sin contenido.
+
+### Demo manual (4 pasos)
+
+1. `npm run seed:fonetica` → imprime el resumen y regenera `docs/INGESTA_FONETICA.md`.
+2. `npm run dev` → pestaña **Inspector**: los 45 puntos sobre las dos siluetas, el 34 en gris.
+3. Toca **2 · Frente** → `/iː/ · CHEESE`, el comodín Globo con sus 9 patrones, y las tablas de
+   ejemplos, patrones (40 palabras), restricciones y minimal pairs.
+4. Toca **34 · Tobillo** → avisa de que falta esa sección en el Word.
+
+### Pendiente
+
+- **Las 20 anomalías de `docs/INGESTA_FONETICA.md`** son del documento, no del conversor. La más
+  importante: falta la sección **34 · TOBILLO /s/**. Al corregir el Word basta volver a correr
+  `npm run seed:fonetica`.
+- **Palacio 2 · Gramática C1**: `documentación/100 grammar news.pdf` (218 páginas) está en el
+  repositorio, esperando que el usuario describa la estructura que quiere, como hizo con fonética.
+- La semilla se carga con `fetch` en el visor (D-014). En la Fase 2 pasa a IndexedDB.

@@ -1,19 +1,22 @@
 import { useState } from 'react';
-import { BODY_SILHOUETTE, BODY_VIEWBOX } from './design/assets';
-import { STATE_LABEL, STATE_TOKEN } from './design/states';
-import type { LocusState } from './domain/types';
+import { Inspector } from '@/features/inspector/Inspector';
+import { TokensPanel } from '@/features/tokens/TokensPanel';
 import './App.css';
 
-const STATES = Object.keys(STATE_TOKEN) as LocusState[];
-const SIDES = ['front', 'back'] as const;
+const TABS = [
+  { id: 'inspector', label: 'Inspector' },
+  { id: 'tokens', label: 'Tokens' },
+] as const;
+
+type TabId = (typeof TABS)[number]['id'];
 
 /**
- * Pantalla de verificación de la Fase 0 (andamiaje).
- * Comprueba que los tokens y las siluetas del traspaso de diseño cargan en los dos temas.
- * La Fase 4 la sustituye por las pantallas reales.
+ * Cáscara provisional. La Fase 4 la sustituye por las pantallas reales con
+ * React Router; hasta entonces basta un conmutador para verificar el trabajo.
  */
 export function App() {
   const [theme, setTheme] = useState<'dark' | 'light'>('dark');
+  const [tab, setTab] = useState<TabId>('inspector');
 
   const toggleTheme = () => {
     const next = theme === 'dark' ? 'light' : 'dark';
@@ -26,43 +29,32 @@ export function App() {
       <header className="shell__head">
         <div>
           <h1>Palacio Corporal</h1>
-          <p className="shell__sub">
-            Fase 0 · andamiaje listo. Tokens y siluetas del diseño cargados.
-          </p>
+          <p className="shell__sub">Verificación de la ingesta · contenido y tokens del diseño</p>
         </div>
-        <button type="button" className="btn" onClick={toggleTheme}>
-          Tema: {theme === 'dark' ? 'oscuro' : 'claro'}
-        </button>
+        <div className="shell__actions">
+          <div className="tabs" role="tablist" aria-label="Vistas">
+            {TABS.map((t) => (
+              <button
+                key={t.id}
+                type="button"
+                role="tab"
+                aria-selected={tab === t.id}
+                className={`tabs__btn${tab === t.id ? ' is-sel' : ''}`}
+                onClick={() => {
+                  setTab(t.id);
+                }}
+              >
+                {t.label}
+              </button>
+            ))}
+          </div>
+          <button type="button" className="btn" onClick={toggleTheme}>
+            Tema: {theme === 'dark' ? 'oscuro' : 'claro'}
+          </button>
+        </div>
       </header>
 
-      <section aria-labelledby="estados">
-        <h2 id="estados">Estados semánticos</h2>
-        <ul className="swatches">
-          {STATES.map((state) => (
-            <li key={state} className="swatch">
-              <span className="swatch__dot" style={{ background: `var(${STATE_TOKEN[state]})` }} />
-              <span className="swatch__name">{STATE_LABEL[state]}</span>
-              <code className="swatch__token">{STATE_TOKEN[state]}</code>
-            </li>
-          ))}
-        </ul>
-      </section>
-
-      <section aria-labelledby="silueta">
-        <h2 id="silueta">
-          Silueta · viewBox {BODY_VIEWBOX.width}×{BODY_VIEWBOX.height}
-        </h2>
-        <div className="bodies">
-          {SIDES.map((side) => (
-            <img
-              key={side}
-              className="bodies__img"
-              src={BODY_SILHOUETTE[side]}
-              alt={side === 'front' ? 'Silueta frontal' : 'Silueta posterior'}
-            />
-          ))}
-        </div>
-      </section>
+      {tab === 'inspector' ? <Inspector /> : <TokensPanel />}
     </main>
   );
 }

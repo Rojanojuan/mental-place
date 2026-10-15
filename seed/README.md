@@ -1,26 +1,36 @@
 # Semillas
 
-Datos de ejemplo. **Nada de esto es código de la app**: son archivos JSON que se importan con el
-mismo formato público de `src/io/` (contrato §5). La app no puede depender de su contenido.
+Datos de ejemplo y contenido del usuario, en el **formato JSON v1 público** del contrato (§5).
+**Nada de esto es código de la app**: se importan por el mismo camino que cualquier copia de
+seguridad, y la app no puede depender de su contenido.
 
-## Archivos previstos
+## Archivos
 
-| Archivo             | Contenido                                                       | Fase |
-| ------------------- | --------------------------------------------------------------- | ---- |
-| `cuerpo1.json`      | Palacio «Cuerpo 1 · Verbal + Nominal», 50 puntos y sus zonas.   | 2    |
-| `cuerpo2.json`      | Palacio «Cuerpo 2 · Oración + Discurso», mismas 50 partes.      | 2    |
-| `estandar45.json`   | Plantilla «Estándar 45» (fonética), orden de ruta fijo.         | 2    |
-| `gramatica_c1.json` | Los 100 elementos C1 como ítems de la plantilla «Gramática C1». | 3    |
+| Archivo             | Contenido                                                                                        | Estado      |
+| ------------------- | ------------------------------------------------------------------------------------------------ | ----------- |
+| `fonetica45.json`   | Palacio «Fonética · Estándar 45»: 45 puntos, 44 ítems, plantilla «Fonética», mazo y horario R10. | ✅ generado |
+| `gramatica_c1.json` | Los 100 elementos C1 como ítems de la plantilla «Gramática C1», en 2 cuerpos de 50 puntos.       | pendiente   |
 
-## Origen de los datos
+## `fonetica45.json` se genera, no se edita
 
-Los tres primeros se portan de `design_handoff_palacio_corporal/pc-data.js`
-(`LOCI`, `ZONES`, `LOCI_C2`, `ZONES_C2`, `STD45`, `STD45_ZONES`), renombrando campos según
-`docs/HANDOFF_DISENO.md` §3.4. Los 10 planos de casa no se guardan aquí: se generan por código
-(`pc-houses.js`).
+Sale de `documentación/Guia_Fonetica 2026.docx` con:
 
-## Falta un archivo de entrada
+```bash
+npm run seed:fonetica
+```
 
-`gramatica_c1.json` se construye en la Fase 3 a partir de **`elementos_c1_base.json`**, que todavía
-no está en el repositorio. Cada elemento se asigna al palacio indicado en su campo `palacio`.
-Cuando llegue, ponlo en esta carpeta.
+El conversor es `scripts/ingest_fonetica.py` y escribe además
+`docs/INGESTA_FONETICA.md`, con los conteos y las anomalías encontradas en el Word.
+Si se corrige el documento (por ejemplo, para añadir la sección **34 · TOBILLO /s/**, que falta),
+se vuelve a correr y la semilla se regenera. **Editar el JSON a mano se pierde en la siguiente
+pasada.**
+
+La geometría (coordenadas, lados, puntos densos y zonas) no está en el Word: sale de `STD45` y
+`STD45_ZONES` en `design_handoff_palacio_corporal/pc-data.js`. Ver `docs/HANDOFF_DISENO.md` §3.9
+bis para saber qué se toma de ahí y qué no.
+
+## El palacio de gramática
+
+`documentación/100 grammar news.pdf` (218 páginas) es el material de origen. Falta que el usuario
+describa la estructura que quiere, como hizo con la fonética: qué va en el detalle de cada punto y
+cómo se reparten los 100 elementos entre los dos cuerpos.

@@ -58,8 +58,9 @@ src/
                    # library, stats, schedules, import-export, onboarding
   components/      # componentes de presentación (BodyMap, LocusPin, …)
   design/          # tokens.css, base.css, body-front.svg, body-back.svg, assets.ts, states.ts
-seed/              # cuerpo1.json, cuerpo2.json, estandar45.json, gramatica_c1.json
-docs/              # DECISIONES.md, PROGRESO.md, HANDOFF_DISENO.md
+seed/              # semillas en JSON v1: fonetica45.json (hecha), gramatica_c1.json (pendiente)
+scripts/           # herramientas offline: ingest_fonetica.py (docx → semilla)
+docs/              # DECISIONES.md, PROGRESO.md, HANDOFF_DISENO.md, INGESTA_FONETICA.md
 tests/             # setup y pruebas de integración
 design_handoff_palacio_corporal/   # prototipos de diseño (SOLO LECTURA)
 ```
@@ -104,14 +105,19 @@ design_handoff_palacio_corporal/   # prototipos de diseño (SOLO LECTURA)
 
 - **Fase 0 · Andamiaje** ✅ — Vite + TS estricto + ESLint/Prettier + Vitest + PWA; carpetas;
   `docs/`; tokens y siluetas **reales** del traspaso en `src/design/`.
+- **Ingesta de contenido** (fuera de orden, a pedido del usuario) — el palacio «Fonética ·
+  Estándar 45» ya está en `seed/fonetica45.json`, generado por `npm run seed:fonetica`, y se puede
+  revisar en la pestaña «Inspector». Ver `docs/PROGRESO.md` y `docs/INGESTA_FONETICA.md`.
+  El palacio de gramática espera la estructura que el usuario quiera.
 - **Fase 1 · Dominio + motor SRS + tests** (§6). Sin UI.
 - **Fase 2 · Base de datos:** esquema Dexie v1, repositorios CRUD, transacciones (borrar un punto
   → sus ítems pasan a «sin asignar», no se borran), semilla de ejemplo.
 - **Fase 3 · Import/Export:** esquemas Zod del JSON v1 (+ `rooms`, `planData`, `style` en
   `palaces`; `room`, `dense` en `loci`), import parcial con `locusRef` («Cuerpo 1 · L8», «Casa
   familiar · 37» o nombre de parte/mueble), vista previa de cambios (dry-run), CSV con mapeo de
-  columnas y export completo. Convierte `seed/gramatica_c1.json` en ítems de la plantilla
-  «Gramática C1», asignados según su campo `palacio`.
+  columnas y export completo. La semilla de fonética (`seed/fonetica45.json`) sirve de caso de
+  prueba del import: ya está en el formato público. Convierte también `seed/gramatica_c1.json` en
+  ítems de la plantilla «Gramática C1», asignados según su campo `palacio`.
 - **Fase 4 · Pantallas:** Hoy, Sesión (señalar → escena → contenido → calificar → hoja de próximo
   repaso), Recorrido, Editor de palacio, Casas, Mis cuerpos, Detalle del punto, Editor de ítem,
   Biblioteca, Horarios, Estadísticas, Importar/exportar, Onboarding. Recrea los `.dc.html` del
