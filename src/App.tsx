@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { NavLink, Route, Routes } from 'react-router-dom';
+import { ImportExport } from '@/features/import-export/ImportExport';
 import { Inspector } from '@/features/inspector/Inspector';
 import { Session } from '@/features/session/Session';
 import { Today } from '@/features/today/Today';
@@ -9,6 +10,7 @@ import './App.css';
 const NAV = [
   { to: '/', label: 'Hoy' },
   { to: '/inspector', label: 'Palacio' },
+  { to: '/datos', label: 'Datos' },
   { to: '/tokens', label: 'Tokens' },
 ] as const;
 
@@ -54,6 +56,7 @@ export function App() {
         <Route path="/" element={<Today />} />
         <Route path="/sesion" element={<Session />} />
         <Route path="/inspector" element={<Inspector />} />
+        <Route path="/datos" element={<ImportExport />} />
         <Route path="/tokens" element={<TokensPanel />} />
         <Route path="*" element={<Today />} />
       </Routes>

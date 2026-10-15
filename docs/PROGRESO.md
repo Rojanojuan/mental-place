@@ -265,3 +265,42 @@ detalle de punto en modo lectura mientras tanto.
 ### Pendiente de la Fase 3
 
 Importar y exportar sigue sin pantalla ni validación Zod. La semilla entra por `bootstrap.ts`.
+
+---
+
+## Fase 3 · Importar y exportar — ✅ terminada (2026-10-15)
+
+### Hecho
+
+| Archivo                       | Qué contiene                                                                                                                                   |
+| ----------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| `src/io/schema.ts`            | Esquemas Zod del JSON v1, incluidos `style`, `planData`, `rooms`, `room` y `dense`.                                                            |
+| `src/io/locus-ref.ts`         | Resolución de `locusRef` por texto: número de ruta, nombre de parte o mueble, con o sin palacio delante.                                       |
+| `src/io/plan.ts`              | La **vista previa**: valida, cuenta qué se crea y qué se sobrescribe, resuelve referencias y avisa de los problemas de integridad. No escribe. |
+| `src/io/csv.ts`               | Lector de CSV propio, mapeo de columnas sugerido por las cabeceras, y export a CSV.                                                            |
+| `src/io/download.ts`          | Copia de seguridad como archivo.                                                                                                               |
+| `src/features/import-export/` | La pantalla, en la ruta `/datos`.                                                                                                              |
+
+**Lo que resuelve `locusRef`:** «Cuerpo 1 · Verbal + Nominal · L8», «Casa familiar · 37»,
+«Cuerpo 1 · Verbal + Nominal · Hombro derecho», «Casa familiar · Lámpara de pie · Salón» y, si el
+nombre es único en toda la base, «Mentón» a secas. Ignora mayúsculas y acentos, admite `·`, `|`,
+`/` y `>` como separadores, y **nunca adivina**: si hay dos candidatos lo dice.
+
+### Comprobaciones
+
+| Comando            | Resultado                                                                |
+| ------------------ | ------------------------------------------------------------------------ |
+| `npm run check`    | ✅ typecheck + lint + **366 tests** en 19 archivos                       |
+| `npm run test:cov` | ✅ 98,5 % sentencias · 94,8 % ramas (umbral sobre `srs`, `domain`, `io`) |
+| `npm run build`    | ✅ 523 kB JS (163 kB gzip)                                               |
+
+73 tests nuevos: el lector de CSV caso por caso (comillas, saltos dentro de celda, BOM, `\r\n`,
+separadores), las ocho formas de `locusRef` y sus dos fracasos, la validación Zod señalando el
+campo exacto (`loci.0.pos.x`), el recuento de crear/sobrescribir, los avisos de integridad y el
+flujo completo de la pantalla: subir archivo → vista previa → confirmar, incluido que **la base no
+se toca hasta confirmar**.
+
+### Pendiente de la Fase 4
+
+Editor de palacio, detalle del punto editable, editor de ítem, Biblioteca, Horarios, Estadísticas,
+Casas y Onboarding.

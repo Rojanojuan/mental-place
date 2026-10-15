@@ -1,0 +1,164 @@
+.iox h2 {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.iox__sub {
+  margin: var(--space-1) 0 0;
+  color: var(--text-3);
+  font-size: 13px;
+  max-width: 62ch;
+}
+
+.iox__grid {
+  margin-top: var(--space-5);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(240px, 340px);
+  gap: var(--space-5);
+  align-items: start;
+}
+
+@media (max-width: 900px) {
+  .iox__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.iox__panel {
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  padding: var(--space-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  align-items: flex-start;
+}
+
+.iox__panel h3 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.iox__panel h4 {
+  margin: var(--space-4) 0 0;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-2);
+}
+
+.iox__hint {
+  margin: 0;
+  color: var(--text-3);
+  font-size: 13px;
+}
+
+.iox__file {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  font-size: 14px;
+  width: 100%;
+}
+
+.iox__file input {
+  padding: var(--space-3);
+  border: 1.5px dashed var(--line-2);
+  border-radius: var(--radius-md);
+  background: var(--sunken);
+  width: 100%;
+}
+
+.iox__error {
+  margin: 0;
+  color: var(--bad);
+  font-size: 14px;
+}
+
+.iox__ok {
+  margin: 0;
+  color: var(--ok);
+  font-size: 14px;
+}
+
+.iox__mapping,
+.iox__plan {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.iox__maprow {
+  display: grid;
+  grid-template-columns: 110px minmax(0, 1fr);
+  align-items: center;
+  gap: var(--space-3);
+  font-size: 13px;
+}
+
+.iox__maprow select {
+  min-height: 36px;
+  padding: 0 var(--space-2);
+  border: 1px solid var(--line-2);
+  border-radius: var(--radius-md);
+  background: var(--sunken);
+}
+
+.iox__totals {
+  margin: 0;
+  font-size: 14px;
+}
+
+.iox__diff {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.iox__diff th,
+.iox__diff td {
+  padding: 4px var(--space-2);
+  text-align: left;
+  border-bottom: 1px solid var(--line);
+}
+
+.iox__diff th {
+  color: var(--text-2);
+  font-weight: 500;
+}
+
+.iox__diff td.mono {
+  font-variant-numeric: tabular-nums;
+}
+
+.iox__warnings,
+.iox__errors,
+.iox__unresolved {
+  margin: 0;
+  padding-left: var(--space-5);
+  font-size: 13px;
+  color: var(--text-2);
+  display: grid;
+  gap: 2px;
+}
+
+.iox__errors {
+  color: var(--bad);
+}
+
+.iox__cancel {
+  align-self: flex-start;
+  min-height: 36px;
+  border: 0;
+  background: none;
+  color: var(--text-3);
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.iox__cancel:hover {
+  color: var(--text);
+}

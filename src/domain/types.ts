@@ -40,6 +40,20 @@ export const PALACE_STYLE_DEFAULTS: PalaceStyle = {
   line: 'fine',
 };
 
+/** Una habitación de un plano. [AMPLÍA CONTRATO] — PROMPT_MEJORAS.md §4. */
+export interface Room {
+  label: string;
+  x: number;
+  y: number;
+  w: number;
+  h: number;
+  zone: ZoneAccent;
+  /** Posición de la etiqueta. */
+  lx?: number;
+  ly?: number;
+  sub?: string;
+}
+
 export interface Palace {
   id: ID;
   name: string;
@@ -49,6 +63,12 @@ export interface Palace {
   color?: string;
   /** [AMPLÍA CONTRATO] Apariencia del cuerpo. */
   style?: PalaceStyle;
+  /** [AMPLÍA CONTRATO] Proporción del lienzo, en los palacios que no son cuerpo. */
+  aspect?: number;
+  /** [AMPLÍA CONTRATO] Plano vectorial generado. */
+  planData?: { svg: string; w: number; h: number };
+  /** [AMPLÍA CONTRATO] Habitaciones del plano. */
+  rooms?: Room[];
   order: number;
   createdAt: string;
   updatedAt: string;

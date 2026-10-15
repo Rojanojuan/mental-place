@@ -80,9 +80,14 @@ describe('Inspector', () => {
 
     await applyGrade('itm-fonetica45-01', 'good', new Date(), {}, db);
 
-    await waitFor(() => {
-      expect(screen.getByRole('button', { name: /^1\. Pelo.*Aprendiendo/ })).toBeInTheDocument();
-    });
+    // `useLiveQuery` rehace la consulta del mapa entera (45 puntos y sus
+    // estados); con la instrumentación de cobertura tarda más de 1 s.
+    await waitFor(
+      () => {
+        expect(screen.getByRole('button', { name: /^1\. Pelo.*Aprendiendo/ })).toBeInTheDocument();
+      },
+      { timeout: 5000 },
+    );
   });
 
   it('espera mientras la base de datos está vacía', async () => {

@@ -297,3 +297,47 @@ conexión.
 y el punto enfocado; no consulta nada. Implementa lo que pide el diseño: cámara de 700 ms al punto,
 pines contra-escalados para que no cambien de tamaño con el zoom, halo pulsante en los vencidos,
 rayado en los pausados, estrella en los dominados y número oculto por debajo de 13 px.
+
+## Fase 3 — Importar y exportar (2026-10-15)
+
+### D-037 · Zod es la frontera de confianza
+
+Todo lo que entra por importación pasa por `src/io/schema.ts`. Después de validar, los datos se
+usan sin más comprobaciones: el esquema refleja `src/domain/types.ts` uno a uno.
+
+### D-038 · El nombre de un palacio puede llevar el separador dentro
+
+«Cuerpo 1 · Verbal + Nominal · L8» tiene tres partes separadas por «·», pero el palacio son las
+dos primeras. Partir por el primer separador fallaba con los nombres reales del proyecto, así que
+`resolveLocusRef()` prueba el **prefijo de palacio más largo** que encaje y usa el resto para
+identificar el punto. Lo descubrió un test.
+
+### D-039 · Una referencia ambigua nunca se adivina
+
+Si «Hombro derecho» existe en dos palacios, `resolveLocusRef()` devuelve `ambiguous` con los
+candidatos y la vista previa los muestra. El ítem entra **sin asignar**: el contenido no se pierde
+y el usuario lo coloca luego desde la bandeja.
+
+### D-040 · Los problemas de integridad son avisos, no errores
+
+Que un ítem apunte a una plantilla que no está en el paquete no impide importar: puede estar ya en
+la base, y el contrato permite el import parcial. Se listan como avisos. Solo los fallos de
+**formato** (Zod) bloquean, y entonces no se escribe nada.
+
+### D-041 · `clean()`: Zod y `exactOptionalPropertyTypes`
+
+Zod devuelve los campos opcionales como `prop?: T | undefined`; el dominio los declara `prop?: T`.
+`clean()` quita las claves que valen `undefined`, con lo que el objeto encaja de verdad con el tipo
+—y además no se guardan claves vacías en IndexedDB.
+
+### D-042 · Lector de CSV propio, sin dependencias
+
+`parseCsv()` cubre comillas, comillas escapadas (`""`), saltos de línea dentro de una celda,
+`\r\n`, el BOM que mete Excel y separador configurable (se adivina entre coma, punto y coma y
+tabulador). Son ~40 líneas con tests; una dependencia no se justificaba.
+
+### D-043 · Sin escapes `\uXXXX` en el código fuente
+
+Al escribir los archivos, los escapes `\u0300` y `\uFEFF` acababan como el carácter literal en el
+fuente —invisible y frágil—. Se usan en su lugar `\p{Diacritic}` con la bandera `u` y, donde hace
+falta el BOM, el escape dentro de una cadena de regex construida sin ambigüedad.
