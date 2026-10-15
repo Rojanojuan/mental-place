@@ -116,3 +116,21 @@ export function formatInterval(interval: Interval): string {
       return value === 1 ? '1 mes' : `${num(value)} meses`;
   }
 }
+
+/**
+ * Proyecta un horario: en qué fecha caería cada etapa si el usuario aprobara
+ * siempre, empezando ahora. Es la «vista de fechas» del editor de intervalos.
+ */
+export function projectIntervals(
+  intervals: Interval[],
+  from: Date,
+  dayStartHour: number,
+): { stage: number; interval: Interval; at: Date }[] {
+  const out: { stage: number; interval: Interval; at: Date }[] = [];
+  let cursor = from;
+  for (const [index, interval] of intervals.entries()) {
+    cursor = nextDue(cursor, interval, dayStartHour);
+    out.push({ stage: index + 1, interval, at: cursor });
+  }
+  return out;
+}

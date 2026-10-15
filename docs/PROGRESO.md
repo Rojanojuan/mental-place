@@ -304,3 +304,37 @@ se toca hasta confirmar**.
 
 Editor de palacio, detalle del punto editable, editor de ítem, Biblioteca, Horarios, Estadísticas,
 Casas y Onboarding.
+
+---
+
+## Fase 4 (segunda parte) · Horarios, Biblioteca y Progreso — ✅ (2026-10-15)
+
+### Hecho
+
+| Pantalla                           | Ruta            | Qué hace                                                                                                                                                        |
+| ---------------------------------- | --------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `features/schedules/Schedules.tsx` | `/horarios`     | Los cinco presets y los del usuario; editor de intervalos con **la fecha en que caería cada etapa**, reglas de calificación, hora preferida e intervalo mínimo. |
+| `features/library/Library.tsx`     | `/biblioteca`   | Todos los ítems con búsqueda, filtro por estado y por zona, bandeja «Sin asignar» y acciones en lote (pausar, reanudar, quitar del punto, borrar).              |
+| `features/stats/Stats.tsx`         | `/estadisticas` | Previsión de 30 días, reparto de los puntos por estado, retención por zona y cuerpo de calor.                                                                   |
+| `components/NumberField.tsx`       | —               | Campo numérico que se puede vaciar para reescribir (ver D-044).                                                                                                 |
+
+También: `projectIntervals()` en el motor, que proyecta en qué fecha caería cada etapa de un
+horario aprobando siempre.
+
+### Comprobaciones
+
+| Comando            | Resultado                                          |
+| ------------------ | -------------------------------------------------- |
+| `npm run check`    | ✅ typecheck + lint + **389 tests** en 20 archivos |
+| `npm run test:cov` | ✅ 98,6 % sentencias · 94,8 % ramas                |
+| `npm run build`    | ✅ 538 kB JS (166 kB gzip)                         |
+
+23 tests nuevos: los presets en su orden, las diez etapas de R10 con su fecha, editar un intervalo
+y que se guarde (incluido **vaciar el campo y reescribirlo**, que era un bug), añadir y quitar
+etapas sin quedarse sin ninguna, cambiar las reglas; en Biblioteca los cuatro filtros y las cuatro
+acciones en lote; y en Progreso la previsión, el reparto y el cálculo de retención.
+
+### Pendiente de la Fase 4
+
+Editor de palacio (crear y mover puntos, zonas, ruta), detalle del punto editable, editor de ítem
+por bloques, Casas (los 10 planos) y Onboarding.

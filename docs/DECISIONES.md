@@ -341,3 +341,33 @@ tabulador). Son ~40 líneas con tests; una dependencia no se justificaba.
 Al escribir los archivos, los escapes `\u0300` y `\uFEFF` acababan como el carácter literal en el
 fuente —invisible y frágil—. Se usan en su lugar `\p{Diacritic}` con la bandera `u` y, donde hace
 falta el BOM, el escape dentro de una cadena de regex construida sin ambigüedad.
+
+## Fase 4 (segunda parte) — Horarios, Biblioteca y Progreso (2026-10-15)
+
+### D-044 · `NumberField`: el campo numérico guarda su propio texto
+
+Un `<input type="number">` controlado por el número no se puede vaciar para reescribirlo: al
+borrarlo el padre rechaza el `0`, vuelve a pintar el valor viejo y lo tecleado se va pegando
+delante («10» → «1015»). `src/components/NumberField.tsx` mantiene el texto dentro y solo entrega
+números válidos. Lo encontró un test, y ese test se queda como regresión.
+
+El refresco cuando el valor llega cambiado de fuera se hace **durante el render** (el patrón de
+React para ajustar estado al cambiar una prop), no en un efecto: así no hay segundo pintado.
+
+### D-045 · Los horarios se listan en el orden del contrato
+
+`db.schedules.toArray()` los devuelve por id, así que el primero era «Adaptativo». La pantalla los
+ordena con los presets del contrato primero —R10 al frente, que es el horario por defecto— y el
+resto por nombre.
+
+### D-046 · Los presets son editables
+
+El contrato dice «R10 (10 checkpoints, **editable**)», así que la pantalla deja editar cualquier
+horario, presets incluidos. Lo que se guarda afecta a los próximos repasos de los ítems que lo
+usan; las etapas en las que ya están no se mueven.
+
+### D-047 · La retención se mide sobre el historial, no se estima
+
+«Retención por zona» es la proporción de repasos de esa zona que **no** fueron «otra vez», contada
+sobre `reviewLogs`. Sin repasos suficientes la pantalla lo dice en vez de pintar un cero
+engañoso.

@@ -12,6 +12,7 @@ export {
   fromMinutes,
   maxInterval,
   nextDue,
+  projectIntervals,
   sameInterval,
   scaleInterval,
   spansADay,

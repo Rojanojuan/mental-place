@@ -8,6 +8,7 @@ import {
   nextDue,
   scaleInterval,
   spansADay,
+  projectIntervals,
   toMinutes,
 } from '@/srs';
 
@@ -166,5 +167,29 @@ describe('formatInterval', () => {
     expect(formatInterval({ value: 2, unit: 'w' })).toBe('2 sem');
     expect(formatInterval({ value: 1, unit: 'mo' })).toBe('1 mes');
     expect(formatInterval({ value: 3, unit: 'mo' })).toBe('3 meses');
+  });
+});
+
+describe('projectIntervals', () => {
+  it('acumula las fechas de cada etapa como si se aprobara siempre', () => {
+    const now = new Date(2026, 9, 15, 19, 40);
+    const plan = projectIntervals(
+      [
+        { value: 10, unit: 'min' },
+        { value: 1, unit: 'd' },
+        { value: 3, unit: 'd' },
+      ],
+      now,
+      8,
+    );
+    expect(plan.map((entry) => entry.stage)).toEqual([1, 2, 3]);
+    expect(plan[0]?.at).toEqual(new Date(2026, 9, 15, 19, 50));
+    // Desde las 19:50, +1 d cae el 16 y se ancla a las 8:00.
+    expect(plan[1]?.at).toEqual(new Date(2026, 9, 16, 8, 0));
+    expect(plan[2]?.at).toEqual(new Date(2026, 9, 19, 8, 0));
+  });
+
+  it('con un horario vacío no proyecta nada', () => {
+    expect(projectIntervals([], new Date(), 8)).toEqual([]);
   });
 });

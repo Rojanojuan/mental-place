@@ -2,7 +2,10 @@ import { useState } from 'react';
 import { NavLink, Route, Routes } from 'react-router-dom';
 import { ImportExport } from '@/features/import-export/ImportExport';
 import { Inspector } from '@/features/inspector/Inspector';
+import { Library } from '@/features/library/Library';
+import { Schedules } from '@/features/schedules/Schedules';
 import { Session } from '@/features/session/Session';
+import { Stats } from '@/features/stats/Stats';
 import { Today } from '@/features/today/Today';
 import { TokensPanel } from '@/features/tokens/TokensPanel';
 import './App.css';
@@ -10,6 +13,9 @@ import './App.css';
 const NAV = [
   { to: '/', label: 'Hoy' },
   { to: '/inspector', label: 'Palacio' },
+  { to: '/biblioteca', label: 'Biblioteca' },
+  { to: '/estadisticas', label: 'Progreso' },
+  { to: '/horarios', label: 'Horarios' },
   { to: '/datos', label: 'Datos' },
   { to: '/tokens', label: 'Tokens' },
 ] as const;
@@ -56,6 +62,9 @@ export function App() {
         <Route path="/" element={<Today />} />
         <Route path="/sesion" element={<Session />} />
         <Route path="/inspector" element={<Inspector />} />
+        <Route path="/biblioteca" element={<Library />} />
+        <Route path="/estadisticas" element={<Stats />} />
+        <Route path="/horarios" element={<Schedules />} />
         <Route path="/datos" element={<ImportExport />} />
         <Route path="/tokens" element={<TokensPanel />} />
         <Route path="*" element={<Today />} />

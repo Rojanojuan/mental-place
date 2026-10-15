@@ -1,0 +1,132 @@
+.stats h2 {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.stats__sub,
+.stats__hint {
+  margin: var(--space-1) 0 0;
+  color: var(--text-3);
+  font-size: 13px;
+}
+
+.stats--msg {
+  padding: var(--space-6);
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+.stats__grid {
+  margin-top: var(--space-5);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--space-4);
+  align-items: start;
+}
+
+.stats__wide {
+  grid-column: 1 / -1;
+}
+
+.stats__panel {
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  padding: var(--space-5);
+}
+
+.stats__panel h3 {
+  margin: 0 0 var(--space-4);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-2);
+}
+
+.stats__forecast {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 96px;
+  background: var(--sunken);
+  border-radius: var(--radius-md);
+  padding: var(--space-2);
+}
+
+.stats__forecast li {
+  flex: 1;
+  display: flex;
+  align-items: flex-end;
+  height: 100%;
+}
+
+.stats__bar {
+  width: 100%;
+  min-height: 2px;
+  background: var(--accent);
+  opacity: 0.8;
+  border-radius: 2px 2px 0 0;
+}
+
+.stats__states,
+.stats__zones {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--space-2);
+}
+
+.stats__states li {
+  display: grid;
+  grid-template-columns: 10px 90px minmax(0, 1fr) 32px;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: 12px;
+}
+
+.stats__zones li {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 90px 40px;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: 12px;
+}
+
+.stats__sdot {
+  width: 10px;
+  height: 10px;
+  border-radius: var(--radius-pill);
+}
+
+.stats__slabel,
+.stats__zname {
+  color: var(--text-2);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.stats__sbar {
+  display: block;
+  height: 8px;
+  background: var(--sunken);
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+}
+
+.stats__sbar span {
+  display: block;
+  height: 100%;
+  border-radius: var(--radius-pill);
+}
+
+.stats__snum {
+  text-align: right;
+  color: var(--text-3);
+  font-variant-numeric: tabular-nums;
+}
