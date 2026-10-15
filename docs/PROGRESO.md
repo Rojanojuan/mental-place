@@ -171,3 +171,52 @@ determinista en cualquier máquina (D-023).
 - El motor todavía no está enchufado a ninguna pantalla: la sesión de repaso es Fase 4. Hasta
   entonces el Inspector solo muestra el contenido ingresado.
 - `src/db/` sigue vacío: sin persistencia, nada de lo que calcula el motor se guarda (Fase 2).
+
+---
+
+## Fase 2 · Base de datos — ✅ terminada (2026-10-15)
+
+### Hecho
+
+`src/db/`, esquema **v1** de Dexie con migraciones versionadas:
+
+| Archivo     | Qué contiene                                                                           |
+| ----------- | -------------------------------------------------------------------------------------- |
+| `db.ts`     | Las 11 tablas (las 10 entidades del contrato + `settings`) con sus índices.            |
+| `repo.ts`   | CRUD de cada entidad y las operaciones transaccionales de ruta y asignación.           |
+| `review.ts` | El puente con el motor: calificar, ajustar a mano, estados del mapa, colas, previsión. |
+| `bundle.ts` | Importar y exportar un paquete JSON v1, sembrar y vaciar.                              |
+
+**La transacción que pide el contrato:** borrar un punto deja sus ítems «sin asignar»
+(`locusId: null`), no los borra, y se lleva solo sus objetos de escena. Lo mismo al borrar un
+palacio entero. Borrar una zona deja los puntos sin zona.
+
+**Lo que no se pudo indexar:** IndexedDB no admite booleanos como clave, así que `suspended` y
+`dense` se filtran en memoria; y las filas con la clave a `null` quedan fuera del índice, por lo
+que los ítems nuevos (`dueAt: null`) se buscan por `stage`. Está documentado en `db.ts`.
+
+### La app ya lee de IndexedDB
+
+- `src/bootstrap.ts` siembra el palacio de fonética **solo en el primer arranque** (D-029).
+- El Inspector consulta con `useLiveQuery`: al calificar un ítem, su punto cambia de color sin
+  recargar (D-030). Hay un test que lo comprueba.
+
+### Comprobaciones
+
+| Comando         | Resultado                                                 |
+| --------------- | --------------------------------------------------------- |
+| `npm run check` | ✅ typecheck + lint + **271 tests** en 13 archivos        |
+| `npm run build` | ✅ 329 kB JS (104 kB gzip) + la semilla como asset aparte |
+
+74 tests nuevos sobre la base de datos, con IndexedDB en memoria (D-027): las transacciones de
+borrado una por una, la ruta (insertar, reordenar, compactar, no desbordar a otro palacio), el
+estado de repaso, el horario que hereda cada ítem de su mazo, los dos caminos de calificación
+(guardar y solo proponer), el ajuste manual con un único log, los estados del mapa, las cinco
+colas y la ida y vuelta completa de la semilla de fonética por la base de datos.
+
+### Pendiente
+
+- No hay pantalla para importar ni exportar: eso es Fase 3, con los esquemas Zod y la vista previa
+  de cambios. El motor y la base ya están listos para recibirlos.
+- Sigue sin existir la sesión de repaso: `applyGrade()` funciona y está probado, pero nadie lo
+  llama desde la UI todavía (Fase 4).

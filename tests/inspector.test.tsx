@@ -2,46 +2,49 @@ import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { beforeEach, describe, expect, it } from 'vitest';
+import type { Bundle } from '@/domain/types';
+import { applyGrade, clearAll, db, ensurePresets, importBundle } from '@/db';
 import { Inspector } from '@/features/inspector/Inspector';
 
-const seed = readFileSync(resolve(process.cwd(), 'seed/fonetica45.json'), 'utf8');
+const seed = JSON.parse(
+  readFileSync(resolve(process.cwd(), 'seed/fonetica45.json'), 'utf8'),
+) as Bundle;
 
-beforeEach(() => {
-  vi.stubGlobal(
-    'fetch',
-    vi.fn(() => Promise.resolve(new Response(seed, { status: 200 }))),
-  );
+beforeEach(async () => {
+  await clearAll(db);
+  await importBundle(seed, db);
+  await ensurePresets(db);
 });
 
-afterEach(() => {
-  vi.unstubAllGlobals();
-});
+const heading = (): Promise<HTMLElement> =>
+  screen.findByRole('heading', { name: 'Fonética · Estándar 45' });
 
 describe('Inspector', () => {
   it('pinta el palacio con sus 45 puntos y 5 zonas', async () => {
     render(<Inspector />);
-    expect(
-      await screen.findByRole('heading', { name: 'Fonética · Estándar 45' }),
-    ).toBeInTheDocument();
+    expect(await heading()).toBeInTheDocument();
     expect(screen.getByText(/45 puntos · 44 con contenido · 5 zonas/)).toBeInTheDocument();
-    // Un pin por punto, más un botón por punto en la lista de ruta.
+    // Un pin por punto (los botones de la lista de ruta tienen otro nombre).
     expect(screen.getAllByRole('button', { name: /^\d+\. / })).toHaveLength(45);
   });
 
   it('abre el primer punto con contenido y muestra sus tablas', async () => {
     render(<Inspector />);
-    await screen.findByRole('heading', { name: 'Fonética · Estándar 45' });
+    await heading();
 
+    // El ancla sale con el mapa; los bloques llegan en una segunda consulta.
+    await waitFor(() => {
+      expect(screen.getByText(/Patrones del sonido/)).toBeInTheDocument();
+    });
     expect(screen.getByText('/j/ · YES')).toBeInTheDocument();
-    expect(screen.getByText(/Patrones del sonido/)).toBeInTheDocument();
     expect(screen.getByText('Silla')).toBeInTheDocument();
     expect(screen.getByText(/4 patrones de escritura/)).toBeInTheDocument();
   });
 
   it('cambia de punto al tocar otro pin', async () => {
     render(<Inspector />);
-    await screen.findByRole('heading', { name: 'Fonética · Estándar 45' });
+    await heading();
 
     await userEvent.click(screen.getByRole('button', { name: /^2\. Frente/ }));
 
@@ -51,13 +54,12 @@ describe('Inspector', () => {
     expect(screen.getByText('CHEESE /ʧiːz/ — QUESO')).toBeInTheDocument();
     expect(screen.getByText('Globo')).toBeInTheDocument();
     expect(screen.getByText(/Minimal pairs/)).toBeInTheDocument();
-    // La tabla de patrones de /iː/ trae 9 grupos y 40 palabras.
     expect(screen.getByText('Yeast')).toBeInTheDocument();
   });
 
   it('avisa de que el punto 34 no tiene contenido', async () => {
     render(<Inspector />);
-    await screen.findByRole('heading', { name: 'Fonética · Estándar 45' });
+    await heading();
 
     await userEvent.click(screen.getByRole('button', { name: /^34\. Tobillo/ }));
 
@@ -67,13 +69,25 @@ describe('Inspector', () => {
     expect(screen.getByText(/falta la sección correspondiente/)).toBeInTheDocument();
   });
 
-  it('informa si la semilla no se puede leer', async () => {
-    vi.stubGlobal(
-      'fetch',
-      vi.fn(() => Promise.resolve(new Response('', { status: 404 }))),
-    );
+  it('refleja el estado de repaso que hay en la base de datos', async () => {
+    // El punto 1 pasa de «Nuevo» a «Aprendiendo» al calificarlo.
     render(<Inspector />);
-    expect(await screen.findByText(/No se pudo cargar la semilla/)).toBeInTheDocument();
+    await heading();
+    await waitFor(() => {
+      expect(screen.getByRole('button', { name: /^1\. Pelo.*Nuevo/ })).toBeInTheDocument();
+    });
+
+    await applyGrade('itm-fonetica45-01', 'good', new Date(), {}, db);
+
+    await waitFor(() => {
+      expect(screen.getByRole('button', { name: /^1\. Pelo.*Aprendiendo/ })).toBeInTheDocument();
+    });
+  });
+
+  it('espera mientras la base de datos está vacía', async () => {
+    await clearAll(db);
+    render(<Inspector />);
+    expect(await screen.findByText(/Abriendo la base de datos/)).toBeInTheDocument();
     expect(screen.getByText(/npm run seed:fonetica/)).toBeInTheDocument();
   });
 });

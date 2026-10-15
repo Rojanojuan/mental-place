@@ -200,3 +200,56 @@ usuario dio. **Se guarda ese log, no los dos.**
 
 **Motivo:** el motor ancla los intervalos de un día o más a la hora local, y los tests obligatorios
 de cambio de horario necesitan una zona con DST para ser deterministas en cualquier máquina.
+
+## Fase 2 — Base de datos (2026-10-15)
+
+### D-024 · Tabla `settings` de clave/valor
+
+No está en el contrato, pero la app necesita guardar el límite diario de nuevos, la hora preferida,
+el tema y la preferencia de «mostrar la hoja de próximo repaso». Una tabla `settings` con
+`key`/`value` y `getSetting(key, fallback)` evita inventar una entidad por cada ajuste.
+
+### D-025 · Borrar un punto **no** renumera la ruta
+
+Los números de ruta son referencias estables: el import los usa (`«Cuerpo 1 · L8»`,
+`«Casa familiar · 37»`). Si al borrar el punto 1 todo se corriera, un import antiguo apuntaría a
+otro sitio. Para compactar hay una operación aparte, `resequenceRoute()`, y para insertar
+`insertLocus()`, que sí corre los de detrás (es lo que pide el flujo de las casas).
+
+### D-026 · Borrar un ítem se lleva su estado de repaso y su historial
+
+Sin el ítem, un `ReviewState` y sus `ReviewLog` no significan nada y quedarían huérfanos
+falseando las estadísticas.
+
+**Contraste deliberado:** borrar un **punto** no borra sus ítems, los deja «sin asignar». El
+contenido es lo valioso; la colocación en el cuerpo se puede volver a hacer.
+
+### D-027 · `fake-indexeddb` como dependencia de desarrollo
+
+jsdom no trae IndexedDB, así que sin ella la capa de persistencia no se podría testear. Se carga en
+`tests/setup.ts`, **antes que cualquier módulo**, porque Dexie la busca al importarse.
+
+**Aviso al usuario (regla 6):** es una dependencia nueva, solo de desarrollo, que nunca entra en el
+bundle. Si prefieres no tenerla, los 74 tests de `tests/db/` se caen y la persistencia queda sin
+cobertura.
+
+### D-028 · `applyOverride()` deja un solo log, no dos
+
+El flujo real es: el usuario califica, ve la fecha propuesta y la ajusta. Si se guardara la
+calificación y luego el ajuste habría dos entradas en el historial para un solo repaso. Por eso
+`applyOverride(itemId, target, now, { grade })` aplica la calificación **en memoria** y guarda
+únicamente el log del ajuste, con `manual: true` y la etapa de partida correcta.
+
+Para ver la propuesta sin escribir nada está `proposeGrade()`.
+
+### D-029 · La semilla se carga solo en el primer arranque
+
+`src/bootstrap.ts` deja los presets y, **solo si la base está vacía**, importa
+`seed/fonetica45.json`. En el segundo arranque no toca nada: lo que el usuario haya editado se
+queda como está. Cuando exista la pantalla de importación (Fase 3), sembrar será una acción suya y
+el bootstrap se quedará solo con los presets.
+
+### D-030 · La UI lee con `useLiveQuery`
+
+El Inspector consulta la base con `useLiveQuery` de `dexie-react-hooks` (D-005): al calificar un
+ítem, el color de su punto cambia sin que nadie recargue nada. Es lo que justifica esa dependencia.

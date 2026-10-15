@@ -1,8 +1,16 @@
-import { useEffect, useMemo, useState } from 'react';
-import seedUrl from '../../../seed/fonetica45.json?url';
+import { useMemo, useState } from 'react';
+import { useLiveQuery } from 'dexie-react-hooks';
 import { BODY_SILHOUETTE, BODY_VIEWBOX } from '@/design/assets';
 import { STATE_LABEL, STATE_TOKEN } from '@/design/states';
-import type { Bundle, ID, Item, Locus, LocusState, SceneObject, Zone } from '@/domain/types';
+import type { ID, Item, Locus, LocusState, SceneObject, Zone } from '@/domain/types';
+import {
+  listItemsByLocus,
+  listLoci,
+  listPalaces,
+  listSceneObjects,
+  listZones,
+  statusByLocus,
+} from '@/db';
 import { BlockView } from './BlockView';
 import './inspector.css';
 
@@ -17,11 +25,8 @@ const CANVAS_W = BODY_VIEWBOX.width * 2 + GAP;
 const PIN = BODY_VIEWBOX.height * 0.052;
 const PIN_DENSE = BODY_VIEWBOX.height * 0.026;
 
-interface LocusView {
+interface Placed {
   locus: Locus;
-  item: Item | undefined;
-  zone: Zone | undefined;
-  scene: SceneObject[];
   state: LocusState;
   cx: number;
   cy: number;
@@ -29,99 +34,79 @@ interface LocusView {
 }
 
 /**
- * Visor de verificación de la ingesta. Lee un paquete JSON v1 y lo pinta sobre
- * las siluetas del diseño. No toca la base de datos ni el motor de repaso: su
- * único trabajo es dejar ver que el contenido entró bien.
+ * Visor del contenido ingresado. Lee de IndexedDB con `useLiveQuery`, así que
+ * se refresca solo cuando cambian los datos o los estados de repaso.
  *
- * En la Fase 4 se parte en `BodyMap` + `LocusDetail` con estas mismas props.
+ * En la Fase 4 se parte en `BodyMap` + `LocusDetail`; los componentes ya están
+ * separados por responsabilidad para que ese corte no toque la lógica.
  */
 export function Inspector() {
-  const [bundle, setBundle] = useState<Bundle | null>(null);
-  const [error, setError] = useState<string | null>(null);
   const [selectedId, setSelectedId] = useState<ID | null>(null);
 
-  useEffect(() => {
-    let alive = true;
-    fetch(seedUrl)
-      .then((res) => {
-        if (!res.ok) throw new Error(`No se pudo leer la semilla (HTTP ${res.status})`);
-        return res.json() as Promise<Bundle>;
-      })
-      .then((data) => {
-        if (!alive) return;
-        setBundle(data);
-        const withItem = data.loci?.find((l) => data.items?.some((i) => i.locusId === l.id));
-        setSelectedId(withItem?.id ?? data.loci?.[0]?.id ?? null);
-      })
-      .catch((cause: unknown) => {
-        if (alive) setError(cause instanceof Error ? cause.message : String(cause));
-      });
-    return () => {
-      alive = false;
-    };
-  }, []);
+  const palace = useLiveQuery(async () => (await listPalaces())[0], []);
+  const palaceId = palace?.id;
 
-  const views = useMemo<LocusView[]>(() => {
-    if (!bundle?.loci) return [];
-    const items = bundle.items ?? [];
-    const zones = bundle.zones ?? [];
-    const scenes = bundle.sceneObjects ?? [];
-    return [...bundle.loci]
-      .sort((a, b) => a.routeNo - b.routeNo)
-      .map((locus) => {
-        const item = items.find((i) => i.locusId === locus.id);
-        return {
-          locus,
-          item,
-          zone: zones.find((z) => z.id === locus.zoneId),
-          scene: scenes.filter((s) => s.locusId === locus.id).sort((a, b) => a.order - b.order),
-          // Sin ReviewState todavía (Fase 2): con ítem = por estudiar, sin ítem = vacío.
-          state: item ? 'new' : 'empty',
-          cx: (locus.side === 'back' ? BACK_X : 0) + locus.pos.x * BODY_VIEWBOX.width,
-          cy: locus.pos.y * BODY_VIEWBOX.height,
-          r: (locus.dense === true ? PIN_DENSE : PIN) / 2,
-        };
-      });
-  }, [bundle]);
+  const map = useLiveQuery(async () => {
+    if (palaceId === undefined) return undefined;
+    const [loci, zones, statuses] = await Promise.all([
+      listLoci(palaceId),
+      listZones(palaceId),
+      statusByLocus(palaceId, new Date()),
+    ]);
+    return { loci, zones, statuses };
+  }, [palaceId]);
 
-  const selected = views.find((v) => v.locus.id === selectedId);
-  const palace = bundle?.palaces?.[0];
-  const filled = views.filter((v) => v.item).length;
+  const current = selectedId ?? map?.loci.find((l) => map.statuses[l.id] !== 'empty')?.id ?? null;
 
-  if (error !== null) {
+  const detail = useLiveQuery(async () => {
+    if (current === null) return undefined;
+    const [items, scene] = await Promise.all([
+      listItemsByLocus(current),
+      listSceneObjects(current),
+    ]);
+    return { items, scene };
+  }, [current]);
+
+  const placed = useMemo<Placed[]>(() => {
+    if (!map) return [];
+    return map.loci.map((locus) => ({
+      locus,
+      state: map.statuses[locus.id] ?? 'empty',
+      cx: (locus.side === 'back' ? BACK_X : 0) + locus.pos.x * BODY_VIEWBOX.width,
+      cy: locus.pos.y * BODY_VIEWBOX.height,
+      r: (locus.dense === true ? PIN_DENSE : PIN) / 2,
+    }));
+  }, [map]);
+
+  if (!palace || !map) {
     return (
       <section className="insp insp--msg">
-        <h2>No se pudo cargar la semilla</h2>
-        <p>{error}</p>
+        <p className="insp__shimmer">Abriendo la base de datos…</p>
         <p className="insp__hint">
-          Genérala con <code>npm run seed:fonetica</code>.
+          Si es la primera vez, se está sembrando el palacio. Si no aparece nada, genera la semilla
+          con <code>npm run seed:fonetica</code>.
         </p>
       </section>
     );
   }
 
-  if (!bundle) {
-    return (
-      <section className="insp insp--msg">
-        <p className="insp__shimmer">Cargando la semilla…</p>
-      </section>
-    );
-  }
+  const selected = placed.find((p) => p.locus.id === current);
+  const filled = placed.filter((p) => p.state !== 'empty').length;
 
   return (
     <section className="insp">
       <header className="insp__head">
         <div>
-          <h2>{palace?.name ?? 'Palacio'}</h2>
+          <h2>{palace.name}</h2>
           <p className="insp__sub">
-            {views.length} puntos · {filled} con contenido · {bundle.zones?.length ?? 0} zonas
+            {placed.length} puntos · {filled} con contenido · {map.zones.length} zonas
           </p>
         </div>
         <ul className="insp__zones">
-          {(bundle.zones ?? []).map((z) => (
-            <li key={z.id}>
-              <span className="insp__zdot" style={{ background: `var(--zone-${z.color})` }} />
-              {z.name}
+          {map.zones.map((zone: Zone) => (
+            <li key={zone.id}>
+              <span className="insp__zdot" style={{ background: `var(--zone-${zone.color})` }} />
+              {zone.name}
             </li>
           ))}
         </ul>
@@ -130,7 +115,7 @@ export function Inspector() {
       <div className="insp__body">
         <div className="insp__map">
           <svg
-            viewBox={`0 0 ${CANVAS_W} ${BODY_VIEWBOX.height}`}
+            viewBox={`0 0 ${String(CANVAS_W)} ${String(BODY_VIEWBOX.height)}`}
             role="group"
             aria-label="Mapa del cuerpo con los puntos del palacio"
           >
@@ -148,38 +133,38 @@ export function Inspector() {
               width={BODY_VIEWBOX.width}
               height={BODY_VIEWBOX.height}
             />
-            {views.map((v) => {
-              const isSel = v.locus.id === selectedId;
+            {placed.map((pin) => {
+              const isSel = pin.locus.id === current;
               return (
                 <g
-                  key={v.locus.id}
+                  key={pin.locus.id}
                   className={`pin${isSel ? ' pin--sel' : ''}`}
                   role="button"
                   tabIndex={0}
-                  aria-label={`${v.locus.routeNo}. ${v.locus.partName} — ${STATE_LABEL[v.state]}`}
+                  aria-label={`${String(pin.locus.routeNo)}. ${pin.locus.partName} — ${STATE_LABEL[pin.state]}`}
                   aria-pressed={isSel}
                   onClick={() => {
-                    setSelectedId(v.locus.id);
+                    setSelectedId(pin.locus.id);
                   }}
                   onKeyDown={(e) => {
                     if (e.key === 'Enter' || e.key === ' ') {
                       e.preventDefault();
-                      setSelectedId(v.locus.id);
+                      setSelectedId(pin.locus.id);
                     }
                   }}
                 >
-                  <title>{`${v.locus.routeNo}. ${v.locus.partName}`}</title>
+                  <title>{`${String(pin.locus.routeNo)}. ${pin.locus.partName}`}</title>
                   <circle
-                    cx={v.cx}
-                    cy={v.cy}
-                    r={v.r}
-                    fill={`var(${STATE_TOKEN[v.state]})`}
+                    cx={pin.cx}
+                    cy={pin.cy}
+                    r={pin.r}
+                    fill={`var(${STATE_TOKEN[pin.state]})`}
                     stroke="var(--state-edge)"
                     strokeWidth={1.5}
                   />
-                  {v.locus.dense !== true && (
-                    <text x={v.cx} y={v.cy} className="pin__n">
-                      {v.locus.routeNo}
+                  {pin.locus.dense !== true && (
+                    <text x={pin.cx} y={pin.cy} className="pin__n">
+                      {pin.locus.routeNo}
                     </text>
                   )}
                 </g>
@@ -187,21 +172,21 @@ export function Inspector() {
             })}
           </svg>
           <ol className="insp__route">
-            {views.map((v) => (
-              <li key={v.locus.id}>
+            {placed.map((pin) => (
+              <li key={pin.locus.id}>
                 <button
                   type="button"
-                  className={`insp__rbtn${v.locus.id === selectedId ? ' is-sel' : ''}`}
+                  className={`insp__rbtn${pin.locus.id === current ? ' is-sel' : ''}`}
                   onClick={() => {
-                    setSelectedId(v.locus.id);
+                    setSelectedId(pin.locus.id);
                   }}
                 >
-                  <span className="insp__rn mono">{v.locus.routeNo}</span>
+                  <span className="insp__rn mono">{pin.locus.routeNo}</span>
                   <span
                     className="insp__rdot"
-                    style={{ background: `var(${STATE_TOKEN[v.state]})` }}
+                    style={{ background: `var(${STATE_TOKEN[pin.state]})` }}
                   />
-                  {v.locus.partName}
+                  {pin.locus.partName}
                 </button>
               </li>
             ))}
@@ -217,7 +202,7 @@ export function Inspector() {
                 <span className="mono">{selected.locus.routeNo}</span> · {selected.locus.partName}
               </h3>
               <p className="insp__meta">
-                {selected.zone?.name} · lado{' '}
+                {map.zones.find((z) => z.id === selected.locus.zoneId)?.name} · lado{' '}
                 {selected.locus.side === 'back' ? 'posterior' : 'frontal'}
                 {selected.locus.dense === true && ' · punto denso'} · {STATE_LABEL[selected.state]}
               </p>
@@ -225,30 +210,32 @@ export function Inspector() {
                 <p className="insp__anchor">{selected.locus.anchor.text}</p>
               )}
 
-              {selected.scene.length > 0 && (
+              {detail && detail.scene.length > 0 && (
                 <ul className="insp__scene">
-                  {selected.scene.map((s) => (
-                    <li key={s.id}>
-                      <strong>{s.text}</strong>
-                      {s.represents !== undefined && <span> — {s.represents}</span>}
+                  {detail.scene.map((object: SceneObject) => (
+                    <li key={object.id}>
+                      <strong>{object.text}</strong>
+                      {object.represents !== undefined && <span> — {object.represents}</span>}
                     </li>
                   ))}
                 </ul>
               )}
 
-              {!selected.item ? (
+              {detail?.items.length === 0 ? (
                 <p className="insp__empty">
                   Punto sin contenido.
                   {selected.locus.notes !== undefined && ` ${selected.locus.notes}`}
                 </p>
               ) : (
-                <>
-                  <p className="insp__front">{selected.item.front}</p>
-                  <p className="insp__back">{selected.item.back}</p>
-                  {selected.item.blocks.map((block, i) => (
-                    <BlockView key={i} block={block} />
-                  ))}
-                </>
+                detail?.items.map((item: Item) => (
+                  <div key={item.id}>
+                    <p className="insp__front">{item.front}</p>
+                    <p className="insp__back">{item.back}</p>
+                    {item.blocks.map((block, i) => (
+                      <BlockView key={i} block={block} />
+                    ))}
+                  </div>
+                ))
               )}
             </>
           )}
