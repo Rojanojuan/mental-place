@@ -87,6 +87,7 @@ export function Inspector() {
           <BodyMap
             loci={map.loci}
             statusByLocus={map.statuses}
+            appearance={palace.style}
             selectedIds={current === null ? [] : [current]}
             onLocusTap={setSelectedId}
           />

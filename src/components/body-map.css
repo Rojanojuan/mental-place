@@ -68,3 +68,56 @@
   dominant-baseline: central;
   pointer-events: none;
 }
+
+/* ---------------------------------------------- apariencia del cuerpo */
+
+/* El SVG traía estos valores en el `<svg>` de fuera, que al incrustar se pierde. */
+.body {
+  fill: none;
+  stroke: var(--body-accent, var(--body-line));
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.body__outline {
+  fill: var(--body-skin, var(--body-fill));
+  fill-opacity: 0.22;
+}
+
+/* Detalle: `min` solo contorno · `med` + rasgos y articulaciones · `full` + músculos. */
+.body--detail-min .body__face,
+.body--detail-min .body__joints,
+.body--detail-min .body__muscles,
+.body--detail-med .body__muscles {
+  display: none;
+}
+
+/* Grosor del trazo, manteniendo la jerarquía entre capas. */
+.body--line-bold .body__outline,
+.body--line-bold .body__ears {
+  stroke-width: 2;
+}
+
+.body--line-bold .body__face,
+.body--line-bold .body__joints,
+.body--line-bold .body__muscles {
+  stroke-width: 1.1;
+}
+
+/* Volumen: `flat` quita el relleno y deja solo la línea. */
+.body--vol-flat .body__outline {
+  fill-opacity: 0;
+}
+
+/* Trazo: `neon` es contorno con resplandor. */
+.body--draw-neon .body__outline,
+.body--draw-neon .body__ears {
+  filter: drop-shadow(0 0 2.5px var(--body-accent, var(--body-line)));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .body--draw-neon .body__outline,
+  .body--draw-neon .body__ears {
+    filter: none;
+  }
+}

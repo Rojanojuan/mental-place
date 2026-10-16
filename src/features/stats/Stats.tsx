@@ -173,6 +173,7 @@ export function Stats() {
           <BodyMap
             loci={data.loci}
             statusByLocus={data.statuses}
+            appearance={data.palace.style}
             maxHeight="44dvh"
             label="Mapa del palacio por estado"
           />

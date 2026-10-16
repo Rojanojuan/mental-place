@@ -84,6 +84,7 @@ export function Onboarding() {
                   <BodyMap
                     loci={data.loci}
                     statusByLocus={data.statuses}
+                    appearance={data.palace.style}
                     maxHeight="40dvh"
                     label="Tu palacio"
                   />

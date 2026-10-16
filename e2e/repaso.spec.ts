@@ -164,6 +164,7 @@ test.describe('maquetación móvil', () => {
     ['/', 'Repasar ahora'],
     ['/inspector', '45 puntos'],
     ['/editor', '45 puntos'],
+    ['/cuerpos', 'Mis cuerpos'],
     ['/biblioteca', 'ítems'],
     ['/estadisticas', 'Previsión de 30 días'],
     ['/horarios', 'Horarios de repaso'],

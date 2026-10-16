@@ -1,7 +1,8 @@
 import { useMemo } from 'react';
-import { BODY_SILHOUETTE, BODY_VIEWBOX } from '@/design/assets';
+import { BODY_INNER, BODY_VIEWBOX } from '@/design/assets';
+import { bodyStyleAttrs } from '@/design/body-style';
 import { STATE_LABEL, STATE_TOKEN } from '@/design/states';
-import type { ID, Locus, LocusState } from '@/domain/types';
+import type { ID, Locus, LocusState, PalaceStyle } from '@/domain/types';
 import './body-map.css';
 
 /** Hueco entre el cuerpo frontal y el posterior: 22 % del ancho de un cuerpo. */
@@ -36,6 +37,8 @@ export interface BodyMapProps {
   maxHeight?: string;
   className?: string;
   label?: string;
+  /** Apariencia del cuerpo (`Palace.style`). */
+  appearance?: PalaceStyle | undefined;
 }
 
 interface Placed {
@@ -65,7 +68,9 @@ export function BodyMap({
   maxHeight = '62dvh',
   className,
   label = 'Mapa del cuerpo con los puntos del palacio',
+  appearance,
 }: BodyMapProps) {
+  const body = bodyStyleAttrs(appearance);
   const placed = useMemo<Placed[]>(
     () =>
       loci.map((locus) => ({
@@ -131,19 +136,16 @@ export function BodyMap({
         className="bodymap__camera"
         transform={`translate(${tx.toFixed(2)} ${ty.toFixed(2)}) scale(${scale.toFixed(3)})`}
       >
-        <image
-          href={BODY_SILHOUETTE.front}
-          x={0}
-          y={0}
-          width={BODY_VIEWBOX.width}
-          height={BODY_VIEWBOX.height}
+        <g
+          className={body.className}
+          style={body.style}
+          dangerouslySetInnerHTML={{ __html: BODY_INNER.front }}
         />
-        <image
-          href={BODY_SILHOUETTE.back}
-          x={BACK_X}
-          y={0}
-          width={BODY_VIEWBOX.width}
-          height={BODY_VIEWBOX.height}
+        <g
+          className={body.className}
+          style={body.style}
+          transform={`translate(${String(BACK_X)} 0)`}
+          dangerouslySetInnerHTML={{ __html: BODY_INNER.back }}
         />
         {placed.map((pin) => {
           const isFocus = pin.locus.id === focusId;

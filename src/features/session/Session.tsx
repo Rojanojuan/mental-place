@@ -2,7 +2,16 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { BodyMap } from '@/components/BodyMap';
 import { BlockView } from '@/features/inspector/BlockView';
-import type { Grade, ID, Item, Locus, LocusState, SceneObject, Schedule } from '@/domain/types';
+import type {
+  Grade,
+  ID,
+  Item,
+  Locus,
+  LocusState,
+  Palace,
+  SceneObject,
+  Schedule,
+} from '@/domain/types';
 import {
   applyGrade,
   applyOverride,
@@ -68,7 +77,11 @@ export function Session() {
   const [done, setDone] = useState<{ reviewed: number; before: Record<ID, LocusState> } | null>(
     null,
   );
-  const [map, setMap] = useState<{ loci: Locus[]; statuses: Record<ID, LocusState> } | null>(null);
+  const [map, setMap] = useState<{
+    loci: Locus[];
+    statuses: Record<ID, LocusState>;
+    style: Palace['style'];
+  } | null>(null);
 
   // La cola se arma una sola vez al entrar: si se recalculara en vivo, las
   // tarjetas se moverían bajo los pies del usuario al ir calificando.
@@ -98,6 +111,7 @@ export function Session() {
         setMap({
           loci: await listLoci(palace.id),
           statuses: await statusByLocus(palace.id, now),
+          style: palace.style,
         });
       }
       setCards(built);
@@ -214,7 +228,12 @@ export function Session() {
         </p>
         {map && (
           <div className="ses__summary">
-            <BodyMap loci={map.loci} statusByLocus={statuses} maxHeight="40dvh" />
+            <BodyMap
+              loci={map.loci}
+              statusByLocus={statuses}
+              appearance={map.style}
+              maxHeight="40dvh"
+            />
           </div>
         )}
         <div className="ses__actions">
@@ -256,6 +275,7 @@ export function Session() {
             <BodyMap
               loci={map.loci}
               statusByLocus={statuses}
+              appearance={map.style}
               focusId={card.locus?.id ?? null}
               zoom={2.2}
               maxHeight="48dvh"

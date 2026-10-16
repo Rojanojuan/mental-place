@@ -189,6 +189,25 @@ se calcula desde `ReviewState` y el contenido vive en `Item`.
 punto 1 (Pelo) es `/j/`, una aproximante. Las cinco zonas se conservan tal cual —son la
 agrupación geométrica del diseño—; renombrarlas es decisión del usuario.
 
+### 3.11 · La silueta no trae las capas de cabello, vello facial ni gafas
+
+`PROMPT_MEJORAS.md` §3 describe la silueta con capas de «vello facial/gafas → cabello», y
+`Palace.style` tiene las claves `hair`, `hairColor`, `facial` y `glasses`. El SVG entregado
+(`silueta/body-front.svg`) trae **cinco** grupos y ninguno es ese:
+
+| Capa del SVG      | Qué permite                                                              |
+| ----------------- | ------------------------------------------------------------------------ |
+| `ears`, `outline` | `accent` (color), `line` (grosor), `skin` (relleno), `vol`, `draw: neon` |
+| `face`, `joints`  | `detail: med`                                                            |
+| `muscles`         | `detail: full`                                                           |
+
+→ La app aplica **6 de las 10 claves** y lo dice en la pantalla «Mis cuerpos» en vez de fingir que
+las otras funcionan. `draw: lapiz` tampoco se puede: necesita las formas de sombreado rayado.
+
+**Lo que haría falta del diseño:** añadir al SVG los grupos `hair`, `facial` y `glasses` con las
+variantes que lista `PROMPT_MEJORAS.md` §2 (7 peinados, 3 de vello facial), de modo que se puedan
+mostrar y ocultar por CSS como ya se hace con `face`, `joints` y `muscles`.
+
 ### 3.9 Import/export: campos extra
 
 `palaces` añade `rooms`, `planData`, `style`; `loci` añade `room`, `dense`.

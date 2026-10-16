@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { NavLink, Route, Routes } from 'react-router-dom';
+import { BodyStyler } from '@/features/body-styler/BodyStyler';
 import { ImportExport } from '@/features/import-export/ImportExport';
 import { Inspector } from '@/features/inspector/Inspector';
 import { Onboarding } from '@/features/onboarding/Onboarding';
@@ -18,6 +19,7 @@ const NAV = [
   { to: '/', label: 'Hoy' },
   { to: '/inspector', label: 'Palacio' },
   { to: '/editor', label: 'Editor' },
+  { to: '/cuerpos', label: 'Cuerpos' },
   { to: '/biblioteca', label: 'Biblioteca' },
   { to: '/estadisticas', label: 'Progreso' },
   { to: '/horarios', label: 'Horarios' },
@@ -68,6 +70,7 @@ export function App() {
         <Route path="/sesion" element={<Session />} />
         <Route path="/inspector" element={<Inspector />} />
         <Route path="/editor" element={<PalaceEditor />} />
+        <Route path="/cuerpos" element={<BodyStyler />} />
         <Route path="/punto/:locusId" element={<LocusEditor />} />
         <Route path="/item/:itemId" element={<ItemEditor />} />
         <Route path="/biblioteca" element={<Library />} />

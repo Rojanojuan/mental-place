@@ -152,6 +152,7 @@ export function PalaceEditor() {
           <BodyMap
             loci={data.loci}
             statusByLocus={data.statuses}
+            appearance={palace.style}
             selectedIds={selectedId === null ? [] : [selectedId]}
             onLocusTap={(id) => {
               void tapLocus(id);

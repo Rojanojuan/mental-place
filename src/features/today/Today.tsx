@@ -113,6 +113,7 @@ export function Today() {
           <BodyMap
             loci={data.loci}
             statusByLocus={data.statuses}
+            appearance={data.palace.style}
             maxHeight="56dvh"
             label="Mapa del palacio con los repasos pendientes"
           />

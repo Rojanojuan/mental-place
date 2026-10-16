@@ -6,6 +6,7 @@ import { STATE_LABEL } from '@/design/states';
 import type { Item, Locus, SceneObject } from '@/domain/types';
 import {
   getLocus,
+  getPalace,
   listItemsByLocus,
   listLoci,
   listSceneObjects,
@@ -41,6 +42,7 @@ export function LocusEditor() {
     if (locusId === undefined) return undefined;
     const locus = await getLocus(locusId);
     if (!locus) return { locus: undefined };
+    const palace = await getPalace(locus.palaceId);
     const [items, scene, zones, loci, statuses] = await Promise.all([
       listItemsByLocus(locusId),
       listSceneObjects(locusId),
@@ -50,7 +52,7 @@ export function LocusEditor() {
     ]);
     const logs = (await Promise.all(items.map((item) => listLogs(item.id)))).flat();
     logs.sort((a, b) => b.at.localeCompare(a.at));
-    return { locus, items, scene, zones, loci, statuses, logs };
+    return { locus, palace, items, scene, zones, loci, statuses, logs };
   }, [locusId]);
 
   if (!data) {
@@ -157,6 +159,7 @@ export function LocusEditor() {
             <BodyMap
               loci={data.loci}
               statusByLocus={data.statuses}
+              appearance={data.palace?.style}
               focusId={locus.id}
               zoom={2.2}
               maxHeight="44dvh"

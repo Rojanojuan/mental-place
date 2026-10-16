@@ -442,3 +442,26 @@ para un par inglés/español.
 La había quitado por ser siempre el mismo texto, y las cabeceras quedaban
 `Inglés · Transcripción · Español` repetidas sin nada que dijera dónde acaba una palabra y empieza
 su contraste. El Word la trae; se queda.
+
+### D-058 · La silueta se incrusta, no se enlaza
+
+El mapa pintaba las siluetas con `<image>`, y así el CSS no entra en el dibujo: la apariencia del
+palacio (`Palace.style`) **estaba en la semilla y la app la ignoraba entera**. Ahora el SVG se
+incrusta con `?raw`, se le quita la metadata C2PA —7,7 kB de los 13 kB del archivo— y los `id` de
+las capas se vuelven clases, porque los dos cuerpos conviven en el mismo documento y dos
+`id="outline"` serían inválidos.
+
+Con eso, seis de las diez claves de `Palace.style` funcionan de verdad: `accent`, `detail`, `line`,
+`skin`, `vol` y `draw: neon`.
+
+### D-059 · Los siete tonos de piel se eligieron aquí
+
+El traspaso nombra los valores de `skin` (`neutral`, `porcelana`, `arena`, `miel`, `canela`,
+`ebano`, `plano`) pero no da sus colores. Están en `src/design/body-style.ts` en oklch, de más
+claro a más oscuro; `plano` es sin relleno. Si el diseño los define, se cambian ahí y ya.
+
+### D-060 · Lo que no se puede aplicar se dice, no se finge
+
+`hair`, `hairColor`, `facial` y `glasses` necesitan capas que el SVG entregado no tiene, y
+`draw: lapiz` necesita el sombreado rayado. «Mis cuerpos» los marca como pendientes y explica por
+qué, en vez de ofrecer botones que no hacen nada. Ver `docs/HANDOFF_DISENO.md` §3.11.
