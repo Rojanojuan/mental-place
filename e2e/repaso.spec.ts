@@ -217,3 +217,63 @@ test.describe('la lista de ruta', () => {
     }
   });
 });
+
+test.describe('uso en móvil', () => {
+  test('entrar directo a la sesión espera a la siembra', async ({ page }) => {
+    // Un marcador o la app instalada abren una ruta sin pasar por Hoy: la cola
+    // se armaba antes de que la semilla terminara y salía «nada que repasar».
+    await page.goto('/sesion');
+    await expect(page.getByText('1 / 20')).toBeVisible(SEEDED);
+  });
+
+  test('la cabecera no se come la pantalla', async ({ page }, testInfo) => {
+    test.skip(testInfo.project.name !== 'movil', 'solo aplica al móvil');
+    await freshApp(page);
+    await expect(page.getByRole('link', { name: /Repasar ahora/ })).toBeVisible(SEEDED);
+
+    const head = await page.evaluate(() => {
+      const el = document.querySelector('.shell__head');
+      return el ? Math.round(el.getBoundingClientRect().height) : 0;
+    });
+    // Ocho destinos envueltos ocupaban 144 px; en una fila que se desliza, ~50.
+    expect(head).toBeLessThan(80);
+  });
+
+  test('en la sesión se ve el contenido sin desplazar', async ({ page }, testInfo) => {
+    test.skip(testInfo.project.name !== 'movil', 'solo aplica al móvil');
+    await page.goto('/sesion');
+    await expect(page.getByText('1 / 20')).toBeVisible(SEEDED);
+    await page.keyboard.press('Space');
+    await page.keyboard.press('Space');
+    await expect(page.getByText(/Patrones del sonido/)).toBeVisible();
+
+    const geo = await page.evaluate(() => {
+      const card = document.querySelector('.ses__card');
+      return {
+        cardTop: card ? Math.round(card.getBoundingClientRect().top) : 9999,
+        viewport: window.innerHeight,
+      };
+    });
+    // El mapa se quedaba media pantalla y la tarjeta empezaba fuera de vista.
+    expect(geo.cardTop).toBeLessThan(geo.viewport - 150);
+  });
+
+  test('los cuatro botones de calificar caben y miden lo que pide el diseño', async ({ page }) => {
+    await page.goto('/sesion');
+    await expect(page.getByText('1 / 20')).toBeVisible(SEEDED);
+    await page.keyboard.press('Space');
+    await page.keyboard.press('Space');
+
+    const sizes = await page.evaluate(() =>
+      [...document.querySelectorAll('.grade')].map((el) => {
+        const r = el.getBoundingClientRect();
+        return { w: Math.round(r.width), h: Math.round(r.height), right: Math.round(r.right) };
+      }),
+    );
+    expect(sizes).toHaveLength(4);
+    for (const size of sizes) {
+      expect(size.h).toBeGreaterThanOrEqual(64);
+      expect(size.right).toBeLessThanOrEqual(await page.evaluate(() => window.innerWidth));
+    }
+  });
+});

@@ -99,7 +99,9 @@
   align-items: center;
   gap: var(--space-2);
   width: 100%;
-  padding: 4px var(--space-2);
+  /* Es la forma fiable de elegir un punto con el dedo: no baja de 44 px. */
+  min-height: var(--hit);
+  padding: var(--space-2);
   background: none;
   border: 0;
   border-radius: var(--radius-sm);
@@ -119,7 +121,7 @@
 }
 
 .insp__rn {
-  min-width: 20px;
+  min-width: var(--hit);
   color: var(--text-3);
   font-size: 11px;
 }
@@ -327,9 +329,10 @@
   display: inline-flex;
   align-items: center;
   gap: var(--space-1);
+  min-height: var(--hit);
   color: inherit;
   text-decoration: none;
-  padding: 2px var(--space-2);
+  padding: var(--space-1) var(--space-2);
   border-radius: var(--radius-pill);
 }
 

@@ -129,3 +129,9 @@
      para que los puntos destaquen por encima del plano. */
   opacity: 0.88;
 }
+
+/* Área táctil del punto: invisible pero tocable. */
+.pin__hit {
+  fill: transparent;
+  stroke: none;
+}

@@ -59,8 +59,14 @@ export function App() {
               </NavLink>
             ))}
           </nav>
-          <button type="button" className="btn" onClick={toggleTheme}>
-            Tema: {theme === 'dark' ? 'oscuro' : 'claro'}
+          <button
+            type="button"
+            className="btn shell__theme"
+            onClick={toggleTheme}
+            aria-label={`Tema ${theme === 'dark' ? 'oscuro' : 'claro'}, cambiar`}
+          >
+            <span aria-hidden="true">{theme === 'dark' ? '☾' : '☀'}</span>
+            <span className="shell__themeword">Tema: {theme === 'dark' ? 'oscuro' : 'claro'}</span>
           </button>
         </div>
       </header>

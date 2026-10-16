@@ -231,11 +231,11 @@ describe('Sesión · la cola', () => {
     renderAt(<Session />, '/sesion');
     await screen.findByText('1 / 3');
     expect(screen.getByLabelText(/Punto señalado: Parte 1/)).toBeInTheDocument();
-    // El pin del punto 1 queda enfocado por la cámara.
-    expect(screen.getByRole('button', { name: /^1\. Parte 1/ })).toHaveAttribute(
-      'aria-pressed',
-      'true',
-    );
+    // En la sesión los puntos solo informan: se anuncian como imagen, no como
+    // botón, para no llenar el lector de pantalla de controles inertes.
+    const pin = screen.getByRole('img', { name: /^1\. Parte 1/ });
+    expect(pin).toBeInTheDocument();
+    expect(pin).not.toHaveAttribute('tabindex');
   });
 });
 

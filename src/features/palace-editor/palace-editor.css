@@ -126,7 +126,7 @@
 
 .pae__zones input,
 .pae__route input {
-  min-height: 32px;
+  min-height: var(--hit);
   padding: 0 var(--space-2);
   border: 1px solid var(--line-2);
   border-radius: var(--radius-md);
@@ -169,8 +169,8 @@
 
 .pae__route button,
 .pae__del {
-  min-width: 26px;
-  min-height: 26px;
+  min-width: var(--hit);
+  min-height: var(--hit);
   border: 0;
   border-radius: var(--radius-sm);
   background: none;
@@ -202,7 +202,7 @@
 }
 
 .pae__rinput {
-  min-height: 28px;
+  min-height: var(--hit);
   padding: 0 var(--space-2);
   border: 1px solid transparent;
   border-radius: var(--radius-sm);

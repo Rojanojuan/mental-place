@@ -17,6 +17,16 @@ const PIN_DENSE = BODY_VIEWBOX.height * 0.026;
 /** Por debajo de este diámetro aparente el número no se lee: se oculta. */
 const NUMBER_MIN = 13;
 
+/**
+ * Área táctil mínima del punto, en unidades del viewBox.
+ *
+ * El diseño la pide de 28 px como mínimo (`PROMPT_MEJORAS.md` §1.3), pero un
+ * punto denso se dibuja a 12 unidades: con el dedo es intocable. Se añade un
+ * círculo transparente detrás, que no cambia el dibujo pero sí lo que se puede
+ * tocar. En la cabeza se solapan —ahí la lista de ruta es la vía fiable—.
+ */
+const HIT_MIN = BODY_VIEWBOX.height * 0.078;
+
 /** Un plano de casa: su dibujo y las medidas de su lienzo. */
 export interface PlanSource {
   svg: string;
@@ -116,6 +126,7 @@ export function BodyMap({
   const ty = focused ? canvasH / 2 - focused.cy * scale : 0;
 
   const selected = new Set(selectedIds);
+  const interactive = onLocusTap !== undefined || onLocusDrag !== undefined;
 
   /**
    * Del punto del puntero a coordenadas normalizadas del cuerpo que toque.
@@ -150,7 +161,9 @@ export function BodyMap({
     <svg
       className={className === undefined ? 'bodymap' : `bodymap ${className}`}
       viewBox={`0 0 ${String(canvasW)} ${String(canvasH)}`}
-      style={{ maxHeight }}
+      // Con `none` no se escribe nada en línea: así el CSS puede decidirlo
+      // por pantalla, que es lo que necesita el móvil.
+      style={maxHeight === 'none' ? undefined : { maxHeight }}
       role="group"
       aria-label={label}
       onClick={
@@ -203,10 +216,12 @@ export function BodyMap({
             <g
               key={pin.locus.id}
               className={classes}
-              role="button"
-              tabIndex={0}
+              // Sin manejador el punto solo informa: anunciarlo como botón
+              // llenaba el lector de pantalla de controles que no hacen nada.
+              role={interactive ? 'button' : 'img'}
+              tabIndex={interactive ? 0 : undefined}
               aria-label={`${String(pin.locus.routeNo)}. ${pin.locus.partName} — ${STATE_LABEL[pin.state]}`}
-              aria-pressed={isFocus}
+              aria-pressed={interactive ? isFocus : undefined}
               onPointerDown={
                 onLocusDrag === undefined
                   ? undefined
@@ -255,6 +270,13 @@ export function BodyMap({
               }}
             >
               <title>{`${String(pin.locus.routeNo)}. ${pin.locus.partName}`}</title>
+              {/* Área táctil: invisible, nunca menor que el mínimo del diseño. */}
+              <circle
+                className="pin__hit"
+                cx={pin.cx}
+                cy={pin.cy}
+                r={Math.max(r, HIT_MIN / 2 / scale)}
+              />
               {/* Vencido: halo pulsante. Nunca solo color (contrato §3). */}
               {pin.state === 'due' && (
                 <circle

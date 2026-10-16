@@ -100,7 +100,7 @@
 }
 
 .iox__maprow select {
-  min-height: 36px;
+  min-height: var(--hit);
   padding: 0 var(--space-2);
   border: 1px solid var(--line-2);
   border-radius: var(--radius-md);
@@ -151,7 +151,7 @@
 
 .iox__cancel {
   align-self: flex-start;
-  min-height: 36px;
+  min-height: var(--hit);
   border: 0;
   background: none;
   color: var(--text-3);
@@ -187,8 +187,8 @@
 }
 
 .iox__backups button {
-  min-width: 26px;
-  min-height: 26px;
+  min-width: var(--hit);
+  min-height: var(--hit);
   border: 0;
   border-radius: var(--radius-sm);
   background: none;

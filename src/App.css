@@ -121,7 +121,7 @@
 }
 
 .tabs__btn {
-  min-height: 36px;
+  min-height: var(--hit);
   padding: 0 var(--space-4);
   border: 0;
   border-radius: var(--radius-pill);
@@ -158,4 +158,73 @@
   text-decoration: none;
   display: inline-flex;
   align-items: center;
+}
+
+/* ------------------------------------------------------------- móvil */
+
+@media (max-width: 760px) {
+  .shell {
+    padding: var(--space-3) var(--space-4) var(--space-8);
+    gap: var(--space-4);
+  }
+
+  .shell h1 {
+    font-size: 17px;
+  }
+
+  .shell__head {
+    align-items: center;
+  }
+
+  /* Ocho destinos envueltos ocupaban 190 px de los 727 del móvil: casi un
+     cuarto de la pantalla antes de ver nada. En una fila que se desliza
+     ocupan 44 px, y siguen estando todos. */
+  .tabs {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .tabs::-webkit-scrollbar {
+    display: none;
+  }
+
+  .tabs__btn {
+    flex: none;
+    padding: 0 var(--space-3);
+  }
+
+  /* Todo en una fila: la navegación se desliza y el tema queda al lado.
+     Apilados ocupaban 144 px de cabecera antes de ver nada. */
+  .shell__actions {
+    flex: 1;
+    min-width: 0;
+    gap: var(--space-2);
+  }
+
+  .tabs {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .shell__actions .btn {
+    flex: none;
+    padding: 0 var(--space-3);
+  }
+
+  /* En el móvil basta el símbolo: la palabra robaba sitio a la navegación. */
+  .shell__themeword {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+  }
+}
+
+.shell__theme {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
 }

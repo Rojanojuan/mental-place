@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useLiveQuery } from 'dexie-react-hooks';
 import { Link, useSearchParams } from 'react-router-dom';
 import type { ScopeRequest } from '@/db';
 import { BodyMap } from '@/components/BodyMap';
@@ -69,6 +70,9 @@ interface Pending {
  */
 export function Session() {
   const [params] = useSearchParams();
+  // Entrar directo a /sesion (un marcador, la app instalada) corría contra la
+  // siembra inicial y la cola salía vacía. Se espera a que haya algo.
+  const itemCount = useLiveQuery(() => db.items.count(), []);
   // Las unidades de repaso del contrato §4.4: la cola de hoy, un punto, una
   // zona, el palacio entero o el recorrido.
   const scope = (params.get('scope') ?? 'today') as QueueScope;
@@ -92,6 +96,7 @@ export function Session() {
   // La cola se arma una sola vez al entrar: si se recalculara en vivo, las
   // tarjetas se moverían bajo los pies del usuario al ir calificando.
   useEffect(() => {
+    if (itemCount === undefined || itemCount === 0) return;
     const alive = { current: true };
     void (async () => {
       const now = new Date();
@@ -130,7 +135,7 @@ export function Session() {
     return () => {
       alive.current = false;
     };
-  }, [locusId, scope, zoneId]);
+  }, [itemCount, locusId, scope, zoneId]);
 
   const card = cards?.[index];
 
@@ -288,7 +293,8 @@ export function Session() {
               appearance={map.style}
               focusId={card.locus?.id ?? null}
               zoom={2.2}
-              maxHeight="48dvh"
+              maxHeight="none"
+              className="ses__bodymap"
               label={`Punto señalado: ${card.locus?.partName ?? 'sin asignar'}`}
             />
           )}

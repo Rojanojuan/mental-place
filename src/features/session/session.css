@@ -297,7 +297,7 @@
 }
 
 .chip {
-  min-height: 36px;
+  min-height: var(--hit);
   padding: 0 var(--space-3);
   border: 1px solid var(--line-2);
   border-radius: var(--radius-pill);
@@ -337,4 +337,24 @@
   margin: 2px 0 0;
   text-align: center;
   font-size: 13px;
+}
+
+/* El alto del mapa vive aquí y no en línea, para que el móvil pueda bajarlo:
+   cediéndole media pantalla, el contenido de la tarjeta quedaba fuera. */
+.ses__bodymap {
+  max-height: 46dvh;
+}
+
+@media (max-width: 760px) {
+  .ses__bodymap {
+    max-height: 24dvh;
+  }
+
+  .ses__body {
+    gap: var(--space-3);
+  }
+
+  .ses__card {
+    padding: var(--space-4);
+  }
 }

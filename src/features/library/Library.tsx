@@ -254,14 +254,17 @@ export function Library() {
             {filtered.map((row) => (
               <tr key={row.item.id} className={selected.has(row.item.id) ? 'is-sel' : undefined}>
                 <td className="lib__pick">
-                  <input
-                    type="checkbox"
-                    aria-label={`Seleccionar ${row.item.title}`}
-                    checked={selected.has(row.item.id)}
-                    onChange={() => {
-                      toggle(row.item.id);
-                    }}
-                  />
+                  {/* La etiqueta llena la celda: se puede tocar en 44 px. */}
+                  <label className="lib__pickbox">
+                    <input
+                      type="checkbox"
+                      aria-label={`Seleccionar ${row.item.title}`}
+                      checked={selected.has(row.item.id)}
+                      onChange={() => {
+                        toggle(row.item.id);
+                      }}
+                    />
+                  </label>
                 </td>
                 <td>
                   <span className="lib__title">{row.item.title}</span>

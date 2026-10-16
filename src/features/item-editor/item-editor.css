@@ -100,7 +100,7 @@
 .blke__field input,
 .blke__field textarea,
 .blke__field select {
-  min-height: 36px;
+  min-height: var(--hit);
   padding: var(--space-2);
   border: 1px solid var(--line-2);
   border-radius: var(--radius-md);
@@ -155,8 +155,8 @@
 }
 
 .ite__bmove button {
-  min-width: 28px;
-  min-height: 28px;
+  min-width: var(--hit);
+  min-height: var(--hit);
   border: 0;
   border-radius: var(--radius-sm);
   background: none;

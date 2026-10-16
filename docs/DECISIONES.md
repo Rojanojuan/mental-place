@@ -542,3 +542,37 @@ Escape descarta y vaciarlo no borra el nombre. Lo usan el renombrado de puntos y
 
 No existe en jsdom y la excepción se llevaba por delante el toque del punto en el editor: tocar un
 pin no seleccionaba nada. Sin captura el arrastre sigue funcionando, así que se ignora el fallo.
+
+## Auditoría de móvil (2026-10-16)
+
+### D-070 · Todo control táctil llega a 44 px
+
+Veintitantas reglas CSS estaban en 20, 26, 28, 32 o 36 px. La lista de ruta —la forma principal de
+elegir un punto— medía 26 px de alto. Todas suben a `var(--hit)`.
+
+Los **pines del cuerpo** son la excepción justificada: el dibujo sigue midiendo lo que manda el
+diseño (5,2 % del alto, 2,6 % si es denso), pero llevan detrás un **círculo transparente** que
+nunca baja del mínimo táctil. El dibujo no cambia; lo que se puede tocar, sí.
+
+### D-071 · Un punto que no hace nada no se anuncia como botón
+
+En la sesión los pines solo informan, pero tenían `role="button"` y `tabIndex`: 45 controles
+inertes en el lector de pantalla y en el recorrido por teclado. Ahora el rol depende de si hay
+manejador.
+
+### D-072 · La navegación móvil es una fila que se desliza
+
+Ocho destinos envueltos ocupaban 144 px de cabecera —un quinto de la pantalla— antes de ver nada.
+En una sola fila deslizable, con el tema reducido a su símbolo, la cabecera baja a 50 px.
+
+### D-073 · El alto del mapa lo decide el CSS, no el componente
+
+Iba en línea (`style="max-height: 48dvh"`) y ganaba a cualquier media query: en la sesión el mapa
+se llevaba media pantalla y el contenido de la tarjeta empezaba fuera de vista. Ahora `maxHeight`
+admite `none` y entonces el componente no escribe nada en línea.
+
+### D-074 · La sesión espera a que haya datos
+
+Entrar directo a `/sesion` armaba la cola contra una base todavía vacía —la siembra iba en
+paralelo— y decía «no hay nada que repasar». Ahora observa el número de ítems y arma la cola
+cuando hay algo. Sigue congelándose después (D-031).
