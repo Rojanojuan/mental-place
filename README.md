@@ -59,6 +59,8 @@ Atajos de teclado en la sesión: **espacio** revela, **1–4** califican.
 
 ## Estado
 
-Fases 0 a 6 terminadas, con el palacio de fonética ya cargado.
-427 tests unitarios y 42 e2e. Falta **Casas** (los 10 planos) y **Mis cuerpos**.
-Ver `docs/PROGRESO.md`.
+Fases 0 a 6 terminadas, con el palacio de fonética cargado de fábrica.
+**455 tests unitarios y 46 e2e** en escritorio y móvil.
+
+Los diez planos de casa están en `seed/casas.json` (1 363 puntos): no se cargan solos, se importan
+desde «Datos» cuando los quieras. Ver `docs/PROGRESO.md`.
