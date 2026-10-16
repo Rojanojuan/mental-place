@@ -190,3 +190,29 @@ test.describe('maquetación móvil', () => {
     });
   }
 });
+
+test.describe('la lista de ruta', () => {
+  test('se lee en orden, en una sola columna', async ({ page }) => {
+    await page.goto('/inspector');
+    await expect(page.getByText('45 puntos', { exact: false })).toBeVisible(SEEDED);
+
+    const geometry = await page.evaluate(() => {
+      const list = document.querySelector('.insp__route');
+      if (!list) return null;
+      const rows = [...list.querySelectorAll('li')].map((node) => {
+        const box = node.getBoundingClientRect();
+        return { top: Math.round(box.top), left: Math.round(box.left) };
+      });
+      return { count: rows.length, rows };
+    });
+
+    expect(geometry?.count).toBe(45);
+    // Un recorrido es un orden: en varias columnas la rejilla se llena por
+    // filas y la izquierda quedaba 1, 3, 5, 7… Cada punto va debajo del anterior.
+    const rows = geometry?.rows ?? [];
+    for (let i = 1; i < rows.length; i += 1) {
+      expect(rows[i]!.top, `punto ${String(i + 1)}`).toBeGreaterThan(rows[i - 1]!.top);
+      expect(rows[i]!.left, `punto ${String(i + 1)}`).toBe(rows[0]!.left);
+    }
+  });
+});

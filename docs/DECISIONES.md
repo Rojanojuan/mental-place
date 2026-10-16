@@ -420,3 +420,12 @@ visual de 727). Los 427 tests de jsdom no podían verlo, porque jsdom no hace ma
 
 El e2e ahora comprueba en las ocho rutas que `scrollWidth <= clientWidth` y que `innerHeight` no se
 dispara sobre el viewport visual. Es el test que habría cazado el bug.
+
+### D-055 · La lista de ruta va en una sola columna
+
+Estaba en una rejilla de `auto-fill` que daba dos columnas de 197 px. Una rejilla se llena **por
+filas**, así que la columna izquierda quedaba 1, 3, 5, 7… y la derecha 2, 4, 6, 8: el recorrido,
+que es un orden, se leía mal.
+
+Un recorrido se lee de arriba abajo. El e2e lo comprueba geométricamente: cada punto tiene que
+estar más abajo que el anterior y alineado a la misma izquierda.

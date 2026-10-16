@@ -85,10 +85,12 @@
   list-style: none;
   margin: var(--space-3) 0 0;
   padding: 0;
-  max-height: 24dvh;
+  max-height: 38dvh;
   overflow: auto;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  /* Una sola columna: el recorrido es un orden. En dos columnas la rejilla se
+     llena por filas y la izquierda quedaba 1, 3, 5, 7… */
+  grid-template-columns: 1fr;
   gap: 2px;
 }
 
