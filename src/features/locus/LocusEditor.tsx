@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useLiveQuery } from 'dexie-react-hooks';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { BodyMap } from '@/components/BodyMap';
+import { PartTranslation } from '@/components/PartName';
 import { STATE_LABEL } from '@/design/states';
 import type { Item, Locus, SceneObject } from '@/domain/types';
 import {
@@ -123,7 +124,8 @@ export function LocusEditor() {
       <header className="lce__head">
         <div>
           <h2>
-            <span className="mono">{locus.routeNo}</span> · {locus.partName}
+            <span className="mono">{locus.routeNo}</span> · {locus.partName}{' '}
+            <PartTranslation locus={locus} className="partx--beside" />
           </h2>
           <p className="lce__sub">
             {data.zones.find((zone) => zone.id === locus.zoneId)?.name ?? 'Sin zona'} · lado{' '}
@@ -197,6 +199,46 @@ export function LocusEditor() {
               }}
             />
           </label>
+
+          <div className="blke__pair">
+            <label className="blke__field">
+              <span>Nombre en el idioma que estudias</span>
+              <input
+                type="text"
+                placeholder="p. ej. Hair"
+                value={locus.partNameEn ?? ''}
+                onChange={(event) => {
+                  const partNameEn = event.target.value;
+                  edit((current) => {
+                    if (partNameEn === '') {
+                      const { partNameEn: _drop, ...rest } = current;
+                      return rest;
+                    }
+                    return { ...current, partNameEn };
+                  });
+                }}
+              />
+            </label>
+            <label className="blke__field">
+              <span>Su transcripción</span>
+              <input
+                type="text"
+                className="mono"
+                placeholder="p. ej. heər"
+                value={locus.partIpa ?? ''}
+                onChange={(event) => {
+                  const partIpa = event.target.value;
+                  edit((current) => {
+                    if (partIpa === '') {
+                      const { partIpa: _drop, ...rest } = current;
+                      return rest;
+                    }
+                    return { ...current, partIpa };
+                  });
+                }}
+              />
+            </label>
+          </div>
 
           <label className="blke__field">
             <span>Zona</span>

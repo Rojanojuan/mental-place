@@ -3,6 +3,7 @@ import { useLiveQuery } from 'dexie-react-hooks';
 import { Link } from 'react-router-dom';
 import { BodyMap } from '@/components/BodyMap';
 import { PalaceChips } from '@/components/PalaceChips';
+import { PartTranslation } from '@/components/PartName';
 import { STATE_LABEL, STATE_TOKEN } from '@/design/states';
 import type { ID, Item, SceneObject, Zone } from '@/domain/types';
 import {
@@ -82,8 +83,14 @@ export function Inspector() {
         <ul className="insp__zones">
           {map.zones.map((zone: Zone) => (
             <li key={zone.id}>
-              <span className="insp__zdot" style={{ background: `var(--zone-${zone.color})` }} />
-              {zone.name}
+              <Link
+                className="insp__zlink"
+                to={`/sesion?scope=zone&zona=${zone.id}`}
+                title={`Repasar ${zone.name}`}
+              >
+                <span className="insp__zdot" style={{ background: `var(--zone-${zone.color})` }} />
+                {zone.name}
+              </Link>
             </li>
           ))}
         </ul>
@@ -114,7 +121,8 @@ export function Inspector() {
                     className="insp__rdot"
                     style={{ background: `var(${STATE_TOKEN[map.statuses[entry.id] ?? 'empty']})` }}
                   />
-                  {entry.partName}
+                  <span className="insp__rpart">{entry.partName}</span>
+                  <PartTranslation locus={entry} className="insp__ren" />
                 </button>
               </li>
             ))}
@@ -127,7 +135,8 @@ export function Inspector() {
           ) : (
             <>
               <h3>
-                <span className="mono">{locus.routeNo}</span> · {locus.partName}
+                <span className="mono">{locus.routeNo}</span> · {locus.partName}{' '}
+                <PartTranslation locus={locus} className="partx--beside" />
               </h3>
               <p className="insp__meta">
                 {map.zones.find((z) => z.id === locus.zoneId)?.name} · lado{' '}
@@ -169,10 +178,21 @@ export function Inspector() {
                   Editar este punto
                 </Link>
                 {detail && detail.items.length > 0 && (
-                  <Link className="btn insp__study" to="/sesion">
-                    Ir a repasar
+                  <Link className="btn insp__study" to={`/sesion?scope=locus&punto=${locus.id}`}>
+                    Repasar este punto
                   </Link>
                 )}
+                {locus.zoneId !== undefined && (
+                  <Link className="btn insp__study" to={`/sesion?scope=zone&zona=${locus.zoneId}`}>
+                    Repasar la zona
+                  </Link>
+                )}
+                <Link className="btn insp__study" to="/sesion?scope=palace">
+                  Todo el palacio
+                </Link>
+                <Link className="btn insp__study" to="/sesion?scope=walk">
+                  Recorrido
+                </Link>
               </div>
             </>
           )}

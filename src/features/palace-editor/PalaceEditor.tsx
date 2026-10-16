@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useLiveQuery } from 'dexie-react-hooks';
 import { Link } from 'react-router-dom';
 import { BodyMap } from '@/components/BodyMap';
+import { InlineText } from '@/components/InlineText';
 import { PalaceChips } from '@/components/PalaceChips';
 import type { ID, ZoneAccent } from '@/domain/types';
 import {
@@ -209,12 +210,11 @@ export function PalaceEditor() {
                         {data.loci.filter((locus) => locus.zoneId === zone.id).length}
                       </span>
                     </button>
-                    <input
-                      type="text"
-                      aria-label={`Nombre de ${zone.name}`}
+                    <InlineText
+                      label={`Nombre de ${zone.name}`}
                       value={zone.name}
-                      onChange={(event) => {
-                        void putZone({ ...zone, name: event.target.value });
+                      onCommit={(name) => {
+                        void putZone({ ...zone, name });
                       }}
                     />
                     <button
@@ -250,9 +250,20 @@ export function PalaceEditor() {
                 {data.loci.map((locus, index) => (
                   <li key={locus.id} className={locus.id === selectedId ? 'is-sel' : undefined}>
                     <span className="pae__rn mono">{locus.routeNo}</span>
-                    <Link className="pae__rname" to={`/punto/${locus.id}`}>
-                      {locus.partName}
-                    </Link>
+                    {mode === 'points' ? (
+                      <InlineText
+                        className="pae__rinput"
+                        label={`Nombre de ${locus.partName}`}
+                        value={locus.partName}
+                        onCommit={(partName) => {
+                          void putLocus({ ...locus, partName });
+                        }}
+                      />
+                    ) : (
+                      <Link className="pae__rname" to={`/punto/${locus.id}`}>
+                        {locus.partName}
+                      </Link>
+                    )}
                     {mode === 'route' ? (
                       <>
                         <button
@@ -302,8 +313,14 @@ export function PalaceEditor() {
                   Renumerar 1…{data.loci.length}
                 </button>
               )}
+              {selectedId !== null && (
+                <Link className="btn pae__open" to={`/punto/${selectedId}`}>
+                  Abrir el punto elegido
+                </Link>
+              )}
               <p className="pae__hint">
-                Borrar un punto no borra sus ítems: pasan a «Sin asignar».
+                Borrar un punto no borra sus ítems: pasan a «Sin asignar». El nombre se edita aquí
+                mismo en modo Puntos; lo demás, abriendo el punto.
               </p>
             </>
           )}

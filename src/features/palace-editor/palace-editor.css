@@ -200,3 +200,24 @@
 .pae__grid--plan .pae__map {
   position: static;
 }
+
+.pae__rinput {
+  min-height: 28px;
+  padding: 0 var(--space-2);
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
+  background: none;
+  color: var(--text);
+  font-size: 13px;
+  width: 100%;
+}
+
+.pae__rinput:hover,
+.pae__rinput:focus {
+  border-color: var(--line-2);
+  background: var(--sunken);
+}
+
+.pae__open {
+  margin-bottom: var(--space-3);
+}

@@ -164,14 +164,22 @@ describe('semilla de fonética · contenido', () => {
 });
 
 describe('semilla de fonética · la parte del cuerpo', () => {
-  it('abre cada ítem con la parte traducida y su IPA', () => {
+  it('va en el punto, con su nombre traducido y su transcripción', () => {
+    const loci = bundle.loci ?? [];
+    const conTraduccion = loci.filter((locus) => locus.partNameEn !== undefined);
+    expect(conTraduccion).toHaveLength(44);
+    for (const locus of conTraduccion) {
+      expect(locus.partNameEn?.length ?? 0, locus.partName).toBeGreaterThan(1);
+      expect(locus.partIpa?.length ?? 0, locus.partName).toBeGreaterThan(1);
+    }
+  });
+
+  it('no se repite dentro del ítem', () => {
     for (const i of items) {
-      const first = i.blocks[0];
-      expect(first?.type, i.title).toBe('bilingual');
-      if (first?.type !== 'bilingual') continue;
-      // «Forehead /ˈfɔːhed/» — lo que da la cabecera del Word.
-      expect(first.en, i.title).toMatch(/\/.+\//);
-      expect(first.es.length, i.title).toBeGreaterThan(2);
+      expect(
+        i.blocks.some((block) => block.type === 'bilingual'),
+        i.title,
+      ).toBe(false);
     }
   });
 

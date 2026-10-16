@@ -214,7 +214,13 @@ export function BodyMap({
                       const start = { x: event.clientX, y: event.clientY };
                       const target = event.currentTarget;
                       let moved = false;
-                      target.setPointerCapture(event.pointerId);
+                      // jsdom (y algún navegador viejo) no lo implementa; sin
+                      // el guardia, la excepción se llevaba por delante el toque.
+                      try {
+                        target.setPointerCapture(event.pointerId);
+                      } catch {
+                        // Sin captura el arrastre sigue funcionando.
+                      }
                       const onMove = (move: PointerEvent): void => {
                         // Umbral de 4 px: por debajo, el gesto sigue siendo un toque.
                         if (

@@ -1,6 +1,8 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
+import type { ScopeRequest } from '@/db';
 import { BodyMap } from '@/components/BodyMap';
+import { PartTranslation } from '@/components/PartName';
 import { BlockView } from '@/features/inspector/BlockView';
 import type {
   Grade,
@@ -67,7 +69,11 @@ interface Pending {
  */
 export function Session() {
   const [params] = useSearchParams();
+  // Las unidades de repaso del contrato §4.4: la cola de hoy, un punto, una
+  // zona, el palacio entero o el recorrido.
   const scope = (params.get('scope') ?? 'today') as QueueScope;
+  const zoneId = params.get('zona');
+  const locusId = params.get('punto');
 
   const [cards, setCards] = useState<Card[] | null>(null);
   const [index, setIndex] = useState(0);
@@ -90,10 +96,14 @@ export function Session() {
     void (async () => {
       const now = new Date();
       const palace = await getCurrentPalace();
-      const queue = await queueFor(
-        palace ? { scope, palaceId: palace.id, newLimit: 20 } : { scope, newLimit: 20 },
-        now,
-      );
+      const request: ScopeRequest = { scope, newLimit: 20 };
+      if (palace) request.palaceId = palace.id;
+      if (zoneId !== null) request.zoneId = zoneId;
+      if (locusId !== null) request.locusId = locusId;
+      // Fuera de la cola de hoy no se limitan los nuevos: si pides una zona,
+      // la quieres entera.
+      if (scope !== 'today') delete request.newLimit;
+      const queue = await queueFor(request, now);
       const built: Card[] = [];
       for (const candidate of queue) {
         const item = await db.items.get(candidate.itemId);
@@ -120,7 +130,7 @@ export function Session() {
     return () => {
       alive.current = false;
     };
-  }, [scope]);
+  }, [locusId, scope, zoneId]);
 
   const card = cards?.[index];
 
@@ -291,6 +301,11 @@ export function Session() {
               'Ítem sin asignar'
             )}
           </p>
+          {card.locus && (
+            <p className="ses__parten">
+              <PartTranslation locus={card.locus} />
+            </p>
+          )}
           {card.locus?.anchor && <p className="ses__anchor">{card.locus.anchor.text}</p>}
         </div>
 

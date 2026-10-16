@@ -306,3 +306,34 @@
   grid-template-rows: repeat(12, auto);
   overflow-x: auto;
 }
+
+.insp__rpart {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* La traducción en la lista de ruta: a la derecha y discreta. */
+.insp__ren {
+  margin-left: auto;
+  padding-left: var(--space-2);
+  font-size: 11px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.insp__zlink {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  color: inherit;
+  text-decoration: none;
+  padding: 2px var(--space-2);
+  border-radius: var(--radius-pill);
+}
+
+.insp__zlink:hover {
+  background: var(--surface-2);
+  color: var(--text);
+}

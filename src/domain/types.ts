@@ -92,6 +92,13 @@ export interface Locus {
   pos: { x: number; y: number };
   anchor?: { text: string; media?: string };
   notes?: string;
+  /**
+   * [AMPLÍA CONTRATO] El nombre de la parte en el idioma que se estudia, con
+   * su transcripción: «Pelo» → «Hair /heər/». La parte del cuerpo también se
+   * memoriza, así que acompaña al punto en todas las pantallas.
+   */
+  partNameEn?: string;
+  partIpa?: string;
   /** [AMPLÍA CONTRATO] Punto agrupado (cabeza, manos): se dibuja más pequeño. */
   dense?: boolean;
   /** [AMPLÍA CONTRATO] Nombre de la habitación, en palacios `custom_plan`. */

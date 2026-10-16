@@ -88,6 +88,12 @@ export function Today() {
             </p>
           )}
 
+          <nav className="today__modes" aria-label="Otras formas de repasar">
+            <Link to="/sesion?scope=palace">Todo el palacio</Link>
+            <Link to="/sesion?scope=walk">Recorrido</Link>
+            <Link to="/inspector">Elegir un punto</Link>
+          </nav>
+
           <h3 className="today__h3">Próximos 7 días</h3>
           <ol className="today__forecast" aria-label="Repasos previstos para los próximos 7 días">
             {days.map((day) => {

@@ -506,3 +506,39 @@ Varios tests importan semillas de ~1 MB en IndexedDB y la suite salía intermite
 subiendo esperas una a una: `testTimeout` de 20 s y `maxWorkers: 4` en `vite.config.ts`, y un
 reintento en Playwright. Cada test que falló alguna vez pasa en solitario; lo que fallaba era la
 espera, no la app.
+
+## La parte del cuerpo y las formas de estudiar (2026-10-16)
+
+### D-066 · El nombre traducido es del punto, no del ítem
+
+Primero lo puse como un bloque dentro del ítem y no servía: aparecía enterrado bajo el anverso y
+el reverso, apilado en vez de al lado, y no salía en el título ni en la lista de ruta ni en la
+sesión.
+
+La parte del cuerpo es una propiedad **del punto**, así que ahí vive:
+`Locus.partNameEn` y `Locus.partIpa` [AMPLÍA CONTRATO]. Con eso sale al lado del nombre en todas
+partes —«Pelo / Cabello · Hair /heər/»— y el bloque duplicado desaparece del ítem.
+
+### D-067 · Las cinco unidades de repaso, con su puerta de entrada
+
+El contrato §4.4 permite repasar por ítem, punto, zona, palacio, recorrido y la cola de hoy. El
+motor y la base lo soportaban desde la Fase 2, pero solo había botón para «hoy» y «recorrido».
+Ahora la sesión lee `scope`, `zona` y `punto` de la URL, y hay dónde pulsarlas: en el detalle del
+punto, en cada zona de la cabecera y en Hoy.
+
+Fuera de la cola de hoy **no se aplica el límite diario de nuevos**: si pides una zona, la quieres
+entera.
+
+### D-068 · `InlineText`: el tercer campo que se escribía solo
+
+Renombrar un punto escribía en IndexedDB **en cada tecla**, con una consulta en vivo detrás: el
+valor volvía a medio teclear y lo escrito se pegaba mal («Pelo / Cabelloo»). Es el mismo problema
+que `NumberField` (D-044) y que la tabla (D-048), ya por tercera vez.
+
+`src/components/InlineText.tsx` guarda su borrador y confirma al salir del campo o con Enter;
+Escape descarta y vaciarlo no borra el nombre. Lo usan el renombrado de puntos y el de zonas.
+
+### D-069 · `setPointerCapture` va con guardia
+
+No existe en jsdom y la excepción se llevaba por delante el toque del punto en el editor: tocar un
+pin no seleccionaba nada. Sin captura el arrastre sigue funcionando, así que se ignora el fallo.

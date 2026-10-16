@@ -1,0 +1,13 @@
+.partx {
+  color: var(--text-2);
+  font-weight: 400;
+}
+
+.partx__ipa {
+  color: var(--text-3);
+}
+
+/* Al lado de un título: algo más pequeño, sin competir con el nombre. */
+.partx--beside {
+  font-size: 0.78em;
+}

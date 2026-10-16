@@ -431,3 +431,38 @@ siluetas y que los chips cambian de palacio.
   a esa escala.
 - **Palacio 2 · Gramática C1**: esperando la estructura.
 - Las cuatro claves de apariencia que el SVG no permite (`docs/HANDOFF_DISENO.md` §3.11).
+
+---
+
+## La parte del cuerpo y las formas de estudiar — ✅ (2026-10-16)
+
+### Hecho
+
+- **El nombre de la parte en el idioma que se estudia vive en el punto** (D-066):
+  `Locus.partNameEn` y `Locus.partIpa`. Sale al lado del nombre en el **título del detalle**, en
+  **cada fila de la lista de ruta** y en la **sesión**, bajo el punto señalado. Y se edita desde el
+  detalle del punto.
+- **Las cinco unidades de repaso del contrato §4.4** con su puerta de entrada (D-067): este punto,
+  esta zona, todo el palacio, el recorrido y la cola de hoy. Cada zona de la cabecera del Inspector
+  es ahora un enlace que lanza su repaso.
+- **Más edición del cuerpo**: renombrar puntos y zonas desde el editor sin salir, con
+  `InlineText` (D-068), y un atajo al detalle del punto elegido.
+
+### Comprobaciones
+
+| Comando         | Resultado                                          |
+| --------------- | -------------------------------------------------- |
+| `npm run check` | ✅ typecheck + lint + **474 tests** en 25 archivos |
+| `npm run e2e`   | ✅ 46 tests en escritorio y móvil                  |
+
+18 tests nuevos: que la traducción está en los 44 puntos que la tienen y **no** en el 34, que sale
+en el título, en la lista y en la sesión, que se edita y se guarda; las cinco unidades de repaso
+con sus conteos (1 punto, 15 de la zona Cabeza, 44 del palacio, 44 del recorrido, 20 de la cola de
+hoy); y el renombrado con Enter, al salir del campo y vaciándolo.
+
+### Dos bugs que salieron de paso
+
+- Renombrar escribía en IndexedDB en cada tecla y el texto se pegaba mal. Tercera vez que aparece
+  el mismo patrón de campo controlado (D-044, D-048, D-068).
+- `setPointerCapture` no existe en jsdom y su excepción impedía seleccionar un punto en el editor
+  (D-069).

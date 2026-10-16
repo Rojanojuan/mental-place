@@ -428,19 +428,9 @@ def read_std45(pc_data: Path) -> tuple[list[dict], list[dict]]:
 def build_blocks(sec: dict, part_name: str) -> list[dict]:
     blocks: list[dict] = []
 
-    # La parte del cuerpo traducida, tal como la da la cabecera del Word
-    # («2. FRENTE (Forehead /ˈfɔːhed/)»). También se memoriza, así que va
-    # delante de todo lo demás.
-    if sec['partEn']:
-        blocks.append(
-            {
-                'type': 'bilingual',
-                'en': f'{sec["partEn"]} {slash(sec["partIpa"])}'.strip(),
-                'es': part_name,
-                'tag': 'base',
-            }
-        )
-
+    # La parte del cuerpo traducida no va aquí: vive en el propio punto
+    # (`Locus.partNameEn` / `partIpa`), que es de quien es, y así sale en el
+    # título, en la lista de ruta y en la sesión sin repetirse dentro del ítem.
     th = sec['theory']
     if th['equivalent']:
         blocks.append({'type': 'note', 'md': f'**Equivalente en español.** {th["equivalent"]}'})
@@ -641,6 +631,10 @@ def build_bundle(sections: list[dict], loci_geo: list[dict], zones_geo: list[dic
             loci.append(locus)
             continue
 
+        if sec['partEn']:
+            locus['partNameEn'] = sec['partEn']
+        if sec['partIpa']:
+            locus['partIpa'] = sec['partIpa']
         locus['anchor'] = {
             'text': f'{slash(sec["sound"])} · {sec["keyword"]["en"]}'
             if sec['keyword']

@@ -91,6 +91,8 @@ export const locusSchema = z.object({
   pos: position,
   anchor: z.object({ text: z.string(), media: z.string().optional() }).optional(),
   notes: z.string().optional(),
+  partNameEn: z.string().optional(),
+  partIpa: z.string().optional(),
   dense: z.boolean().optional(),
   room: z.string().optional(),
 });
