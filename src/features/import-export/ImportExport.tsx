@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useLiveQuery } from 'dexie-react-hooks';
 import { exportBundle, getSetting, importBundle, setSetting } from '@/db';
 import {
@@ -20,8 +20,12 @@ import {
   suggestMapping,
 } from '@/io';
 import {
+  type PeriodicState,
   NOTIFY_KEY,
+  disablePeriodicReminder,
+  enablePeriodicReminder,
   notifyPermission,
+  periodicReminderState,
   requestNotifyPermission,
 } from '@/features/notifications/notify';
 import { getBackup, listBackups } from './autobackup';
@@ -135,6 +139,12 @@ export function ImportExport() {
   const backups = useLiveQuery(() => listBackups(), []);
   const notifyOn = useLiveQuery(() => getSetting(NOTIFY_KEY, false), []);
   const permission = notifyPermission();
+  // El aviso en segundo plano no vive en la base de datos: lo sabe el
+  // navegador, y solo responde si la app esta instalada.
+  const [periodic, setPeriodic] = useState<PeriodicState | null>(null);
+  useEffect(() => {
+    void periodicReminderState().then(setPeriodic);
+  }, []);
 
   return (
     <section className="iox">
@@ -368,8 +378,55 @@ export function ImportExport() {
           )}
           <p className="iox__hint">
             Se comprueba al abrir la app y al volver a ella, con cuatro horas de descanso entre
-            avisos. Una app instalada no puede despertarse sola de forma fiable.
+            avisos.
           </p>
+
+          {permission === 'granted' && (
+            <>
+              <h3>Avisarme con la app cerrada</h3>
+              {periodic === 'unsupported' ? (
+                <p className="iox__hint">
+                  Este navegador no lo admite. Funciona en Chrome o Edge, con la app instalada desde
+                  el menu «Instalar app».
+                </p>
+              ) : periodic === 'on' ? (
+                <>
+                  <p className="iox__hint">
+                    Activo. El navegador elige el momento: como mucho mira cada doce horas, y solo
+                    avisa si hay algo vencido.
+                  </p>
+                  <button
+                    type="button"
+                    className="btn"
+                    onClick={() => {
+                      void disablePeriodicReminder().then(setPeriodic);
+                    }}
+                  >
+                    Desactivar
+                  </button>
+                </>
+              ) : (
+                <>
+                  <button
+                    type="button"
+                    className="btn"
+                    onClick={() => {
+                      void enablePeriodicReminder().then(setPeriodic);
+                    }}
+                  >
+                    Activar avisos en segundo plano
+                  </button>
+                  {periodic === 'blocked' && (
+                    <p className="iox__hint">
+                      El navegador lo ha rechazado. Hay que instalar la app (menu del navegador →
+                      «Instalar app») y usarla unos dias: Chrome solo lo concede a las apps
+                      instaladas que se abren con frecuencia.
+                    </p>
+                  )}
+                </>
+              )}
+            </>
+          )}
         </article>
       </div>
     </section>

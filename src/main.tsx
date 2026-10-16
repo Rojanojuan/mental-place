@@ -11,7 +11,8 @@ if (!container) throw new Error('No se encontró el nodo #root');
 
 createRoot(container).render(
   <StrictMode>
-    <BrowserRouter>
+    {/* GitHub Pages sirve la app bajo /mental-place/: las rutas cuelgan de ahi. */}
+    <BrowserRouter basename={import.meta.env.BASE_URL}>
       <App />
     </BrowserRouter>
   </StrictMode>,

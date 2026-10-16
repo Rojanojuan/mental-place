@@ -1,0 +1,62 @@
+# Publica la app en GitHub Pages en cada empujón a `main`.
+#
+# La app queda en https://<usuario>.github.io/mental-place/ con HTTPS, que es
+# el requisito para instalarla y para que lleguen los avisos de repaso.
+name: Desplegar
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Un despliegue a la vez; si llegan dos empujones, gana el último.
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  construir:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+
+      - run: npm ci
+
+      # La definición de terminado del proyecto: tipos, lint y los tests.
+      - run: npm run check
+
+      - run: npm run build
+        env:
+          # Pages sirve el repositorio bajo su nombre, no en la raíz.
+          BASE_PATH: /mental-place/
+
+      # Un enlace directo a /sesion abierto antes de que el service worker
+      # esté instalado llega a Pages como 404: se le da el mismo index.
+      - name: Respaldo para las rutas profundas
+        run: cp dist/index.html dist/404.html
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  desplegar:
+    needs: construir
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.pages.outputs.page_url }}
+    steps:
+      - id: pages
+        uses: actions/deploy-pages@v4

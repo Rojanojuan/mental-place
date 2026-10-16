@@ -466,3 +466,46 @@ hoy); y el renombrado con Enter, al salir del campo y vaciándolo.
   el mismo patrón de campo controlado (D-044, D-048, D-068).
 - `setPointerCapture` no existe en jsdom y su excepción impedía seleccionar un punto en el editor
   (D-069).
+
+## Despliegue y avisos de verdad — ✅ (2026-10-16)
+
+### Hecho
+
+- **GitHub Pages** (D-075). `.github/workflows/deploy.yml`: cada empujón a `main` pasa
+  `npm run check`, compila con `BASE_PATH=/mental-place/` y publica `dist/`. La ruta base es una
+  variable, así que en local sigue siendo `/` y ni `npm run preview` ni los e2e se enteran. El
+  router cuelga de `import.meta.env.BASE_URL`; se revisó que nada en `src/` arme una ruta con `/`
+  a pelo. El flujo copia `index.html` a `404.html` para los enlaces directos que llegan antes de
+  que el service worker esté instalado.
+- **Service worker propio** (D-076): `src/sw.ts` con `injectManifest`. Además de la caché,
+  escucha `periodicsync` y **avisa con la app cerrada**: cuenta los vencidos leyendo IndexedDB en
+  crudo, sin Dexie, y al tocar la notificación enfoca la pestaña abierta o abre `/sesion`. Se
+  comprueba con su propio `tsconfig.sw.json` (librería `WebWorker`, que no convive con `DOM`).
+- **La pantalla Datos dice la verdad**: separa «al abrir la app» (funciona en todas partes) de
+  «con la app cerrada», y cuando el navegador lo rechaza explica que hace falta instalar la app en
+  Chrome o Edge en vez de dejar un botón que no hace nada.
+- La semilla entra al precache (`globPatterns` incluye `json`), así que el primer arranque sin red
+  ya trae el palacio.
+- Limpieza: el `audit3.mjs` que quedó en la raíz es ahora `scripts/audit_movil.mjs`, con
+  `npm run audit:movil`.
+
+### Comprobaciones
+
+| Comando         | Resultado                                                  |
+| --------------- | ---------------------------------------------------------- |
+| `npm run check` | ✅ typecheck + lint + **481 tests** en 25 archivos         |
+| `npm run build` | ✅ `dist/sw.js` con 12 entradas de precache (1,34 MB)      |
+| `npm run e2e`   | ✅ 51 pasan, 1 reintentada, 2 omitidas, escritorio y móvil |
+
+7 tests nuevos sobre el aviso en segundo plano: sin service worker y sin la API da
+`unsupported`, distingue apagado de encendido por la etiqueta registrada, lo activa con las doce
+horas de `minInterval`, y si el navegador lo rechaza queda `blocked` sin lanzar excepción.
+
+### Lo que falta y no depende de mí
+
+1. **Crear el repositorio `mental-place` en GitHub** y en **Settings → Pages** poner
+   _Source: GitHub Actions_. `gh` no está instalado en esta máquina.
+2. Decidir si `documentación/` (6 MB: el Word de fonética y el PDF de gramática) viaja al
+   repositorio público. Está versionada y `npm run seed:fonetica` la necesita en local.
+3. El aviso en segundo plano solo se puede probar en el sitio publicado, con la app instalada en
+   Chrome Android: en `localhost` el navegador no concede el permiso.

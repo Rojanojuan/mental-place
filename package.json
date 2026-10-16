@@ -20,7 +20,8 @@
     "check": "npm run typecheck && npm run lint && npm run test",
     "e2e": "playwright test",
     "e2e:ui": "playwright test --ui",
-    "seed:casas": "node scripts/ingest_casas.mjs"
+    "seed:casas": "node scripts/ingest_casas.mjs",
+    "audit:movil": "node scripts/audit_movil.mjs"
   },
   "dependencies": {
     "date-fns": "^4.4.0",

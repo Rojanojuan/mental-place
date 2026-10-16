@@ -26,6 +26,38 @@ npm run dev
 | `npm run e2e`           | 42 e2e con Playwright en Chromium, escritorio y móvil. |
 | `npm run seed:fonetica` | Regenera `seed/fonetica45.json` desde el Word.         |
 
+## Publicar
+
+La app se publica en **GitHub Pages** desde `.github/workflows/deploy.yml`: cada empujón a `main`
+pasa `npm run check`, compila con `BASE_PATH=/mental-place/` y sube `dist/`. Queda en
+
+```
+https://<tu-usuario>.github.io/mental-place/
+```
+
+La primera vez, en el repositorio: **Settings → Pages → Source: GitHub Actions**.
+
+Para compilar en local como lo hace el despliegue:
+
+```powershell
+$env:BASE_PATH = '/mental-place/'; npm run build; $env:BASE_PATH = $null
+```
+
+Sin esa variable la base es `/`, que es lo que necesitan `npm run preview` y los e2e.
+
+### Avisos de repaso
+
+Dos caminos, y la pantalla **Datos** dice cuál está activo:
+
+1. **Al abrir la app** — funciona en cualquier navegador. Mira si hay vencidos al arrancar y al
+   volver del segundo plano, con cuatro horas de descanso entre avisos.
+2. **Con la app cerrada** — `periodicsync` en `src/sw.ts`. Pide Chrome o Edge, **la app
+   instalada** (menú del navegador → «Instalar app») y HTTPS; el navegador decide el momento y
+   mira como mucho cada doce horas. En iOS no existe.
+
+Pages es estático: no hay avisos enviados desde un servidor. Ver `docs/DECISIONES.md` D-075 y
+D-076.
+
 ## Mapa del repositorio
 
 - `CLAUDE.md` — instrucciones del proyecto y **contrato compartido** (fuente única de verdad).

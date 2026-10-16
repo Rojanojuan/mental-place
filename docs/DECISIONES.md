@@ -576,3 +576,32 @@ admite `none` y entonces el componente no escribe nada en línea.
 Entrar directo a `/sesion` armaba la cola contra una base todavía vacía —la siembra iba en
 paralelo— y decía «no hay nada que repasar». Ahora observa el número de ítems y arma la cola
 cuando hay algo. Sigue congelándose después (D-031).
+
+### D-075 · GitHub Pages, con la ruta base en una variable
+
+De los sitios que sirven HTTPS gratis —requisito para instalar la app y para los avisos— Pages es
+el único que no pide otra cuenta: está en el mismo repositorio que el código. Lo sirve bajo
+`/mental-place/`, no en la raíz, así que `vite.config.ts` lee la base de `BASE_PATH` y el flujo de
+despliegue la exporta. En local sigue siendo `/`, de modo que los e2e y `npm run preview` no se
+enteran. El router cuelga de `import.meta.env.BASE_URL`; nada construye rutas con `/` a pelo.
+
+Pages es estático: no hay servidor, así que no hay push desde el servidor. Los avisos son del
+dispositivo (D-076). Si algún día hace falta push, cambiar de sitio es mover `BASE_PATH` a `/`.
+
+### D-076 · Service worker propio para avisar con la app cerrada
+
+El generado (`generateSW`) solo sabe de caché. Con `injectManifest` el service worker es
+`src/sw.ts` y además escucha `periodicsync`: cuenta los vencidos leyendo IndexedDB **en crudo**
+—sin Dexie, para no meter media app en el worker— y muestra la notificación. `notificationclick`
+enfoca la pestaña abierta o abre `/sesion`.
+
+Honestamente: esto solo lo dispara Chrome o Edge, y únicamente si la app está **instalada** y se
+usa con frecuencia; el navegador decide el momento y las doce horas de `minInterval` son una
+petición, no una promesa. En iOS no existe. El aviso al abrir la app (D-056) sigue siendo el
+camino que funciona en todas partes, y la pantalla Datos dice cuál de los dos está activo en vez
+de prometer lo que no hay.
+
+`src/sw.ts` se comprueba con su propio `tsconfig.sw.json`: usa la librería `WebWorker`, que no
+convive con `DOM` en el mismo proyecto. La etiqueta de la sincronización vive en
+`periodic-tag.ts`, importado por el worker y por la app, porque si se separan el aviso deja de
+llegar sin que nada falle.

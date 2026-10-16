@@ -11,10 +11,14 @@ import {
 import { getBackup, listBackups, runAutoBackup } from '@/features/import-export/autobackup';
 import {
   NOTIFY_KEY,
+  disablePeriodicReminder,
+  enablePeriodicReminder,
   notifyDue,
   notifyPermission,
+  periodicReminderState,
   requestNotifyPermission,
 } from '@/features/notifications/notify';
+import { PERIODIC_MIN_MS, PERIODIC_TAG } from '@/features/notifications/periodic-tag';
 import { miniBundle } from './db/helpers';
 
 beforeEach(async () => {
@@ -165,5 +169,83 @@ describe('avisos de repasos vencidos', () => {
     stubNotification('default');
     expect(await requestNotifyPermission()).toBe('granted');
     expect(await getSetting(NOTIFY_KEY, false, db)).toBe(true);
+  });
+});
+
+describe('aviso con la app cerrada', () => {
+  interface FakeSync {
+    tags: string[];
+    registered: { tag: string; minInterval: number | undefined }[];
+    falla: boolean;
+  }
+
+  /** Monta un `navigator.serviceWorker` de mentira con o sin `periodicSync`. */
+  function stubSync(options: { soporta: boolean; tags?: string[]; falla?: boolean }): FakeSync {
+    const fake: FakeSync = {
+      tags: options.tags ?? [],
+      registered: [],
+      falla: options.falla ?? false,
+    };
+    const periodicSync = {
+      register: (tag: string, init?: { minInterval: number }) => {
+        if (fake.falla) return Promise.reject(new Error('no permitido'));
+        fake.registered.push({ tag, minInterval: init?.minInterval });
+        fake.tags.push(tag);
+        return Promise.resolve();
+      },
+      getTags: () =>
+        fake.falla ? Promise.reject(new Error('no permitido')) : Promise.resolve(fake.tags),
+      unregister: (tag: string) => {
+        fake.tags = fake.tags.filter((entry) => entry !== tag);
+        return Promise.resolve();
+      },
+    };
+    vi.stubGlobal('navigator', {
+      serviceWorker: {
+        getRegistration: () =>
+          Promise.resolve(options.soporta ? { periodicSync } : { periodicSync: undefined }),
+      },
+    });
+    return fake;
+  }
+
+  it('sin service worker no hay nada que ofrecer', async () => {
+    vi.stubGlobal('navigator', {});
+    expect(await periodicReminderState()).toBe('unsupported');
+  });
+
+  it('un navegador sin la API tampoco', async () => {
+    stubSync({ soporta: false });
+    expect(await periodicReminderState()).toBe('unsupported');
+    expect(await enablePeriodicReminder()).toBe('unsupported');
+  });
+
+  it('apagado mientras no esté registrada la etiqueta', async () => {
+    stubSync({ soporta: true, tags: ['otra-cosa'] });
+    expect(await periodicReminderState()).toBe('off');
+  });
+
+  it('encendido si la etiqueta ya está', async () => {
+    stubSync({ soporta: true, tags: [PERIODIC_TAG] });
+    expect(await periodicReminderState()).toBe('on');
+  });
+
+  it('activarlo lo registra cada doce horas', async () => {
+    const fake = stubSync({ soporta: true });
+    expect(await enablePeriodicReminder()).toBe('on');
+    expect(fake.registered).toEqual([{ tag: PERIODIC_TAG, minInterval: PERIODIC_MIN_MS }]);
+    expect(PERIODIC_MIN_MS).toBe(12 * 60 * 60 * 1000);
+  });
+
+  it('si el navegador lo rechaza, queda bloqueado y no revienta', async () => {
+    stubSync({ soporta: true, falla: true });
+    expect(await enablePeriodicReminder()).toBe('blocked');
+    expect(await periodicReminderState()).toBe('blocked');
+  });
+
+  it('se puede desactivar', async () => {
+    const fake = stubSync({ soporta: true, tags: [PERIODIC_TAG] });
+    expect(await disablePeriodicReminder()).toBe('off');
+    expect(fake.tags).toEqual([]);
   });
 });

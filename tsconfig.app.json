@@ -30,5 +30,7 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["src", "tests"]
+  "include": ["src", "tests"],
+  // El service worker se comprueba aparte: usa la librería WebWorker, no DOM.
+  "exclude": ["src/sw.ts"]
 }

@@ -3,19 +3,34 @@ import { defineConfig } from 'vitest/config';
 import react from '@vitejs/plugin-react';
 import { VitePWA } from 'vite-plugin-pwa';
 
+/**
+ * Carpeta en la que vive la app publicada.
+ *
+ * En local es la raiz; GitHub Pages la sirve bajo `/<repositorio>/`, asi que el
+ * flujo de despliegue exporta `BASE_PATH=/mental-place/`. Todo lo que arma una
+ * ruta usa `import.meta.env.BASE_URL`, nunca `/` a pelo.
+ */
+const base = process.env.BASE_PATH ?? '/';
+
 export default defineConfig({
+  base,
   plugins: [
     react(),
     VitePWA({
       registerType: 'autoUpdate',
       includeAssets: ['icon.svg'],
+      // Service worker propio (`src/sw.ts`): el generado no puede avisar de los
+      // repasos vencidos con la app cerrada. Ver docs/DECISIONES.md D-076.
+      strategies: 'injectManifest',
+      srcDir: 'src',
+      filename: 'sw.ts',
       manifest: {
         name: 'Palacio Corporal',
         short_name: 'Palacio',
         description: 'Palacio de la memoria sobre un cuerpo personalizable con repaso espaciado.',
         lang: 'es',
-        start_url: '/',
-        scope: '/',
+        start_url: base,
+        scope: base,
         display: 'standalone',
         orientation: 'portrait',
         background_color: '#161826',
@@ -25,9 +40,11 @@ export default defineConfig({
           { src: 'icon-maskable.svg', sizes: 'any', type: 'image/svg+xml', purpose: 'maskable' },
         ],
       },
-      workbox: {
-        globPatterns: ['**/*.{js,css,html,svg,woff2}'],
-        cleanupOutdatedCaches: true,
+      injectManifest: {
+        globPatterns: ['**/*.{js,css,html,svg,woff2,json}'],
+        // La semilla de fonetica pesa 693 kB y el precache la necesita entera
+        // para que la app funcione sin red en el primer arranque.
+        maximumFileSizeToCacheInBytes: 4 * 1024 * 1024,
       },
       devOptions: { enabled: false },
     }),
