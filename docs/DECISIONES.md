@@ -429,3 +429,16 @@ que es un orden, se leía mal.
 
 Un recorrido se lee de arriba abajo. El e2e lo comprueba geométricamente: cada punto tiene que
 estar más abajo que el anterior y alineado a la misma izquierda.
+
+### D-056 · La parte del cuerpo traducida abre cada ítem
+
+La cabecera del Word da la parte en inglés con su IPA —«2. FRENTE (Forehead /ˈfɔːhed/)»— y eso
+también se memoriza. Estaba en `fields.partEn` / `fields.partIpa` pero no se mostraba en ninguna
+pantalla. Ahora es el **primer bloque** de cada ítem, como `bilingual`, que es el tipo del contrato
+para un par inglés/español.
+
+### D-057 · Los minimal pairs recuperan su columna «vs.»
+
+La había quitado por ser siempre el mismo texto, y las cabeceras quedaban
+`Inglés · Transcripción · Español` repetidas sin nada que dijera dónde acaba una palabra y empieza
+su contraste. El Word la trae; se queda.

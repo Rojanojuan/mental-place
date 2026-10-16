@@ -212,6 +212,6 @@ describe('la semilla de fonética entra entera', () => {
     expect(out.items).toHaveLength(44);
     const frente = out.items?.find((i) => i.fields.routeNo === 2);
     expect(frente?.title).toBe('Frente · /iː/');
-    expect(frente?.blocks).toHaveLength(8);
+    expect(frente?.blocks).toHaveLength(9);
   });
 });

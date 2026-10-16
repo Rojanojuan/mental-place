@@ -162,3 +162,36 @@ describe('semilla de fonética · contenido', () => {
     }
   });
 });
+
+describe('semilla de fonética · la parte del cuerpo', () => {
+  it('abre cada ítem con la parte traducida y su IPA', () => {
+    for (const i of items) {
+      const first = i.blocks[0];
+      expect(first?.type, i.title).toBe('bilingual');
+      if (first?.type !== 'bilingual') continue;
+      // «Forehead /ˈfɔːhed/» — lo que da la cabecera del Word.
+      expect(first.en, i.title).toMatch(/\/.+\//);
+      expect(first.es.length, i.title).toBeGreaterThan(2);
+    }
+  });
+
+  it('la deja también en `fields`, separada', () => {
+    for (const i of items) {
+      expect(typeof i.fields.partEn, i.title).toBe('string');
+      expect((i.fields.partEn as string).length, i.title).toBeGreaterThan(2);
+      expect(typeof i.fields.partIpa, i.title).toBe('string');
+    }
+  });
+
+  it('marca el contraste de los minimal pairs con «vs.»', () => {
+    const pairs = items
+      .flatMap((i) => i.blocks)
+      .filter((b) => b.type === 'table' && b.caption === 'Minimal pairs');
+    expect(pairs.length).toBeGreaterThan(30);
+    for (const block of pairs) {
+      if (block.type !== 'table') continue;
+      expect(block.columns[4]).toBe('vs.');
+      for (const row of block.rows) expect(row[4]).toBe('vs.');
+    }
+  });
+});

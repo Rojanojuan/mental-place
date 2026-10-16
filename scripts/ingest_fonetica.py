@@ -425,8 +425,22 @@ def read_std45(pc_data: Path) -> tuple[list[dict], list[dict]]:
 # ------------------------------------------------------------------ construir bundle
 
 
-def build_blocks(sec: dict) -> list[dict]:
+def build_blocks(sec: dict, part_name: str) -> list[dict]:
     blocks: list[dict] = []
+
+    # La parte del cuerpo traducida, tal como la da la cabecera del Word
+    # («2. FRENTE (Forehead /ˈfɔːhed/)»). También se memoriza, así que va
+    # delante de todo lo demás.
+    if sec['partEn']:
+        blocks.append(
+            {
+                'type': 'bilingual',
+                'en': f'{sec["partEn"]} {slash(sec["partIpa"])}'.strip(),
+                'es': part_name,
+                'tag': 'base',
+            }
+        )
+
     th = sec['theory']
     if th['equivalent']:
         blocks.append({'type': 'note', 'md': f'**Equivalente en español.** {th["equivalent"]}'})
@@ -488,6 +502,7 @@ def build_blocks(sec: dict) -> list[dict]:
                     'Inglés',
                     'Transcripción',
                     'Español',
+                    'vs.',
                     'Inglés',
                     'Transcripción',
                     'Español',
@@ -498,6 +513,7 @@ def build_blocks(sec: dict) -> list[dict]:
                         p['a']['en'],
                         p['a']['ipa'],
                         p['a']['es'],
+                        'vs.',
                         p['b']['en'],
                         p['b']['ipa'],
                         p['b']['es'],
@@ -678,7 +694,7 @@ def build_bundle(sections: list[dict], loci_geo: list[dict], zones_geo: list[dic
                 'title': f'{g["name"]} · {slash(sec["sound"])}',
                 'front': f'{slash(sec["sound"])} — ¿cómo se produce y con qué patrones se escribe?',
                 'back': f'{kw["en"]} {slash(kw["ipa"])} — {kw["es"]}' if kw else slash(sec['sound']),
-                'blocks': build_blocks(sec),
+                'blocks': build_blocks(sec, g['name']),
                 'tags': ['fonetica', g['zone']],
                 'fields': {
                     'routeNo': n,

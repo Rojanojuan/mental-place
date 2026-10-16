@@ -1322,6 +1322,12 @@
       "back": "YES /jɛs/ — SÍ",
       "blocks": [
         {
+          "type": "bilingual",
+          "en": "Hair /heər/",
+          "es": "Pelo / Cabello",
+          "tag": "base"
+        },
+        {
           "type": "note",
           "md": "**Equivalente en español.** Como la \" i \" de iglesia. Este sonido es un deslizamiento de la lengua hacia el frente y el paladar. La mandíbula está más relajada que para otros sonidos cerrados como /i:/."
         },
@@ -1623,6 +1629,12 @@
       "front": "/iː/ — ¿cómo se produce y con qué patrones se escribe?",
       "back": "CHEESE /ʧiːz/ — QUESO",
       "blocks": [
+        {
+          "type": "bilingual",
+          "en": "Forehead /ˈfɔːhed/",
+          "es": "Frente",
+          "tag": "base"
+        },
         {
           "type": "note",
           "md": "**Equivalente en español.** Como la \" i \" de iglesia, pero más larga y sostenida."
@@ -2023,6 +2035,7 @@
             "Inglés",
             "Transcripción",
             "Español",
+            "vs.",
             "Inglés",
             "Transcripción",
             "Español"
@@ -2033,6 +2046,7 @@
               "Eat",
               "iːt",
               "Comer",
+              "vs.",
               "Yet",
               "jɛt",
               "Todavía"
@@ -2042,6 +2056,7 @@
               "Ease",
               "iːz",
               "Facilidad",
+              "vs.",
               "Yes",
               "jɛs",
               "Sí"
@@ -2051,6 +2066,7 @@
               "Ear",
               "iːr",
               "Oído",
+              "vs.",
               "Year",
               "jɪər",
               "Año"
@@ -2060,6 +2076,7 @@
               "Eel",
               "iːl",
               "Anguila",
+              "vs.",
               "Yell",
               "jɛl",
               "Gritar"
@@ -2069,6 +2086,7 @@
               "East",
               "iːst",
               "Este(punto cardinal)",
+              "vs.",
               "Yeast",
               "jiːst",
               "Levadura"
@@ -2078,6 +2096,7 @@
               "Eve",
               "iːv",
               "Víspera",
+              "vs.",
               "Yve",
               "jiv",
               "Nombre propio"
@@ -2247,6 +2266,12 @@
       "front": "/ɪ/ — ¿cómo se produce y con qué patrones se escribe?",
       "back": "Shit /ʃɪt/ — Mierda",
       "blocks": [
+        {
+          "type": "bilingual",
+          "en": "Eyebrows /ˈaɪbraʊz/",
+          "es": "Cejas",
+          "tag": "base"
+        },
         {
           "type": "note",
           "md": "**Equivalente en español.** El sonido /ɪ/ en inglés se asemeja al sonido de la letra \"e\" en palabras en español como \"techo\" o \"seco\". Sin embargo, en español, este sonido suele ser un poco más cerrado y tenso, mientras que en inglés es más relajado. El sonido /ɪ/ es una vocal cerrada, anterior y no redondeada. Aquí hay algunas pautas sobre cómo pronunciarlo:"
@@ -2600,6 +2625,7 @@
             "Inglés",
             "Transcripción",
             "Español",
+            "vs.",
             "Inglés",
             "Transcripción",
             "Español"
@@ -2610,6 +2636,7 @@
               "Bit",
               "bɪt",
               "Morder .past / Pedazo",
+              "vs.",
               "Beat",
               "biːt",
               "Golpear"
@@ -2619,6 +2646,7 @@
               "Sit",
               "sɪt",
               "Sentar",
+              "vs.",
               "Seat",
               "siːt",
               "Asiento"
@@ -2628,6 +2656,7 @@
               "Live",
               "lɪv",
               "Vivir",
+              "vs.",
               "Leave",
               "liːv",
               "Dejar"
@@ -2637,6 +2666,7 @@
               "Fit",
               "fɪt",
               "Ajustar",
+              "vs.",
               "Feet",
               "fiːt",
               "Pies"
@@ -2646,6 +2676,7 @@
               "Ship",
               "ʃɪp",
               "Barco",
+              "vs.",
               "Sheep",
               "ʃiːp",
               "Oveja"
@@ -2655,6 +2686,7 @@
               "Sin",
               "sɪn",
               "Pecado/Pecar",
+              "vs.",
               "Scene",
               "siːn",
               "Escena"
@@ -2804,6 +2836,12 @@
       "front": "/e/ — ¿cómo se produce y con qué patrones se escribe?",
       "back": "MEN /mɛn/ — HOMBRE",
       "blocks": [
+        {
+          "type": "bilingual",
+          "en": "Eyelashes /ˈaɪlæʃɪz/",
+          "es": "Pestañas",
+          "tag": "base"
+        },
         {
           "type": "note",
           "md": "**Equivalente en español.** El sonido /e/ en inglés es similar al sonido de la letra \"e\" en palabras en español como \"mesa\" o \"ver\". Sin embargo, el sonido /e/ en inglés tiende a ser más abierto y menos cerrado en comparación con el español. El sonido /e/ es una vocal media, anterior y no redondeada. Aquí tienes algunas pautas sobre cómo pronunciarlo:"
@@ -3067,6 +3105,7 @@
             "Inglés",
             "Transcripción",
             "Español",
+            "vs.",
             "Inglés",
             "Transcripción",
             "Español"
@@ -3077,6 +3116,7 @@
               "Bet",
               "bet",
               "Apostar",
+              "vs.",
               "Bit",
               "bɪt",
               "Morder.past"
@@ -3086,6 +3126,7 @@
               "Men",
               "men",
               "Hombres",
+              "vs.",
               "Min",
               "mɪn",
               "Minuto (abreviación)"
@@ -3095,6 +3136,7 @@
               "Pen",
               "pen",
               "Bolígrafo",
+              "vs.",
               "Pin",
               "pɪn",
               "Alfiler"
@@ -3104,6 +3146,7 @@
               "Set",
               "set",
               "Conjunto",
+              "vs.",
               "Sit",
               "sɪt",
               "Sentar"
@@ -3113,6 +3156,7 @@
               "Beg",
               "beɡ",
               "Rogar",
+              "vs.",
               "Big",
               "bɪɡ",
               "Grande"
@@ -3122,6 +3166,7 @@
               "Sex",
               "sex",
               "Sexo",
+              "vs.",
               "Six",
               "sɪx",
               "Seis"
@@ -3245,6 +3290,12 @@
       "front": "/æ/ — ¿cómo se produce y con qué patrones se escribe?",
       "back": "CAT /kæt/ — GATO",
       "blocks": [
+        {
+          "type": "bilingual",
+          "en": "Eyes /aɪz/",
+          "es": "Ojos",
+          "tag": "base"
+        },
         {
           "type": "note",
           "md": "**Equivalente en español.** El sonido /æ/ en inglés no tiene un equivalente directo en español, pero se asemeja al sonido de la letra \"a\" en palabras como \"más\" o \"casa\". Sin embargo, /æ/ es más abierto y se pronuncia con la lengua más baja en comparación con la \"a\" española. El sonido /æ/ es una vocal abierta, anterior y no redondeada. Aquí tienes algunas pautas sobre cómo pronunciarlo:"
@@ -3449,6 +3500,7 @@
             "Inglés",
             "Transcripción",
             "Español",
+            "vs.",
             "Inglés",
             "Transcripción",
             "Español"
@@ -3459,6 +3511,7 @@
               "Bat",
               "bæt",
               "Murciélago",
+              "vs.",
               "Bet",
               "bet",
               "Apostar"
@@ -3468,6 +3521,7 @@
               "Man",
               "mæn",
               "Hombre",
+              "vs.",
               "Men",
               "men",
               "Hombres"
@@ -3477,6 +3531,7 @@
               "Pat",
               "pæt",
               "Palmear/ Nombre Patricia/o",
+              "vs.",
               "Pet",
               "pet",
               "Mascota"
@@ -3486,6 +3541,7 @@
               "Sat",
               "sæt",
               "Sentar .past",
+              "vs.",
               "Set",
               "set",
               "Conjunto"
@@ -3495,6 +3551,7 @@
               "Bag",
               "bæg",
               "Bolsa",
+              "vs.",
               "Beg",
               "beɡ",
               "Rogar"
@@ -3613,6 +3670,12 @@
       "front": "/ɔː/ — ¿cómo se produce y con qué patrones se escribe?",
       "back": "BALL /bɔːl/ — BALÓN",
       "blocks": [
+        {
+          "type": "bilingual",
+          "en": "Nose /nəʊz/",
+          "es": "Nariz",
+          "tag": "base"
+        },
         {
           "type": "list",
           "items": [
@@ -4097,6 +4160,7 @@
             "Inglés",
             "Transcripción",
             "Español",
+            "vs.",
             "Inglés",
             "Transcripción",
             "Español"
@@ -4107,6 +4171,7 @@
               "Caught",
               "kɔːt",
               "Atrapado",
+              "vs.",
               "Cat",
               "kæt",
               "Gato"
@@ -4116,6 +4181,7 @@
               "Port",
               "pɔːrt",
               "Puerto",
+              "vs.",
               "Pat",
               "pæt",
               "Palmear"
@@ -4125,6 +4191,7 @@
               "Taught",
               "tɔːt",
               "Enseñado",
+              "vs.",
               "Tat",
               "tæt",
               "Tatuaje (informal)"
@@ -4134,6 +4201,7 @@
               "Bought",
               "bɔːt",
               "Comprado",
+              "vs.",
               "Bat",
               "bæt",
               "Murciélago"
@@ -4143,6 +4211,7 @@
               "Call",
               "kɔːl",
               "Llamar",
+              "vs.",
               "Cal",
               "kæl",
               "Nombre propio"
@@ -4152,6 +4221,7 @@
               "Tall",
               "tɔːl",
               "Alto",
+              "vs.",
               "Tab",
               "tæb",
               "Pestaña"
@@ -4161,6 +4231,7 @@
               "Fall",
               "fɔːl",
               "Caer",
+              "vs.",
               "Fat",
               "fæt",
               "Gordo"
@@ -4170,6 +4241,7 @@
               "Law",
               "lɔː",
               "Ley",
+              "vs.",
               "Lap",
               "læp",
               "Regazo"
@@ -4179,6 +4251,7 @@
               "Ball",
               "bɔːl",
               "Pelota",
+              "vs.",
               "Bag",
               "bæg",
               "Bolsa"
@@ -4188,6 +4261,7 @@
               "Wall",
               "wɔːl",
               "Pared",
+              "vs.",
               "Wag",
               "wæɡ",
               "Mover la cola"
@@ -4386,6 +4460,12 @@
       "back": "CAR /kɑː/ — CARRO",
       "blocks": [
         {
+          "type": "bilingual",
+          "en": "Moustache /məˈstɑːʃ/",
+          "es": "Bigote",
+          "tag": "base"
+        },
+        {
           "type": "note",
           "md": "**Equivalente en español.** El sonido /ɑː/ se asemeja al sonido de la letra \"a\" en español, como en \"papa\" o \"casa.\" Sin embargo, el sonido /ɑː/ es más prolongado y tiene una calidad más abierta que la \"a\" española ( pon los labios como si fueras a decir una o y pronuncias a , esto es muy común en inglés americano, en británico es mucho mas neutral la posición de los labios. El sonido /ɑː/ es una vocal abierta, posterior y ligeramente redondeada. Aquí tienes algunas pautas sobre cómo pronunciarlo:"
         },
@@ -4576,6 +4656,7 @@
             "Inglés",
             "Transcripción",
             "Español",
+            "vs.",
             "Inglés",
             "Transcripción",
             "Español"
@@ -4586,6 +4667,7 @@
               "Cart",
               "kɑːt",
               "Carro",
+              "vs.",
               "Court",
               "kɔːt",
               "Corte"
@@ -4595,6 +4677,7 @@
               "Heart",
               "hɑːt",
               "Corazón",
+              "vs.",
               "Hoard",
               "hɔːd",
               "Abastecerse"
@@ -4604,6 +4687,7 @@
               "Part",
               "pɑːt",
               "Parte",
+              "vs.",
               "Port",
               "pɔːt",
               "Puerto"
@@ -4613,6 +4697,7 @@
               "Calm",
               "kɑːm",
               "Calma",
+              "vs.",
               "Call",
               "kɔːl",
               "Llamar"
@@ -4622,6 +4707,7 @@
               "Farm",
               "fɑːm",
               "Granja",
+              "vs.",
               "Form",
               "fɔːm",
               "Forma"
@@ -4738,6 +4824,12 @@
       "front": "/ɒ/ — ¿cómo se produce y con qué patrones se escribe?",
       "back": "HOT /hɒt/ — CALIENTE",
       "blocks": [
+        {
+          "type": "bilingual",
+          "en": "Lips /lɪps/",
+          "es": "Labios",
+          "tag": "base"
+        },
         {
           "type": "note",
           "md": "**Equivalente en español.** Similar a la a en la palabra Gato pero con la boca muy neutral. El sonido /ɒ/ es una vocal abierta, posterior y no redondeada. Aquí tienes algunas pautas sobre cómo pronunciarlo: Similar al sonido anterior pero muy corto."
@@ -4901,6 +4993,7 @@
             "Inglés",
             "Transcripción",
             "Español",
+            "vs.",
             "Inglés",
             "Transcripción",
             "Español"
@@ -4911,6 +5004,7 @@
               "Cot",
               "kɒt",
               "Cuna",
+              "vs.",
               "Cart",
               "kɑːt",
               "Carro"
@@ -4920,6 +5014,7 @@
               "Not",
               "nɒt",
               "No",
+              "vs.",
               "Naught",
               "nɑːt",
               "Nada"
@@ -4929,6 +5024,7 @@
               "Hot",
               "hɒt",
               "Caliente",
+              "vs.",
               "Heart",
               "hɑːt",
               "Corazón"
@@ -4938,6 +5034,7 @@
               "Pop",
               "pɒp",
               "Estallar",
+              "vs.",
               "Palm",
               "pɑːm",
               "Palma"
@@ -4947,6 +5044,7 @@
               "Cot",
               "kɒt",
               "Cuna",
+              "vs.",
               "Caught",
               "kɔːt",
               "Atrapado"
@@ -4956,6 +5054,7 @@
               "Lot",
               "lɒt",
               "Lote",
+              "vs.",
               "Law",
               "lɔː",
               "Ley"
@@ -4965,6 +5064,7 @@
               "Rot",
               "rɒt",
               "Pudrir",
+              "vs.",
               "Raw",
               "rɔː",
               "Crudo"
@@ -4974,6 +5074,7 @@
               "Pot",
               "pɒt",
               "Olla",
+              "vs.",
               "Port",
               "pɔːt",
               "Puerto"
@@ -4983,6 +5084,7 @@
               "Shot",
               "ʃɒt",
               "Disparo",
+              "vs.",
               "Short",
               "ʃɔːt",
               "Corto"
@@ -5185,6 +5287,12 @@
       "front": "/ʌ/ — ¿cómo se produce y con qué patrones se escribe?",
       "back": "RUN /rʌn/ — CORRER",
       "blocks": [
+        {
+          "type": "bilingual",
+          "en": "Teeth /tiːθ/",
+          "es": "Dientes",
+          "tag": "base"
+        },
         {
           "type": "note",
           "md": "**Equivalente en español.** El sonido /ʌ/ es similar al sonido \"a\" en algunas pronunciaciones regionales de español, como en \"cama\" o \"pasa,\" aunque es más abierto y su calidad es distinta. No hay un equivalente exacto en español, pero puede ser aproximado a una \"a\" en ciertas situaciones. El sonido /ʌ/ es una vocal media, central y no redondeada. Aquí tienes algunas pautas sobre cómo pronunciarlo:"
@@ -5473,6 +5581,7 @@
             "Inglés",
             "Transcripción",
             "Español",
+            "vs.",
             "Inglés",
             "Transcripción",
             "Español"
@@ -5483,6 +5592,7 @@
               "Cup",
               "kʌp",
               "Taza",
+              "vs.",
               "Cop",
               "kɒp",
               "Policía"
@@ -5492,6 +5602,7 @@
               "Duck",
               "dʌk",
               "Pato",
+              "vs.",
               "Dock",
               "dɒk",
               "Muelle"
@@ -5501,6 +5612,7 @@
               "Luck",
               "lʌk",
               "Suerte",
+              "vs.",
               "Lock",
               "lɒk",
               "Cerradura"
@@ -5510,6 +5622,7 @@
               "Hut",
               "hʌt",
               "Choza",
+              "vs.",
               "Hot",
               "hɒt",
               "Caliente"
@@ -5519,6 +5632,7 @@
               "But",
               "bʌt",
               "Pero",
+              "vs.",
               "Bought",
               "bɒt",
               "Comprado"
@@ -5528,6 +5642,7 @@
               "Bud",
               "bʌd",
               "Brote",
+              "vs.",
               "Bod",
               "bɒd",
               "Cuerpo (jerga)"
@@ -5537,6 +5652,7 @@
               "Cut",
               "kʌt",
               "Cortar",
+              "vs.",
               "Cot",
               "kɒt",
               "Cuna"
@@ -5546,6 +5662,7 @@
               "Cull",
               "kʌl",
               "Eliminar",
+              "vs.",
               "Call",
               "kɒl",
               "Llamada"
@@ -5555,6 +5672,7 @@
               "Pun",
               "pʌn",
               "Juego de palabras/ Chiste",
+              "vs.",
               "Pond",
               "pɒnd",
               "Pantano/ Estanque/ Charco"
@@ -5564,6 +5682,7 @@
               "Luck",
               "lʌk",
               "Suerte",
+              "vs.",
               "Lodge",
               "lɒdʒ",
               "Cabaña"
@@ -5698,6 +5817,12 @@
       "front": "/w/ — ¿cómo se produce y con qué patrones se escribe?",
       "back": "Water /ˈwɔːtər/ — AGUA",
       "blocks": [
+        {
+          "type": "bilingual",
+          "en": "Tongue /tʌŋ/",
+          "es": "Lengua",
+          "tag": "base"
+        },
         {
           "type": "note",
           "md": "**Equivalente en español.** Se pronuncia como la U en hueso."
@@ -5928,6 +6053,7 @@
             "Inglés",
             "Transcripción",
             "Español",
+            "vs.",
             "Inglés",
             "Transcripción",
             "Español"
@@ -5938,6 +6064,7 @@
               "Won",
               "wʌn",
               "Ganó",
+              "vs.",
               "Sun",
               "sʌn",
               "Sol"
@@ -5947,6 +6074,7 @@
               "Wander",
               "ˈwɒndər",
               "Deambular",
+              "vs.",
               "Under",
               "ˈʌndər",
               "Debajo"
@@ -5956,6 +6084,7 @@
               "Wood",
               "wʊd",
               "Madera",
+              "vs.",
               "Mud",
               "mʌd",
               "Lodo"
@@ -6097,6 +6226,12 @@
       "front": "/uː/ — ¿cómo se produce y con qué patrones se escribe?",
       "back": "FOOD /fuːd/ — COMIDA",
       "blocks": [
+        {
+          "type": "bilingual",
+          "en": "Throat /θrəʊt/",
+          "es": "Garganta",
+          "tag": "base"
+        },
         {
           "type": "note",
           "md": "**Equivalente en español.** El sonido /uː/ es similar al sonido de la \"u\" en español, como en \"luz\" o \"tú.\" Sin embargo, el sonido /uː/ en inglés se pronuncia con una mayor duración y claridad. El sonido /uː/ es una vocal cerrada, posterior y redondeada. Aquí tienes algunas pautas sobre cómo pronunciarlo:"
@@ -6388,6 +6523,7 @@
             "Inglés",
             "Transcripción",
             "Español",
+            "vs.",
             "Inglés",
             "Transcripción",
             "Español"
@@ -6398,6 +6534,7 @@
               "Woo",
               "wuː",
               "Cortejar",
+              "vs.",
               "We",
               "wiː",
               "Nosotros"
@@ -6407,6 +6544,7 @@
               "Who",
               "huː",
               "Quién",
+              "vs.",
               "Wit",
               "wɪt",
               "Ingenio"
@@ -6416,6 +6554,7 @@
               "Pool",
               "puːl",
               "Piscina",
+              "vs.",
               "Will",
               "wɪl",
               "Voluntad"
@@ -6425,6 +6564,7 @@
               "Food",
               "fuːd",
               "Comida",
+              "vs.",
               "Wood",
               "wʊd",
               "Madera"
@@ -6434,6 +6574,7 @@
               "Cool",
               "kuːl",
               "Fresco",
+              "vs.",
               "Wool",
               "wʊl",
               "Lana"
@@ -6598,6 +6739,12 @@
       "front": "/ʊ/ — ¿cómo se produce y con qué patrones se escribe?",
       "back": "GOOD /gʊd/ — BUENO",
       "blocks": [
+        {
+          "type": "bilingual",
+          "en": "Chin /tʃɪn/",
+          "es": "Mentón",
+          "tag": "base"
+        },
         {
           "type": "note",
           "md": "**Equivalente en español.** El sonido /ʊ/ es similar al sonido \"u\" en algunas palabras españolas como \"puro\" o \"luz,\" aunque no hay un equivalente exacto. La calidad del sonido en inglés es un poco más cerrada y menos tensa. El sonido /ʊ/ es una vocal cerrada, posterior y redondeada. Aquí tienes algunas pautas sobre cómo pronunciarlo:"
@@ -6822,6 +6969,7 @@
             "Inglés",
             "Transcripción",
             "Español",
+            "vs.",
             "Inglés",
             "Transcripción",
             "Español"
@@ -6832,6 +6980,7 @@
               "Look",
               "lʊk",
               "Mirar",
+              "vs.",
               "Luke",
               "luːk",
               "Lucas"
@@ -6841,6 +6990,7 @@
               "Foot",
               "fʊt",
               "Pie",
+              "vs.",
               "Food",
               "fuːd",
               "Comida"
@@ -6850,6 +7000,7 @@
               "Pull",
               "pʊl",
               "Tirar",
+              "vs.",
               "Pool",
               "puːl",
               "Piscina"
@@ -6859,6 +7010,7 @@
               "Good",
               "ɡʊd",
               "Bueno",
+              "vs.",
               "Goose",
               "ɡuːs",
               "Ganso"
@@ -6868,6 +7020,7 @@
               "Could",
               "kʊd",
               "Podría",
+              "vs.",
               "Cooed",
               "kuːd",
               "Arrulló"
@@ -6980,6 +7133,12 @@
       "front": "/ɜː/ — ¿cómo se produce y con qué patrones se escribe?",
       "back": "NURSE /nɜːs/ — ENFERMERA/RO",
       "blocks": [
+        {
+          "type": "bilingual",
+          "en": "Cheeks /tʃiːks/",
+          "es": "Mejillas",
+          "tag": "base"
+        },
         {
           "type": "note",
           "md": "**Equivalente en español.** El sonido /ɜː/ no tiene un equivalente exacto en español. Sin embargo, se puede aproximar al sonido \"e\" en algunas palabras como \"merced\" o \"perder.\" Sin embargo, el sonido en inglés se produce de manera más prolongada y con una cualidad diferente. El sonido /ɜː/ es una vocal media, central y no redondeada. Aquí tienes algunas pautas sobre cómo pronunciarlo:"
@@ -7251,6 +7410,7 @@
             "Inglés",
             "Transcripción",
             "Español",
+            "vs.",
             "Inglés",
             "Transcripción",
             "Español"
@@ -7261,6 +7421,7 @@
               "Her",
               "hɜːr",
               "Su (de ella)",
+              "vs.",
               "Who",
               "huː",
               "Quién"
@@ -7270,6 +7431,7 @@
               "Burn",
               "bɜːrn",
               "Quemar",
+              "vs.",
               "Boone",
               "buːn",
               "Nombre propio (Boone)"
@@ -7279,6 +7441,7 @@
               "Fur",
               "fɜːr",
               "Pelaje",
+              "vs.",
               "Foo",
               "fuː",
               "Término ficticio (usado en programación y ejemplos)"
@@ -7288,6 +7451,7 @@
               "Purse",
               "pɜːrs",
               "Monedero",
+              "vs.",
               "Poo",
               "puː",
               "Caca (informal)"
@@ -7297,6 +7461,7 @@
               "Turn",
               "tɜːrn",
               "Girar",
+              "vs.",
               "Tune",
               "tuːn",
               "Melodía"
@@ -7306,6 +7471,7 @@
               "Curd",
               "kɜːrd",
               "Cuajada",
+              "vs.",
               "Cooed",
               "kuːd",
               "Arrulló"
@@ -7315,6 +7481,7 @@
               "Blurt",
               "blɜːrt",
               "Soltar (Decir Abruptame nte)",
+              "vs.",
               "Blued",
               "bluːd",
               "Teñido de azul"
@@ -7324,6 +7491,7 @@
               "Stir",
               "stɜːr",
               "Revolver",
+              "vs.",
               "Stew",
               "stuː",
               "Estofado"
@@ -7333,6 +7501,7 @@
               "Word",
               "wɜːrd",
               "Palabra",
+              "vs.",
               "Wooed",
               "wuːd",
               "Cortejó"
@@ -7458,6 +7627,12 @@
       "front": "/ə/ — ¿cómo se produce y con qué patrones se escribe?",
       "back": "BANANA /bəˈnɑːnə/ — BANANO",
       "blocks": [
+        {
+          "type": "bilingual",
+          "en": "Temple /ˈtempəl/",
+          "es": "Sien",
+          "tag": "base"
+        },
         {
           "type": "note",
           "md": "**Equivalente en español.** El sonido /ə/ no tiene un equivalente exacto en español. Sin embargo, se asemeja al sonido de la \"e\" en palabras como \"tema\" o la \"a\" en \"casa,\" aunque la producción del schwa es más relajada y menos tensa. El sonido /ə/ es conocido como schwa. Es una vocal central y se considera la vocal más neutral en inglés. Aquí tienes algunas pautas sobre cómo pronunciarlo:"
@@ -7713,6 +7888,7 @@
             "Inglés",
             "Transcripción",
             "Español",
+            "vs.",
             "Inglés",
             "Transcripción",
             "Español"
@@ -7723,6 +7899,7 @@
               "Ago",
               "əˈɡoʊ",
               "Hace (tiempo)",
+              "vs.",
               "Ergo",
               "ˈɜːɡoʊ",
               "Por lo tanto"
@@ -7732,6 +7909,7 @@
               "Above",
               "əˈbʌv",
               "Encima",
+              "vs.",
               "Herb",
               "hɜːrb",
               "Hierba (en inglés americano)"
@@ -7741,6 +7919,7 @@
               "Ahead",
               "əˈhɛd",
               "Adelante",
+              "vs.",
               "Heard",
               "hɜːrd",
               "Escuchado"
@@ -7750,6 +7929,7 @@
               "Alone",
               "əˈloʊn",
               "Solo",
+              "vs.",
               "Earn",
               "ɜːrn",
               "Ganar"
@@ -7759,6 +7939,7 @@
               "Around",
               "əˈraʊnd",
               "Alrededor",
+              "vs.",
               "Err",
               "ɜːr",
               "Errar"
@@ -7768,6 +7949,7 @@
               "Appeal",
               "əˈpiːl",
               "Apelar",
+              "vs.",
               "Purl",
               "pɜːrl",
               "Punto al revés (en tejido)"
@@ -7777,6 +7959,7 @@
               "Arise",
               "əˈraɪz",
               "Surgir",
+              "vs.",
               "Purse",
               "pɜːrs",
               "Monedero"
@@ -7786,6 +7969,7 @@
               "Support",
               "səˈpɔːrt",
               "Apoyar",
+              "vs.",
               "Surge",
               "sɜːrdʒ",
               "Oleada"
@@ -7795,6 +7979,7 @@
               "Amount",
               "əˈmaʊnt",
               "Cantidad",
+              "vs.",
               "Burn",
               "bɜːrn",
               "Quemar"
@@ -7804,6 +7989,7 @@
               "Alive",
               "əˈlaɪv",
               "Vivo",
+              "vs.",
               "Serve",
               "sɜːrv",
               "Servir"
@@ -7933,6 +8119,12 @@
       "front": "/eɪ/ — ¿cómo se produce y con qué patrones se escribe?",
       "back": "PLAY /pleɪ/ — JUGAR",
       "blocks": [
+        {
+          "type": "bilingual",
+          "en": "Ears /ɪər/",
+          "es": "Orejas",
+          "tag": "base"
+        },
         {
           "type": "note",
           "md": "**Equivalente en español.** El sonido /eɪ/ se asemeja al diptongo \"ei\" en palabras españolas como \"seis\" o \"ley\", pero en inglés, el deslizamiento hacia la segunda vocal es más claro y prolongado. El sonido /eɪ/ es un diptongo que comienza con el sonido /e/ y luego desliza hacia un sonido cercano a /ɪ/. Es una vocal deslizante que se usa comúnmente en palabras con la letra \"a\" o combinaciones que la incluyan."
@@ -8221,6 +8413,7 @@
             "Inglés",
             "Transcripción",
             "Español",
+            "vs.",
             "Inglés",
             "Transcripción",
             "Español"
@@ -8231,6 +8424,7 @@
               "Ate",
               "eɪt",
               "Comió",
+              "vs.",
               "At",
               "ət",
               "En"
@@ -8240,6 +8434,7 @@
               "Bait",
               "beɪt",
               "Cebo",
+              "vs.",
               "But",
               "bət",
               "Pero"
@@ -8249,6 +8444,7 @@
               "Game",
               "ɡeɪm",
               "Juego",
+              "vs.",
               "Gum",
               "ɡəm",
               "Encía o Chicle"
@@ -8370,6 +8566,12 @@
       "front": "/aɪ/ — ¿cómo se produce y con qué patrones se escribe?",
       "back": "I /aɪ/ — YO",
       "blocks": [
+        {
+          "type": "bilingual",
+          "en": "Neck /nek/",
+          "es": "Cuello / Tráquea",
+          "tag": "base"
+        },
         {
           "type": "note",
           "md": "**Equivalente en español.** En español, no tenemos un equivalente exacto al sonido /aɪ/, ya que el español tiende a usar vocales puras (sin diptongos tan marcados). Sin embargo, el diptongo más cercano es el que encontramos en palabras como \"aire\" o \"caigo\". Aunque similar, en español el deslizamiento hacia la i es menos pronunciado y más corto que en inglés. El sonido /aɪ/ en inglés es un diptongo compuesto por los sonidos /a/ y /ɪ/. Se produce comenzando con una posición de la boca abierta, como al pronunciar el sonido /a/ en español, y luego elevando la lengua hacia la posición del sonido /ɪ/, cerrando ligeramente la boca."
@@ -8771,6 +8973,7 @@
             "Inglés",
             "Transcripción",
             "Español",
+            "vs.",
             "Inglés",
             "Transcripción",
             "Español"
@@ -8781,6 +8984,7 @@
               "White",
               "waɪt",
               "Blanco",
+              "vs.",
               "Wait",
               "weɪt",
               "Esperar"
@@ -8790,6 +8994,7 @@
               "Might",
               "maɪt",
               "Podría",
+              "vs.",
               "Mate",
               "meɪt",
               "Compañero"
@@ -8799,6 +9004,7 @@
               "File",
               "faɪl",
               "Archivo",
+              "vs.",
               "Fail",
               "feɪl",
               "Fallar"
@@ -8808,6 +9014,7 @@
               "Pine",
               "paɪn",
               "Pino",
+              "vs.",
               "Pain",
               "peɪn",
               "Dolor"
@@ -8817,6 +9024,7 @@
               "Sight",
               "saɪt",
               "Vista",
+              "vs.",
               "Sail",
               "seɪl",
               "Navegar"
@@ -8826,6 +9034,7 @@
               "Buy",
               "baɪ",
               "Comprar",
+              "vs.",
               "Bay",
               "beɪ",
               "Bahía"
@@ -8835,6 +9044,7 @@
               "Mile",
               "maɪl",
               "Milla",
+              "vs.",
               "Mail",
               "meɪl",
               "Correo"
@@ -8844,6 +9054,7 @@
               "Time",
               "taɪm",
               "Tiempo",
+              "vs.",
               "Tame",
               "teɪm",
               "Domar"
@@ -8853,6 +9064,7 @@
               "Fight",
               "faɪt",
               "Pelear",
+              "vs.",
               "Fate",
               "feɪt",
               "Destino"
@@ -8862,6 +9074,7 @@
               "Wine",
               "waɪn",
               "Vino",
+              "vs.",
               "Wane",
               "weɪn",
               "Menguar"
@@ -8871,6 +9084,7 @@
               "Side",
               "saɪd",
               "Lado",
+              "vs.",
               "Sade",
               "seɪd",
               "Nombre propio"
@@ -8880,6 +9094,7 @@
               "Pride",
               "praɪd",
               "Orgullo",
+              "vs.",
               "Prayed",
               "preɪd",
               "Oró"
@@ -8889,6 +9104,7 @@
               "Lime",
               "laɪm",
               "Lima",
+              "vs.",
               "Lame",
               "leɪm",
               "Cojo"
@@ -8898,6 +9114,7 @@
               "Pile",
               "paɪl",
               "Pila",
+              "vs.",
               "Pale",
               "peɪl",
               "Pálido"
@@ -9077,6 +9294,12 @@
       "front": "/ɔɪ/ — ¿cómo se produce y con qué patrones se escribe?",
       "back": "BOY /bɔɪ/ — CHICO",
       "blocks": [
+        {
+          "type": "bilingual",
+          "en": "Shoulders /ˈʃəʊldəz/",
+          "es": "Hombros",
+          "tag": "base"
+        },
         {
           "type": "note",
           "md": "**Equivalente en español.** No existe un equivalente exacto en español para el sonido /ɔɪ/, ya que es un diptongo característico del inglés. Sin embargo, una aproximación cercana sería el sonido que usamos en palabras como \"hoy\" o \"voy\". Aunque similar, en inglés el deslizamiento y el inicio más abierto del sonido /ɔ/ están más marcados, la y final suena como una e. El sonido /ɔɪ/ en inglés es un diptongo compuesto por los sonidos /ɔ/ y /ɪ/. Para pronunciarlo, se comienza con una posición en la boca abierta y redondeada (similar al sonido \"oe\" en español, como en la palabra roedor, pero más corta y relajada), y luego se desliza hacia una posición más cerrada con el sonido /ɪ/. Posición de los labios terminan en una posición relajada, sin redondear."
@@ -9270,6 +9493,7 @@
             "Inglés",
             "Transcripción",
             "Español",
+            "vs.",
             "Inglés",
             "Transcripción",
             "Español"
@@ -9280,6 +9504,7 @@
               "Boy",
               "bɔɪ",
               "Chico",
+              "vs.",
               "Buy",
               "baɪ",
               "Comprar"
@@ -9289,6 +9514,7 @@
               "Toy",
               "tɔɪ",
               "Juguete",
+              "vs.",
               "Tie",
               "taɪ",
               "Corbata"
@@ -9298,6 +9524,7 @@
               "Coin",
               "kɔɪn",
               "Moneda",
+              "vs.",
               "Kite",
               "kaɪt",
               "Cometa"
@@ -9307,6 +9534,7 @@
               "Oil",
               "ɔɪl",
               "Aceite",
+              "vs.",
               "Aisle",
               "aɪl",
               "Pasillo"
@@ -9316,6 +9544,7 @@
               "Boil",
               "bɔɪl",
               "Hervir",
+              "vs.",
               "Bile",
               "baɪl",
               "Bilis"
@@ -9325,6 +9554,7 @@
               "Soil",
               "sɔɪl",
               "Suelo",
+              "vs.",
               "Sigh",
               "saɪ",
               "Suspirar"
@@ -9334,6 +9564,7 @@
               "Join",
               "ʤɔɪn",
               "Unir",
+              "vs.",
               "Jive",
               "ʤaɪv",
               "Baile"
@@ -9343,6 +9574,7 @@
               "Foil",
               "fɔɪl",
               "Frustrar/Pa pel de Aluminio",
+              "vs.",
               "File",
               "faɪl",
               "Archivo"
@@ -9352,6 +9584,7 @@
               "Voice",
               "vɔɪs",
               "Voz",
+              "vs.",
               "Vice",
               "vaɪs",
               "Vicio"
@@ -9361,6 +9594,7 @@
               "Loin",
               "lɔɪn",
               "Lomo",
+              "vs.",
               "Line",
               "laɪn",
               "Línea"
@@ -9477,6 +9711,12 @@
       "front": "/juː/ — ¿cómo se produce y con qué patrones se escribe?",
       "back": "YOU /juː/ — TÚ",
       "blocks": [
+        {
+          "type": "bilingual",
+          "en": "Armpit /ˈɑːmpɪt/",
+          "es": "Axila",
+          "tag": "base"
+        },
         {
           "type": "note",
           "md": "**Equivalente en español.** En español, el sonido /juː/ no tiene un equivalente exacto. Se asemeja a la combinación \"iu\" que encontramos en palabras como \"ciudad\" o \"viuda\", pero en español, el sonido \"i\" no se desliza tanto hacia el sonido \"u\" como en inglés y suele ser más corto. El sonido /juː/ en inglés es un diptongo que combina los sonidos /j/ y /uː/. Este sonido se pronuncia comenzando con el sonido /j/ (como en el inicio de “yo” en español) y luego deslizando hacia el sonido /uː/, que es una vocal larga similar a la \"u\" en español, pero más prolongada."
@@ -9701,6 +9941,7 @@
             "Inglés",
             "Transcripción",
             "Español",
+            "vs.",
             "Inglés",
             "Transcripción",
             "Español"
@@ -9711,6 +9952,7 @@
               "You",
               "juː",
               "Tú",
+              "vs.",
               "Toy",
               "tɔɪ",
               "Juguete"
@@ -9720,6 +9962,7 @@
               "Cue",
               "kjuː",
               "Señal",
+              "vs.",
               "Coy",
               "kɔɪ",
               "Tímido"
@@ -9729,6 +9972,7 @@
               "Few",
               "fjuː",
               "Pocos",
+              "vs.",
               "Foy",
               "fɔɪ",
               "Nombre Propio"
@@ -9738,6 +9982,7 @@
               "Due",
               "djuː",
               "Debido",
+              "vs.",
               "Boy",
               "bɔɪ",
               "Niño"
@@ -9747,6 +9992,7 @@
               "Pew",
               "pjuː",
               "Banco de Iglesia",
+              "vs.",
               "Ploy",
               "plɔɪ",
               "Estratagema"
@@ -9756,6 +10002,7 @@
               "View",
               "vjuː",
               "Vista",
+              "vs.",
               "Joy",
               "dʒɔɪ",
               "Alegría"
@@ -9765,6 +10012,7 @@
               "Blue",
               "bluː",
               "Azul",
+              "vs.",
               "Boy",
               "bɔɪ",
               "Chico"
@@ -9774,6 +10022,7 @@
               "New",
               "njuː",
               "Nuevo",
+              "vs.",
               "Noise",
               "nɔɪz",
               "Ruido"
@@ -9783,6 +10032,7 @@
               "Fuel",
               "fjuːəl",
               "Combustible",
+              "vs.",
               "Foil",
               "fɔɪl",
               "Papel de Aluminio"
@@ -9906,6 +10156,12 @@
       "front": "/ɪə/ — ¿cómo se produce y con qué patrones se escribe?",
       "back": "HERE /hɪər/ — AQUÍ",
       "blocks": [
+        {
+          "type": "bilingual",
+          "en": "Biceps /ˈbaɪseps/",
+          "es": "Bíceps",
+          "tag": "base"
+        },
         {
           "type": "note",
           "md": "**Equivalente en español.** No existe un equivalente directo en español, ya que el sonido /ɪə/ es un diptongo propio del inglés. Una aproximación podría ser la combinación \"ie\" que usamos en palabras como \"pierna\" o \"tierra\", aunque en español este diptongo es más breve y no tiene el mismo deslizamiento hacia una vocal tan relajada como el schwa. El sonido /ɪə/ en inglés es un diptongo que combina los sonidos /ɪ/ (como en \"sit\") y /ə/ (schwa). Para producir este sonido, se comienza en una posición más alta y frontal con la lengua (como para el sonido /ɪ/), y luego se desliza hacia una posición central más relajada para producir el sonido /ə/, que es una vocal neutra y corta."
@@ -10179,6 +10435,7 @@
             "Inglés",
             "Transcripción",
             "Español",
+            "vs.",
             "Inglés",
             "Transcripción",
             "Español"
@@ -10189,6 +10446,7 @@
               "Here",
               "hɪə",
               "Aquí",
+              "vs.",
               "Hugh",
               "hjuː",
               "Nombre Propio (Hugo)"
@@ -10198,6 +10456,7 @@
               "Fear",
               "fɪə",
               "Miedo",
+              "vs.",
               "Few",
               "fjuː",
               "Pocos"
@@ -10207,6 +10466,7 @@
               "Near",
               "nɪə",
               "Cerca",
+              "vs.",
               "New",
               "njuː",
               "Nuevo"
@@ -10216,6 +10476,7 @@
               "Beer",
               "bɪə",
               "Cerveza",
+              "vs.",
               "View",
               "vjuː",
               "Vista"
@@ -10225,6 +10486,7 @@
               "Tear",
               "tɪə",
               "Lagrima",
+              "vs.",
               "Tune",
               "tjuːn",
               "Melodía"
@@ -10234,6 +10496,7 @@
               "Dear",
               "dɪə",
               "Querido",
+              "vs.",
               "Due",
               "djuː",
               "Debido"
@@ -10243,6 +10506,7 @@
               "Steer",
               "stɪə",
               "Qirigir",
+              "vs.",
               "Stu",
               "stjuː",
               "Nombre Propio (Abreviatura de Stuart)"
@@ -10252,6 +10516,7 @@
               "Pier",
               "pɪə",
               "Muelle",
+              "vs.",
               "Pew",
               "pjuː",
               "Banco de Iglesia"
@@ -10384,6 +10649,12 @@
       "front": "/eə/ — ¿cómo se produce y con qué patrones se escribe?",
       "back": "AIR /eə/ — AIRE",
       "blocks": [
+        {
+          "type": "bilingual",
+          "en": "Elbow /ˈelbəʊ/",
+          "es": "Codo",
+          "tag": "base"
+        },
         {
           "type": "note",
           "md": "**Equivalente en español.** No existe un equivalente exacto en español para /eə/. Una aproximación podría ser el diptongo en palabras como \"ea\" en \"pelear\" o \"idea\", pero el español no tiene un deslizamiento tan marcado ni una vocal tan relajada como el schwa al final. El sonido /eə/ en inglés es un diptongo que combina los sonidos /e/ (como en \"bed\") y /ə/ (schwa). Se produce comenzando en una posición de la boca más abierta y relajada para el sonido /e/, y luego se desliza hacia el sonido neutro y central /ə/."
@@ -10612,6 +10883,7 @@
             "Inglés",
             "Transcripción",
             "Español",
+            "vs.",
             "Inglés",
             "Transcripción",
             "Español"
@@ -10622,6 +10894,7 @@
               "Hair",
               "heə",
               "Cabello",
+              "vs.",
               "Here",
               "hɪə",
               "Aquí"
@@ -10631,6 +10904,7 @@
               "Bear",
               "beə",
               "Oso",
+              "vs.",
               "Beer",
               "bɪə",
               "Cerveza"
@@ -10640,6 +10914,7 @@
               "Fair",
               "feə",
               "Justo/Feria",
+              "vs.",
               "Fear",
               "fɪə",
               "Miedo"
@@ -10649,6 +10924,7 @@
               "Share",
               "ʃeə",
               "Compartir",
+              "vs.",
               "Sheer",
               "ʃɪə",
               "Puro/Absoluto"
@@ -10658,6 +10934,7 @@
               "Tear",
               "teə",
               "Rasgar",
+              "vs.",
               "Tear",
               "tɪə",
               "Lágrima"
@@ -10770,6 +11047,12 @@
       "front": "/ʊə/ — ¿cómo se produce y con qué patrones se escribe?",
       "back": "SURE ʃʊər, /ʃɔː/ — SEGURO/RA",
       "blocks": [
+        {
+          "type": "bilingual",
+          "en": "Forearm /ˈfɔːrɑːm/",
+          "es": "Antebrazo",
+          "tag": "base"
+        },
         {
           "type": "note",
           "md": "**Equivalente en español.** No existe un equivalente en español para /ʊə/, ya que el español no utiliza diptongos que terminen en un sonido schwa neutro. La combinación más cercana podría ser un diptongo como \"ua\" en palabras como \"suave\" o \"cuadro\", ó \"ue\" en hueso, aunque en español este diptongo es más corto y cerrado, sin el deslizamiento hacia el sonido schwa. El sonido /ʊə/ en inglés es un diptongo que combina los sonidos /ʊ/ (como en \"foot\") y /ə/ (schwa). Para producir este sonido, se empieza con una posición de la lengua hacia atrás y ligeramente elevada para el sonido /ʊ/, y luego se desliza hacia una posición central y relajada para producir el sonido /ə. Posición inicial: Comienza con la boca en una posición casi cerrada, con los labios ligeramente redondeados y la lengua hacia atrás y algo elevada, como para el sonido /ʊ/."
@@ -10975,6 +11258,7 @@
             "Inglés",
             "Transcripción",
             "Español",
+            "vs.",
             "Inglés",
             "Transcripción",
             "Español"
@@ -10985,6 +11269,7 @@
               "Cure",
               "kjʊə",
               "Cura",
+              "vs.",
               "Care",
               "keə",
               "Cuidar"
@@ -10994,6 +11279,7 @@
               "Pure",
               "pjʊə",
               "Puro",
+              "vs.",
               "Pair",
               "peə",
               "Par, Pareja"
@@ -11003,6 +11289,7 @@
               "Sure",
               "ʃʊə",
               "Seguro",
+              "vs.",
               "Share",
               "ʃeə",
               "Compartir"
@@ -11012,6 +11299,7 @@
               "Tour",
               "tʊə",
               "Recorrido",
+              "vs.",
               "Tear",
               "teə",
               "Rasgar"
@@ -11021,6 +11309,7 @@
               "Poor",
               "pʊə",
               "Pobre",
+              "vs.",
               "Pear",
               "peə",
               "Pera"
@@ -11030,6 +11319,7 @@
               "Moor",
               "mʊə",
               "Amarrar (embarcación )",
+              "vs.",
               "Mare",
               "meə",
               "Yegua"
@@ -11039,6 +11329,7 @@
               "Endure",
               "ɪnˈdjʊə",
               "Soportar",
+              "vs.",
               "Dare",
               "deə",
               "Atreverse"
@@ -11048,6 +11339,7 @@
               "Your",
               "jʊə",
               "Tuyo",
+              "vs.",
               "Their",
               "ðeə",
               "De ellos"
@@ -11057,6 +11349,7 @@
               "Secure",
               "sɪˈkjʊə",
               "Asegurar",
+              "vs.",
               "Scare",
               "skeə",
               "Asustar"
@@ -11066,6 +11359,7 @@
               "Lure",
               "ljʊə",
               "Atraer",
+              "vs.",
               "Hair",
               "heə",
               "Cabello"
@@ -11175,6 +11469,12 @@
       "front": "/aʊ/ — ¿cómo se produce y con qué patrones se escribe?",
       "back": "SHOUT /ʃaʊt/ — GRITAR",
       "blocks": [
+        {
+          "type": "bilingual",
+          "en": "Wrist /rɪst/",
+          "es": "Muñeca",
+          "tag": "base"
+        },
         {
           "type": "note",
           "md": "**Equivalente en español.** Una palabra muy comùn con este sonido es OUCH! que equivale en español al AY! cuando te duele algo En español, no existe un equivalente exacto del sonido /aʊ/. Una aproximación sería el diptongo en palabras como \"auto\" o \"causa\". Sin embargo, en español el deslizamiento hacia el sonido \"u\" suele ser más breve y menos marcado. El sonido /aʊ/ en inglés es un diptongo que combina los sonidos /a/ (como en \"car\") y /ʊ/ (como en \"foot\"). Para producir este sonido, se comienza con la boca abierta y relajada en la posición de /a/, y luego se desliza hacia una posición más cerrada con los labios redondeados para el sonido /ʊ/. Posición inicial: Comienza con la boca bien abierta y la lengua en una posición baja para producir el sonido /a/. Deslizamiento hacia /ʊ/: La lengua se eleva hacia una posición más alta y hacia atrás en la boca, mientras los labios se redondean para formar el sonido /ʊ/."
@@ -11419,6 +11719,7 @@
             "Inglés",
             "Transcripción",
             "Español",
+            "vs.",
             "Inglés",
             "Transcripción",
             "Español"
@@ -11429,6 +11730,7 @@
               "Shout",
               "ʃaʊt",
               "Gritar",
+              "vs.",
               "Sure",
               "ʃʊər",
               "Seguro"
@@ -11438,6 +11740,7 @@
               "How",
               "haʊ",
               "Cómo",
+              "vs.",
               "Hour",
               "aʊər",
               "Hora"
@@ -11447,6 +11750,7 @@
               "Now",
               "naʊ",
               "Ahora",
+              "vs.",
               "Newer",
               "ˈnjuːər",
               "Más Nuevo"
@@ -11456,6 +11760,7 @@
               "Loud",
               "laʊd",
               "Ruidoso",
+              "vs.",
               "Lure",
               "lʊər",
               "Atraer"
@@ -11465,6 +11770,7 @@
               "Cow",
               "kaʊ",
               "Vaca",
+              "vs.",
               "Cure",
               "kjʊər",
               "Cura"
@@ -11474,6 +11780,7 @@
               "Foul",
               "faʊl",
               "Falta",
+              "vs.",
               "Fewer",
               "ˈfjuːər",
               "Menos"
@@ -11483,6 +11790,7 @@
               "Doubt",
               "daʊt",
               "Duda",
+              "vs.",
               "Tour",
               "tʊər",
               "Gira/ Tour"
@@ -11492,6 +11800,7 @@
               "Power",
               "ˈpaʊər",
               "Poder",
+              "vs.",
               "Pure",
               "pjʊər",
               "Puro"
@@ -11501,6 +11810,7 @@
               "Tower",
               "ˈtaʊər",
               "Torre",
+              "vs.",
               "Tour",
               "tʊər",
               "Gira/ Tour"
@@ -11625,6 +11935,12 @@
       "front": "/əʊ/ — ¿cómo se produce y con qué patrones se escribe?",
       "back": "OH NO /əʊ nəʊ/ — OH NO",
       "blocks": [
+        {
+          "type": "bilingual",
+          "en": "Knuckles /ˈnʌkəlz/",
+          "es": "Nudillos",
+          "tag": "base"
+        },
         {
           "type": "note",
           "md": "**Equivalente en español.** Comparación con el español Este sonido es único en inglés y no tiene un equivalente exacto en español.Sin embargo, un equivalente cercano en español sería el diptongo que usamos en palabras como \"Europa\" o \"euforia\", donde la vocal inicial es algo relajada y se desliza hacia una \"u\" breve y redondeada. El sonido /əʊ/ en inglés es un diptongo característico que comienza con el sonido schwa /ə/ y se desliza hacia /ʊ/. Posición inicial: Comienza en una posición relajada y central para producir el schwa /ə/. Los labios están ligeramente relajados. Deslizamiento hacia /ʊ/: La lengua y los labios se redondean un poco más al deslizarse hacia el sonido /ʊ/, que es un sonido breve y posterior, parecido a la \"u\" de \"mucho\"."
@@ -11937,6 +12253,7 @@
             "Inglés",
             "Transcripción",
             "Español",
+            "vs.",
             "Inglés",
             "Transcripción",
             "Español"
@@ -11947,6 +12264,7 @@
               "No",
               "nəʊ",
               "No",
+              "vs.",
               "Now",
               "naʊ",
               "Ahora"
@@ -11956,6 +12274,7 @@
               "Go",
               "ɡəʊ",
               "Ir",
+              "vs.",
               "Gow",
               "ɡaʊ",
               "Apellido (no común)"
@@ -11965,6 +12284,7 @@
               "Show",
               "ʃəʊ",
               "Mostrar",
+              "vs.",
               "Shout",
               "ʃaʊt",
               "Gritar"
@@ -11974,6 +12294,7 @@
               "Bow",
               "bəʊ",
               "Arco (de flecha)",
+              "vs.",
               "Bow",
               "baʊ",
               "Inclinarse"
@@ -11983,6 +12304,7 @@
               "Low",
               "ləʊ",
               "Bajo",
+              "vs.",
               "Loud",
               "laʊd",
               "Fuerte (en volumen)"
@@ -11992,6 +12314,7 @@
               "Own",
               "əʊn",
               "Poseer",
+              "vs.",
               "Owl",
               "aʊl",
               "Búho"
@@ -12001,6 +12324,7 @@
               "Blow",
               "bləʊ",
               "Soplar",
+              "vs.",
               "Bough",
               "baʊ",
               "Rama"
@@ -12010,6 +12334,7 @@
               "Boat",
               "bəʊt",
               "Bote",
+              "vs.",
               "Bout",
               "baʊt",
               "Combate, Episodio"
@@ -12019,6 +12344,7 @@
               "Mow",
               "məʊ",
               "Segar",
+              "vs.",
               "Mouth",
               "maʊθ",
               "Boca"
@@ -12156,6 +12482,12 @@
       "front": "/p/ — ¿cómo se produce y con qué patrones se escribe?",
       "back": "PEOPLE /ˈpiːpᵊl/ — GENTE",
       "blocks": [
+        {
+          "type": "bilingual",
+          "en": "Nails /neɪlz/",
+          "es": "Uñas",
+          "tag": "base"
+        },
         {
           "type": "note",
           "md": "**Equivalente en español.** El sonido /p/ en inglés tiene un equivalente en español, ya que en ambos idiomas se usa un sonido bilabial sordo similar. Sin embargo, en inglés, especialmente en inglés americano, la /p/ suele tener una aspiración en ciertas posiciones (como al inicio de una palabra), donde se escucha un ligero soplo de aire después de la liberación del sonido. Este soplo no ocurre en español. El sonido /p/ en inglés es un sonido oclusivo, bilabial y sordo. Se produce al juntar ambos labios y bloquear el flujo de aire momentáneamente antes de soltarlo rápidamente. Posición inicial: Junta ambos labios, creando una obstrucción completa para bloquear el flujo de aire. Liberación: Suelta el aire de forma rápida y explosiva sin utilizar las cuerdas vocales, lo que produce un sonido sordo."
@@ -12504,6 +12836,12 @@
       "back": "BABY /ˈbeɪbi/ — BEBÉ",
       "blocks": [
         {
+          "type": "bilingual",
+          "en": "Palm /pɑːm/",
+          "es": "Palma de la mano",
+          "tag": "base"
+        },
+        {
           "type": "note",
           "md": "**Equivalente en español.** El sonido /b/ en inglés es similar al sonido /b/ en español, especialmente cuando aparece al inicio de una palabra (como en \"bola\"). Sin embargo, en español este sonido a menudo se convierte en una aproximante bilabial sonora (sonido suave, como en \"saber\") cuando está entre vocales, mientras que en inglés mantiene la oclusión en todas sus posiciones. El sonido /b/ en inglés es un sonido oclusivo, bilabial y sonoro. Se produce al juntar ambos labios para bloquear momentáneamente el flujo de aire y luego liberarlo, al mismo tiempo que se utilizan las cuerdas vocales para producir un sonido vibrante. Posición inicial: Junta ambos labios para detener el flujo de aire, como en el sonido /p/. Liberación y sonoridad: Suelta el aire de manera rápida, permitiendo que las cuerdas vocales vibren, lo que produce el sonido sonoro /b/."
         },
@@ -12748,6 +13086,7 @@
             "Inglés",
             "Transcripción",
             "Español",
+            "vs.",
             "Inglés",
             "Transcripción",
             "Español"
@@ -12758,6 +13097,7 @@
               "Bat",
               "bæt",
               "Murciélago",
+              "vs.",
               "Pat",
               "pæt",
               "Palmada"
@@ -12767,6 +13107,7 @@
               "Bet",
               "bɛt",
               "Apostar",
+              "vs.",
               "Pet",
               "pɛt",
               "Mascota"
@@ -12776,6 +13117,7 @@
               "Bin",
               "bɪn",
               "Cubo",
+              "vs.",
               "Pin",
               "pɪn",
               "Alfiler"
@@ -12785,6 +13127,7 @@
               "Bill",
               "bɪl",
               "Cuenta",
+              "vs.",
               "Pill",
               "pɪl",
               "Pastilla"
@@ -12794,6 +13137,7 @@
               "Bark",
               "bɑːrk",
               "Ladrido",
+              "vs.",
               "Park",
               "pɑːrk",
               "Parque"
@@ -12921,6 +13265,12 @@
       "front": "/t/ — ¿cómo se produce y con qué patrones se escribe?",
       "back": "TITS /tɪts/ — TETAS",
       "blocks": [
+        {
+          "type": "bilingual",
+          "en": "Chest /tʃest/",
+          "es": "Pecho",
+          "tag": "base"
+        },
         {
           "type": "note",
           "md": "**Equivalente en español.** En español, el sonido /t/ se produce de manera similar y tiene características muy parecidas en cuanto a lugar de articulación (alveolar) y sonoridad (sordo). Sin embargo, en inglés, especialmente en inglés americano, el sonido /t/ a menudo tiene una aspiración (un ligero soplo de aire) cuando aparece al principio de una palabra o sílaba tónica, lo cual no ocurre en español. Además, en inglés americano, el /t/ entre vocales se convierte en un sonido de golpe llamado flap /ɾ/ (similar al sonido en español en palabras como \"caro\"), como en \"water\" /ˈwɔːɾər/. El sonido /t/ en inglés es un sonido oclusivo, alveolar y sordo. Se produce al colocar la punta de la lengua contra los alvéolos (la zona justo detrás de los dientes superiores) para bloquear el flujo de aire, y luego liberarlo de forma rápida sin vibración de las cuerdas vocales, lo que da un sonido sordo. Posición inicial: Coloca la punta de la lengua contra los alvéolos para crear una obstrucción total del aire. Liberación: Suelta el aire rápidamente para producir el sonido /t/ sin vibración de las cuerdas vocales."
@@ -13179,6 +13529,7 @@
             "Inglés",
             "Transcripción",
             "Español",
+            "vs.",
             "Inglés",
             "Transcripción",
             "Español"
@@ -13189,6 +13540,7 @@
               "Tie",
               "taɪ",
               "Corbata",
+              "vs.",
               "Buy",
               "baɪ",
               "Comprar"
@@ -13198,6 +13550,7 @@
               "Tall",
               "tɔːl",
               "Alto",
+              "vs.",
               "Ball",
               "bɔːl",
               "Pelota"
@@ -13207,6 +13560,7 @@
               "Team",
               "tiːm",
               "Equipo",
+              "vs.",
               "Beam",
               "biːm",
               "Rayo"
@@ -13216,6 +13570,7 @@
               "Tone",
               "toʊn",
               "Tono",
+              "vs.",
               "Bone",
               "boʊn",
               "Hueso"
@@ -13225,6 +13580,7 @@
               "Tell",
               "tɛl",
               "Decir",
+              "vs.",
               "Bell",
               "bɛl",
               "Campana"
@@ -13234,6 +13590,7 @@
               "Tear",
               "tɛər",
               "Rasgar",
+              "vs.",
               "Bear",
               "bɛər",
               "Oso"
@@ -13243,6 +13600,7 @@
               "Tack",
               "tæk",
               "Clavo",
+              "vs.",
               "Back",
               "bæk",
               "Atrás"
@@ -13252,6 +13610,7 @@
               "Ten",
               "tɛn",
               "Diez",
+              "vs.",
               "Ben",
               "bɛn",
               "Nombre propio (Ben)"
@@ -13261,6 +13620,7 @@
               "Tart",
               "tɑːrt",
               "Tarta",
+              "vs.",
               "Bart",
               "bɑːrt",
               "Nombre Propio (Bart)"
@@ -13270,6 +13630,7 @@
               "Tip",
               "tɪp",
               "Punta",
+              "vs.",
               "Bit",
               "bɪt",
               "Pedazo"
@@ -13400,6 +13761,12 @@
       "front": "/d/ — ¿cómo se produce y con qué patrones se escribe?",
       "back": "DOG /dɒɡ/ — PERRO",
       "blocks": [
+        {
+          "type": "bilingual",
+          "en": "Ribs /rɪbz/",
+          "es": "Costillas",
+          "tag": "base"
+        },
         {
           "type": "note",
           "md": "**Equivalente en español.** En español, el sonido /d/ se produce de manera similar y es también un sonido oclusivo, alveolar y sonoro. La principal diferencia es que en español, el sonido /d/ tiende a suavizarse cuando está entre vocales, convirtiéndose en una aproximante (como en \"cada\"), mientras que en inglés mantiene la oclusión en todas las posiciones. El sonido /d/ en inglés es un sonido oclusivo, alveolar y sonoro. Se produce al colocar la punta de la lengua contra la parte anterior del paladar (la zona justo detrás de los dientes superiores) para bloquear el flujo de aire, y luego liberarlo, mientras las cuerdas vocales vibran para darle sonoridad. Posición inicial: Coloca la punta de la lengua contra la parte anterior del paladar o superficie palatina de incisivos superiores , bloqueando completamente el flujo de aire. Liberación con sonoridad: Suelta el aire mientras permites que las cuerdas vocales vibren, lo que produce el sonido /d/."
@@ -13668,6 +14035,7 @@
             "Inglés",
             "Transcripción",
             "Español",
+            "vs.",
             "Inglés",
             "Transcripción",
             "Español"
@@ -13678,6 +14046,7 @@
               "Day",
               "deɪ",
               "Día",
+              "vs.",
               "Tame",
               "teɪm",
               "Domar"
@@ -13687,6 +14056,7 @@
               "Do",
               "duː",
               "Hacer",
+              "vs.",
               "Too",
               "tuː",
               "También"
@@ -13696,6 +14066,7 @@
               "Den",
               "dɛn",
               "Guarida",
+              "vs.",
               "Ten",
               "tɛn",
               "Diez"
@@ -13705,6 +14076,7 @@
               "Dime",
               "daɪm",
               "Moneda (10 centavos)",
+              "vs.",
               "Time",
               "taɪm",
               "Tiempo"
@@ -13714,6 +14086,7 @@
               "Dot",
               "dɒt",
               "Punto",
+              "vs.",
               "Tot",
               "tɒt",
               "Niño pequeño"
@@ -13834,6 +14207,12 @@
       "front": "/k/ — ¿cómo se produce y con qué patrones se escribe?",
       "back": "KEY /kiː/ — LLAVE",
       "blocks": [
+        {
+          "type": "bilingual",
+          "en": "Navel /ˈneɪvəl/",
+          "es": "Ombligo",
+          "tag": "base"
+        },
         {
           "type": "note",
           "md": "**Equivalente en español.** En español, el sonido /k/ es similar y también es un sonido oclusivo, velar y sordo, como en las palabras \"casa\" o \"camino\". Sin embargo, en inglés, el sonido /k/ suele tener una aspiración (una ligera exhalación de aire) cuando aparece al inicio de una palabra o sílaba tónica, especialmente en inglés americano, lo cual no ocurre en español. El sonido /k/ en inglés es un sonido oclusivo, velar y sordo. Se produce al levantar la parte posterior de la lengua hacia el paladar blando (o velo) y bloquear el flujo de aire, liberándolo después sin utilizar las cuerdas vocales, lo que le da su cualidad sorda. Posición inicial: La parte posterior de la lengua se eleva y toca el paladar blando, bloqueando completamente el flujo de aire. Liberación: Se libera el aire de manera rápida y sin vibración de las cuerdas vocales, produciendo el sonido sordo /k/."
@@ -14112,6 +14491,7 @@
             "Inglés",
             "Transcripción",
             "Español",
+            "vs.",
             "Inglés",
             "Transcripción",
             "Español"
@@ -14122,6 +14502,7 @@
               "Cat",
               "kæt",
               "Gato",
+              "vs.",
               "Dad",
               "dæd",
               "Papá"
@@ -14131,6 +14512,7 @@
               "Cap",
               "kæp",
               "Gorra",
+              "vs.",
               "Dap",
               "dæp",
               "Saludar con el puño (informal)"
@@ -14140,6 +14522,7 @@
               "Kill",
               "kɪl",
               "Matar",
+              "vs.",
               "Dill",
               "dɪl",
               "Eneldo (hierba)"
@@ -14149,6 +14532,7 @@
               "Code",
               "koʊd",
               "Código",
+              "vs.",
               "Dode",
               "doʊd",
               "Apodo (poco común)"
@@ -14158,6 +14542,7 @@
               "Cane",
               "keɪn",
               "Bastón",
+              "vs.",
               "Dane",
               "deɪn",
               "Danés"
@@ -14167,6 +14552,7 @@
               "Core",
               "kɔːr",
               "Núcleo",
+              "vs.",
               "Door",
               "dɔːr",
               "Puerta"
@@ -14176,6 +14562,7 @@
               "Coat",
               "koʊt",
               "Abrigo",
+              "vs.",
               "Dote",
               "doʊt",
               "Consentir"
@@ -14185,6 +14572,7 @@
               "Cart",
               "kɑːrt",
               "Carrito",
+              "vs.",
               "Dart",
               "dɑːrt",
               "Dardo"
@@ -14194,6 +14582,7 @@
               "Curl",
               "kɜːrl",
               "rizo",
+              "vs.",
               "Durl",
               "dɜːrl",
               "Variante (Nombre poco común)"
@@ -14335,6 +14724,12 @@
       "front": "/g/ — ¿cómo se produce y con qué patrones se escribe?",
       "back": "GUTS /ɡʌts/ — INTESTINO",
       "blocks": [
+        {
+          "type": "bilingual",
+          "en": "Abdomen /ˈæbdəmən/",
+          "es": "Barriga / Abdomen",
+          "tag": "base"
+        },
         {
           "type": "note",
           "md": "**Equivalente en español.** En español, el sonido /g/ es similar y también es un sonido oclusivo, velar y sonoro, como en \"gato\" o \"goma\". Sin embargo, en español, el sonido /g/ tiende a suavizarse cuando se encuentra entre vocales, convirtiéndose en una aproximante más suave (como en “agua”). En inglés, el sonido /g/ se mantiene como una oclusiva plena en todas las posiciones, sin suavizarse. El sonido /g/ en inglés es un sonido oclusivo, velar y sonoro. Se produce al elevar la parte posterior de la lengua hacia el velo del paladar (la parte blanda de la boca) para bloquear el flujo de aire, liberándolo rápidamente mientras las cuerdas vocales vibran, dándole así la cualidad sonora. Posición inicial: La parte posterior de la lengua se eleva y toca el velo del paladar para detener el flujo de aire. Liberación con sonoridad: Se libera el aire de forma rápida mientras las cuerdas vocales vibran, produciendo el sonido sonoro /g/."
@@ -14601,6 +14996,7 @@
             "Inglés",
             "Transcripción",
             "Español",
+            "vs.",
             "Inglés",
             "Transcripción",
             "Español"
@@ -14611,6 +15007,7 @@
               "Got",
               "ɡɒt",
               "Tener",
+              "vs.",
               "Cot",
               "kɒt",
               "Cuna"
@@ -14620,6 +15017,7 @@
               "Game",
               "ɡeɪm",
               "Juego",
+              "vs.",
               "Came",
               "keɪm",
               "Vinir .past"
@@ -14629,6 +15027,7 @@
               "Gold",
               "ɡoʊld",
               "Oro",
+              "vs.",
               "Cold",
               "koʊld",
               "Frío"
@@ -14638,6 +15037,7 @@
               "Gap",
               "ɡæp",
               "Brecha",
+              "vs.",
               "Cap",
               "kæp",
               "Gorra"
@@ -14647,6 +15047,7 @@
               "Goal",
               "ɡoʊl",
               "Meta (Portería de Futbol)",
+              "vs.",
               "Coal",
               "koʊl",
               "Carbón"
@@ -14770,6 +15171,12 @@
       "front": "/f/ — ¿cómo se produce y con qué patrones se escribe?",
       "back": "FREE /friː/ — LIBRE",
       "blocks": [
+        {
+          "type": "bilingual",
+          "en": "Genitals /ˈdʒenɪtəlz/",
+          "es": "Genitales",
+          "tag": "base"
+        },
         {
           "type": "note",
           "md": "**Equivalente en español.** En español, el sonido /f/ es similar y también es fricativo, labiodental y sordo, como en las palabras “familia” o “foto”. La diferencia principal es que en inglés, el sonido /f/ puede aparecer en combinaciones de consonantes y posiciones en las que no siempre aparece en español. El sonido /f/ en inglés es un sonido fricativo, labiodental y sordo. Se produce al colocar los dientes superiores contra el labio inferior y permitir que el aire fluya de manera continua, creando fricción, sin que las cuerdas vocales vibren. Posición inicial: Coloca los dientes superiores ligeramente contra el labio inferior. Fricción sin sonoridad: Permite que el aire fluya creando fricción entre los dientes y el labio inferior, sin vibración en las cuerdas vocales, lo que da al sonido su cualidad sorda."
@@ -15004,6 +15411,7 @@
             "Inglés",
             "Transcripción",
             "Español",
+            "vs.",
             "Inglés",
             "Transcripción",
             "Español"
@@ -15014,6 +15422,7 @@
               "Fan",
               "fæn",
               "Ventilador",
+              "vs.",
               "Gan",
               "ɡæn",
               "Abreviación de \"ganar\" (en contextos informales o nombres)"
@@ -15023,6 +15432,7 @@
               "Fine",
               "faɪn",
               "Bien/ Multa",
+              "vs.",
               "Gine",
               "ɡaɪn",
               "Variante de nombre"
@@ -15032,6 +15442,7 @@
               "Fat",
               "fæt",
               "Gordo",
+              "vs.",
               "Gat",
               "ɡæt",
               "Pistola (slang)"
@@ -15041,6 +15452,7 @@
               "Fig",
               "fɪɡ",
               "Higo",
+              "vs.",
               "Gig",
               "ɡɪɡ",
               "Actuación (Concierto)"
@@ -15050,6 +15462,7 @@
               "Fill",
               "fɪl",
               "Llenar",
+              "vs.",
               "Gill",
               "ɡɪl",
               "Agalla"
@@ -15059,6 +15472,7 @@
               "Ferry",
               "ˈfɛri",
               "Transbordad or",
+              "vs.",
               "Garry",
               "ˈɡæri",
               "Nombre Propio"
@@ -15068,6 +15482,7 @@
               "Feel",
               "fiːl",
               "Sentir",
+              "vs.",
               "Geel",
               "ɡiːl",
               "Nombre propio en algunas lenguas"
@@ -15077,6 +15492,7 @@
               "Fail",
               "feɪl",
               "Fallar",
+              "vs.",
               "Gale",
               "ɡeɪl",
               "Vendaval"
@@ -15205,6 +15621,12 @@
       "front": "/v/ — ¿cómo se produce y con qué patrones se escribe?",
       "back": "VISIT /ˈvɪzɪt/ — VISITA",
       "blocks": [
+        {
+          "type": "bilingual",
+          "en": "Thigh /θaɪ/",
+          "es": "Muslo",
+          "tag": "base"
+        },
         {
           "type": "note",
           "md": "**Equivalente en español.** En español, el sonido /v/ no existe de manera exacta. El sonido más cercano es la /b/ suave entre vocales, como en \"saber\" o \"vivir\". Sin embargo, en inglés, el sonido /v/ es siempre fricativo, mientras que en español, la /b/ entre vocales es una aproximante (menos fricativa). El sonido /v/ en inglés es un sonido fricativo, labiodental y sonoro. Se produce colocando los dientes superiores contra el labio inferior y permitiendo que el aire fluya de manera continua, creando fricción, mientras las cuerdas vocales vibran para darle sonoridad. Posición inicial: Coloca los dientes superiores contra el labio inferior. Fricción con sonoridad: Deja que el aire fluya y produzca fricción entre el labio inferior y los dientes superiores, mientras vibran las cuerdas vocales para darle un carácter sonoro."
@@ -15400,6 +15822,7 @@
             "Inglés",
             "Transcripción",
             "Español",
+            "vs.",
             "Inglés",
             "Transcripción",
             "Español"
@@ -15410,6 +15833,7 @@
               "Vine",
               "vaɪn",
               "Vid",
+              "vs.",
               "Fine",
               "faɪn",
               "Bien/Multa"
@@ -15419,6 +15843,7 @@
               "Van",
               "væn",
               "Furgoneta",
+              "vs.",
               "Fan",
               "fæn",
               "Ventilador"
@@ -15428,6 +15853,7 @@
               "Vast",
               "vɑːst",
               "Vasto",
+              "vs.",
               "Fast",
               "fɑːst",
               "Rápido"
@@ -15437,6 +15863,7 @@
               "Veil",
               "veɪl",
               "Velo",
+              "vs.",
               "Fail",
               "feɪl",
               "Fallar"
@@ -15446,6 +15873,7 @@
               "Vote",
               "voʊt",
               "Votar",
+              "vs.",
               "Foat",
               "foʊt",
               "Abreviación de algunos nombres propios"
@@ -15455,6 +15883,7 @@
               "Very",
               "ˈvɛri",
               "Muy",
+              "vs.",
               "Ferry",
               "ˈfɛri",
               "Transbordador"
@@ -15464,6 +15893,7 @@
               "Vase",
               "veɪs",
               "Jarrón",
+              "vs.",
               "Face",
               "feɪs",
               "Cara"
@@ -15473,6 +15903,7 @@
               "Vest",
               "vɛst",
               "Chaleco",
+              "vs.",
               "Fest",
               "fɛst",
               "Festival"
@@ -15482,6 +15913,7 @@
               "Verse",
               "vɜːs",
               "Verso",
+              "vs.",
               "First",
               "fɜːst",
               "Primero"
@@ -15491,6 +15923,7 @@
               "Vow",
               "vaʊ",
               "Voto/ Promesa",
+              "vs.",
               "Foul",
               "faʊl",
               "Falta (en deportes)"
@@ -15500,6 +15933,7 @@
               "Save",
               "seɪv",
               "Ahorrar",
+              "vs.",
               "Safe",
               "seɪf",
               "Seguro"
@@ -15662,6 +16096,12 @@
       "front": "/θ/ — ¿cómo se produce y con qué patrones se escribe?",
       "back": "Thanks /θæŋks/ — Gracias",
       "blocks": [
+        {
+          "type": "bilingual",
+          "en": "Knee /niː/",
+          "es": "Rodilla",
+          "tag": "base"
+        },
         {
           "type": "note",
           "md": "**Equivalente en español.** En español, no existe un equivalente directo al sonido /θ/. La variante más cercana sería la \"z\" en el español de España, como en las palabras “zapato” o “cielo”. Sin embargo, en la mayoría de los dialectos del español, este sonido no se utiliza, y se reemplaza con el sonido /s/. El sonido /θ/ en inglés es un sonido fricativo, interdental y sordo. Se produce al colocar la punta de la lengua entre los dientes superiores e inferiores y permitir que el aire fluya de manera continua, creando fricción, sin utilizar las cuerdas vocales. Posición inicial: Coloca la punta de la lengua entre los dientes superiores e inferiores, de manera que el aire pueda pasar entre ellos. Fricción sin sonoridad: Permite que el aire fluya creando fricción entre la lengua y los dientes, sin vibrar las cuerdas vocales, produciendo un sonido sordo."
@@ -15918,6 +16358,7 @@
             "Inglés",
             "Transcripción",
             "Español",
+            "vs.",
             "Inglés",
             "Transcripción",
             "Español"
@@ -15928,6 +16369,7 @@
               "Thin",
               "θɪn",
               "Delgado",
+              "vs.",
               "Vin",
               "vɪn",
               "Nombre propio o diminutivo de Vincent"
@@ -15937,6 +16379,7 @@
               "Thank",
               "θæŋk",
               "Agradecer",
+              "vs.",
               "Van",
               "væn",
               "Furgoneta"
@@ -15946,6 +16389,7 @@
               "Thick",
               "θɪk",
               "Grueso",
+              "vs.",
               "Vic",
               "vɪk",
               "Diminutivo de Victor"
@@ -16062,6 +16506,12 @@
       "front": "/ð/ — ¿cómo se produce y con qué patrones se escribe?",
       "back": "THERE /ðeə/ — ALLÁ",
       "blocks": [
+        {
+          "type": "bilingual",
+          "en": "Shin /ʃɪn/",
+          "es": "Tibia / Espinilla / Canilla",
+          "tag": "base"
+        },
         {
           "type": "note",
           "md": "**Equivalente en español.** manera fricativa y sorda. No existe un equivalente directo en español para /ð/. Sin embargo, el sonido más cercano sería la \"d\" suave que aparece entre vocales en español (como en \"cada\" o \"nada\"). Aún así, en inglés el sonido /ð/ es más fricativo y se produce con la lengua entre los dientes, mientras que en español la \"d\" suave es una aproximante y se produce detrás de los dientes. El sonido /ð/ en inglés es un sonido fricativo, interdental y sonoro. Se produce colocando la punta de la lengua entre los dientes superiores e inferiores y permitiendo que el aire fluya de manera continua, creando fricción, mientras las cuerdas vocales vibran, dándole una cualidad sonora. Posición inicial: Coloca la punta de la lengua entre los dientes superiores e inferiores, de forma que el aire pueda fluir entre ellos. Fricción con sonoridad: Deja que el aire fluya entre la lengua y los dientes, mientras las cuerdas vocales vibran, produciendo el sonido sonoro /ð/. El sonido /s/ en inglés es similar al sonido /s/ en español, y ambos se producen de manera fricativa, alveolar y sorda. Este sonido es bastante estable entre los dos idiomas, aunque en inglés puede aparecer en combinaciones de consonantes y posiciones donde no siempre se encuentra en español. El sonido /s/ en inglés es un sonido fricativo, alveolar y sordo. Se produce al colocar la punta de la lengua cerca de los alvéolos (la zona justo detrás de los dientes superiores) sin tocarlos completamente y permitiendo que el aire pase continuamente para crear fricción, sin usar las cuerdas vocales. El sonido /s/ en inglés es un sonido fricativo, alveolar y sordo. Se produce al colocar la punta de la lengua cerca de los alvéolos (la zona justo detrás de los dientes superiores) sin tocarlos completamente y permitiendo que el aire pase continuamente para crear fricción, sin usar las cuerdas vocales. Posición inicial: Coloca la punta de la lengua cerca a superficie palatina de incisivos, permitiendo que el aire fluya a través del espacio estrecho creado. Fricción sin sonoridad: Deja que el aire fluya de manera continua sin vibración de las cuerdas vocales, produciendo un sonido sordo."
@@ -16543,6 +16993,7 @@
             "Inglés",
             "Transcripción",
             "Español",
+            "vs.",
             "Inglés",
             "Transcripción",
             "Español"
@@ -16553,6 +17004,7 @@
               "They",
               "ðeɪ",
               "Ellos",
+              "vs.",
               "Thigh",
               "θaɪ",
               "Muslo"
@@ -16562,6 +17014,7 @@
               "This",
               "ðɪs",
               "Esto",
+              "vs.",
               "Thistle",
               "ˈθɪsəl",
               "Cardo"
@@ -16571,6 +17024,7 @@
               "Though",
               "ðoʊ",
               "Aunque",
+              "vs.",
               "Thaw",
               "θɔː",
               "Descongelar"
@@ -16580,6 +17034,7 @@
               "Breathe",
               "briːð",
               "Respirar",
+              "vs.",
               "Breath",
               "brɛθ",
               "Aliento"
@@ -16589,6 +17044,7 @@
               "Then",
               "ðɛn",
               "Entonces",
+              "vs.",
               "Thin",
               "θɪn",
               "Delgado"
@@ -16598,6 +17054,7 @@
               "Sink",
               "sɪŋk",
               "Hundir",
+              "vs.",
               "Think",
               "θɪŋk",
               "Pensar"
@@ -16607,6 +17064,7 @@
               "Sum",
               "sʌm",
               "Suma",
+              "vs.",
               "Thumb",
               "θʌm",
               "Pulgar"
@@ -16616,6 +17074,7 @@
               "Sin",
               "sɪn",
               "Pecado",
+              "vs.",
               "Thin",
               "θɪn",
               "Delgado"
@@ -16625,6 +17084,7 @@
               "Sigh",
               "saɪ",
               "Suspiro",
+              "vs.",
               "Thigh",
               "θaɪ",
               "Muslo"
@@ -16634,6 +17094,7 @@
               "So",
               "soʊ",
               "Así/ Entonces",
+              "vs.",
               "Though",
               "ðoʊ",
               "Aunque"
@@ -16643,6 +17104,7 @@
               "Seal",
               "siːl",
               "Sellar",
+              "vs.",
               "Thee",
               "ðiː",
               "Te ( A ti (Antiguo))"
@@ -16652,6 +17114,7 @@
               "Seen",
               "siːn",
               "Visto",
+              "vs.",
               "Then",
               "ðɛn",
               "Entonces"
@@ -16661,6 +17124,7 @@
               "Son",
               "sʌn",
               "Hijo",
+              "vs.",
               "Than",
               "ðæn",
               "Que (comparativo)"
@@ -16859,6 +17323,12 @@
       "front": "/z/ — ¿cómo se produce y con qué patrones se escribe?",
       "back": "zoo /zuː/ — ZOOLÓGICO",
       "blocks": [
+        {
+          "type": "bilingual",
+          "en": "Instep /ˈɪnstep/",
+          "es": "Empeine",
+          "tag": "base"
+        },
         {
           "type": "note",
           "md": "**Equivalente en español.** El sonido /z/ no tiene un equivalente exacto en español. En algunos dialectos del español, como el español peninsular (de España), la letra \"s\" puede sonar similar a /z/ cuando está entre vocales, aunque sin la misma fricción sonora. En el español general, sin embargo, este sonido no existe, ya que la letra \"s\" se pronuncia siempre como el sonido sordo /s/. El sonido /z/ en inglés es un sonido fricativo, alveolar y sonoro. Se produce al colocar la punta de la lengua cerca de la zona justo detrás de los dientes superiores, sin tocar completamente, permitiendo que el aire fluya continuamente para crear fricción, mientras las cuerdas vocales vibran, dándole una cualidad sonora. Posición inicial: Coloca la punta de la lengua cerca de la superficie de incisivos superiores para crear una pequeña restricción que permite que el aire pase. Fricción con sonoridad: Deja que el aire fluya de forma continua, y permite que las cuerdas vocales vibren, produciendo el sonido sonoro /z/."
@@ -17096,6 +17566,7 @@
             "Inglés",
             "Transcripción",
             "Español",
+            "vs.",
             "Inglés",
             "Transcripción",
             "Español"
@@ -17106,6 +17577,7 @@
               "Zoo",
               "zuː",
               "Zoológico",
+              "vs.",
               "Sue",
               "suː",
               "Demandar"
@@ -17115,6 +17587,7 @@
               "Zeal",
               "ziːl",
               "Entusiasmo",
+              "vs.",
               "Seal",
               "siːl",
               "Sello"
@@ -17124,6 +17597,7 @@
               "Zip",
               "zɪp",
               "Cremallera",
+              "vs.",
               "Sip",
               "sɪp",
               "Sorbo"
@@ -17133,6 +17607,7 @@
               "Rise",
               "raɪz",
               "Subir",
+              "vs.",
               "Rice",
               "raɪs",
               "Arroz"
@@ -17142,6 +17617,7 @@
               "Buzz",
               "bʌz",
               "Zumbido",
+              "vs.",
               "Bus",
               "bʌs",
               "Autobús"
@@ -17266,6 +17742,12 @@
       "front": "/ʃ/ — ¿cómo se produce y con qué patrones se escribe?",
       "back": "SHOW /ʃəʊ/ — ESPECTÁCULO",
       "blocks": [
+        {
+          "type": "bilingual",
+          "en": "Little toe /ˈlɪtəl təʊ/",
+          "es": "Dedo pequeño del pie / Meñique",
+          "tag": "base"
+        },
         {
           "type": "note",
           "md": "**Equivalente en español.** El sonido /ʃ/ no tiene un equivalente directo en la mayoría de los dialectos del español. Sin embargo es igual al sonido que usamos para decirle a alguien que haga silencio shshsh .En algunas regiones de América Latina, como en Argentina o Uruguay. Se produce al colocar la parte media de la lengua cerca de la zona postalveolar (la zona justo detrás de los incisivos superiores) permitiendo que el aire pase de forma continua y sin vibración de las cuerdas vocales, lo cual le da su cualidad sorda. Posición inicial: Coloca la lengua hacia la parte posterior de los alvéolos, sin tocar completamente, creando una pequeña abertura para el flujo de aire. Fricción sin sonoridad: Permite que el aire pase de forma continua, sin vibrar las cuerdas vocales, produciendo un sonido sordo."
@@ -17574,6 +18056,7 @@
             "Inglés",
             "Transcripción",
             "Español",
+            "vs.",
             "Inglés",
             "Transcripción",
             "Español"
@@ -17584,6 +18067,7 @@
               "Sheep",
               "ʃiːp",
               "Oveja",
+              "vs.",
               "Zip",
               "zɪp",
               "Cremallera"
@@ -17593,6 +18077,7 @@
               "Shine",
               "ʃaɪn",
               "Brillar",
+              "vs.",
               "Zine",
               "zaɪn",
               "Revista (Informal)"
@@ -17602,6 +18087,7 @@
               "Shop",
               "ʃɒp",
               "Tienda",
+              "vs.",
               "Zap",
               "zæp",
               "Eliminar Rápidamente"
@@ -17729,6 +18215,12 @@
       "front": "/tʃ/ — ¿cómo se produce y con qué patrones se escribe?",
       "back": "CHECK /ʧɛk/ — REVISAR",
       "blocks": [
+        {
+          "type": "bilingual",
+          "en": "Sole /səʊl/",
+          "es": "Planta del pie",
+          "tag": "base"
+        },
         {
           "type": "note",
           "md": "**Equivalente en español.** En español, el sonido /tʃ/ es similar y se produce de manera muy parecida, como en palabras como \"chico\" o \"mucho\". En este caso, el sonido es igualmente africado, post alveolar y sordo en ambos idiomas, lo cual facilita su pronunciación para los hablantes de español. El sonido /tʃ/ en inglés es un sonido africado, postalveolar y sordo. Se produce combinando una oclusión (detención del flujo de aire) seguida de una fricción continua. Este sonido comienza como un sonido oclusivo (con la lengua bloqueando el flujo de aire en la zona postalveolar) y luego se convierte en un sonido fricativo sordo al liberar el aire. Posición inicial: Coloca la lengua hacia la zona posterior de incisivos superiores, bloqueando completamente el flujo de aire como si fueras a producir un sonido /t/."
@@ -17982,6 +18474,7 @@
             "Inglés",
             "Transcripción",
             "Español",
+            "vs.",
             "Inglés",
             "Transcripción",
             "Español"
@@ -17992,6 +18485,7 @@
               "Cheap",
               "tʃiːp",
               "Barato",
+              "vs.",
               "Sheep",
               "ʃiːp",
               "Oveja"
@@ -18001,6 +18495,7 @@
               "Chip",
               "tʃɪp",
               "Papa frita",
+              "vs.",
               "Ship",
               "ʃɪp",
               "Barco"
@@ -18010,6 +18505,7 @@
               "Choose",
               "tʃuːz",
               "Elegir",
+              "vs.",
               "Shoes",
               "ʃuːz",
               "Zapatos"
@@ -18019,6 +18515,7 @@
               "Chin",
               "tʃɪn",
               "Barbilla",
+              "vs.",
               "Shin",
               "ʃɪn",
               "Espinilla"
@@ -18028,6 +18525,7 @@
               "Cherry",
               "ˈtʃɛri",
               "Cereza",
+              "vs.",
               "Sherry",
               "ˈʃɛri",
               "Jerez"
@@ -18151,6 +18649,12 @@
       "front": "/ʒ/ — ¿cómo se produce y con qué patrones se escribe?",
       "back": "TELEVISION /ˈtɛlɪvɪʒᵊn/ — TELEVISIÓN",
       "blocks": [
+        {
+          "type": "bilingual",
+          "en": "Heel /hiːl/",
+          "es": "Talón",
+          "tag": "base"
+        },
         {
           "type": "note",
           "md": "**Equivalente en español.** En español, no existe un equivalente exacto para el sonido /ʒ/. Sin embargo, en algunos dialectos de Argentina y Uruguay, el sonido de las letras \"y\" o \"ll\" puede sonar de manera similar (como en “playa” o “yo”), aunque en español tiende a ser menos fricativo. El sonido /ʒ/ en inglés es un sonido fricativo, postalveolar y sonoro. Se produce al colocar la lengua cerca de la zona postalveolar, permitiendo que el aire fluya de manera continua, creando fricción, mientras las cuerdas vocales vibran, lo que le da su cualidad sonora. Posición inicial: Coloca la lengua hacia la parte posterior de los alvéolos, sin bloquear completamente el flujo de aire, para crear una pequeña fricción. Fricción con sonoridad: Permite que el aire pase de forma continua y que las cuerdas vocales vibren para producir el sonido sonoro /ʒ/."
@@ -18382,6 +18886,7 @@
             "Inglés",
             "Transcripción",
             "Español",
+            "vs.",
             "Inglés",
             "Transcripción",
             "Español"
@@ -18392,6 +18897,7 @@
               "Leisure",
               "ˈlɛʒər",
               "Ocio",
+              "vs.",
               "Ledger",
               "ˈlɛdʒər",
               "Libro Contable"
@@ -18401,6 +18907,7 @@
               "Measure",
               "ˈmɛʒər",
               "Medir",
+              "vs.",
               "Catcher",
               "ˈkætʃər",
               "Receptor"
@@ -18410,6 +18917,7 @@
               "Vision",
               "ˈvɪʒən",
               "Visión",
+              "vs.",
               "Kitchen",
               "ˈkɪtʃɪn",
               "Cocina"
@@ -18419,6 +18927,7 @@
               "Usual",
               "ˈjuːʒuəl",
               "Usual",
+              "vs.",
               "Choose",
               "tʃuːz",
               "Elegir"
@@ -18428,6 +18937,7 @@
               "Treasure",
               "ˈtrɛʒər",
               "Tesoro",
+              "vs.",
               "Teacher",
               "ˈtiːtʃər",
               "Maestro"
@@ -18437,6 +18947,7 @@
               "Closure",
               "ˈkloʊʒər",
               "Cierre",
+              "vs.",
               "Catcher",
               "ˈkætʃər",
               "Receptor"
@@ -18446,6 +18957,7 @@
               "Seizure",
               "ˈsiːʒər",
               "Ataque (Médico)",
+              "vs.",
               "Teacher",
               "ˈtiːtʃər",
               "Maestro"
@@ -18455,6 +18967,7 @@
               "Visual",
               "ˈvɪʒuəl",
               "Visual",
+              "vs.",
               "Chisel",
               "ˈtʃɪzəl",
               "Cincel"
@@ -18464,6 +18977,7 @@
               "Asia",
               "ˈeɪʒə",
               "Asia",
+              "vs.",
               "Nature",
               "ˈneɪtʃər",
               "Naturaleza"
@@ -18588,6 +19102,12 @@
       "front": "/dʒ/ — ¿cómo se produce y con qué patrones se escribe?",
       "back": "JOHN /ʤɒn/ — JOHN (NOMBRE PROPIO)",
       "blocks": [
+        {
+          "type": "bilingual",
+          "en": "Calf /kɑːf/",
+          "es": "Pantorrilla",
+          "tag": "base"
+        },
         {
           "type": "note",
           "md": "**Equivalente en español.** En español, no existe un equivalente exacto al sonido /dʒ/. Sin embargo, el sonido más cercano sería la combinación de “y” en algunas regiones de América Latina (por ejemplo, en Argentina y Uruguay), donde “yo” puede sonar como /dʒo/. Aun así, el sonido /dʒ/ en inglés es más fuerte y fricativo. El sonido /dʒ/ en inglés es un sonido africado, postalveolar y sonoro. Se produce combinando una oclusión (bloqueo del flujo de aire) seguida de una fricción continua. Comienza como un sonido oclusivo (similar a /d/) y se convierte en un sonido fricativo sonoro (similar a /ʒ/), con vibración en las cuerdas vocales. Posición inicial: La lengua se coloca hacia la zona posterior de incisivos superiores para bloquear el flujo de aire, como si se produjera el sonido /d/. Liberación en fricción con sonoridad: Al soltar el aire, se produce una fricción mientras las cuerdas vocales vibran, dando lugar al sonido sonoro /dʒ/."
@@ -18825,6 +19345,7 @@
             "Inglés",
             "Transcripción",
             "Español",
+            "vs.",
             "Inglés",
             "Transcripción",
             "Español"
@@ -18835,6 +19356,7 @@
               "Jane",
               "dʒeɪn",
               "Jane (Nombre Propio)",
+              "vs.",
               "Beige Beige",
               "beɪʒ",
               "Beige"
@@ -18844,6 +19366,7 @@
               "Major",
               "ˈmeɪdʒər",
               "Mayor",
+              "vs.",
               "Measure",
               "ˈmɛʒər",
               "Medida"
@@ -18853,6 +19376,7 @@
               "Jam",
               "dʒæm",
               "Mermelada",
+              "vs.",
               "Genre",
               "ˈʒɒnrə",
               "Género"
@@ -18967,6 +19491,12 @@
       "front": "/m/ — ¿cómo se produce y con qué patrones se escribe?",
       "back": "MONEY /ˈmʌni/ — DINERO",
       "blocks": [
+        {
+          "type": "bilingual",
+          "en": "Ass /æs/",
+          "es": "Nalgas",
+          "tag": "base"
+        },
         {
           "type": "note",
           "md": "**Equivalente en español.** En español, el sonido /m/ es similar y se produce de la misma manera. Es nasal, bilabial y sonoro, como en palabras como \"mamá\" o \"mismo\". Este sonido es compartido entre inglés y español y no presenta variaciones significativas. El sonido /m/ en inglés es un sonido nasal, bilabial y sonoro. Se produce al juntar los labios y dejar que el aire salga por la nariz, mientras las cuerdas vocales vibran, dándole una cualidad sonora. Posición inicial: Junta ambos labios para bloquear el flujo de aire por la boca."
@@ -19219,6 +19749,7 @@
             "Inglés",
             "Transcripción",
             "Español",
+            "vs.",
             "Inglés",
             "Transcripción",
             "Español"
@@ -19229,6 +19760,7 @@
               "Jam",
               "dʒæm",
               "Mermelada",
+              "vs.",
               "Ma’am",
               "mæm",
               "Señora"
@@ -19238,6 +19770,7 @@
               "Jaw",
               "dʒɔː",
               "Mandíbula",
+              "vs.",
               "Maw",
               "mɔː",
               "Boca/Abismo"
@@ -19247,6 +19780,7 @@
               "Gym",
               "dʒɪm",
               "Gimnasio",
+              "vs.",
               "Him",
               "hɪm",
               "Él"
@@ -19256,6 +19790,7 @@
               "Jane",
               "dʒeɪn",
               "Nombre propio",
+              "vs.",
               "Main",
               "meɪn",
               "Principal"
@@ -19265,6 +19800,7 @@
               "Jar",
               "dʒɑːr",
               "Frasco",
+              "vs.",
               "Mar",
               "mɑːr",
               "Estropear"
@@ -19274,6 +19810,7 @@
               "Jet",
               "dʒɛt",
               "Avión",
+              "vs.",
               "Met",
               "mɛt",
               "Conocer .past"
@@ -19283,6 +19820,7 @@
               "Jill",
               "dʒɪl",
               "Nombre propio",
+              "vs.",
               "Mill",
               "mɪl",
               "Molino"
@@ -19292,6 +19830,7 @@
               "Joke",
               "dʒoʊk",
               "Broma",
+              "vs.",
               "Moke",
               "moʊk",
               "Burro (En inglés antiguo)"
@@ -19301,6 +19840,7 @@
               "June",
               "dʒuːn",
               "Junio",
+              "vs.",
               "Moon",
               "muːn",
               "Luna"
@@ -19310,6 +19850,7 @@
               "Joy",
               "dʒɔɪ",
               "Alegría",
+              "vs.",
               "Moy",
               "mɔɪ",
               "Nombre propio o apodo"
@@ -19444,6 +19985,12 @@
       "front": "/n/ — ¿cómo se produce y con qué patrones se escribe?",
       "back": "NEW /njuː/ — NUEVO",
       "blocks": [
+        {
+          "type": "bilingual",
+          "en": "Hip /hɪp/",
+          "es": "Cadera",
+          "tag": "base"
+        },
         {
           "type": "note",
           "md": "**Equivalente en español.** En español, el sonido /n/ es similar y se produce de la misma manera. Es nasal, alveolar y sonoro, como en palabras como \"noche\" o \"mano\". Este sonido es compartido entre inglés y español, y no presenta diferencias significativas en su pronunciación. El sonido /n/ en inglés es un sonido nasal, alveolar y sonoro. Se produce colocando la lengua en la zona justo detrás de los dientes superiores y dejando que el aire salga por la nariz, mientras las cuerdas vocales vibran, lo cual le da su cualidad sonora. Posición inicial: Coloca la punta de la lengua bloqueando el flujo de aire por la boca. Sonoridad nasal: Permite que el aire pase a través de la nariz, mientras las cuerdas vocales vibran, produciendo el sonido sonoro /n/."
@@ -19705,6 +20252,7 @@
             "Inglés",
             "Transcripción",
             "Español",
+            "vs.",
             "Inglés",
             "Transcripción",
             "Español"
@@ -19715,6 +20263,7 @@
               "Net",
               "nɛt",
               "Red",
+              "vs.",
               "Met",
               "mɛt",
               "Conocer (past)"
@@ -19724,6 +20273,7 @@
               "Nap",
               "næp",
               "Siesta",
+              "vs.",
               "Map",
               "mæp",
               "Mapa"
@@ -19733,6 +20283,7 @@
               "Near",
               "nɪr",
               "Cerca",
+              "vs.",
               "Mere",
               "mɪr",
               "Lago/Simple /Mero/Solo"
@@ -19742,6 +20293,7 @@
               "No",
               "noʊ",
               "No",
+              "vs.",
               "Moe",
               "moʊ",
               "Mo (Nombre propio)"
@@ -19751,6 +20303,7 @@
               "Nine",
               "naɪn",
               "Nueve",
+              "vs.",
               "Mime",
               "maɪm",
               "Mimo"
@@ -19873,6 +20426,12 @@
       "front": "/ŋ/ — ¿cómo se produce y con qué patrones se escribe?",
       "back": "SING /sɪŋ/ — CANTAR",
       "blocks": [
+        {
+          "type": "bilingual",
+          "en": "Waist /weɪst/",
+          "es": "Cintura",
+          "tag": "base"
+        },
         {
           "type": "note",
           "md": "**Equivalente en español.** El sonido /ŋ/ no tiene un equivalente exacto en español, pero el sonido más cercano se puede encontrar en algunas palabras informales o dialectales, como en \"tango\" o \"vengo\". En estos casos, la \"n\" seguida de \"g\" se puede pronunciar de forma similar a /ŋ/, aunque no es un sonido independiente en español. El sonido /ŋ/ en inglés es un sonido nasal, velar y sonoro. Se produce al elevar la parte posterior de la lengua hacia el velo del paladar (la parte blanda en la parte posterior de la boca), permitiendo que el aire salga por la nariz mientras las cuerdas vocales vibran. Este sonido es característico del inglés y aparece en combinaciones específicas de letras, como \"ng\". Posición inicial: Eleva la parte posterior de la lengua hacia el velo del paladar, bloqueando el flujo de aire por la boca. Sonoridad nasal: Permite que el aire fluya por la nariz mientras las cuerdas vocales vibran, produciendo el sonido /ŋ/."
@@ -20081,6 +20640,7 @@
             "Inglés",
             "Transcripción",
             "Español",
+            "vs.",
             "Inglés",
             "Transcripción",
             "Español"
@@ -20091,6 +20651,7 @@
               "Ring",
               "rɪŋ",
               "Anillo",
+              "vs.",
               "Rin",
               "rɪn",
               "Nombre propio o abreviatura"
@@ -20100,6 +20661,7 @@
               "Sing",
               "sɪŋ",
               "Cantar",
+              "vs.",
               "Sin",
               "sɪn",
               "Pecado"
@@ -20109,6 +20671,7 @@
               "Bang",
               "bæŋ",
               "Estallido",
+              "vs.",
               "Ban",
               "bæn",
               "Prohibir"
@@ -20118,6 +20681,7 @@
               "King",
               "kɪŋ",
               "Rey",
+              "vs.",
               "Kin",
               "kɪn",
               "Pariente"
@@ -20127,6 +20691,7 @@
               "Long",
               "lɔŋ",
               "Largo",
+              "vs.",
               "Lawn",
               "lɔːn",
               "Césped"
@@ -20136,6 +20701,7 @@
               "Hung",
               "hʌŋ",
               "Colgado",
+              "vs.",
               "Hun",
               "hʌn",
               "Nombre Propio o término antiguo"
@@ -20145,6 +20711,7 @@
               "Sung",
               "sʌŋ",
               "Cantado",
+              "vs.",
               "Sun",
               "sʌn",
               "Sol"
@@ -20154,6 +20721,7 @@
               "Wing",
               "wɪŋ",
               "Ala",
+              "vs.",
               "Win",
               "wɪn",
               "Ganar"
@@ -20163,6 +20731,7 @@
               "Tongue",
               "tʌŋ",
               "Lengua",
+              "vs.",
               "Ton",
               "tʌn",
               "Tonelada"
@@ -20172,6 +20741,7 @@
               "Cling",
               "klɪŋ",
               "Aferrarse/ Apegarse",
+              "vs.",
               "Clin",
               "klɪn",
               "Nombre propio (raro)"
@@ -20300,6 +20870,12 @@
       "front": "/h/ — ¿cómo se produce y con qué patrones se escribe?",
       "back": "HAPPY /ˈhæpi/ — FELIZ",
       "blocks": [
+        {
+          "type": "bilingual",
+          "en": "Spine /spaɪn/",
+          "es": "Columna",
+          "tag": "base"
+        },
         {
           "type": "note",
           "md": "**Equivalente en español.** En español, el sonido /h/ no tiene un equivalente exacto, ya que en la mayoría de los dialectos del español la \"h\" es muda. Sin embargo, en algunos dialectos (como el andaluz o algunos dialectos del español de América), la \"j\" o \"g\" suave puede sonar de forma similar al /h/ en inglés, como en “jalapeño” o “gente”, aunque con menos fricción en inglés. El sonido /h/ en inglés es un sonido fricativo, glotal y sordo. Se produce al permitir que el aire pase a través de la glotis (la abertura entre las cuerdas vocales) sin vibración y sin que haya un bloqueo completo, lo que produce un sonido suave y aspirado. Posición inicial: Mantén la boca y la garganta relajadas; las cuerdas vocales están abiertas para permitir el paso libre del aire. Aire sin fricción sonora: Permite que el aire pase de manera continua, sin vibrar las cuerdas vocales. El sonido /h/ se produce como una exhalación de aire."
@@ -20538,6 +21114,7 @@
             "Inglés",
             "Transcripción",
             "Español",
+            "vs.",
             "Inglés",
             "Transcripción",
             "Español"
@@ -20548,6 +21125,7 @@
               "Hung",
               "hʌŋ",
               "Colgado",
+              "vs.",
               "Sung",
               "sʌŋ",
               "Cantado"
@@ -20557,6 +21135,7 @@
               "Hill",
               "hɪl",
               "Colina",
+              "vs.",
               "Sing",
               "sɪŋ",
               "Cantar"
@@ -20566,6 +21145,7 @@
               "Hip",
               "hɪp",
               "Cadera",
+              "vs.",
               "Ring",
               "rɪŋ",
               "Anillo"
@@ -20575,6 +21155,7 @@
               "Harm",
               "hɑːm",
               "Daño",
+              "vs.",
               "Lung",
               "lʌŋ",
               "Pulmón"
@@ -20584,6 +21165,7 @@
               "Hall",
               "hɔːl",
               "Pasillo",
+              "vs.",
               "Long",
               "lɔŋ",
               "Largo"
@@ -20593,6 +21175,7 @@
               "Heart",
               "hɑːt",
               "Corazón",
+              "vs.",
               "Tongue",
               "tʌŋ",
               "Lengua"
@@ -20717,6 +21300,12 @@
       "front": "/l/ — ¿cómo se produce y con qué patrones se escribe?",
       "back": "LOVE /lʌv/ — AMOR",
       "blocks": [
+        {
+          "type": "bilingual",
+          "en": "Back /bæk/",
+          "es": "Espalda",
+          "tag": "base"
+        },
         {
           "type": "note",
           "md": "**Equivalente en español.** En español, el sonido /l/ es similar y se produce de la misma manera en la mayoría de las posiciones, como en palabras como \"luz\" o \"solo\". Sin embargo, en inglés hay dos tipos de /l/: L clara (clear L): Se produce al principio de una sílaba, como en \"light\". Es similar a la /l/ en español. L oscura (dark L): Aparece al final de sílabas, como en \"full\". Aquí, la parte posterior de la lengua se eleva ligeramente hacia el paladar, lo cual no ocurre en español. El sonido /l/ en inglés es un sonido aproximante, alveolar y sonoro.(La zona justo detrás de los dientes superiores) y dejar que el aire pase por los lados de la lengua mientras las cuerdas vocales vibran, dándole una cualidad sonora. Posición inicial: Coloca la punta de la lengua contra las superficies posteriores de los incisivos superiores. Sonoridad: Permite que el aire fluya por los lados de la lengua, mientras las cuerdas vocales vibran, produciendo el sonido /l/."
@@ -20955,6 +21544,7 @@
             "Inglés",
             "Transcripción",
             "Español",
+            "vs.",
             "Inglés",
             "Transcripción",
             "Español"
@@ -20965,6 +21555,7 @@
               "Low",
               "loʊ",
               "Bajo",
+              "vs.",
               "Hoe",
               "hoʊ",
               "Azadón/Puta"
@@ -20974,6 +21565,7 @@
               "Led",
               "lɛd",
               "Condujo",
+              "vs.",
               "Head",
               "hɛd",
               "Cabeza"
@@ -20983,6 +21575,7 @@
               "Light",
               "laɪt",
               "Luz",
+              "vs.",
               "Height",
               "haɪt",
               "Altura"
@@ -20992,6 +21585,7 @@
               "Lid",
               "lɪd",
               "Tapa",
+              "vs.",
               "Hid",
               "hɪd",
               "Escondió"
@@ -21001,6 +21595,7 @@
               "Late",
               "leɪt",
               "Tarde",
+              "vs.",
               "Hate",
               "heɪt",
               "Odio/Odiar"
@@ -21123,6 +21718,12 @@
       "front": "/r/ — ¿cómo se produce y con qué patrones se escribe?",
       "back": "RED /rɛd/ — ROJO",
       "blocks": [
+        {
+          "type": "bilingual",
+          "en": "Nape /neɪp/",
+          "es": "Nuca",
+          "tag": "base"
+        },
         {
           "type": "note",
           "md": "**Equivalente en español.** Este sonido puede ser desafiante para hablantes de español debido a las diferencias en su articulación y la falta de contacto directo con el paladar en inglés. El sonido /r/ en inglés no tiene un equivalente exacto en español. En español, la \"r\" es más fuerte y se articula con una vibración o un toque en parte anterior del paladar (como en \"pero\" o \"perro\"). En cambio, en inglés, el sonido /r/ es más suave y no toca el paladar, lo que le da una cualidad de \"aproximante\" sin contacto directo. El /r/ en inglés es un sonido aproximante, postalveolar y sonoro. Se produce al acercar la punta de la lengua hacia los laterales del paladar, sin hacer contacto total, permitiendo que el aire fluya de forma suave mientras las cuerdas vocales vibran. Posición inicial: La lengua se coloca cerca de la zona postalveolar sin tocar el paladar o los dientes. Sonoridad: Las cuerdas vocales vibran, produciendo el sonido /r/ con un flujo suave de aire, sin fricción."
@@ -21391,6 +21992,7 @@
             "Inglés",
             "Transcripción",
             "Español",
+            "vs.",
             "Inglés",
             "Transcripción",
             "Español"
@@ -21401,6 +22003,7 @@
               "Right",
               "raɪt",
               "Derecho",
+              "vs.",
               "Light",
               "laɪt",
               "Luz"
@@ -21410,6 +22013,7 @@
               "Road",
               "roʊd",
               "Camino",
+              "vs.",
               "Load",
               "loʊd",
               "Carga"
@@ -21419,6 +22023,7 @@
               "Rip",
               "rɪp",
               "Rasgar",
+              "vs.",
               "Lip",
               "lɪp",
               "Labio"
@@ -21428,6 +22033,7 @@
               "Ring",
               "rɪŋ",
               "Anillo",
+              "vs.",
               "Ling",
               "lɪŋ",
               "Ling (nombre propio)"
@@ -21437,6 +22043,7 @@
               "Rock",
               "rɒk",
               "Roca",
+              "vs.",
               "Lock",
               "lɒk",
               "Cerradura"
