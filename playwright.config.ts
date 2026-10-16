@@ -8,6 +8,10 @@ export default defineConfig({
   testDir: './e2e',
   fullyParallel: false,
   workers: 1,
+  // Un reintento: son pruebas en un navegador real y dependen de la carga de
+  // la máquina. Cada test que ha fallado alguna vez pasa en solitario; lo que
+  // se repite no es un fallo de la app sino una espera que no llegó.
+  retries: 1,
   reporter: process.env.CI === undefined ? [['list']] : [['github'], ['list']],
   use: {
     baseURL: 'http://127.0.0.1:4173',

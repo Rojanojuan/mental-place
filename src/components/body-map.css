@@ -121,3 +121,11 @@
     filter: none;
   }
 }
+
+/* ------------------------------------------------- planos de casa */
+
+.plan {
+  /* El generador ya trae sus propios colores y patrones; aquí solo se atenúa
+     para que los puntos destaquen por encima del plano. */
+  opacity: 0.88;
+}

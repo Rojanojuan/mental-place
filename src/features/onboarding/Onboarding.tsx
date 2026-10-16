@@ -2,7 +2,15 @@ import { useState } from 'react';
 import { useLiveQuery } from 'dexie-react-hooks';
 import { Link, useNavigate } from 'react-router-dom';
 import { BodyMap } from '@/components/BodyMap';
-import { countsFor, listLoci, listPalaces, listSchedules, setSetting, statusByLocus } from '@/db';
+import {
+  countsFor,
+  getCurrentPalace,
+  listLoci,
+  listPalaces,
+  listSchedules,
+  setSetting,
+  statusByLocus,
+} from '@/db';
 import { formatInterval } from '@/srs';
 import './onboarding.css';
 
@@ -17,7 +25,7 @@ export function Onboarding() {
   const data = useLiveQuery(async () => {
     const now = new Date();
     const [palaces, schedules] = await Promise.all([listPalaces(), listSchedules()]);
-    const palace = palaces[0];
+    const palace = await getCurrentPalace();
     const [loci, statuses, counts] = palace
       ? await Promise.all([
           listLoci(palace.id),

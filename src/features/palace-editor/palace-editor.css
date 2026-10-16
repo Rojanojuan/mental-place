@@ -192,3 +192,11 @@
   opacity: 0.3;
   cursor: default;
 }
+
+.pae__grid--plan {
+  grid-template-columns: 1fr;
+}
+
+.pae__grid--plan .pae__map {
+  position: static;
+}

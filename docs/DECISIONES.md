@@ -465,3 +465,44 @@ claro a más oscuro; `plano` es sin relleno. Si el diseño los define, se cambia
 `hair`, `hairColor`, `facial` y `glasses` necesitan capas que el SVG entregado no tiene, y
 `draw: lapiz` necesita el sombreado rayado. «Mis cuerpos» los marca como pendientes y explica por
 qué, en vez de ofrecer botones que no hacen nada. Ver `docs/HANDOFF_DISENO.md` §3.11.
+
+## Casas · los diez planos (2026-10-16)
+
+### D-061 · Las casas se generan a semilla, no se llevan en la app
+
+`design_handoff_palacio_corporal/pc-houses.js` ya hace todo el trabajo geométrico (muros, puertas,
+habitaciones y la ruta en serpentina de `PROMPT_MEJORAS.md` §4.2). `scripts/ingest_casas.mjs`
+(`npm run seed:casas`) lo importa y traduce su forma a las entidades del contrato.
+
+**No se cargan al arrancar.** Son 1 363 puntos y 466 kB de SVG —casi 1 MB de JSON— para palacios
+que puede que nunca uses. Se importan a mano desde «Datos», que es el camino del contrato. Así el
+generador tampoco entra en el bundle.
+
+### D-062 · Las casas vienen amuebladas pero vacías
+
+El generador trae un `item` de ejemplo en cada mueble; es contenido de relleno del prototipo, como
+el `PH` de `pc-data.js` (D-001 bis). La semilla crea **solo los puntos**: cada mueble es un locus y
+el contenido lo pones tú.
+
+### D-063 · El mapa aprende un modo «plano»
+
+`BodyMap` acepta `plan`: con él pinta el plano en lugar de las dos siluetas, toma el `viewBox` de
+`planData` y coloca los puntos sobre ese lienzo. El tamaño del punto sale de la fórmula del diseño
+(`0,3 × √(área / nº de puntos)`, §5) con un suelo para que siga siendo tocable.
+
+Un plano es apaisado, así que en el Inspector y en el Editor ocupa **todo el ancho** y el detalle
+va debajo: metido en la columna estrecha del cuerpo, los puntos quedaban en 8 px, por debajo del
+mínimo de 9 px que pide el diseño. Con el ancho completo miden 21 px.
+
+### D-064 · Un palacio actual, guardado
+
+Con once palacios, «el primero de la lista» dejó de servir: la app enseñaba siempre fonética y no
+había forma de ver las casas. `getCurrentPalace()` lee el elegido de `settings` y cae al primero si
+ya no existe; `PalaceChips` lo cambia y todas las pantallas lo siguen.
+
+### D-065 · La suite se estabiliza por configuración, no parcheando tests
+
+Varios tests importan semillas de ~1 MB en IndexedDB y la suite salía intermitente. En vez de ir
+subiendo esperas una a una: `testTimeout` de 20 s y `maxWorkers: 4` en `vite.config.ts`, y un
+reintento en Playwright. Cada test que falló alguna vez pasa en solitario; lo que fallaba era la
+espera, no la app.

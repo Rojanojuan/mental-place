@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { useLiveQuery } from 'dexie-react-hooks';
 import { BodyMap } from '@/components/BodyMap';
-import type { APPLIED_KEYS} from '@/design/body-style';
+import type { APPLIED_KEYS } from '@/design/body-style';
 import { PENDING_KEYS, SKIN_FILL } from '@/design/body-style';
 import { PALACE_STYLE_DEFAULTS, type Palace, type PalaceStyle } from '@/domain/types';
-import { listLoci, listPalaces, putPalace, statusByLocus, stamp } from '@/db';
+import { getCurrentPalace, listLoci, listPalaces, putPalace, stamp, statusByLocus } from '@/db';
 import './body-styler.css';
 
 type Key = (typeof APPLIED_KEYS)[number];
@@ -54,7 +54,7 @@ export function BodyStyler() {
 
   const data = useLiveQuery(async () => {
     const palaces = await listPalaces();
-    const palace = palaces[0];
+    const palace = await getCurrentPalace();
     if (!palace) return { palaces, palace: undefined };
     const [loci, statuses] = await Promise.all([
       listLoci(palace.id),

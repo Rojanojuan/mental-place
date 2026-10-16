@@ -2,12 +2,13 @@ import { useState } from 'react';
 import { useLiveQuery } from 'dexie-react-hooks';
 import { Link } from 'react-router-dom';
 import { BodyMap } from '@/components/BodyMap';
+import { PalaceChips } from '@/components/PalaceChips';
 import { STATE_LABEL, STATE_TOKEN } from '@/design/states';
 import type { ID, Item, SceneObject, Zone } from '@/domain/types';
 import {
+  getCurrentPalace,
   listItemsByLocus,
   listLoci,
-  listPalaces,
   listSceneObjects,
   listZones,
   statusByLocus,
@@ -23,7 +24,7 @@ import './inspector.css';
 export function Inspector() {
   const [selectedId, setSelectedId] = useState<ID | null>(null);
 
-  const palace = useLiveQuery(async () => (await listPalaces())[0], []);
+  const palace = useLiveQuery(() => getCurrentPalace(), []);
   const palaceId = palace?.id;
 
   const map = useLiveQuery(async () => {
@@ -65,6 +66,12 @@ export function Inspector() {
 
   return (
     <section className="insp">
+      <PalaceChips
+        currentId={palace.id}
+        onChange={() => {
+          setSelectedId(null);
+        }}
+      />
       <header className="insp__head">
         <div>
           <h2>{palace.name}</h2>
@@ -82,12 +89,13 @@ export function Inspector() {
         </ul>
       </header>
 
-      <div className="insp__body">
+      <div className={`insp__body${palace.planData ? ' insp__body--plan' : ''}`}>
         <div className="insp__map">
           <BodyMap
             loci={map.loci}
             statusByLocus={map.statuses}
             appearance={palace.style}
+            plan={palace.planData}
             selectedIds={current === null ? [] : [current]}
             onLocusTap={setSelectedId}
           />

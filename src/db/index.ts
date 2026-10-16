@@ -7,6 +7,7 @@ export { newId, stamp } from './id';
 export type { Setting } from './db';
 
 export * from './repo';
+export { getCurrentPalace, setCurrentPalace } from './current';
 export * from './review';
 export {
   clearAll,

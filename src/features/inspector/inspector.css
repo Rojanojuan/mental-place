@@ -288,3 +288,21 @@
   gap: var(--space-2);
   flex-wrap: wrap;
 }
+
+/* Un plano es apaisado: en una columna estrecha los puntos bajan del mínimo
+   tocable, así que ocupa todo el ancho y el detalle va debajo. */
+.insp__body--plan {
+  grid-template-columns: 1fr;
+}
+
+.insp__body--plan .insp__map {
+  position: static;
+}
+
+.insp__body--plan .insp__route {
+  max-height: 30dvh;
+  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+  grid-auto-flow: column;
+  grid-template-rows: repeat(12, auto);
+  overflow-x: auto;
+}

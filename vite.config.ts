@@ -50,6 +50,13 @@ export default defineConfig({
     // Zona fija: el motor de repaso ancla los intervalos de un día o más a la
     // hora local, y los tests de cambio de horario necesitan una zona con DST.
     env: { TZ: 'Europe/Madrid' },
+    // Varios tests importan semillas de ~1 MB en IndexedDB; el límite de 5 s
+    // por defecto se quedaba corto y la suite salía intermitente.
+    testTimeout: 20_000,
+    hookTimeout: 20_000,
+    // Con un proceso por archivo la máquina se satura y las consultas en vivo
+    // de Dexie tardan de más: la suite salía intermitente. Cuatro va sobrado.
+    maxWorkers: 4,
     include: ['src/**/*.{test,spec}.{ts,tsx}', 'tests/**/*.{test,spec}.{ts,tsx}'],
     exclude: ['e2e/**', 'node_modules/**'],
     coverage: {

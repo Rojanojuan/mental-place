@@ -13,11 +13,11 @@ import type {
   Schedule,
 } from '@/domain/types';
 import {
+  getCurrentPalace,
   applyGrade,
   applyOverride,
   db,
   listLoci,
-  listPalaces,
   listSceneObjects,
   previewForItem,
   queueFor,
@@ -89,7 +89,7 @@ export function Session() {
     const alive = { current: true };
     void (async () => {
       const now = new Date();
-      const palace = (await listPalaces())[0];
+      const palace = await getCurrentPalace();
       const queue = await queueFor(
         palace ? { scope, palaceId: palace.id, newLimit: 20 } : { scope, newLimit: 20 },
         now,

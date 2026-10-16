@@ -2,11 +2,12 @@ import { useState } from 'react';
 import { useLiveQuery } from 'dexie-react-hooks';
 import { Link } from 'react-router-dom';
 import { BodyMap } from '@/components/BodyMap';
+import { PalaceChips } from '@/components/PalaceChips';
 import type { ID, ZoneAccent } from '@/domain/types';
 import {
+  getCurrentPalace,
   insertLocus,
   listLoci,
-  listPalaces,
   listZones,
   moveLocus,
   newId,
@@ -43,7 +44,7 @@ export function PalaceEditor() {
   const [selectedId, setSelectedId] = useState<ID | null>(null);
 
   const data = useLiveQuery(async () => {
-    const palace = (await listPalaces())[0];
+    const palace = await getCurrentPalace();
     if (!palace) return { palace: undefined };
     const [loci, zones, statuses] = await Promise.all([
       listLoci(palace.id),
@@ -124,6 +125,12 @@ export function PalaceEditor() {
 
   return (
     <section className="pae">
+      <PalaceChips
+        currentId={palace.id}
+        onChange={() => {
+          setSelectedId(null);
+        }}
+      />
       <header className="pae__head">
         <div>
           <h2>Editor · {palace.name}</h2>
@@ -147,12 +154,13 @@ export function PalaceEditor() {
         </div>
       </header>
 
-      <div className="pae__grid">
+      <div className={`pae__grid${palace.planData ? ' pae__grid--plan' : ''}`}>
         <div className="pae__map">
           <BodyMap
             loci={data.loci}
             statusByLocus={data.statuses}
             appearance={palace.style}
+            plan={palace.planData}
             selectedIds={selectedId === null ? [] : [selectedId]}
             onLocusTap={(id) => {
               void tapLocus(id);

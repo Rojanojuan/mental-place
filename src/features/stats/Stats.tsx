@@ -3,11 +3,11 @@ import { BodyMap } from '@/components/BodyMap';
 import { STATE_LABEL, STATE_TOKEN } from '@/design/states';
 import type { ID, LocusState } from '@/domain/types';
 import {
+  getCurrentPalace,
   countsFor,
   db,
   forecast,
   listLoci,
-  listPalaces,
   listZones,
   statusByLocus,
   studyStreak,
@@ -21,7 +21,7 @@ const FORECAST_DAYS = 30;
 export function Stats() {
   const data = useLiveQuery(async () => {
     const now = new Date();
-    const palace = (await listPalaces())[0];
+    const palace = await getCurrentPalace();
     if (!palace) return undefined;
 
     const [loci, zones, statuses, days, counts, streak, logs] = await Promise.all([
@@ -174,6 +174,7 @@ export function Stats() {
             loci={data.loci}
             statusByLocus={data.statuses}
             appearance={data.palace.style}
+            plan={data.palace.planData}
             maxHeight="44dvh"
             label="Mapa del palacio por estado"
           />

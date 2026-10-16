@@ -392,3 +392,42 @@ desbordamiento móvil en las ocho rutas.
   editarlo.
 - **Rendimiento con 500+ puntos y 10 000 ítems**: no medido. Con 45 puntos y 44 ítems va sobrado.
 - **Palacio 2 · Gramática C1**: esperando la estructura que quiera el usuario.
+
+---
+
+## Casas · los diez planos — ✅ (2026-10-16)
+
+La última pieza grande de la Fase 4.
+
+### Hecho
+
+- **`scripts/ingest_casas.mjs`** (`npm run seed:casas`) → `seed/casas.json`:
+  **10 casas · 50 zonas · 1 363 puntos · 123 habitaciones · 466 kB de planos**.
+  Cada mueble es un punto, cada casa empieza en la **Puerta principal** y la ruta va 1…n sin
+  huecos, como manda `PROMPT_MEJORAS.md` §4.2.
+- **Modo plano en `BodyMap`**: pinta el plano, toma el `viewBox` de `planData` y dimensiona los
+  puntos con la fórmula del diseño. En plano ocupa todo el ancho (D-063).
+- **Selector de palacio** (`PalaceChips`) y palacio actual guardado (D-064): sin esto la app
+  enseñaba siempre el primero y las casas eran invisibles.
+
+**No se cargan al arrancar**: se importan desde «Datos» eligiendo `seed/casas.json`.
+
+### Comprobaciones
+
+| Comando              | Resultado                                          |
+| -------------------- | -------------------------------------------------- |
+| `npm run seed:casas` | ✅ 10 casas, 1 363 puntos                          |
+| `npm run check`      | ✅ typecheck + lint + **455 tests** en 24 archivos |
+| `npm run e2e`        | ✅ 46 tests en escritorio y móvil                  |
+
+14 tests nuevos: que las diez casas son `custom_plan` con su plano y sus habitaciones, que cada
+una tiene ≥ 130 puntos, que **la ruta empieza en la Puerta principal** y va 1…n, que la semilla
+**pasa la validación Zod del import sin un solo aviso**, que el mapa pinta el plano en vez de las
+siluetas y que los chips cambian de palacio.
+
+### Lo que queda
+
+- **Rendimiento con 10 000 ítems**: con 1 363 puntos cargados la app va bien, pero no está medido
+  a esa escala.
+- **Palacio 2 · Gramática C1**: esperando la estructura.
+- Las cuatro claves de apariencia que el SVG no permite (`docs/HANDOFF_DISENO.md` §3.11).

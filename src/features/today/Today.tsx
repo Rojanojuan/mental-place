@@ -1,7 +1,7 @@
 import { useLiveQuery } from 'dexie-react-hooks';
 import { Link } from 'react-router-dom';
 import { BodyMap } from '@/components/BodyMap';
-import { countsFor, forecast, listLoci, listPalaces, statusByLocus, studyStreak } from '@/db';
+import { countsFor, forecast, getCurrentPalace, listLoci, statusByLocus, studyStreak } from '@/db';
 import './today.css';
 
 const DAY_LABELS = ['do', 'lu', 'ma', 'mi', 'ju', 'vi', 'sá'];
@@ -20,7 +20,7 @@ function greeting(hour: number): string {
 export function Today() {
   const data = useLiveQuery(async () => {
     const now = new Date();
-    const palace = (await listPalaces())[0];
+    const palace = await getCurrentPalace();
     if (!palace) return undefined;
     const [counts, loci, statuses, days, streak] = await Promise.all([
       countsFor({ scope: 'today' }, now),
@@ -114,6 +114,7 @@ export function Today() {
             loci={data.loci}
             statusByLocus={data.statuses}
             appearance={data.palace.style}
+            plan={data.palace.planData}
             maxHeight="56dvh"
             label="Mapa del palacio con los repasos pendientes"
           />

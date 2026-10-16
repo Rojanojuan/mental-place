@@ -86,11 +86,12 @@ describe('Inspector', () => {
       () => {
         expect(screen.getByRole('button', { name: /^1\. Pelo.*Aprendiendo/ })).toBeInTheDocument();
       },
-      { timeout: 5000 },
+      // Esta consulta en vivo rehace el mapa entero (45 puntos y sus estados).
+      // Con la suite completa en paralelo, y más aún bajo cobertura, no cabe
+      // en el segundo que da `waitFor` por defecto.
+      { timeout: 15_000 },
     );
-    // Margen propio: con la instrumentación de cobertura esta consulta en vivo
-    // no cabe en el límite de 5 s por test.
-  }, 15000);
+  });
 
   it('espera mientras la base de datos está vacía', async () => {
     await clearAll(db);

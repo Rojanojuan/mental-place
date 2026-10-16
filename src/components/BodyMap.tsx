@@ -17,6 +17,21 @@ const PIN_DENSE = BODY_VIEWBOX.height * 0.026;
 /** Por debajo de este diámetro aparente el número no se lee: se oculta. */
 const NUMBER_MIN = 13;
 
+/** Un plano de casa: su dibujo y las medidas de su lienzo. */
+export interface PlanSource {
+  svg: string;
+  w: number;
+  h: number;
+}
+
+/**
+ * Diámetro del punto en un plano: `0,3 × √(área / nº de puntos)`
+ * (`PROMPT_MEJORAS.md` §5), con un suelo para que siga siendo tocable.
+ */
+function planPin(plan: PlanSource, count: number): number {
+  return Math.max(10, 0.3 * Math.sqrt((plan.w * plan.h) / Math.max(1, count)));
+}
+
 export interface BodyMapProps {
   loci: Locus[];
   statusByLocus: Record<ID, LocusState>;
@@ -39,6 +54,11 @@ export interface BodyMapProps {
   label?: string;
   /** Apariencia del cuerpo (`Palace.style`). */
   appearance?: PalaceStyle | undefined;
+  /**
+   * Plano de casa. Con él, el mapa pinta el plano en vez de las dos siluetas
+   * y coloca los puntos sobre su lienzo.
+   */
+  plan?: PlanSource | undefined;
 }
 
 interface Placed {
@@ -69,26 +89,31 @@ export function BodyMap({
   className,
   label = 'Mapa del cuerpo con los puntos del palacio',
   appearance,
+  plan,
 }: BodyMapProps) {
   const body = bodyStyleAttrs(appearance);
-  const placed = useMemo<Placed[]>(
-    () =>
-      loci.map((locus) => ({
-        locus,
-        state: statusByLocus[locus.id] ?? 'empty',
-        cx: (locus.side === 'back' ? BACK_X : 0) + locus.pos.x * BODY_VIEWBOX.width,
-        cy: locus.pos.y * BODY_VIEWBOX.height,
-        d: locus.dense === true ? PIN_DENSE : PIN,
-      })),
-    [loci, statusByLocus],
-  );
+  const canvasW = plan ? plan.w : CANVAS_W;
+  const canvasH = plan ? plan.h : CANVAS_H;
+
+  const placed = useMemo<Placed[]>(() => {
+    const planDiameter = plan ? planPin(plan, loci.length) : 0;
+    return loci.map((locus) => ({
+      locus,
+      state: statusByLocus[locus.id] ?? 'empty',
+      cx: plan
+        ? locus.pos.x * plan.w
+        : (locus.side === 'back' ? BACK_X : 0) + locus.pos.x * BODY_VIEWBOX.width,
+      cy: plan ? locus.pos.y * plan.h : locus.pos.y * BODY_VIEWBOX.height,
+      d: plan ? planDiameter : locus.dense === true ? PIN_DENSE : PIN,
+    }));
+  }, [loci, plan, statusByLocus]);
 
   // Cámara: centra el punto enfocado. Los pines se contra-escalan para que su
   // tamaño aparente no cambie con el aumento.
   const focused = focusId === null ? undefined : placed.find((p) => p.locus.id === focusId);
   const scale = focused && zoom !== 1 ? zoom : 1;
-  const tx = focused ? CANVAS_W / 2 - focused.cx * scale : 0;
-  const ty = focused ? CANVAS_H / 2 - focused.cy * scale : 0;
+  const tx = focused ? canvasW / 2 - focused.cx * scale : 0;
+  const ty = focused ? canvasH / 2 - focused.cy * scale : 0;
 
   const selected = new Set(selectedIds);
 
@@ -106,18 +131,25 @@ export function BodyMap({
     if (!root) return null;
     const box = root.getBoundingClientRect();
     if (box.width === 0 || box.height === 0) return null;
-    const vx = ((event.clientX - box.left) / box.width) * CANVAS_W;
-    const vy = ((event.clientY - box.top) / box.height) * CANVAS_H;
+    const vx = ((event.clientX - box.left) / box.width) * canvasW;
+    const vy = ((event.clientY - box.top) / box.height) * canvasH;
+    if (plan) {
+      // En un plano no hay dos lados: el lienzo entero es el palacio.
+      return {
+        pos: { x: Number((vx / canvasW).toFixed(4)), y: Number((vy / canvasH).toFixed(4)) },
+        side: 'front',
+      };
+    }
     const side: 'front' | 'back' = vx >= BACK_X ? 'back' : 'front';
     const x = (vx - (side === 'back' ? BACK_X : 0)) / BODY_VIEWBOX.width;
     if (x < 0 || x > 1) return null;
-    return { pos: { x: Number(x.toFixed(4)), y: Number((vy / CANVAS_H).toFixed(4)) }, side };
+    return { pos: { x: Number(x.toFixed(4)), y: Number((vy / canvasH).toFixed(4)) }, side };
   };
 
   return (
     <svg
       className={className === undefined ? 'bodymap' : `bodymap ${className}`}
-      viewBox={`0 0 ${String(CANVAS_W)} ${String(CANVAS_H)}`}
+      viewBox={`0 0 ${String(canvasW)} ${String(canvasH)}`}
       style={{ maxHeight }}
       role="group"
       aria-label={label}
@@ -136,17 +168,23 @@ export function BodyMap({
         className="bodymap__camera"
         transform={`translate(${tx.toFixed(2)} ${ty.toFixed(2)}) scale(${scale.toFixed(3)})`}
       >
-        <g
-          className={body.className}
-          style={body.style}
-          dangerouslySetInnerHTML={{ __html: BODY_INNER.front }}
-        />
-        <g
-          className={body.className}
-          style={body.style}
-          transform={`translate(${String(BACK_X)} 0)`}
-          dangerouslySetInnerHTML={{ __html: BODY_INNER.back }}
-        />
+        {plan ? (
+          <g className="plan" dangerouslySetInnerHTML={{ __html: plan.svg }} />
+        ) : (
+          <>
+            <g
+              className={body.className}
+              style={body.style}
+              dangerouslySetInnerHTML={{ __html: BODY_INNER.front }}
+            />
+            <g
+              className={body.className}
+              style={body.style}
+              transform={`translate(${String(BACK_X)} 0)`}
+              dangerouslySetInnerHTML={{ __html: BODY_INNER.back }}
+            />
+          </>
+        )}
         {placed.map((pin) => {
           const isFocus = pin.locus.id === focusId;
           const d = pin.d / scale;
