@@ -43,8 +43,6 @@
   background: var(--sunken);
   border-radius: var(--radius-lg);
   padding: var(--space-3);
-  position: sticky;
-  top: var(--space-3);
 }
 
 .pae__map .bodymap {
@@ -220,4 +218,25 @@
 
 .pae__open {
   margin-bottom: var(--space-3);
+}
+
+/* La columna pegada es un patron de escritorio. En una sola columna un
+   elemento sticky se desplaza SOBRE el contenido que le sigue y lo tapa: en el
+   telefono el cuerpo se comia el panel entero (D-077). */
+@media (min-width: 901px) {
+  .pae__map {
+    position: sticky;
+    top: var(--space-3);
+  }
+}
+
+@media (max-width: 900px) {
+  .pae__map .bodymap {
+    max-height: 38dvh;
+  }
+
+  .pae__zones,
+  .pae__route {
+    max-height: 34dvh;
+  }
 }

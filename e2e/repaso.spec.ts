@@ -277,3 +277,161 @@ test.describe('uso en móvil', () => {
     }
   });
 });
+
+/**
+ * La columna lateral pegada es un patrón de escritorio: cuando la rejilla se
+ * colapsa a una columna, un elemento `sticky` se desplaza SOBRE el contenido
+ * que le sigue y lo tapa. Pasó en cinco pantallas a la vez y no lo ve ningún
+ * test de unidad, porque depende del tamaño real de la ventana (D-077).
+ */
+test.describe('leer el panel en el teléfono', () => {
+  const PANELES = [
+    { ruta: '/inspector', espera: /45 puntos/, lado: '.insp__map', panel: '.insp__detail' },
+    { ruta: '/editor', espera: /45 puntos/, lado: '.pae__map', panel: '.pae__panel' },
+    { ruta: '/cuerpos', espera: /cuerpo/i, lado: '.bst__map', panel: '.bst__panel' },
+    { ruta: '/punto/loc-fonetica45-01', espera: /Pelo/, lado: '.lce__map', panel: '.lce__panel' },
+  ];
+
+  for (const caso of PANELES) {
+    test(`en ${caso.ruta} el cuerpo no tapa el panel`, async ({ page }, testInfo) => {
+      test.skip(testInfo.project.name !== 'movil', 'solo aplica al móvil');
+      await page.goto('/');
+      await expect(page.getByRole('link', { name: /Repasar ahora/ })).toBeVisible(SEEDED);
+      await page.goto(caso.ruta);
+      await expect(page.getByText(caso.espera).first()).toBeVisible(SEEDED);
+
+      // Desplazarse al panel es justo lo que hace el usuario para leerlo.
+      await page.evaluate((s) => {
+        document.querySelector(s)?.scrollIntoView({ block: 'start' });
+      }, caso.panel);
+
+      const geo = await page.evaluate(
+        ([sl, sp]) => {
+          const lado = document.querySelector(sl);
+          const panel = document.querySelector(sp);
+          if (!lado || !panel) return null;
+          const a = lado.getBoundingClientRect();
+          const b = panel.getBoundingClientRect();
+          // ¿Qué elemento recibiría el toque sobre la cabecera del panel?
+          const x = b.left + b.width / 2;
+          const y = Math.max(4, Math.min(window.innerHeight - 4, b.top + 24));
+          const encima = document.elementFromPoint(x, y);
+          return {
+            solape: Math.round(Math.max(0, Math.min(a.bottom, b.bottom) - Math.max(a.top, b.top))),
+            esDelPanel: panel.contains(encima),
+            altoLado: Math.round(a.height),
+            ventana: window.innerHeight,
+          };
+        },
+        [caso.lado, caso.panel] as const,
+      );
+
+      expect(geo).not.toBeNull();
+      expect(geo?.solape).toBe(0);
+      expect(geo?.esDelPanel).toBe(true);
+      // Y la columna no puede medir más que la pantalla.
+      expect(geo?.altoLado ?? 0).toBeLessThan(geo?.ventana ?? 0);
+    });
+  }
+
+  test('tocar un punto trae el detalle a la vista', async ({ page }, testInfo) => {
+    test.skip(testInfo.project.name !== 'movil', 'solo aplica al móvil');
+    await page.goto('/inspector');
+    await expect(page.getByText(/45 puntos/)).toBeVisible(SEEDED);
+
+    const antes = await page.evaluate(() => {
+      const el = document.querySelector('.insp__detail');
+      return el ? Math.round(el.getBoundingClientRect().top) : 0;
+    });
+    // Nace por debajo del borde inferior: tocar un pin no se notaba.
+    expect(antes).toBeGreaterThan(600);
+
+    await page.locator('.insp__map [role="button"]').first().click({ force: true });
+
+    await expect
+      .poll(
+        () =>
+          page.evaluate(() => {
+            const el = document.querySelector('.insp__detail');
+            return el ? Math.round(el.getBoundingClientRect().top) : 9999;
+          }),
+        { timeout: 5000 },
+      )
+      .toBeLessThan(120);
+  });
+});
+
+test.describe('la sesión en el teléfono', () => {
+  test('«Revelar» se alcanza sin desplazar en las dos fases', async ({ page }, testInfo) => {
+    test.skip(testInfo.project.name !== 'movil', 'solo aplica al móvil');
+    await page.goto('/sesion');
+    await expect(page.getByText('1 / 20')).toBeVisible(SEEDED);
+
+    for (const fase of ['señalar', 'escena']) {
+      const geo = await page.evaluate(() => {
+        const b = document.querySelector('.ses__reveal');
+        if (!b) return null;
+        const r = b.getBoundingClientRect();
+        return { bottom: Math.round(r.bottom), ventana: window.innerHeight };
+      });
+      // Dentro de la tarjeta caía 68 px por debajo del borde.
+      expect(geo, `fase ${fase}`).not.toBeNull();
+      expect(geo?.bottom ?? 9999, `fase ${fase}`).toBeLessThanOrEqual(geo?.ventana ?? 0);
+      await page.getByRole('button', { name: /^Revelar/ }).click();
+    }
+  });
+
+  test('al revelar el contenido hay sitio de verdad para leerlo', async ({ page }, testInfo) => {
+    test.skip(testInfo.project.name !== 'movil', 'solo aplica al móvil');
+    await page.goto('/sesion');
+    await expect(page.getByText('1 / 20')).toBeVisible(SEEDED);
+    await page.keyboard.press('Space');
+    await page.keyboard.press('Space');
+    await expect(page.getByText(/Patrones del sonido/)).toBeVisible();
+
+    // La vista aterriza en la tarjeta: la pregunta arriba y la respuesta debajo.
+    await expect
+      .poll(
+        () =>
+          page.evaluate(() => {
+            const card = document.querySelector('.ses__card');
+            const grades = document.querySelector('.ses__grades');
+            if (!card || !grades) return -1;
+            const top = card.getBoundingClientRect().top;
+            return Math.round(grades.getBoundingClientRect().top - Math.max(top, 0));
+          }),
+        { timeout: 5000 },
+      )
+      // Antes quedaban 199 px; con el cuerpo encogido y el salto, más de 400.
+      .toBeGreaterThan(400);
+
+    // La pregunta sigue visible mientras se lee la respuesta.
+    const front = await page.evaluate(() => {
+      const el = document.querySelector('.ses__front');
+      return el ? Math.round(el.getBoundingClientRect().top) : -9999;
+    });
+    expect(front).toBeGreaterThan(0);
+  });
+
+  test('el cuerpo manda al recordar y se encoge al leer', async ({ page }, testInfo) => {
+    test.skip(testInfo.project.name !== 'movil', 'solo aplica al móvil');
+    await page.goto('/sesion');
+    await expect(page.getByText('1 / 20')).toBeVisible(SEEDED);
+
+    const alto = async (): Promise<number> =>
+      page.evaluate(() => {
+        const el = document.querySelector('.ses__bodymap');
+        return el ? Math.round(el.getBoundingClientRect().height) : 0;
+      });
+
+    const recordando = await alto();
+    await page.keyboard.press('Space');
+    await page.keyboard.press('Space');
+    await expect(page.getByText(/Patrones del sonido/)).toBeVisible();
+    const leyendo = await alto();
+
+    // El diseño lo fija en 440 → 200 px (`stageH` de PalacioApp.dc.html).
+    expect(recordando).toBeGreaterThan(300);
+    expect(leyendo).toBeLessThan(recordando * 0.6);
+  });
+});

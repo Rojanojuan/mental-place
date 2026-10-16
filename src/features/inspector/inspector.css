@@ -74,8 +74,6 @@
 }
 
 .insp__map {
-  position: sticky;
-  top: var(--space-3);
   background: var(--sunken);
   border-radius: var(--radius-lg);
   padding: var(--space-3);
@@ -339,4 +337,26 @@
 .insp__zlink:hover {
   background: var(--surface-2);
   color: var(--text);
+}
+
+/* La columna pegada es un patron de escritorio. En una sola columna un
+   elemento sticky se desplaza SOBRE el contenido que le sigue y lo tapa: en el
+   telefono el cuerpo se comia el panel entero (D-077). */
+@media (min-width: 901px) {
+  .insp__map {
+    position: sticky;
+    top: var(--space-3);
+  }
+}
+
+/* El cuerpo y la lista de ruta juntos no pueden llenar la pantalla: detras
+   viene el detalle, que es justo lo que se ha venido a leer. */
+@media (max-width: 900px) {
+  .insp__map .bodymap {
+    max-height: 34dvh;
+  }
+
+  .insp__route {
+    max-height: 24dvh;
+  }
 }

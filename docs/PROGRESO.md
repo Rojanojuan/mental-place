@@ -509,3 +509,57 @@ horas de `minInterval`, y si el navegador lo rechaza queda `blocked` sin lanzar 
    repositorio público. Está versionada y `npm run seed:fonetica` la necesita en local.
 3. El aviso en segundo plano solo se puede probar en el sitio publicado, con la app instalada en
    Chrome Android: en `localhost` el navegador no concede el permiso.
+
+## Segunda auditoría de móvil: poder leer lo que se elige — ✅ (2026-10-16)
+
+El usuario reportó que al tocar un punto el cuerpo se superponía al detalle y no se veía la
+información. Era cierto, y no era solo el Inspector: la misma avería estaba en cuatro pantallas.
+
+### Lo que estaba roto
+
+- **Cuatro columnas laterales `sticky` que nadie apagaba en el móvil** (D-077). Al colapsar la
+  rejilla a una columna, el elemento sticky se desplaza sobre el contenido siguiente: el Inspector
+  tapaba **760 px** del detalle —`elementFromPoint` sobre su título devolvía el `<svg>` del
+  cuerpo—, `/cuerpos` 388, `/punto/:id` 344 y `/editor` 276.
+- **El alto del mapa era un estilo en línea** (D-078), así que ninguna media query podía bajarlo.
+  D-073 lo había parcheado solo en la sesión.
+- **En el Inspector tocar un pin no hacía nada visible**: el detalle nacía en el píxel 1180 de una
+  pantalla de 727.
+- **En la sesión quedaban 199 px para leer** el contenido, y al devolver al cuerpo su tamaño el
+  botón «Revelar» caía 68 px por debajo del borde.
+
+### Lo que se hizo
+
+- El sticky vive ahora dentro de `@media (min-width: 901px)`, el mismo umbral de las dos columnas.
+- `BodyMap` publica el alto como `--bodymap-max` y el CSS manda: cada pantalla lo baja en el
+  teléfono con una regla normal.
+- Elegir un punto **trae el detalle a la vista** (`revealPanel`, solo en una columna).
+- La sesión sigue al prototipo (`stageH = isContent ? 200 : 440`, D-079): el cuerpo manda al
+  recordar (48dvh) y se encoge al leer (19dvh), «Revelar» baja a la barra de acción junto a donde
+  luego salen los calificadores, y al revelar la vista aterriza en la tarjeta con la pregunta
+  todavía arriba.
+
+| Medida                             | Antes      | Ahora      |
+| ---------------------------------- | ---------- | ---------- |
+| Solape columna/panel (4 pantallas) | 276–760 px | **0 px**   |
+| Detalle tras tocar un pin          | y=1180     | **y=0**    |
+| Sitio para leer en la sesión       | 199 px     | **637 px** |
+| «Revelar» alcanzable sin desplazar | no         | sí         |
+
+### Comprobaciones
+
+| Comando         | Resultado                                                  |
+| --------------- | ---------------------------------------------------------- |
+| `npm run check` | ✅ typecheck + lint + **486 tests** en 26 archivos         |
+| `npm run e2e`   | ✅ 59 pasan, 1 reintentada, 10 omitidas (escritorio+móvil) |
+
+12 tests nuevos: 5 de unidad (`tests/movil.test.tsx`) sobre `revealPanel` y el Inspector, y 7 e2e
+que miden el solape con `elementFromPoint`, que la columna no mide más que la pantalla, que tocar
+un pin sube el detalle, que «Revelar» cabe en las dos fases y que el cuerpo se encoge al leer.
+Comprobado además a 1280 px que el escritorio no cambia: el sticky vuelve y no hay desplazamientos.
+
+### Decidido a propósito
+
+En `/editor` tocar un punto **no** lleva el panel a la vista: en los modos de mover y crear se toca
+el lienzo muchas veces seguidas y desplazar en cada toque pelearía con el usuario. Sin el sticky el
+panel ya es alcanzable.

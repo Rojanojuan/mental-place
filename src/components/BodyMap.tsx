@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { type CSSProperties, useMemo } from 'react';
 import { BODY_INNER, BODY_VIEWBOX } from '@/design/assets';
 import { bodyStyleAttrs } from '@/design/body-style';
 import { STATE_LABEL, STATE_TOKEN } from '@/design/states';
@@ -161,9 +161,16 @@ export function BodyMap({
     <svg
       className={className === undefined ? 'bodymap' : `bodymap ${className}`}
       viewBox={`0 0 ${String(canvasW)} ${String(canvasH)}`}
-      // Con `none` no se escribe nada en línea: así el CSS puede decidirlo
-      // por pantalla, que es lo que necesita el móvil.
-      style={maxHeight === 'none' ? undefined : { maxHeight }}
+      // El alto viaja como variable CSS, no como `max-height` en línea: en
+      // línea ganaba a cualquier media query y el cuerpo se quedaba con la
+      // pantalla entera del móvil (D-073, y ahora D-077). Con `none` no se
+      // escribe nada y manda el CSS de la pantalla.
+      style={
+        maxHeight === 'none'
+          ? undefined
+          : // Las propiedades personalizadas no están en CSSProperties.
+            ({ '--bodymap-max': maxHeight } as CSSProperties)
+      }
       role="group"
       aria-label={label}
       onClick={

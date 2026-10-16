@@ -1,8 +1,9 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useLiveQuery } from 'dexie-react-hooks';
 import { Link, useSearchParams } from 'react-router-dom';
 import type { ScopeRequest } from '@/db';
 import { BodyMap } from '@/components/BodyMap';
+import { revealPanel } from '@/components/reveal';
 import { PartTranslation } from '@/components/PartName';
 import { BlockView } from '@/features/inspector/BlockView';
 import type {
@@ -92,6 +93,27 @@ export function Session() {
     statuses: Record<ID, LocusState>;
     style: Palace['style'];
   } | null>(null);
+
+  const mapRef = useRef<HTMLDivElement>(null);
+  const cardRef = useRef<HTMLDivElement>(null);
+  const primeraVez = useRef(true);
+
+  /**
+   * En el telefono la vista sigue a la fase.
+   *
+   * No caben a la vez el cuerpo grande, la pregunta y una respuesta larga —son
+   * 550 px de los 727 de un telefono—, asi que al revelar el contenido la
+   * vista aterriza en la tarjeta, con la pregunta todavia arriba y el cuerpo a
+   * un dedo de distancia. Al pasar a la tarjeta siguiente vuelve al cuerpo,
+   * que es con lo que empieza el ejercicio.
+   */
+  useEffect(() => {
+    if (primeraVez.current) {
+      primeraVez.current = false;
+      return;
+    }
+    revealPanel(phase === 'content' ? cardRef.current : mapRef.current);
+  }, [phase, index]);
 
   // La cola se arma una sola vez al entrar: si se recalculara en vivo, las
   // tarjetas se moverían bajo los pies del usuario al ir calificando.
@@ -284,8 +306,11 @@ export function Session() {
         <span style={{ width: `${String(Math.round((index / total) * 100))}%` }} />
       </div>
 
-      <div className="ses__body">
-        <div className="ses__map">
+      {/* El cuerpo manda mientras se intenta recordar y se encoge al revelar
+          el contenido, que es cuando hace falta sitio para leer. El diseño lo
+          fija en 440 px → 200 px (`stageH` de PalacioApp.dc.html). */}
+      <div className={`ses__body${phase === 'content' ? ' ses__body--leyendo' : ''}`}>
+        <div className="ses__map" ref={mapRef}>
           {map && (
             <BodyMap
               loci={map.loci}
@@ -315,7 +340,7 @@ export function Session() {
           {card.locus?.anchor && <p className="ses__anchor">{card.locus.anchor.text}</p>}
         </div>
 
-        <div className="ses__card">
+        <div className="ses__card" ref={cardRef}>
           {PHASE_HINT[phase] !== '' && <p className="ses__hint">{PHASE_HINT[phase]}</p>}
 
           {phase !== 'point' && card.scene.length > 0 && (
@@ -331,21 +356,28 @@ export function Session() {
 
           <p className="ses__front">{card.item.front ?? card.item.title}</p>
 
-          {phase === 'content' ? (
+          {phase === 'content' && (
             <div className="ses__content">
               {card.item.back !== undefined && <p className="ses__back">{card.item.back}</p>}
               {card.item.blocks.map((block, i) => (
                 <BlockView key={i} block={block} />
               ))}
             </div>
-          ) : (
-            <button type="button" className="btn btn--primary ses__reveal" onClick={reveal}>
-              Revelar {phase === 'point' && card.scene.length > 0 ? 'la escena' : 'el contenido'}
-              <kbd>espacio</kbd>
-            </button>
           )}
         </div>
       </div>
+
+      {/* «Revelar» ocupa el mismo sitio que luego ocupan los cuatro botones de
+          calificar: pegado abajo, al alcance del pulgar. Dentro de la tarjeta
+          caía 68 px por debajo del borde del teléfono. */}
+      {phase !== 'content' && (
+        <div className="ses__act">
+          <button type="button" className="btn btn--primary ses__reveal" onClick={reveal}>
+            Revelar {phase === 'point' && card.scene.length > 0 ? 'la escena' : 'el contenido'}
+            <kbd>espacio</kbd>
+          </button>
+        </div>
+      )}
 
       {phase === 'content' && !pending && (
         <div className="ses__grades">

@@ -605,3 +605,50 @@ de prometer lo que no hay.
 convive con `DOM` en el mismo proyecto. La etiqueta de la sincronización vive en
 `periodic-tag.ts`, importado por el worker y por la app, porque si se separan el aviso deja de
 llegar sin que nada falle.
+
+### D-077 · La columna pegada es un patrón de escritorio y hay que apagarla
+
+Cinco pantallas tenían la misma avería: `.insp__map`, `.pae__map`, `.lce__map` y `.bst__map` con
+`position: sticky`, y una media query que al llegar al móvil solo colapsaba la rejilla a una
+columna. Un elemento sticky se desplaza **sobre** el contenido que le sigue, así que en el teléfono
+el cuerpo se montaba encima del panel: el Inspector tapaba 760 px del detalle, y
+`elementFromPoint` sobre el título del detalle devolvía el `<svg>` del cuerpo. Es exactamente lo
+que se veía al tocar un punto.
+
+Ahora el sticky vive dentro de `@media (min-width: 901px)`, el mismo umbral en el que la rejilla
+tiene dos columnas. La regla general: **nada se queda pegado cuando el diseño es de una columna**.
+
+### D-078 · El alto del mapa viaja como variable CSS, no como estilo en línea
+
+`BodyMap` escribía `style={{ maxHeight }}`, y un estilo en línea gana a cualquier media query. Por
+eso seis pantallas tenían un cuerpo de 62dvh que el móvil no podía bajar; D-073 lo había parcheado
+solo en la sesión, pasando `maxHeight="none"`. Ahora el componente escribe
+`--bodymap-max` y `.bodymap` hace `max-height: var(--bodymap-max, none)`: cada pantalla puede
+bajarlo en el teléfono con una regla normal, sin tocar el componente.
+
+### D-079 · En el teléfono la vista sigue a la fase de la tarjeta
+
+Medido en un Pixel 5 (727 px de alto): cabecera 122 + cuerpo 224 + escena 70 + pregunta 51 = 467
+px antes de la respuesta, con los calificadores pegados abajo a 638. No caben a la vez el cuerpo
+grande, la pregunta y una respuesta larga, y fingir que sí dejaba 199 px para leer una tabla de
+patrones.
+
+Dos movimientos, los dos del prototipo `PalacioApp.dc.html`:
+
+1. **El cuerpo manda al recordar y se encoge al leer** (`stageH = isContent ? 200 : 440`): 48dvh
+   mientras se intenta recordar —es el ejercicio— y 19dvh al revelar el contenido.
+2. **«Revelar» baja a la barra de acción**, el mismo hueco que luego ocupan los cuatro
+   calificadores, para que el pulgar no se mueva. Dentro de la tarjeta caía 68 px por debajo del
+   borde de la pantalla.
+3. Al revelar, la vista **aterriza en la tarjeta**: la pregunta arriba, la respuesta debajo y el
+   cuerpo a un dedo de distancia. Al pasar a la tarjeta siguiente vuelve al cuerpo.
+
+Sitio para leer: **199 px → 637 px**. El alto del mapa no se anima: además de reflujo por
+fotograma, el desplazamiento automático se calculaba sobre la posición vieja y se pasaba 211 px.
+
+### D-080 · `matchMedia` y `scrollIntoView` se doblan en el setup de los tests
+
+jsdom no trae ninguno de los dos, y ahora las pantallas los usan para decidir si están en una
+columna. El doble de `matchMedia` resuelve `min-width`/`max-width` contra `window.innerWidth`, así
+que un test simula un teléfono cambiando ese valor; `revealPanel` además comprueba que existan
+antes de usarlos, como en D-069.

@@ -2,6 +2,9 @@
   width: 100%;
   height: auto;
   display: block;
+  /* Lo fija el llamador como `--bodymap-max`; al ser CSS y no un estilo en
+     línea, cada pantalla puede bajarlo en el móvil. */
+  max-height: var(--bodymap-max, none);
 }
 
 .bodymap image {

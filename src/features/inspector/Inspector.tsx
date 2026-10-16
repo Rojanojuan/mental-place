@@ -1,7 +1,8 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { useLiveQuery } from 'dexie-react-hooks';
 import { Link } from 'react-router-dom';
 import { BodyMap } from '@/components/BodyMap';
+import { revealPanel } from '@/components/reveal';
 import { PalaceChips } from '@/components/PalaceChips';
 import { PartTranslation } from '@/components/PartName';
 import { STATE_LABEL, STATE_TOKEN } from '@/design/states';
@@ -24,6 +25,19 @@ import './inspector.css';
  */
 export function Inspector() {
   const [selectedId, setSelectedId] = useState<ID | null>(null);
+  const detailRef = useRef<HTMLElement>(null);
+
+  /**
+   * Elegir un punto, desde el cuerpo o desde la lista de ruta.
+   *
+   * En el telefono el detalle queda por debajo del borde inferior, asi que
+   * tocar un pin no producia ningun efecto visible: hay que llevarlo a la
+   * vista. En escritorio `revealPanel` no hace nada.
+   */
+  const selectLocus = (id: ID): void => {
+    setSelectedId(id);
+    revealPanel(detailRef.current);
+  };
 
   const palace = useLiveQuery(() => getCurrentPalace(), []);
   const palaceId = palace?.id;
@@ -104,7 +118,7 @@ export function Inspector() {
             appearance={palace.style}
             plan={palace.planData}
             selectedIds={current === null ? [] : [current]}
-            onLocusTap={setSelectedId}
+            onLocusTap={selectLocus}
           />
           <ol className="insp__route">
             {map.loci.map((entry) => (
@@ -113,7 +127,7 @@ export function Inspector() {
                   type="button"
                   className={`insp__rbtn${entry.id === current ? ' is-sel' : ''}`}
                   onClick={() => {
-                    setSelectedId(entry.id);
+                    selectLocus(entry.id);
                   }}
                 >
                   <span className="insp__rn mono">{entry.routeNo}</span>
@@ -129,7 +143,7 @@ export function Inspector() {
           </ol>
         </div>
 
-        <article className="insp__detail">
+        <article className="insp__detail" ref={detailRef}>
           {!locus ? (
             <p>Elige un punto.</p>
           ) : (
