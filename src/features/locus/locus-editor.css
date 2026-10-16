@@ -1,0 +1,136 @@
+.lce__grid {
+  margin-top: var(--space-5);
+  display: grid;
+  grid-template-columns: minmax(240px, 380px) minmax(0, 1fr);
+  gap: var(--space-5);
+  align-items: start;
+}
+
+@media (max-width: 900px) {
+  .lce__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.lce__map {
+  background: var(--sunken);
+  border-radius: var(--radius-lg);
+  padding: var(--space-3);
+  overflow: hidden;
+  position: sticky;
+  top: var(--space-3);
+}
+
+.lce__panel {
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  padding: var(--space-5);
+}
+
+.lce__panel h3 {
+  margin: var(--space-5) 0 var(--space-2);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-2);
+}
+
+.lce__hint {
+  margin: 0 0 var(--space-3);
+  color: var(--text-3);
+  font-size: 12px;
+}
+
+.lce__scene,
+.lce__items,
+.lce__logs {
+  list-style: none;
+  margin: 0 0 var(--space-3);
+  padding: 0;
+  display: grid;
+  gap: var(--space-1);
+}
+
+.lce__scene li {
+  display: grid;
+  grid-template-columns: 20px minmax(0, 1fr) 28px 28px;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2);
+  background: var(--surface-2);
+  border-radius: var(--radius-md);
+  font-size: 13px;
+}
+
+.lce__sorder {
+  color: var(--text-3);
+  font-size: 11px;
+}
+
+.lce__scene button {
+  min-width: 26px;
+  min-height: 26px;
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: none;
+  color: var(--text-3);
+  cursor: pointer;
+}
+
+.lce__scene button:hover:not(:disabled) {
+  background: var(--surface);
+  color: var(--text);
+}
+
+.lce__scene button:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+.lce__addscene {
+  display: flex;
+  gap: var(--space-2);
+  margin-bottom: var(--space-3);
+}
+
+.lce__addscene input {
+  flex: 1;
+  min-height: 36px;
+  padding: 0 var(--space-2);
+  border: 1px solid var(--line-2);
+  border-radius: var(--radius-md);
+  background: var(--sunken);
+  color: var(--text);
+}
+
+.lce__items li {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: var(--space-2);
+  background: var(--surface-2);
+  border-radius: var(--radius-md);
+  font-size: 13px;
+}
+
+.lce__items a {
+  color: var(--accent-text);
+}
+
+.lce__itags {
+  color: var(--text-3);
+  font-size: 11px;
+}
+
+.lce__logs li {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 60px 56px auto;
+  gap: var(--space-2);
+  font-size: 12px;
+  color: var(--text-2);
+}
+
+.lce__manual {
+  color: var(--accent-text);
+  font-size: 11px;
+}

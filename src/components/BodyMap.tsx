@@ -24,7 +24,14 @@ export interface BodyMapProps {
   /** Aumento al enfocar. 1 = vista general. */
   zoom?: number;
   selectedIds?: ID[];
-  onLocusTap?: (id: ID) => void;
+  // Los manejadores admiten `undefined` explícito porque con
+  // `exactOptionalPropertyTypes` el llamador no podría pasarlos condicionados.
+  onLocusTap?: ((id: ID) => void) | undefined;
+  /** Arrastrar un punto. La posición llega ya normalizada 0–1 con su lado. */
+  onLocusDrag?:
+    ((id: ID, pos: { x: number; y: number }, side: 'front' | 'back') => void) | undefined;
+  /** Tocar el lienzo vacío: así se crean puntos en el editor. */
+  onCanvasTap?: ((pos: { x: number; y: number }, side: 'front' | 'back') => void) | undefined;
   /** Alto máximo en la caja que lo contiene. */
   maxHeight?: string;
   className?: string;
@@ -53,6 +60,8 @@ export function BodyMap({
   zoom = 1,
   selectedIds = [],
   onLocusTap,
+  onLocusDrag,
+  onCanvasTap,
   maxHeight = '62dvh',
   className,
   label = 'Mapa del cuerpo con los puntos del palacio',
@@ -78,6 +87,28 @@ export function BodyMap({
 
   const selected = new Set(selectedIds);
 
+  /**
+   * Del punto del puntero a coordenadas normalizadas del cuerpo que toque.
+   * Hay dos cuerpos en el lienzo, así que también se devuelve el lado.
+   */
+  const toBody = (event: {
+    clientX: number;
+    clientY: number;
+    currentTarget: EventTarget | null;
+  }): { pos: { x: number; y: number }; side: 'front' | 'back' } | null => {
+    const svg = (event.currentTarget as SVGSVGElement | null)?.ownerSVGElement ?? null;
+    const root = svg ?? (event.currentTarget as SVGSVGElement | null);
+    if (!root) return null;
+    const box = root.getBoundingClientRect();
+    if (box.width === 0 || box.height === 0) return null;
+    const vx = ((event.clientX - box.left) / box.width) * CANVAS_W;
+    const vy = ((event.clientY - box.top) / box.height) * CANVAS_H;
+    const side: 'front' | 'back' = vx >= BACK_X ? 'back' : 'front';
+    const x = (vx - (side === 'back' ? BACK_X : 0)) / BODY_VIEWBOX.width;
+    if (x < 0 || x > 1) return null;
+    return { pos: { x: Number(x.toFixed(4)), y: Number((vy / CANVAS_H).toFixed(4)) }, side };
+  };
+
   return (
     <svg
       className={className === undefined ? 'bodymap' : `bodymap ${className}`}
@@ -85,6 +116,16 @@ export function BodyMap({
       style={{ maxHeight }}
       role="group"
       aria-label={label}
+      onClick={
+        onCanvasTap === undefined
+          ? undefined
+          : (event) => {
+              // Solo el fondo: los pines tienen su propio manejador.
+              if (event.target !== event.currentTarget) return;
+              const hit = toBody(event);
+              if (hit) onCanvasTap(hit.pos, hit.side);
+            }
+      }
     >
       <g
         className="bodymap__camera"
@@ -126,7 +167,40 @@ export function BodyMap({
               tabIndex={0}
               aria-label={`${String(pin.locus.routeNo)}. ${pin.locus.partName} — ${STATE_LABEL[pin.state]}`}
               aria-pressed={isFocus}
-              onClick={() => onLocusTap?.(pin.locus.id)}
+              onPointerDown={
+                onLocusDrag === undefined
+                  ? undefined
+                  : (event) => {
+                      const start = { x: event.clientX, y: event.clientY };
+                      const target = event.currentTarget;
+                      let moved = false;
+                      target.setPointerCapture(event.pointerId);
+                      const onMove = (move: PointerEvent): void => {
+                        // Umbral de 4 px: por debajo, el gesto sigue siendo un toque.
+                        if (
+                          !moved &&
+                          Math.hypot(move.clientX - start.x, move.clientY - start.y) < 4
+                        ) {
+                          return;
+                        }
+                        moved = true;
+                        const hit = toBody({
+                          clientX: move.clientX,
+                          clientY: move.clientY,
+                          currentTarget: target,
+                        });
+                        if (hit) onLocusDrag(pin.locus.id, hit.pos, hit.side);
+                      };
+                      const onUp = (): void => {
+                        target.removeEventListener('pointermove', onMove);
+                        target.removeEventListener('pointerup', onUp);
+                        if (!moved) onLocusTap?.(pin.locus.id);
+                      };
+                      target.addEventListener('pointermove', onMove);
+                      target.addEventListener('pointerup', onUp);
+                    }
+              }
+              onClick={onLocusDrag === undefined ? () => onLocusTap?.(pin.locus.id) : undefined}
               onKeyDown={(event) => {
                 if (event.key === 'Enter' || event.key === ' ') {
                   event.preventDefault();

@@ -371,3 +371,52 @@ usan; las etapas en las que ya están no se mueven.
 «Retención por zona» es la proporción de repasos de esa zona que **no** fueron «otra vez», contada
 sobre `reviewLogs`. Sin repasos suficientes la pantalla lo dice en vez de pintar un cero
 engañoso.
+
+## Fases 4–6 · cierre (2026-10-16)
+
+### D-048 · Las tablas también se editan como texto
+
+`TableBlockEditor` guarda su propio texto, por el mismo motivo que `NumberField` (D-044): si el
+valor saliera del bloque, al vaciar el área la tabla se reconstruiría con una columna por defecto y
+lo tecleado se pegaría detrás. Las filas cortas se cuadran al ancho de la cabecera, porque una
+tabla desigual rompe el render.
+
+### D-049 · Borrar un punto desde el editor no borra sus ítems
+
+Es la misma transacción de la Fase 2, ahora con un botón: los ítems pasan a «Sin asignar» y la
+pantalla lo dice en voz alta («Borrar un punto no borra sus ítems»). Igual con las zonas.
+
+### D-050 · Las notificaciones se comprueban al abrir, no en segundo plano
+
+Una PWA instalada no puede despertarse sola de forma fiable para avisar, así que `notifyDue()` se
+llama al arrancar y en `visibilitychange`, con **cuatro horas de descanso** entre avisos. El
+permiso se pide solo desde un gesto del usuario, nunca al cargar.
+
+### D-051 · La copia automática se guarda dentro, no se descarga
+
+`runAutoBackup()` guarda una copia al día —las cinco últimas— en la tabla `settings`, y desde
+«Datos» se baja la que haga falta. Descargar sola pediría permiso al navegador cada vez.
+
+**Límite declarado:** si se borran los datos del sitio, las copias se van con ellos. La pantalla lo
+advierte: no sustituye a bajarse una copia de vez en cuando.
+
+### D-052 · El e2e corre contra el build, no contra el servidor de desarrollo
+
+`playwright.config.ts` levanta `vite preview` tras `npm run build`, en `127.0.0.1` (sin
+`--host 127.0.0.1`, vite escucha en `localhost`, Playwright sondea `127.0.0.1` y se queda
+esperando hasta agotar el tiempo). Así se prueba lo que de verdad se publica, service worker
+incluido.
+
+### D-053 · Un contexto por test basta: no se borra IndexedDB a mano
+
+Playwright da un contexto nuevo por test, así que la base ya empieza limpia. Borrarla tras cargar
+la app competía con la siembra —que la tiene abierta— y dejaba la base a medias.
+
+### D-054 · El móvil se prueba midiendo el desbordamiento, no a ojo
+
+`.tabs` tenía ocho enlaces en un flex **sin `flex-wrap`**: medían ~700 px, desbordaban a lo ancho y
+Chrome móvil alejaba el zoom de **toda la app** (se veía al 56 %, con `innerHeight` 1294 sobre un
+visual de 727). Los 427 tests de jsdom no podían verlo, porque jsdom no hace maquetación.
+
+El e2e ahora comprueba en las ocho rutas que `scrollWidth <= clientWidth` y que `innerHeight` no se
+dispara sobre el viewport visual. Es el test que habría cazado el bug.

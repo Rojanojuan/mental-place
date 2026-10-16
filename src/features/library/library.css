@@ -87,8 +87,14 @@
   color: var(--text-3);
 }
 
+.lib__scroll {
+  overflow-x: auto;
+  border-radius: var(--radius-lg);
+}
+
 .lib__table {
   width: 100%;
+  min-width: 420px;
   border-collapse: collapse;
   font-size: 13px;
   background: var(--surface);

@@ -51,6 +51,7 @@ export default defineConfig({
     // hora local, y los tests de cambio de horario necesitan una zona con DST.
     env: { TZ: 'Europe/Madrid' },
     include: ['src/**/*.{test,spec}.{ts,tsx}', 'tests/**/*.{test,spec}.{ts,tsx}'],
+    exclude: ['e2e/**', 'node_modules/**'],
     coverage: {
       provider: 'v8',
       reporter: ['text', 'html', 'lcov'],

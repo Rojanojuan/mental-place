@@ -3,6 +3,7 @@
  * de repaso; el motor nunca llama aquí.
  */
 export { PalacioDB, db } from './db';
+export { newId, stamp } from './id';
 export type { Setting } from './db';
 
 export * from './repo';

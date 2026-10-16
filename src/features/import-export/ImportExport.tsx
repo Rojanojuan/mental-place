@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { exportBundle, importBundle } from '@/db';
+import { useLiveQuery } from 'dexie-react-hooks';
+import { exportBundle, getSetting, importBundle, setSetting } from '@/db';
 import {
   type CsvMapping,
   type CsvTable,
@@ -18,6 +19,12 @@ import {
   readExistingIds,
   suggestMapping,
 } from '@/io';
+import {
+  NOTIFY_KEY,
+  notifyPermission,
+  requestNotifyPermission,
+} from '@/features/notifications/notify';
+import { getBackup, listBackups } from './autobackup';
 import './import-export.css';
 
 const COLLECTION_LABEL: Record<(typeof COLLECTIONS)[number], string> = {
@@ -125,6 +132,9 @@ export function ImportExport() {
   }
 
   const totals = plan ? planTotal(plan) : null;
+  const backups = useLiveQuery(() => listBackups(), []);
+  const notifyOn = useLiveQuery(() => getSetting(NOTIFY_KEY, false), []);
+  const permission = notifyPermission();
 
   return (
     <section className="iox">
@@ -297,6 +307,69 @@ export function ImportExport() {
           >
             Ítems en CSV
           </button>
+
+          <h3>Copias automáticas</h3>
+          <p className="iox__hint">
+            Una al día, las cinco últimas, guardadas dentro de la app. Si borras los datos del sitio
+            se van con ellos, así que de vez en cuando bájate una.
+          </p>
+          {backups === undefined || backups.length === 0 ? (
+            <p className="iox__hint">Todavía no hay ninguna.</p>
+          ) : (
+            <ul className="iox__backups">
+              {backups.map((backup) => (
+                <li key={backup.at}>
+                  <span className="mono">{backup.at.slice(0, 16).replace('T', ' ')}</span>
+                  <span className="iox__size mono">{Math.round(backup.bytes / 1024)} kB</span>
+                  <button
+                    type="button"
+                    aria-label={`Descargar la copia del ${backup.at.slice(0, 10)}`}
+                    onClick={() => {
+                      void getBackup(backup.at).then((full) => {
+                        if (full) downloadText(full.json, backupFilename(new Date(full.at)));
+                      });
+                    }}
+                  >
+                    ↓
+                  </button>
+                </li>
+              ))}
+            </ul>
+          )}
+
+          <h3>Avisos de repasos vencidos</h3>
+          {permission === 'unsupported' ? (
+            <p className="iox__hint">Este navegador no admite notificaciones.</p>
+          ) : permission === 'denied' ? (
+            <p className="iox__hint">
+              Las bloqueaste en el navegador. Hay que permitirlas desde sus ajustes del sitio.
+            </p>
+          ) : permission === 'granted' ? (
+            <label className="iox__toggle">
+              <input
+                type="checkbox"
+                checked={notifyOn ?? false}
+                onChange={(event) => {
+                  void setSetting(NOTIFY_KEY, event.target.checked);
+                }}
+              />
+              Avisarme cuando haya repasos vencidos
+            </label>
+          ) : (
+            <button
+              type="button"
+              className="btn"
+              onClick={() => {
+                void requestNotifyPermission();
+              }}
+            >
+              Permitir avisos
+            </button>
+          )}
+          <p className="iox__hint">
+            Se comprueba al abrir la app y al volver a ella, con cuatro horas de descanso entre
+            avisos. Una app instalada no puede despertarse sola de forma fiable.
+          </p>
         </article>
       </div>
     </section>

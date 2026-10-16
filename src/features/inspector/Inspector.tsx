@@ -155,11 +155,16 @@ export function Inspector() {
                 ))
               )}
 
-              {detail && detail.items.length > 0 && (
-                <Link className="btn insp__study" to="/sesion">
-                  Ir a repasar
+              <div className="insp__cta">
+                <Link className="btn insp__study" to={`/punto/${locus.id}`}>
+                  Editar este punto
                 </Link>
-              )}
+                {detail && detail.items.length > 0 && (
+                  <Link className="btn insp__study" to="/sesion">
+                    Ir a repasar
+                  </Link>
+                )}
+              </div>
             </>
           )}
         </article>

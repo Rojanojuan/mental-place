@@ -1,5 +1,7 @@
 .shell {
   max-width: 1180px;
+  /* Red de seguridad: nada debe forzar scroll horizontal en el móvil. */
+  overflow-x: clip;
   margin: 0 auto;
   padding: var(--space-5) var(--space-4) var(--space-8);
   display: flex;
@@ -108,8 +110,12 @@
 
 .tabs {
   display: flex;
+  /* Sin `wrap`, ocho enlaces miden ~700 px, desbordan a lo ancho y el navegador
+     móvil aleja el zoom de TODA la app (se veía al 56 %). Lo cazó un e2e. */
+  flex-wrap: wrap;
   gap: 2px;
   padding: 3px;
+  max-width: 100%;
   background: var(--surface-2);
   border-radius: var(--radius-pill);
 }

@@ -88,7 +88,9 @@ describe('Inspector', () => {
       },
       { timeout: 5000 },
     );
-  });
+    // Margen propio: con la instrumentación de cobertura esta consulta en vivo
+    // no cabe en el límite de 5 s por test.
+  }, 15000);
 
   it('espera mientras la base de datos está vacía', async () => {
     await clearAll(db);

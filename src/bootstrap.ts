@@ -1,6 +1,8 @@
 import seedUrl from '../seed/fonetica45.json?url';
 import type { Bundle } from '@/domain/types';
 import { type PalacioDB, db, ensurePresets, importBundle, isEmpty } from '@/db';
+import { runAutoBackup } from '@/features/import-export/autobackup';
+import { notifyDue } from '@/features/notifications/notify';
 
 export interface BootstrapResult {
   seeded: boolean;
@@ -24,4 +26,15 @@ export async function bootstrap(database: PalacioDB = db): Promise<BootstrapResu
   const bundle = (await response.json()) as Bundle;
   const counts = await importBundle(bundle, database);
   return { seeded: true, items: counts.items };
+}
+
+/**
+ * Tareas de cada arranque: copia automática y aviso de vencidos.
+ *
+ * Se llama también al volver del segundo plano, porque una PWA no puede
+ * despertarse sola de forma fiable para avisar.
+ */
+export async function onAppOpen(): Promise<void> {
+  await runAutoBackup();
+  await notifyDue();
 }

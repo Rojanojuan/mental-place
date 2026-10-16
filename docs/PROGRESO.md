@@ -338,3 +338,57 @@ acciones en lote; y en Progreso la previsión, el reparto y el cálculo de reten
 
 Editor de palacio (crear y mover puntos, zonas, ruta), detalle del punto editable, editor de ítem
 por bloques, Casas (los 10 planos) y Onboarding.
+
+---
+
+## Fases 4, 5 y 6 · cierre — ✅ (2026-10-16)
+
+### Pantallas que faltaban de la Fase 4
+
+| Pantalla                                  | Ruta          | Qué hace                                                                                                                             |
+| ----------------------------------------- | ------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| `features/palace-editor/PalaceEditor.tsx` | `/editor`     | Modos Puntos / Zonas / Ruta: tocar el cuerpo crea un punto, arrastrar lo mueve, pintar zonas tocando, reordenar y renumerar la ruta. |
+| `features/locus/LocusEditor.tsx`          | `/punto/:id`  | Ancla, nombre, zona, notas, objetos de escena reordenables (máx. 5), ítems del punto e historial.                                    |
+| `features/item-editor/ItemEditor.tsx`     | `/item/:id`   | Editor por bloques de los siete tipos del contrato, asignación palacio → zona → punto y vista previa.                                |
+| `features/onboarding/Onboarding.tsx`      | `/bienvenida` | Cuatro pasos: qué es, tu palacio, tu ritmo, el primer repaso.                                                                        |
+
+### Fase 6 · pulido
+
+- **Notificaciones** de repasos vencidos (`features/notifications/notify.ts`): permiso a petición,
+  cuatro horas de descanso entre avisos, comprobación al abrir y al volver del segundo plano.
+- **Copia de seguridad automática** (`features/import-export/autobackup.ts`): una al día, las cinco
+  últimas, descargables desde «Datos».
+- **Teclado**: espacio revela, 1–4 califican; nombre accesible explícito en los botones de
+  calificar y `role="alert"`/`role="status"` en los avisos.
+
+### Fase 5 · e2e con Playwright
+
+`npm run e2e` — **42 tests en Chromium real contra el build de producción**, en escritorio y en
+móvil (Pixel 5): el arranque con siembra, el ciclo completo de una tarjeta, el teclado, el ajuste
+manual, la persistencia tras recargar, las siete pantallas sin errores de página y el
+desbordamiento móvil en las ocho rutas.
+
+### Comprobaciones
+
+| Comando            | Resultado                                          |
+| ------------------ | -------------------------------------------------- |
+| `npm run check`    | ✅ typecheck + lint + **427 tests** en 22 archivos |
+| `npm run e2e`      | ✅ **42 tests** (escritorio + móvil)               |
+| `npm run test:cov` | ✅ 98,6 % sentencias · 94,8 % ramas                |
+| `npm run build`    | ✅ sin errores                                     |
+
+### El bug que solo el navegador podía encontrar
+
+`.tabs` tenía ocho enlaces en un flex sin `flex-wrap`: desbordaban a lo ancho y Chrome móvil
+**alejaba el zoom de toda la app, dejándola al 56 %**. Los 427 tests de jsdom no podían verlo
+—jsdom no maqueta—. Arreglado y con test de regresión en las ocho rutas (D-054).
+
+### Lo que queda fuera
+
+- **Casas** (los 10 planos de `pc-houses.js`, ≥ 130 puntos cada una): es la pieza más grande que
+  falta de la Fase 4. El dominio ya la admite (`custom_plan`, `Palace.planData`, `Palace.rooms`,
+  `Locus.room`) y el import también, pero el generador de planos y su visor no están portados.
+- **Mis cuerpos** (`BodyStyler`): `Palace.style` existe y se guarda; falta la pantalla para
+  editarlo.
+- **Rendimiento con 500+ puntos y 10 000 ítems**: no medido. Con 45 puntos y 44 ítems va sobrado.
+- **Palacio 2 · Gramática C1**: esperando la estructura que quiera el usuario.

@@ -43,7 +43,10 @@ export default tseslint.config(
       // Regla 7: sin `any` salvo en adaptadores de importación, y documentado.
       '@typescript-eslint/no-explicit-any': 'error',
       '@typescript-eslint/consistent-type-imports': ['error', { prefer: 'type-imports' }],
-      '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
+      '@typescript-eslint/no-unused-vars': [
+        'error',
+        { argsIgnorePattern: '^_', varsIgnorePattern: '^_', ignoreRestSiblings: true },
+      ],
       '@typescript-eslint/restrict-template-expressions': ['error', { allowNumber: true }],
     },
   },
@@ -76,8 +79,13 @@ export default tseslint.config(
     rules: { '@typescript-eslint/no-non-null-assertion': 'off' },
   },
   {
-    files: ['vite.config.ts', 'scripts/**/*.{ts,js}'],
+    files: ['vite.config.ts', 'playwright.config.ts', 'scripts/**/*.{ts,js}'],
     languageOptions: { globals: globals.node },
+  },
+  {
+    // Los e2e corren en el navegador con su propio runner.
+    files: ['e2e/**/*.ts'],
+    languageOptions: { globals: { ...globals.browser, ...globals.node } },
   },
   prettier,
 );

@@ -1,0 +1,131 @@
+.onb {
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+.onb--msg {
+  padding: var(--space-6);
+}
+
+.onb__steps {
+  list-style: none;
+  margin: 0 0 var(--space-5);
+  padding: 0;
+  display: flex;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+  font-size: 12px;
+  color: var(--text-3);
+}
+
+.onb__steps li {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.onb__steps li[aria-current='step'] {
+  color: var(--accent-text);
+}
+
+.onb__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: var(--radius-pill);
+  background: var(--line-2);
+}
+
+.onb__dot.is-done {
+  background: var(--accent);
+}
+
+.onb__card {
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  padding: var(--space-6);
+}
+
+.onb__card h2 {
+  margin: 0 0 var(--space-4);
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.onb__card p {
+  margin: 0 0 var(--space-3);
+  font-size: 15px;
+  color: var(--text-2);
+}
+
+.onb__hint {
+  font-size: 13px !important;
+  color: var(--text-3) !important;
+}
+
+.onb__map {
+  background: var(--sunken);
+  border-radius: var(--radius-md);
+  padding: var(--space-3);
+  margin-bottom: var(--space-3);
+}
+
+.onb__schedules {
+  list-style: none;
+  margin: 0 0 var(--space-3);
+  padding: 0;
+  display: grid;
+  gap: var(--space-2);
+}
+
+.onb__schedules label {
+  display: grid;
+  grid-template-columns: 20px minmax(0, 1fr);
+  grid-template-rows: auto auto;
+  gap: 2px var(--space-2);
+  padding: var(--space-3);
+  background: var(--surface-2);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+}
+
+.onb__schedules input {
+  grid-row: span 2;
+  align-self: center;
+}
+
+.onb__sname {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.onb__sintervals {
+  font-size: 11px;
+  color: var(--text-3);
+}
+
+.onb__howto {
+  margin: 0 0 var(--space-4);
+  padding-left: var(--space-5);
+  font-size: 14px;
+  color: var(--text-2);
+  display: grid;
+  gap: var(--space-2);
+}
+
+.onb__howto kbd {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  border: 1px solid var(--line-2);
+  border-radius: var(--radius-sm);
+  padding: 1px 4px;
+}
+
+.onb__nav {
+  margin-top: var(--space-5);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--line);
+  display: flex;
+  gap: var(--space-3);
+  justify-content: flex-end;
+}

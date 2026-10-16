@@ -238,58 +238,60 @@ export function Library() {
         {filtered.length} {filtered.length === 1 ? 'resultado' : 'resultados'}
       </p>
 
-      <table className="lib__table">
-        <thead>
-          <tr>
-            <th scope="col" className="lib__pick">
-              <span className="lib__sr">Seleccionar</span>
-            </th>
-            <th scope="col">Ítem</th>
-            <th scope="col">Punto</th>
-            <th scope="col">Estado</th>
-          </tr>
-        </thead>
-        <tbody>
-          {filtered.map((row) => (
-            <tr key={row.item.id} className={selected.has(row.item.id) ? 'is-sel' : undefined}>
-              <td className="lib__pick">
-                <input
-                  type="checkbox"
-                  aria-label={`Seleccionar ${row.item.title}`}
-                  checked={selected.has(row.item.id)}
-                  onChange={() => {
-                    toggle(row.item.id);
-                  }}
-                />
-              </td>
-              <td>
-                <span className="lib__title">{row.item.title}</span>
-                {row.item.tags.length > 0 && (
-                  <span className="lib__tags">{row.item.tags.join(' · ')}</span>
-                )}
-              </td>
-              <td>
-                {row.item.locusId === null ? (
-                  <span className="lib__unassigned">Sin asignar</span>
-                ) : (
-                  <span className="lib__locus">
-                    <span className="mono">{row.locusLabel}</span>
-                  </span>
-                )}
-              </td>
-              <td>
-                <span className="lib__state">
-                  <span
-                    className="lib__dot"
-                    style={{ background: `var(${STATE_TOKEN[row.state]})` }}
-                  />
-                  {STATE_LABEL[row.state]}
-                </span>
-              </td>
+      <div className="lib__scroll">
+        <table className="lib__table">
+          <thead>
+            <tr>
+              <th scope="col" className="lib__pick">
+                <span className="lib__sr">Seleccionar</span>
+              </th>
+              <th scope="col">Ítem</th>
+              <th scope="col">Punto</th>
+              <th scope="col">Estado</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {filtered.map((row) => (
+              <tr key={row.item.id} className={selected.has(row.item.id) ? 'is-sel' : undefined}>
+                <td className="lib__pick">
+                  <input
+                    type="checkbox"
+                    aria-label={`Seleccionar ${row.item.title}`}
+                    checked={selected.has(row.item.id)}
+                    onChange={() => {
+                      toggle(row.item.id);
+                    }}
+                  />
+                </td>
+                <td>
+                  <span className="lib__title">{row.item.title}</span>
+                  {row.item.tags.length > 0 && (
+                    <span className="lib__tags">{row.item.tags.join(' · ')}</span>
+                  )}
+                </td>
+                <td>
+                  {row.item.locusId === null ? (
+                    <span className="lib__unassigned">Sin asignar</span>
+                  ) : (
+                    <span className="lib__locus">
+                      <span className="mono">{row.locusLabel}</span>
+                    </span>
+                  )}
+                </td>
+                <td>
+                  <span className="lib__state">
+                    <span
+                      className="lib__dot"
+                      style={{ background: `var(${STATE_TOKEN[row.state]})` }}
+                    />
+                    {STATE_LABEL[row.state]}
+                  </span>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
 
       {filtered.length === 0 && <p className="lib__empty">Ningún ítem cumple el filtro.</p>}
     </section>

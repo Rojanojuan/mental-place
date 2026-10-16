@@ -2,6 +2,10 @@ import { useState } from 'react';
 import { NavLink, Route, Routes } from 'react-router-dom';
 import { ImportExport } from '@/features/import-export/ImportExport';
 import { Inspector } from '@/features/inspector/Inspector';
+import { Onboarding } from '@/features/onboarding/Onboarding';
+import { PalaceEditor } from '@/features/palace-editor/PalaceEditor';
+import { ItemEditor } from '@/features/item-editor/ItemEditor';
+import { LocusEditor } from '@/features/locus/LocusEditor';
 import { Library } from '@/features/library/Library';
 import { Schedules } from '@/features/schedules/Schedules';
 import { Session } from '@/features/session/Session';
@@ -13,6 +17,7 @@ import './App.css';
 const NAV = [
   { to: '/', label: 'Hoy' },
   { to: '/inspector', label: 'Palacio' },
+  { to: '/editor', label: 'Editor' },
   { to: '/biblioteca', label: 'Biblioteca' },
   { to: '/estadisticas', label: 'Progreso' },
   { to: '/horarios', label: 'Horarios' },
@@ -62,10 +67,14 @@ export function App() {
         <Route path="/" element={<Today />} />
         <Route path="/sesion" element={<Session />} />
         <Route path="/inspector" element={<Inspector />} />
+        <Route path="/editor" element={<PalaceEditor />} />
+        <Route path="/punto/:locusId" element={<LocusEditor />} />
+        <Route path="/item/:itemId" element={<ItemEditor />} />
         <Route path="/biblioteca" element={<Library />} />
         <Route path="/estadisticas" element={<Stats />} />
         <Route path="/horarios" element={<Schedules />} />
         <Route path="/datos" element={<ImportExport />} />
+        <Route path="/bienvenida" element={<Onboarding />} />
         <Route path="/tokens" element={<TokensPanel />} />
         <Route path="*" element={<Today />} />
       </Routes>
