@@ -704,3 +704,25 @@ Nada de lo anterior se vio en seis auditorías porque Playwright solo corría Ch
 iOS no es Chrome con otra piel. Hay un tercer proyecto, `movil-iphone` (WebKit, iPhone 13), y los
 tests de teléfono miran el prefijo `movil`, así que corren en los dos. Requiere
 `npx playwright install webkit`.
+
+### D-087 · La tabla de patrones se lee por grupos, no como rejilla
+
+En las tablas de patrones el patrón solo viene en la **primera fila** de cada
+grupo; las siguientes dejan `#` y `Patrón` vacíos. Pintada como rejilla y apilada en el teléfono
+(D-083), cada palabra de continuación quedaba suelta, **sin el patrón al que pertenece**: en un
+repaso eso confunde más que no enseñar nada.
+
+Ahora una tabla con esa forma se pinta por grupos: el patrón es una cabecera con su número y
+cuántas palabras trae, y sus filas cuelgan de él. Tres reglas, todas por la **forma** de los datos
+y no por lo que signifiquen (regla 2):
+
+1. **Agrupa** la primera columna que viene llena en la fila inicial y vacía en alguna posterior;
+   se cuentan solo las del principio, porque un hueco en medio es un dato que falta.
+2. **Encabeza la fila** la columna que más veces contiene el fragmento entrecomillado del
+   encabezado (`"ee"` → `ee`): es la palabra por la que esas filas están juntas. Detrás van las
+   columnas técnicas —la transcripción, que es una anotación corta— y cierra la traducción.
+3. **Se resalta** el fragmento dentro de esa palabra, con fondo, negrita y subrayado, nunca solo
+   color. Solo ahí: marcarlo también en la traducción («Golp**ea**r» por «ea») confunde, que es
+   justo lo que había que evitar.
+
+Los «minimal pairs» no tienen celdas vacías, así que siguen con el apilado de D-083.

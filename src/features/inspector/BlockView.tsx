@@ -1,5 +1,7 @@
 import type { ReactNode } from 'react';
 import type { Block } from '@/domain/types';
+import { GroupedTable } from './GroupedTable';
+import { columnasDeGrupo } from './grouping';
 
 /**
  * Caracteres del bloque Unicode de extensiones IPA y modificadores.
@@ -67,7 +69,22 @@ export function BlockView({ block }: { block: Block }) {
         </ul>
       );
 
-    case 'table':
+    case 'table': {
+      // Una tabla cuyas primeras columnas solo vienen en la primera fila de
+      // cada grupo se lee por grupos, no como rejilla: al apilarla, las filas
+      // de continuacion perdian su patron y quedaban palabras sueltas.
+      const nGrupo = columnasDeGrupo(block.rows);
+      if (nGrupo > 0) {
+        return (
+          <GroupedTable
+            columns={block.columns}
+            rows={block.rows}
+            caption={block.caption}
+            nGrupo={nGrupo}
+            esTecnica={isTechnical}
+          />
+        );
+      }
       return (
         // El CSS apila la tabla cuando no cabe, y cada celda lleva su
         // rótulo. Es el número de columnas lo que decide, no de qué va la
@@ -119,6 +136,7 @@ export function BlockView({ block }: { block: Block }) {
           </div>
         </figure>
       );
+    }
 
     case 'bilingual':
       return (
