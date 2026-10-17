@@ -338,3 +338,93 @@ export async function studyStreak(now: Date, database: DB = db): Promise<number>
   }
   return streak;
 }
+
+/** Un repaso que está por llegar, ya con el nombre de su punto. */
+export interface ProximoRepaso {
+  at: Date;
+  /** Cuántos ítems vencen en ese mismo instante. */
+  cuantos: number;
+  /** El punto del primero, para poder nombrarlo en el aviso. */
+  punto?: string;
+}
+
+/**
+ * El siguiente repaso **futuro**, si lo hay.
+ *
+ * Sale del índice `dueAt`, así que no recorre los 10 000 ítems: pide los
+ * posteriores a `now` y se queda con el primero. Lo vencido no cuenta —de eso
+ * avisa `notifyDue` al abrir la app—; esto es para programar el aviso exacto
+ * del próximo checkpoint.
+ */
+export async function nextDueAfter(now: Date, database: DB = db): Promise<ProximoRepaso | null> {
+  const desde = now.toISOString();
+  const pendientes = await database.reviewStates
+    .where('dueAt')
+    .above(desde)
+    .filter((state) => !state.suspended)
+    .toArray();
+  if (pendientes.length === 0) return null;
+
+  let primero = pendientes[0];
+  if (primero === undefined) return null;
+  for (const estado of pendientes) {
+    if (estado.dueAt !== null && (primero.dueAt === null || estado.dueAt < primero.dueAt)) {
+      primero = estado;
+    }
+  }
+  if (primero.dueAt === null) return null;
+
+  const cuantos = pendientes.filter((e) => e.dueAt === primero.dueAt).length;
+  const resultado: ProximoRepaso = { at: new Date(primero.dueAt), cuantos };
+
+  const item = await database.items.get(primero.itemId);
+  if (item?.locusId != null) {
+    const locus = await database.loci.get(item.locusId);
+    if (locus) resultado.punto = locus.partName;
+  }
+  return resultado;
+}
+
+/**
+ * Los repasos de los próximos días, agrupados por el instante en que caen.
+ *
+ * Se agrupan porque el preset R10 redondea los intervalos de un día o más a la
+ * hora de inicio: decenas de ítems comparten el mismo minuto y, sin agrupar,
+ * el calendario se llenaría de avisos idénticos.
+ */
+export async function proximosRepasos(
+  now: Date,
+  dias = 60,
+  database: DB = db,
+): Promise<ProximoRepaso[]> {
+  const hasta = new Date(now.getTime() + dias * 24 * 60 * 60 * 1000).toISOString();
+  const pendientes = await database.reviewStates
+    .where('dueAt')
+    .between(now.toISOString(), hasta, false, true)
+    .filter((state) => !state.suspended)
+    .toArray();
+
+  const porInstante = new Map<string, string[]>();
+  for (const estado of pendientes) {
+    if (estado.dueAt === null) continue;
+    const lista = porInstante.get(estado.dueAt) ?? [];
+    lista.push(estado.itemId);
+    porInstante.set(estado.dueAt, lista);
+  }
+
+  const instantes = [...porInstante.entries()].sort((a, b) => a[0].localeCompare(b[0]));
+  const salida: ProximoRepaso[] = [];
+  for (const [cuando, itemIds] of instantes) {
+    const entrada: ProximoRepaso = { at: new Date(cuando), cuantos: itemIds.length };
+    const primerId = itemIds[0];
+    if (primerId !== undefined) {
+      const item = await database.items.get(primerId);
+      if (item?.locusId != null) {
+        const locus = await database.loci.get(item.locusId);
+        if (locus) entrada.punto = locus.partName;
+      }
+    }
+    salida.push(entrada);
+  }
+  return salida;
+}

@@ -792,3 +792,36 @@ estudiar. El contenido entra después a mano o con un import parcial de solo `it
 
 Como `casas.json`, no se carga al arrancar: son dos palacios que quizá no quieras. Se importa
 desde «Datos».
+
+### D-091 · Avisar en el minuto del repaso: qué se puede y qué no
+
+El usuario pidió un aviso **por cada repetición**, a su hora. La restricción que manda es que usa
+un **iPhone**, así que esto es lo que hay de verdad:
+
+| Alternativa                   | iPhone                    | Hora exacta             | Servidor |
+| ----------------------------- | ------------------------- | ----------------------- | -------- |
+| Aviso al abrir la app (D-056) | sí                        | no, solo al abrir       | no       |
+| `periodicsync` (D-076)        | **no existe en iOS**      | no, decide el navegador | no       |
+| Notification Triggers         | **nunca pasó de prueba**  | sí                      | no       |
+| **Temporizador en la app**    | sí, con la app viva       | **sí**                  | no       |
+| **Calendario (.ics)**         | sí                        | **sí**                  | no       |
+| Web Push (VAPID)              | sí, iOS 16.4+ e instalada | sí                      | **sí**   |
+
+Se añaden las dos que no piden servidor:
+
+1. **Temporizador** (`features/notifications/timer.ts`): mientras la app siga viva se arma un
+   `setTimeout` para el **siguiente vencimiento** y el aviso salta en su minuto, nombrando el
+   punto («Toca repasar: Pelo / Cabello»). Cubre de verdad los checkpoints cortos de R10 —10 min,
+   1 h—, que son los que se pierden si solo se mira al abrir. Se trocea en tramos de 10 minutos
+   porque un `setTimeout` largo se desvía al suspenderse el equipo, y se **rearma al calificar**,
+   porque entonces la cola cambia.
+2. **Calendario** (`io/ics.ts`): cada repaso, un evento con alarma a su hora. Es la única forma de
+   que un iPhone avise **con la app cerrada** sin montar nada. Es una **foto**: al estudiar cambian
+   las fechas y hay que volver a exportar; la pantalla lo dice, porque prometer otra cosa sería
+   engañar. Los repasos se agrupan por instante, ya que R10 redondea los intervalos de un día o más
+   a la hora de inicio y decenas de ítems caen en el mismo minuto.
+
+Lo que **no** se hace sin tu visto bueno: **Web Push**. Es lo único que avisa a la hora exacta con
+la app cerrada en iPhone, pero necesita un servidor que envíe (claves VAPID, dónde guardar las
+suscripciones y un cron que dispare). GitHub Pages es estático, así que supondría otro servicio y
+un cambio de stack — y eso se pregunta antes (regla 6).

@@ -3,6 +3,7 @@ import type { Bundle } from '@/domain/types';
 import { type PalacioDB, db, ensurePresets, importBundle, isEmpty } from '@/db';
 import { runAutoBackup } from '@/features/import-export/autobackup';
 import { notifyDue } from '@/features/notifications/notify';
+import { scheduleNextDue } from '@/features/notifications/timer';
 
 export interface BootstrapResult {
   seeded: boolean;
@@ -28,13 +29,30 @@ export async function bootstrap(database: PalacioDB = db): Promise<BootstrapResu
   return { seeded: true, items: counts.items };
 }
 
+/** El temporizador en marcha, para rearmarlo cuando la cola cambie. */
+let programado: { cancel: () => void } | null = null;
+
 /**
- * Tareas de cada arranque: copia automática y aviso de vencidos.
+ * Rearma el aviso del próximo repaso.
  *
- * Se llama también al volver del segundo plano, porque una PWA no puede
- * despertarse sola de forma fiable para avisar.
+ * Hay que llamarlo **después de calificar**: al cambiar la cola, el siguiente
+ * vencimiento ya no es el mismo.
+ */
+export function rearmarAviso(): void {
+  programado?.cancel();
+  programado = scheduleNextDue();
+}
+
+/**
+ * Tareas de cada arranque: copia automática, aviso de lo vencido y el
+ * temporizador del próximo repaso.
+ *
+ * Se llama también al volver del segundo plano. El temporizador solo vive
+ * mientras la app esté abierta; con la app cerrada avisan el calendario
+ * exportado o, en Android instalado, `periodicsync` (D-091).
  */
 export async function onAppOpen(): Promise<void> {
   await runAutoBackup();
   await notifyDue();
+  rearmarAviso();
 }

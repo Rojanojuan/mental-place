@@ -4,6 +4,7 @@ import { Link, useSearchParams } from 'react-router-dom';
 import type { ScopeRequest } from '@/db';
 import { BodyMap } from '@/components/BodyMap';
 import { revealPanel } from '@/components/reveal';
+import { rearmarAviso } from '@/bootstrap';
 import { PartTranslation } from '@/components/PartName';
 import { BlockView } from '@/features/inspector/BlockView';
 import type {
@@ -209,6 +210,8 @@ export function Session() {
   const accept = useCallback(async () => {
     if (!card || !pending) return;
     await applyGrade(card.itemId, pending.grade, new Date());
+    // La cola cambió: el proximo vencimiento ya no es el mismo (D-091).
+    rearmarAviso();
     advance();
   }, [advance, card, pending]);
 
@@ -216,6 +219,7 @@ export function Session() {
     async (target: OverrideTarget) => {
       if (!card || !pending) return;
       await applyOverride(card.itemId, target, new Date(), { grade: pending.grade });
+      rearmarAviso();
       advance();
     },
     [advance, card, pending],

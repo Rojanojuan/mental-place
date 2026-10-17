@@ -13,3 +13,4 @@ export type { Collection, CollectionDiff, ExistingIds, ImportPlan, UnresolvedRef
 export { bundleToCsv, csvToBundle, guessSeparator, parseCsv, suggestMapping } from './csv';
 export type { CsvImportOptions, CsvMapping, CsvTable } from './csv';
 export { backupFilename, downloadBackup, downloadText, serializeBundle } from './download';
+export { type IcsEvent, buildIcs, icsDate, icsEscape, icsFold } from './ics';

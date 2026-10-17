@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useLiveQuery } from 'dexie-react-hooks';
-import { exportBundle, getSetting, importBundle, setSetting } from '@/db';
+import { exportBundle, getSetting, importBundle, proximosRepasos, setSetting } from '@/db';
 import {
   type CsvMapping,
   type CsvTable,
@@ -11,6 +11,7 @@ import {
   downloadBackup,
   downloadText,
   backupFilename,
+  buildIcs,
   guessSeparator,
   parseCsv,
   planImport,
@@ -142,6 +143,7 @@ export function ImportExport() {
   // El aviso en segundo plano no vive en la base de datos: lo sabe el
   // navegador, y solo responde si la app esta instalada.
   const [periodic, setPeriodic] = useState<PeriodicState | null>(null);
+  const [ics, setIcs] = useState<number | null>(null);
   useEffect(() => {
     void periodicReminderState().then(setPeriodic);
   }, []);
@@ -345,6 +347,48 @@ export function ImportExport() {
                 </li>
               ))}
             </ul>
+          )}
+
+          <h3>Repasos en el calendario</h3>
+          <p className="iox__hint">
+            Cada repaso, como un evento con alarma a su hora exacta. Es la única forma de que el
+            iPhone avise con la app cerrada sin montar un servidor. Ojo: es una{' '}
+            <strong>foto</strong>
+            —al estudiar cambian las fechas—, así que conviene volver a exportar de vez en cuando.
+          </p>
+          <button
+            type="button"
+            className="btn"
+            onClick={() => {
+              void (async () => {
+                const ahora = new Date();
+                const proximos = await proximosRepasos(ahora, 60);
+                const eventos = proximos.map((r) => ({
+                  at: r.at,
+                  uid: `${r.at.toISOString()}-${String(r.cuantos)}@palacio-corporal`,
+                  summary:
+                    r.cuantos === 1
+                      ? `Repasar: ${r.punto ?? 'un punto'}`
+                      : `Repasar ${String(r.cuantos)} puntos`,
+                  description: r.punto === undefined ? undefined : `Empieza por ${r.punto}.`,
+                }));
+                setIcs(eventos.length);
+                downloadText(
+                  buildIcs(eventos, ahora),
+                  backupFilename(ahora, 'ics'),
+                  'text/calendar',
+                );
+              })();
+            }}
+          >
+            Descargar el calendario (.ics)
+          </button>
+          {ics !== null && (
+            <p className="iox__hint" role="status">
+              {ics === 0
+                ? 'No hay repasos programados todavía: estudia algo primero.'
+                : `${String(ics)} avisos para los próximos 60 días. Ábrelo en el teléfono y se añaden al calendario.`}
+            </p>
           )}
 
           <h3>Avisos de repasos vencidos</h3>
