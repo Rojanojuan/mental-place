@@ -436,3 +436,91 @@
     content: none;
   }
 }
+
+/* En un telefono de 320 px tampoco cabe una tabla de tres columnas: ahi se
+   apilan tambien las medianas, con las mismas reglas. */
+
+/* Una tabla de 5+ columnas no cabe en un teléfono. Arrastrarla a lo ancho
+   fila por fila no es leer: de los «minimal pairs» (8 columnas) solo se veía
+   el 54 %. Aquí cada fila se convierte en un bloque y cada celda lleva
+   delante el nombre de su columna (D-083). */
+@media (max-width: 400px) {
+  .blk-table--midi .blk-table__scroll {
+    overflow-x: visible;
+    box-shadow: none;
+  }
+
+  .blk-table--midi table,
+  .blk-table--midi tbody,
+  .blk-table--midi tr,
+  .blk-table--midi td {
+    display: block;
+  }
+
+  .blk-table--midi thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+  }
+
+  .blk-table--midi tr {
+    margin-bottom: var(--space-2);
+    padding: var(--space-3);
+    background: var(--surface-2);
+    border-radius: var(--radius-md);
+  }
+
+  .blk-table--midi td {
+    display: grid;
+    grid-template-columns: 6.5em minmax(0, 1fr);
+    gap: var(--space-2);
+    align-items: baseline;
+    padding: 2px 0;
+    border: 0;
+    white-space: normal;
+  }
+
+  .blk-table--midi td::before {
+    content: attr(data-label);
+    color: var(--text-3);
+    font-size: 11px;
+    text-transform: lowercase;
+  }
+
+  .blk-table--midi td:empty {
+    display: none;
+  }
+
+  .blk-table--midi td.blk-table__dup {
+    display: block;
+    margin: var(--space-2) 0;
+    padding: 0;
+    height: 1px;
+    overflow: hidden;
+    text-indent: -999em;
+    background: var(--line-2);
+  }
+
+  .blk-table--midi td.blk-table__dup::before {
+    content: none;
+  }
+}
+
+/* Apilada, el valor comparte la linea con su rotulo. En un telefono de 320 px
+   una palabra larga no cabia y se salia 14 px, asi que se le permite partir y
+   el rotulo se estrecha. */
+@media (max-width: 760px) {
+  .blk-table--wide td,
+  .blk-table--midi td {
+    overflow-wrap: anywhere;
+  }
+}
+
+@media (max-width: 360px) {
+  .blk-table--wide td,
+  .blk-table--midi td {
+    grid-template-columns: 5.2em minmax(0, 1fr);
+  }
+}

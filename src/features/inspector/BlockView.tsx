@@ -36,6 +36,20 @@ function inline(md: string): ReactNode[] {
  * Renderiza los bloques genéricos del contrato. No sabe nada del contenido:
  * sirve igual para fonética, gramática o cualquier otra plantilla.
  */
+/**
+ * Cuánto estorba una tabla en un teléfono, por su número de columnas.
+ *
+ * Cinco o más no caben en ningún móvil: de los «minimal pairs» (ocho) solo se
+ * veía el 54 %, con 270 px que había que arrastrar fila por fila. Tres o
+ * cuatro sí caben en un teléfono normal, pero no en uno de 320 px, así que el
+ * CSS las apila solo ahí.
+ */
+function anchoDeTabla(columnas: number): string {
+  if (columnas >= 5) return ' blk-table--wide';
+  if (columnas >= 3) return ' blk-table--midi';
+  return '';
+}
+
 export function BlockView({ block }: { block: Block }) {
   switch (block.type) {
     case 'text':
@@ -55,12 +69,10 @@ export function BlockView({ block }: { block: Block }) {
 
     case 'table':
       return (
-        // Una tabla de cinco columnas o más no cabe en un teléfono: la de
-        // «minimal pairs» tiene ocho y solo se veía el 54 %, con 270 px que
-        // había que ir arrastrando fila por fila. Marcada como ancha, el CSS
-        // la apila en pantalla estrecha y cada celda lleva su rótulo. Es el
-        // número de columnas lo que decide, no de qué va la tabla.
-        <figure className={`blk-table${block.columns.length >= 5 ? ' blk-table--wide' : ''}`}>
+        // El CSS apila la tabla cuando no cabe, y cada celda lleva su
+        // rótulo. Es el número de columnas lo que decide, no de qué va la
+        // tabla (regla 2: nada de contenido en la app).
+        <figure className={`blk-table${anchoDeTabla(block.columns.length)}`}>
           {block.caption !== undefined && <figcaption>{block.caption}</figcaption>}
           <div className="blk-table__scroll">
             <table>
@@ -81,8 +93,12 @@ export function BlockView({ block }: { block: Block }) {
                       // dice nada: la «vs.» de los minimal pairs salía como
                       // «vs. — vs.» ocho veces por tabla. Apilada se convierte
                       // en el separador entre las dos mitades que se contrastan.
-                      const repite = cell.trim() !== '' && cell.trim() === (block.columns[c] ?? '').trim();
-                      const clases = [isTechnical(cell) ? 'mono' : '', repite ? 'blk-table__dup' : '']
+                      const repite =
+                        cell.trim() !== '' && cell.trim() === (block.columns[c] ?? '').trim();
+                      const clases = [
+                        isTechnical(cell) ? 'mono' : '',
+                        repite ? 'blk-table__dup' : '',
+                      ]
                         .filter(Boolean)
                         .join(' ');
                       return (
