@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useLiveQuery } from 'dexie-react-hooks';
 import { Link } from 'react-router-dom';
 import { BodyMap } from '@/components/BodyMap';
+import { Lupa } from '@/components/Lupa';
 import { InlineText } from '@/components/InlineText';
 import { PalaceChips } from '@/components/PalaceChips';
 import type { ID, ZoneAccent } from '@/domain/types';
@@ -185,6 +186,20 @@ export function PalaceEditor() {
           <p className="pae__count">
             {data.loci.length} puntos · {data.zones.length} zonas
           </p>
+          {/* Elegir un punto amontonado con el dedo era cuestion de suerte; en
+              modo Puntos no se enseña, porque ahi se crea y se arrastra sobre
+              el cuerpo entero (D-088). */}
+          {!palace.planData && mode !== 'points' && (
+            <Lupa
+              loci={data.loci}
+              statusByLocus={data.statuses}
+              appearance={palace.style}
+              selectedId={selectedId}
+              onLocusTap={(id) => {
+                void tapLocus(id);
+              }}
+            />
+          )}
         </div>
 
         <div className="pae__panel">

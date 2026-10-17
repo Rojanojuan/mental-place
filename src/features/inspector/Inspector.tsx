@@ -2,6 +2,7 @@ import { useRef, useState } from 'react';
 import { useLiveQuery } from 'dexie-react-hooks';
 import { Link } from 'react-router-dom';
 import { BodyMap } from '@/components/BodyMap';
+import { Lupa } from '@/components/Lupa';
 import { revealPanel } from '@/components/reveal';
 import { PalaceChips } from '@/components/PalaceChips';
 import { PartTranslation } from '@/components/PartName';
@@ -120,6 +121,19 @@ export function Inspector() {
             selectedIds={current === null ? [] : [current]}
             onLocusTap={selectLocus}
           />
+          {/* Los puntos amontonados, separados: sin esto, 15 de los 45 solo
+              se podian elegir por la lista (D-088). */}
+          {!palace.planData && (
+            <Lupa
+              loci={map.loci}
+              statusByLocus={map.statuses}
+              appearance={palace.style}
+              selectedId={current}
+              onLocusTap={selectLocus}
+              title={`Lupa · ${map.zones[0]?.name ?? 'puntos juntos'}`}
+            />
+          )}
+
           <ol className="insp__route">
             {map.loci.map((entry) => (
               <li key={entry.id}>

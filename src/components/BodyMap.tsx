@@ -25,7 +25,11 @@ const NUMBER_MIN = 13;
  * círculo transparente detrás, que no cambia el dibujo pero sí lo que se puede
  * tocar. En la cabeza se solapan —ahí la lista de ruta es la vía fiable—.
  */
-const HIT_MIN = BODY_VIEWBOX.height * 0.078;
+/**
+ * Fracción del ancho visible que ocupa el área táctil mínima. Sale de los
+ * 44 px del diseño sobre el lienzo completo (480 × 0,078 de alto).
+ */
+const HIT_FRAC = (BODY_VIEWBOX.height * 0.078) / CANVAS_W;
 
 /** Un plano de casa: su dibujo y las medidas de su lienzo. */
 export interface PlanSource {
@@ -58,6 +62,20 @@ export interface BodyMapProps {
     ((id: ID, pos: { x: number; y: number }, side: 'front' | 'back') => void) | undefined;
   /** Tocar el lienzo vacío: así se crean puntos en el editor. */
   onCanvasTap?: ((pos: { x: number; y: number }, side: 'front' | 'back') => void) | undefined;
+  /**
+   * Recorte del lienzo: en vez de todo el cuerpo se enseña este rectángulo,
+   * muy ampliado. Es lo que usa la lupa para separar los puntos amontonados.
+   * Con recorte no hay cámara: el encuadre ya lo da el propio rectángulo.
+   */
+  viewport?: { x: number; y: number; w: number; h: number } | undefined;
+  /** Diámetro de los pines en unidades del lienzo. Por defecto, el calculado. */
+  pinSize?: number | undefined;
+  /**
+   * Antepuesto al nombre accesible de cada pin. Cuando el mismo punto sale dos
+   * veces en la pantalla —el cuerpo y su lupa—, sin esto el lector de pantalla
+   * lo lee duplicado y sin saber cuál es cuál.
+   */
+  pinLabelPrefix?: string | undefined;
   /** Alto máximo en la caja que lo contiene. */
   maxHeight?: string;
   className?: string;
@@ -95,6 +113,9 @@ export function BodyMap({
   onLocusTap,
   onLocusDrag,
   onCanvasTap,
+  viewport,
+  pinSize,
+  pinLabelPrefix,
   maxHeight = '62dvh',
   className,
   label = 'Mapa del cuerpo con los puntos del palacio',
@@ -114,13 +135,16 @@ export function BodyMap({
         ? locus.pos.x * plan.w
         : (locus.side === 'back' ? BACK_X : 0) + locus.pos.x * BODY_VIEWBOX.width,
       cy: plan ? locus.pos.y * plan.h : locus.pos.y * BODY_VIEWBOX.height,
-      d: plan ? planDiameter : locus.dense === true ? PIN_DENSE : PIN,
+      d: pinSize ?? (plan ? planDiameter : locus.dense === true ? PIN_DENSE : PIN),
     }));
-  }, [loci, plan, statusByLocus]);
+  }, [loci, pinSize, plan, statusByLocus]);
 
   // Cámara: centra el punto enfocado. Los pines se contra-escalan para que su
   // tamaño aparente no cambie con el aumento.
-  const focused = focusId === null ? undefined : placed.find((p) => p.locus.id === focusId);
+  const focused =
+    viewport !== undefined || focusId === null
+      ? undefined
+      : placed.find((p) => p.locus.id === focusId);
   const scale = focused && zoom !== 1 ? zoom : 1;
   /**
    * La camara centra el punto, pero sin acotarla deja la caja medio vacia: con
@@ -128,6 +152,23 @@ export function BodyMap({
    * el cuerpo hacia abajo, dejando media pantalla en negro en la sesion del
    * telefono. Acotada, el lienzo escalado siempre cubre la vista (D-084).
    */
+  /**
+   * Cuánto se ve ampliado el lienzo en pantalla. Con cámara lo dice el zoom;
+   * con recorte, cuánto se ha estrechado la ventana. Hace falta para decidir
+   * si cabe el número dentro del pin: sin esto, en la lupa los pines salían
+   * grandes pero mudos.
+   */
+  const escalaAparente = viewport === undefined ? scale : canvasW / viewport.w;
+
+  /**
+   * Área táctil mínima, en unidades del lienzo.
+   *
+   * Es una fracción del ancho **visible**, no del lienzo entero: así ocupa los
+   * mismos píxeles en pantalla tanto en el cuerpo completo como en el recorte
+   * de la lupa. Medido contra el lienzo entero, en la lupa se quedaba en 19 px.
+   */
+  const hitMin = ((viewport?.w ?? canvasW) * HIT_FRAC) / scale;
+
   const encuadra = (centro: number, tamano: number): number =>
     Math.min(0, Math.max(tamano - tamano * scale, tamano / 2 - centro * scale));
   const tx = focused ? encuadra(focused.cx, canvasW) : 0;
@@ -168,7 +209,11 @@ export function BodyMap({
   return (
     <svg
       className={className === undefined ? 'bodymap' : `bodymap ${className}`}
-      viewBox={`0 0 ${String(canvasW)} ${String(canvasH)}`}
+      viewBox={
+        viewport === undefined
+          ? `0 0 ${String(canvasW)} ${String(canvasH)}`
+          : `${String(viewport.x)} ${String(viewport.y)} ${String(viewport.w)} ${String(viewport.h)}`
+      }
       // El alto viaja como variable CSS, no como `max-height` en línea: en
       // línea ganaba a cualquier media query y el cuerpo se quedaba con la
       // pantalla entera del móvil (D-073, y ahora D-077). Con `none` no se
@@ -217,7 +262,7 @@ export function BodyMap({
           const isFocus = pin.locus.id === focusId;
           const d = pin.d / scale;
           const r = d / 2;
-          const showNumber = d * scale >= NUMBER_MIN;
+          const showNumber = d * escalaAparente >= NUMBER_MIN;
           const classes = [
             'pin',
             `pin--${pin.state}`,
@@ -235,7 +280,7 @@ export function BodyMap({
               // llenaba el lector de pantalla de controles que no hacen nada.
               role={interactive ? 'button' : 'img'}
               tabIndex={interactive ? 0 : undefined}
-              aria-label={`${String(pin.locus.routeNo)}. ${pin.locus.partName} — ${STATE_LABEL[pin.state]}`}
+              aria-label={`${pinLabelPrefix === undefined ? '' : `${pinLabelPrefix}: `}${String(pin.locus.routeNo)}. ${pin.locus.partName} — ${STATE_LABEL[pin.state]}`}
               aria-pressed={interactive ? isFocus : undefined}
               onPointerDown={
                 onLocusDrag === undefined
@@ -286,12 +331,7 @@ export function BodyMap({
             >
               <title>{`${String(pin.locus.routeNo)}. ${pin.locus.partName}`}</title>
               {/* Área táctil: invisible, nunca menor que el mínimo del diseño. */}
-              <circle
-                className="pin__hit"
-                cx={pin.cx}
-                cy={pin.cy}
-                r={Math.max(r, HIT_MIN / 2 / scale)}
-              />
+              <circle className="pin__hit" cx={pin.cx} cy={pin.cy} r={Math.max(r, hitMin / 2)} />
               {/* Vencido: halo pulsante. Nunca solo color (contrato §3). */}
               {pin.state === 'due' && (
                 <circle
