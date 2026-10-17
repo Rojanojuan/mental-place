@@ -165,7 +165,7 @@ export async function statusByLocus(
 ): Promise<Record<ID, LocusState>> {
   const loci = await listLoci(palaceId, database);
   const locusIds = loci.map((locus) => locus.id);
-  const items = await database.items.where('locusId').anyOf(locusIds).toArray();
+  const items = await itemsDeLoci(locusIds, database);
   const states = await database.reviewStates.bulkGet(items.map((item) => item.id));
   const schedules = await database.schedules.toArray();
   const scheduleById = new Map(schedules.map((schedule) => [schedule.id, schedule]));
@@ -199,6 +199,27 @@ export interface ScopeRequest {
   includeMastered?: boolean;
 }
 
+/**
+ * Los ítems de un conjunto de puntos.
+ *
+ * **No** se usa `where('locusId').anyOf(ids)`: con los 500 puntos de un
+ * palacio grande tardaba **53 segundos**, frente a **69 ms** leyendo la tabla
+ * entera y filtrando en memoria —775 veces más— porque recorre el índice una
+ * vez por clave. Medido en `tests/escala.test.ts` (D-089).
+ *
+ * Para un solo punto sigue mandando el índice, que es una búsqueda directa.
+ */
+async function itemsDeLoci(ids: ID[], database: DB): Promise<Item[]> {
+  const [solo] = ids;
+  if (solo === undefined) return [];
+  if (ids.length === 1) {
+    return database.items.where('locusId').equals(solo).toArray();
+  }
+  const buscados = new Set(ids);
+  const todos = await database.items.toArray();
+  return todos.filter((item) => item.locusId !== null && buscados.has(item.locusId));
+}
+
 /** Reúne los candidatos del alcance pedido, ya con su estado de repaso. */
 export async function collectCandidates(
   request: ScopeRequest,
@@ -212,34 +233,36 @@ export async function collectCandidates(
   } else if (request.zoneId !== undefined) {
     const loci = await database.loci.where('zoneId').equals(request.zoneId).toArray();
     routeByLocus = new Map(loci.map((locus) => [locus.id, locus.routeNo]));
-    items = await database.items
-      .where('locusId')
-      .anyOf(loci.map((locus) => locus.id))
-      .toArray();
+    items = await itemsDeLoci(
+      loci.map((locus) => locus.id),
+      database,
+    );
   } else if (request.palaceId !== undefined) {
     const loci = await listLoci(request.palaceId, database);
     routeByLocus = new Map(loci.map((locus) => [locus.id, locus.routeNo]));
-    items = await database.items
-      .where('locusId')
-      .anyOf(loci.map((locus) => locus.id))
-      .toArray();
+    items = await itemsDeLoci(
+      loci.map((locus) => locus.id),
+      database,
+    );
   } else {
     items = await database.items.toArray();
     const loci = await database.loci.toArray();
     routeByLocus = new Map(loci.map((locus) => [locus.id, locus.routeNo]));
   }
 
+  // Un `bulkGet` y no una consulta por ítem: con 10 000 eran 10 000 viajes
+  // seguidos a IndexedDB y armar la cola pasaba de 20 segundos (D-089).
+  const estados = await database.reviewStates.bulkGet(items.map((item) => item.id));
+
   const candidates: QueueCandidate[] = [];
-  for (const item of items) {
-    const state = (await database.reviewStates.get(item.id)) ?? {
-      ...newReviewState(item.id, R10.id),
-    };
+  items.forEach((item, i) => {
+    const state = estados[i] ?? { ...newReviewState(item.id, R10.id) };
     const candidate: QueueCandidate = { itemId: item.id, locusId: item.locusId, state };
     const routeNo = item.locusId === null ? undefined : routeByLocus.get(item.locusId);
     if (routeNo !== undefined) candidate.routeNo = routeNo;
     if (item.priority !== undefined) candidate.priority = item.priority;
     candidates.push(candidate);
-  }
+  });
   return candidates;
 }
 

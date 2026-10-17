@@ -726,3 +726,48 @@ y no por lo que signifiquen (regla 2):
    justo lo que había que evitar.
 
 Los «minimal pairs» no tienen celdas vacías, así que siguen con el apilado de D-083.
+
+### D-088 · La lupa: los puntos amontonados, separados
+
+15 de los 45 puntos del cuerpo de fonética caen en la cabeza; sus áreas táctiles se solapaban y
+elegir uno concreto era cuestión de suerte (quedó anotado como pendiente en dos auditorías). El
+diseño lo resuelve con un círculo muy ampliado sobre esa zona, con el número y el estado de cada
+punto (`PalacioApp.dc.html`).
+
+Dos cosas se **calculan**, no se escriben: el recorte sale de los puntos marcados como `dense`
+—ninguna coordenada de la cabeza vive en la app— y el diámetro de los pines sale de la distancia
+real al vecino más cercano (el 80 % de la mediana), porque agrandarlos a ojo los volvía a
+amontonar, que es justo lo que la lupa viene a evitar.
+
+De paso aparecieron dos defectos de `BodyMap`: el número y el área táctil mínima se medían contra
+el **lienzo entero**, de modo que en un recorte los pines salían grandes pero mudos y con 19 px de
+área; ahora se miden sobre el ancho **visible**. Y un punto que aparece dos veces en la pantalla
+—el cuerpo y su lupa— necesita nombres accesibles distintos, o el lector de pantalla lo lee
+duplicado: los de la lupa llevan el prefijo «Lupa».
+
+En el editor de palacio la lupa no se enseña en modo Puntos: ahí se toca el cuerpo entero para
+crear y arrastrar, y un segundo mapa estorbaría.
+
+### D-089 · `anyOf` con muchas claves es catastrófico
+
+La Fase 6 daba por buena una app con 500 puntos y 10 000 ítems **sin haberlo medido nunca**. Al
+medirlo, cuatro de seis comprobaciones se agotaban a los 20 segundos. El culpable:
+
+| Paso                                       | Tiempo        |
+| ------------------------------------------ | ------------- |
+| Importar 10 000 ítems                      | 344 ms        |
+| `items.where('locusId').anyOf(500 claves)` | **53 479 ms** |
+| `items.toArray()` (10 000)                 | 69 ms         |
+| `reviewStates.bulkGet(10 000)`             | 75 ms         |
+
+`anyOf` recorre el índice **una vez por clave**: leer la tabla entera y filtrar en memoria es 775
+veces más rápido. Cambiado en los tres sitios que lo usaban con el conjunto de puntos de un palacio
+o de una zona (`collectCandidates`, `statusByLocus`, `listItemsByPalace`); para un solo punto sigue
+mandando el índice, que es una búsqueda directa.
+
+Dos consultas por ítem más, del mismo estilo: `collectCandidates` pedía el estado de repaso uno a
+uno (10 000 viajes seguidos) y la Biblioteca hacía lo mismo al abrirse. Las dos pasan a `bulkGet`.
+
+El fichero de medida (`tests/escala.test.ts`) pasó de **102 s con cuatro agotados a 2,3 s con los
+seis en verde**. Los topes son generosos —esto corre en cualquier máquina— pero cortan de raíz
+cualquier vuelta a un O(n²).

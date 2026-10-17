@@ -4,7 +4,6 @@ import type { ID, Item, LocusState } from '@/domain/types';
 import {
   assignItem,
   db,
-  getReviewState,
   listPalaces,
   listZones,
   removeItem,
@@ -58,9 +57,13 @@ export function Library() {
     const locusById = new Map(loci.map((locus) => [locus.id, locus]));
     const zones = palaces[0] ? await listZones(palaces[0].id) : [];
 
+    // Un `bulkGet` y no una consulta por ítem: con 10 000 la Biblioteca se
+    // quedaba colgada abriendo la base (D-089).
+    const estados = await db.reviewStates.bulkGet(items.map((item) => item.id));
+
     const rows: Row[] = [];
-    for (const item of items) {
-      const reviewState = await getReviewState(item.id);
+    items.forEach((item, i) => {
+      const reviewState = estados[i];
       const locus = item.locusId === null ? undefined : locusById.get(item.locusId);
       const palace = locus ? palaceById.get(locus.palaceId) : undefined;
       rows.push({
@@ -72,7 +75,7 @@ export function Library() {
         zoneId: locus?.zoneId,
         locusLabel: locus ? `${String(locus.routeNo)} · ${locus.partName}` : 'Sin asignar',
       });
-    }
+    });
     rows.sort((a, b) => a.item.title.localeCompare(b.item.title, 'es'));
     return { rows, zones, loci };
   }, []);

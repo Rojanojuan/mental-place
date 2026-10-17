@@ -212,10 +212,10 @@ export function listItemsByDeck(deckId: ID, database: DB = db): Promise<Item[]> 
 export async function listItemsByPalace(palaceId: ID, database: DB = db): Promise<Item[]> {
   const loci = await listLoci(palaceId, database);
   const order = new Map(loci.map((locus, index) => [locus.id, index]));
-  const items = await database.items
-    .where('locusId')
-    .anyOf(loci.map((locus) => locus.id))
-    .toArray();
+  // Leer y filtrar, no `anyOf`: con 500 puntos aquel tardaba 53 s (D-089).
+  const buscados = new Set(loci.map((locus) => locus.id));
+  const todos = await database.items.toArray();
+  const items = todos.filter((item) => item.locusId !== null && buscados.has(item.locusId));
   return items.sort(
     (a, b) => (order.get(a.locusId ?? '') ?? 0) - (order.get(b.locusId ?? '') ?? 0),
   );
