@@ -1,9 +1,16 @@
 .shell {
   max-width: 1180px;
-  /* Red de seguridad: nada debe forzar scroll horizontal en el móvil. */
+  /* Red de seguridad: nada debe forzar scroll horizontal en el móvil. Ojo:
+     recorta en silencio, así que el e2e mide el ancho real del contenido
+     para que no vuelva a tapar un desborde (D-081). */
   overflow-x: clip;
   margin: 0 auto;
-  padding: var(--space-5) var(--space-4) var(--space-8);
+  /* `viewport-fit=cover` mete la maquetación bajo el notch y las esquinas
+     redondeadas del iPhone: sin estos márgenes el texto se pierde por el
+     borde. En lo que no es un iPhone, `env()` vale 0. */
+  padding: var(--space-5) calc(var(--space-4) + env(safe-area-inset-right))
+    calc(var(--space-8) + env(safe-area-inset-bottom))
+    calc(var(--space-4) + env(safe-area-inset-left));
   display: flex;
   flex-direction: column;
   gap: var(--space-6);
@@ -168,12 +175,21 @@
     gap: var(--space-4);
   }
 
+  /* El título no se encogía y dejaba la navegación en 93 px de un iPhone SE:
+     ocho destinos en un sobrante. En el teléfono la app ya se llama por su
+     icono, así que el nombre queda solo para el lector de pantalla. */
   .shell h1 {
-    font-size: 17px;
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
   }
 
   .shell__head {
     align-items: center;
+    gap: 0;
   }
 
   /* Ocho destinos envueltos ocupaban 190 px de los 727 del móvil: casi un
@@ -206,6 +222,9 @@
   .tabs {
     flex: 1;
     min-width: 0;
+    /* Se difumina por la derecha: asi se ve que hay mas y no parece una
+       palabra cortada debajo del boton de tema. */
+    mask-image: linear-gradient(to right, #000 calc(100% - 28px), transparent);
   }
 
   .shell__actions .btn {

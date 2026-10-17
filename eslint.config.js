@@ -12,6 +12,9 @@ export default tseslint.config(
       'dev-dist',
       'coverage',
       'node_modules',
+      // Artefactos de Playwright: trazas minificadas, no codigo del proyecto.
+      'test-results',
+      'playwright-report',
       // Prototipos de diseño: referencia, no código del proyecto.
       'design_handoff_palacio_corporal',
     ],

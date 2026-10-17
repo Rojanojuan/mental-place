@@ -55,7 +55,12 @@ export function BlockView({ block }: { block: Block }) {
 
     case 'table':
       return (
-        <figure className="blk-table">
+        // Una tabla de cinco columnas o más no cabe en un teléfono: la de
+        // «minimal pairs» tiene ocho y solo se veía el 54 %, con 270 px que
+        // había que ir arrastrando fila por fila. Marcada como ancha, el CSS
+        // la apila en pantalla estrecha y cada celda lleva su rótulo. Es el
+        // número de columnas lo que decide, no de qué va la tabla.
+        <figure className={`blk-table${block.columns.length >= 5 ? ' blk-table--wide' : ''}`}>
           {block.caption !== undefined && <figcaption>{block.caption}</figcaption>}
           <div className="blk-table__scroll">
             <table>
@@ -71,11 +76,26 @@ export function BlockView({ block }: { block: Block }) {
               <tbody>
                 {block.rows.map((row, r) => (
                   <tr key={r}>
-                    {row.map((cell, c) => (
-                      <td key={c} className={isTechnical(cell) ? 'mono' : undefined}>
-                        {cell}
-                      </td>
-                    ))}
+                    {row.map((cell, c) => {
+                      // Una celda que solo repite el nombre de su columna no
+                      // dice nada: la «vs.» de los minimal pairs salía como
+                      // «vs. — vs.» ocho veces por tabla. Apilada se convierte
+                      // en el separador entre las dos mitades que se contrastan.
+                      const repite = cell.trim() !== '' && cell.trim() === (block.columns[c] ?? '').trim();
+                      const clases = [isTechnical(cell) ? 'mono' : '', repite ? 'blk-table__dup' : '']
+                        .filter(Boolean)
+                        .join(' ');
+                      return (
+                        <td
+                          key={c}
+                          // El rótulo que el CSS pinta delante al apilar.
+                          data-label={block.columns[c] ?? ''}
+                          className={clases === '' ? undefined : clases}
+                        >
+                          {cell}
+                        </td>
+                      );
+                    })}
                   </tr>
                 ))}
               </tbody>

@@ -87,7 +87,7 @@
 
 @media (max-width: 900px) {
   .ses__body {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 }
 
@@ -173,7 +173,7 @@
 .ses__act {
   position: sticky;
   bottom: 0;
-  padding: var(--space-3) 0;
+  padding: var(--space-3) 0 calc(var(--space-3) + env(safe-area-inset-bottom));
   background: linear-gradient(to top, var(--bg) 60%, transparent);
 }
 
@@ -182,9 +182,10 @@
   position: sticky;
   bottom: 0;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: var(--space-2);
-  padding: var(--space-3) 0;
+  /* El indicador de inicio del iPhone vive justo aqui. */
+  padding: var(--space-3) 0 calc(var(--space-3) + env(safe-area-inset-bottom));
   background: linear-gradient(to top, var(--bg) 60%, transparent);
 }
 
@@ -250,7 +251,7 @@
   background: var(--surface);
   border-radius: var(--radius-sheet) var(--radius-sheet) 0 0;
   box-shadow: var(--shadow-lg);
-  padding: var(--space-5);
+  padding: var(--space-5) var(--space-5) calc(var(--space-5) + env(safe-area-inset-bottom));
   animation: pc-sheet var(--dur-base) var(--ease-out) both;
 }
 
@@ -378,6 +379,28 @@
 
   .ses__body {
     gap: var(--space-3);
+  }
+
+  /* La barra de accion, fija y opaca.
+     Pegada (`sticky`) acababa montandose sobre el texto de la tarjeta —el
+     mismo problema que D-077, pero por abajo—. Fija, opaca y con su hueco
+     reservado en `.ses`, no puede tapar nada (D-085). */
+  .ses__act,
+  .ses__grades {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 5;
+    background: var(--bg);
+    border-top: 1px solid var(--line);
+    padding: var(--space-3) calc(var(--space-4) + env(safe-area-inset-right))
+      calc(var(--space-3) + env(safe-area-inset-bottom))
+      calc(var(--space-4) + env(safe-area-inset-left));
+  }
+
+  .ses {
+    padding-bottom: 104px;
   }
 
   .ses__card {

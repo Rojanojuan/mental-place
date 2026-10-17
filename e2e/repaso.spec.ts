@@ -91,6 +91,9 @@ test.describe('una tarjeta completa', () => {
   test('«Avanzado» deja fijar la fecha a mano', async ({ page }) => {
     await freshApp(page);
     await page.getByRole('link', { name: /Repasar ahora/ }).click(SEEDED);
+    // Armar la cola tarda hasta 6 s en WebKit: sin esperarla, las teclas se
+    // pierden contra la pantalla de carga.
+    await expect(page.getByText('1 / 20')).toBeVisible(SEEDED);
     await page.keyboard.press('Space');
     await page.keyboard.press('Space');
     await page.getByRole('button', { name: /^Bien ·/ }).click();
@@ -108,6 +111,8 @@ test.describe('una tarjeta completa', () => {
 test.describe('lo que se estudia queda guardado', () => {
   async function gradeFirstCard(page: Page): Promise<void> {
     await page.getByRole('link', { name: /Repasar ahora/ }).click(SEEDED);
+    // La cola no es instantanea; en WebKit tarda hasta 6 s.
+    await expect(page.getByText('1 / 20')).toBeVisible(SEEDED);
     await page.keyboard.press('Space');
     await page.keyboard.press('Space');
     await page.getByRole('button', { name: /^Bien ·/ }).click();
@@ -227,7 +232,7 @@ test.describe('uso en móvil', () => {
   });
 
   test('la cabecera no se come la pantalla', async ({ page }, testInfo) => {
-    test.skip(testInfo.project.name !== 'movil', 'solo aplica al móvil');
+    test.skip(!testInfo.project.name.startsWith('movil'), 'solo aplica al móvil');
     await freshApp(page);
     await expect(page.getByRole('link', { name: /Repasar ahora/ })).toBeVisible(SEEDED);
 
@@ -240,7 +245,7 @@ test.describe('uso en móvil', () => {
   });
 
   test('en la sesión se ve el contenido sin desplazar', async ({ page }, testInfo) => {
-    test.skip(testInfo.project.name !== 'movil', 'solo aplica al móvil');
+    test.skip(!testInfo.project.name.startsWith('movil'), 'solo aplica al móvil');
     await page.goto('/sesion');
     await expect(page.getByText('1 / 20')).toBeVisible(SEEDED);
     await page.keyboard.press('Space');
@@ -294,11 +299,14 @@ test.describe('leer el panel en el teléfono', () => {
 
   for (const caso of PANELES) {
     test(`en ${caso.ruta} el cuerpo no tapa el panel`, async ({ page }, testInfo) => {
-      test.skip(testInfo.project.name !== 'movil', 'solo aplica al móvil');
+      test.skip(!testInfo.project.name.startsWith('movil'), 'solo aplica al móvil');
       await page.goto('/');
       await expect(page.getByRole('link', { name: /Repasar ahora/ })).toBeVisible(SEEDED);
       await page.goto(caso.ruta);
       await expect(page.getByText(caso.espera).first()).toBeVisible(SEEDED);
+      // El mapa tarda en aparecer mas que el texto que lo anuncia.
+      await page.locator(caso.lado).waitFor(SEEDED);
+      await page.locator(caso.panel).waitFor(SEEDED);
 
       // Desplazarse al panel es justo lo que hace el usuario para leerlo.
       await page.evaluate((s) => {
@@ -335,7 +343,7 @@ test.describe('leer el panel en el teléfono', () => {
   }
 
   test('tocar un punto trae el detalle a la vista', async ({ page }, testInfo) => {
-    test.skip(testInfo.project.name !== 'movil', 'solo aplica al móvil');
+    test.skip(!testInfo.project.name.startsWith('movil'), 'solo aplica al móvil');
     await page.goto('/inspector');
     await expect(page.getByText(/45 puntos/)).toBeVisible(SEEDED);
 
@@ -363,7 +371,7 @@ test.describe('leer el panel en el teléfono', () => {
 
 test.describe('la sesión en el teléfono', () => {
   test('«Revelar» se alcanza sin desplazar en las dos fases', async ({ page }, testInfo) => {
-    test.skip(testInfo.project.name !== 'movil', 'solo aplica al móvil');
+    test.skip(!testInfo.project.name.startsWith('movil'), 'solo aplica al móvil');
     await page.goto('/sesion');
     await expect(page.getByText('1 / 20')).toBeVisible(SEEDED);
 
@@ -382,7 +390,7 @@ test.describe('la sesión en el teléfono', () => {
   });
 
   test('al revelar el contenido hay sitio de verdad para leerlo', async ({ page }, testInfo) => {
-    test.skip(testInfo.project.name !== 'movil', 'solo aplica al móvil');
+    test.skip(!testInfo.project.name.startsWith('movil'), 'solo aplica al móvil');
     await page.goto('/sesion');
     await expect(page.getByText('1 / 20')).toBeVisible(SEEDED);
     await page.keyboard.press('Space');
@@ -414,7 +422,7 @@ test.describe('la sesión en el teléfono', () => {
   });
 
   test('el cuerpo manda al recordar y se encoge al leer', async ({ page }, testInfo) => {
-    test.skip(testInfo.project.name !== 'movil', 'solo aplica al móvil');
+    test.skip(!testInfo.project.name.startsWith('movil'), 'solo aplica al móvil');
     await page.goto('/sesion');
     await expect(page.getByText('1 / 20')).toBeVisible(SEEDED);
 
@@ -433,5 +441,148 @@ test.describe('la sesión en el teléfono', () => {
     // El diseño lo fija en 440 → 200 px (`stageH` de PalacioApp.dc.html).
     expect(recordando).toBeGreaterThan(300);
     expect(leyendo).toBeLessThan(recordando * 0.6);
+  });
+});
+
+/**
+ * El desborde que el `overflow-x: clip` del shell se tragaba.
+ *
+ * `grid-template-columns: 1fr` significa `minmax(auto, 1fr)`: el mínimo es el
+ * min-content, así que la columna crecía MÁS que la pantalla —439 px en un
+ * iPhone de 390— y el shell recortaba lo que sobraba sin dejar forma de
+ * llegar a ello. Como el documento nunca crecía, ninguna medida lo delataba:
+ * hay que medir contra la caja del shell, no contra el documento (D-081).
+ */
+test.describe('nada se pierde por la derecha', () => {
+  const RUTAS = ['/', '/inspector', '/sesion', '/editor', '/biblioteca', '/datos'];
+
+  for (const ruta of RUTAS) {
+    test(`en ${ruta} nada se sale de la caja`, async ({ page }, testInfo) => {
+      test.skip(!testInfo.project.name.startsWith('movil'), 'solo aplica al móvil');
+      await page.goto('/');
+      await expect(page.getByRole('link', { name: /Repasar ahora/ })).toBeVisible(SEEDED);
+      await page.goto(ruta);
+      await page.waitForTimeout(600);
+
+      const fuera = await page.evaluate(() => {
+        const shell = document.querySelector('.shell');
+        if (!shell) return ['sin shell'];
+        const caja = shell.getBoundingClientRect();
+        const limite = caja.right - parseFloat(getComputedStyle(shell).paddingRight);
+        const malos: string[] = [];
+        for (const el of shell.querySelectorAll('*')) {
+          const b = el.getBoundingClientRect();
+          if (b.width === 0 || b.height === 0) continue;
+          /*
+           * Solo cuenta lo que de verdad se pierde. No cuentan: lo que vive en
+           * un contenedor que ya lo recorta o lo desplaza —una tabla con
+           * scroll propio, el interior del SVG con la cámara—, lo que está
+           * oculto con `clip-path` (la cabecera que queda para el lector de
+           * pantalla) y las barras fijas, que ocupan todo el ancho a propósito.
+           */
+          let contenido = false;
+          for (let p: Element | null = el; p; p = p.parentElement) {
+            const cs = getComputedStyle(p);
+            const ov = cs.overflowX;
+            if (ov === 'auto' || ov === 'scroll' || ov === 'hidden' || ov === 'clip') {
+              contenido = true;
+              break;
+            }
+            if (cs.clipPath !== 'none' || cs.position === 'fixed') {
+              contenido = true;
+              break;
+            }
+          }
+          if (!contenido && b.right - limite > 2) {
+            const cls = typeof el.className === 'string' ? el.className : '';
+            malos.push(`${el.tagName.toLowerCase()}.${cls} +${Math.round(b.right - limite)}px`);
+          }
+        }
+        return malos;
+      });
+
+      expect(fuera).toEqual([]);
+    });
+  }
+
+  test('la navegación conserva un ancho usable', async ({ page }, testInfo) => {
+    test.skip(!testInfo.project.name.startsWith('movil'), 'solo aplica al móvil');
+    await page.goto('/');
+    await expect(page.getByRole('link', { name: /Repasar ahora/ })).toBeVisible(SEEDED);
+
+    const nav = await page.evaluate(() => {
+      const el = document.querySelector('.tabs');
+      return el ? Math.round(el.clientWidth) : 0;
+    });
+    // El título no se encogía y dejaba la navegación en 93 px de un iPhone SE.
+    expect(nav).toBeGreaterThan(200);
+  });
+
+  test('una tabla ancha se lee sin arrastrarla', async ({ page }, testInfo) => {
+    test.skip(!testInfo.project.name.startsWith('movil'), 'solo aplica al móvil');
+    await page.goto('/inspector');
+    await expect(page.getByText(/45 puntos/)).toBeVisible(SEEDED);
+    // El punto 2 trae la tabla de «minimal pairs», de ocho columnas.
+    await page.locator('.insp__rbtn').nth(1).click();
+    await expect(page.getByText(/Minimal pairs/)).toBeVisible();
+
+    const tablas = await page.evaluate(() =>
+      [...document.querySelectorAll('.blk-table')].map((fig) => {
+        const sc = fig.querySelector('.blk-table__scroll');
+        const tb = fig.querySelector('table');
+        return {
+          titulo: fig.querySelector('figcaption')?.textContent ?? '',
+          oculto: sc && tb ? Math.round(tb.scrollWidth - sc.clientWidth) : 0,
+        };
+      }),
+    );
+
+    // De los minimal pairs solo se veía el 54 %: 270 px había que arrastrarlos.
+    expect(tablas.length).toBeGreaterThan(0);
+    for (const t of tablas) expect(t.oculto, t.titulo).toBeLessThanOrEqual(2);
+  });
+
+  test('la barra de acción no deja nada inalcanzable', async ({ page }, testInfo) => {
+    test.skip(!testInfo.project.name.startsWith('movil'), 'solo aplica al móvil');
+    await page.goto('/sesion');
+    await expect(page.getByText('1 / 20')).toBeVisible(SEEDED);
+
+    const tapado = await page.evaluate(async () => {
+      window.scrollTo(0, document.documentElement.scrollHeight);
+      await new Promise((r) => setTimeout(r, 400));
+      const barra = document.querySelector('.ses__act')?.getBoundingClientRect();
+      if (!barra) return -1;
+      let peor = 0;
+      for (const el of document.querySelectorAll('.ses__card *')) {
+        if (el.children.length > 0 || el.textContent.trim() === '') continue;
+        const b = el.getBoundingClientRect();
+        peor = Math.max(peor, Math.min(b.bottom, barra.bottom) - Math.max(b.top, barra.top));
+      }
+      return Math.round(peor);
+    });
+
+    // Con la barra pegada, «Revelar» se montaba sobre el texto de la tarjeta.
+    expect(tapado).toBe(0);
+  });
+
+  test('la cámara no deja media caja en negro', async ({ page }, testInfo) => {
+    test.skip(!testInfo.project.name.startsWith('movil'), 'solo aplica al móvil');
+    await page.goto('/sesion');
+    await expect(page.getByText('1 / 20')).toBeVisible(SEEDED);
+
+    const camara = await page.evaluate(() => {
+      // Es un atributo del SVG, no un estilo: el `transform` calculado de un
+      // <g> no se lee igual en WebKit que en Chromium.
+      const t = document.querySelector('.bodymap__camera')?.getAttribute('transform');
+      if (t === null || t === undefined) return null;
+      const m = /translate\(\s*(-?[\d.]+)\s+(-?[\d.]+)\s*\)/.exec(t);
+      if (!m) return null;
+      return { tx: Number(m[1]), ty: Number(m[2]) };
+    });
+
+    // Sin acotar, el punto 1 daba ty positivo y empujaba el cuerpo abajo.
+    expect(camara).not.toBeNull();
+    expect(camara?.tx ?? 1).toBeLessThanOrEqual(0.5);
+    expect(camara?.ty ?? 1).toBeLessThanOrEqual(0.5);
   });
 });

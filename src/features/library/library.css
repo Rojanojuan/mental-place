@@ -28,6 +28,7 @@
 .lib__filters label {
   display: grid;
   gap: 4px;
+  min-width: 0;
 }
 
 .lib__label {
@@ -47,6 +48,26 @@
 
 .lib__search input {
   min-width: 260px;
+}
+
+/* Un `<select>` se mide por su opcion mas larga, y «Cabeza · Vocales» se salia
+   45 px de un iPhone SE. En el telefono cada filtro ocupa su propia fila y los
+   controles no pasan del ancho disponible. */
+@media (max-width: 760px) {
+  .lib__filters {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .lib__search input {
+    min-width: 0;
+  }
+}
+
+.lib__filters select,
+.lib__filters input[type='search'] {
+  max-width: 100%;
+  width: 100%;
 }
 
 .lib__check {

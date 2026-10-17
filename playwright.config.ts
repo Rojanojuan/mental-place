@@ -22,6 +22,11 @@ export default defineConfig({
   projects: [
     { name: 'escritorio', use: { ...devices['Desktop Chrome'] } },
     { name: 'movil', use: { ...devices['Pixel 5'] } },
+    // Safari en iOS no es Chrome con otra piel: el desborde que recortaba el
+    // texto por la derecha solo se vio aqui. Los tests de telefono miran el
+    // prefijo «movil», asi que corren en los dos. Necesita
+    // `npx playwright install webkit`.
+    { name: 'movil-iphone', use: { ...devices['iPhone 13'] } },
   ],
   webServer: {
     // `--host 127.0.0.1`: sin él vite preview escucha en localhost y Playwright

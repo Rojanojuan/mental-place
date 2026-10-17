@@ -128,3 +128,62 @@ con el usuario. El panel ya es alcanzable sin el sticky.
 
 Y en `npm test`, `tests/movil.test.tsx`: que `revealPanel` desplaza en una columna, no hace nada en
 escritorio, y que el Inspector lo aplica al detalle y solo en el teléfono.
+
+---
+
+# Tercera auditoría — en un iPhone de verdad (2026-10-16)
+
+Las dos auditorías anteriores se hicieron en **Chromium con perfil Pixel 5**. El usuario usa un
+**iPhone**, y Safari en iOS no es Chrome con otra piel. El síntoma que reportó —«el texto no se ve
+completo, se va a la derecha y se pierde»— no aparecía en ninguna medición porque
+`.shell { overflow-x: clip }` recortaba el desborde **en silencio**: `document.scrollWidth` nunca
+crecía, así que seis auditorías seguidas dijeron «desborda 0 px».
+
+Medido con WebKit en iPhone SE (320), iPhone 13 (390) y iPhone 14 Pro Max (430).
+
+## Lo que estaba roto
+
+| #   | Qué                                                                                  | Medida                              |
+| --- | ------------------------------------------------------------------------------------ | ----------------------------------- |
+| 1   | `grid-template-columns: 1fr` = `minmax(auto, 1fr)`: la columna crecía al min-content | **439,8 px en una pantalla de 390** |
+| 2   | `.shell { overflow-x: clip }` lo recortaba sin dejar llegar a ello                   | 66 px de texto inalcanzables        |
+| 3   | `viewport-fit=cover` sin `env(safe-area-inset-*)`                                    | contenido bajo el notch             |
+| 4   | El `<h1>` no se encogía y ahogaba la navegación                                      | nav de **93 px** en un SE           |
+| 5   | Tabla de «minimal pairs», 8 columnas                                                 | solo el **54 %** visible            |
+| 6   | La cámara del cuerpo sin acotar                                                      | media caja en negro                 |
+| 7   | «Revelar» pegado se montaba sobre el texto de la tarjeta                             | 39 px tapados                       |
+| 8   | El `<select>` de zona en la Biblioteca                                               | +45 px fuera en un SE               |
+
+Los puntos 1, 2, 5 y 7 son, juntos, exactamente lo que el usuario describía.
+
+## Lo que se ve ahora
+
+| Medida                                   | Antes    | Ahora     |
+| ---------------------------------------- | -------- | --------- |
+| Elementos recortados, 3 iPhone × 7 rutas | varios   | **0**     |
+| Columna del detalle (iPhone 13)          | 439,8 px | 358 px    |
+| Ancho útil de la navegación (SE / 13)    | 93 / 163 | 244 / 315 |
+| «Minimal pairs» visible                  | 54 %     | **100 %** |
+| Sitio para leer en la sesión             | 199 px   | 570 px    |
+| Texto tapado por la barra de acción      | 39 px    | **0 px**  |
+
+## Por qué no se vio antes
+
+Tres lecciones, todas caras:
+
+1. **Medir contra el documento no vale si algo recorta.** `overflow-x: clip` convierte un desborde
+   en invisible para `scrollWidth`. Hay que medir contra la caja que recorta.
+2. **Un perfil de móvil en Chromium no es un iPhone.** El e2e tiene ahora un tercer proyecto,
+   `movil-iphone` (WebKit).
+3. **Los números pueden estar bien y la pantalla mal.** El hueco negro de la cámara, la navegación
+   cortada a media palabra y el botón sobre el texto salieron de _mirar una captura_, no de medir.
+
+## Cómo se comprueba
+
+`npm run e2e` (requiere `npx playwright install webkit`), en `movil` y `movil-iphone`:
+
+- que en seis rutas **ningún** elemento sobresale de la caja del shell;
+- que la navegación conserva más de 200 px útiles;
+- que ninguna tabla deja contenido oculto a lo ancho;
+- que la barra de acción no deja nada inalcanzable;
+- que la cámara nunca traslada en positivo.

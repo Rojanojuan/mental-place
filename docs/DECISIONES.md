@@ -652,3 +652,55 @@ jsdom no trae ninguno de los dos, y ahora las pantallas los usan para decidir si
 columna. El doble de `matchMedia` resuelve `min-width`/`max-width` contra `window.innerWidth`, así
 que un test simula un teléfono cambiando ese valor; `revealPanel` además comprueba que existan
 antes de usarlos, como en D-069.
+
+### D-081 · `1fr` no es `minmax(0, 1fr)`, y el `clip` del shell lo tapaba
+
+La avería que el usuario veía en su iPhone. `grid-template-columns: 1fr` significa
+`minmax(auto, 1fr)`: el mínimo de la pista es el **min-content** del contenido, así que al
+colapsar a una columna la pista crecía **más que la pantalla** —439,8 px en un iPhone de 390— y el
+texto se iba por la derecha. Y `.shell { overflow-x: clip }`, puesto como «red de seguridad»,
+hacía justo lo contrario de ayudar: **recortaba en silencio** lo que sobraba, sin barra de
+desplazamiento y sin forma de llegar a ello.
+
+Doce rejillas con el mismo defecto, ahora `minmax(0, 1fr)`. La `clip` se queda —evita el rebote
+horizontal de iOS— pero ya no puede esconder nada: el e2e mide contra la **caja del shell**, no
+contra el documento, porque `document.scrollWidth` nunca crecía y por eso todas las mediciones
+anteriores decían «desborda 0».
+
+### D-082 · `viewport-fit=cover` sin zonas seguras recorta el iPhone
+
+`index.html` pedía `viewport-fit=cover` —la maquetación llega hasta el borde físico— pero el CSS
+no usaba `env(safe-area-inset-*)` en ningún sitio. En un iPhone con notch eso mete el contenido
+bajo las esquinas redondeadas y el indicador de inicio. Ahora el relleno del shell y las tres
+barras inferiores (`.ses__act`, `.ses__grades`, `.sheet`) suman el inset. Donde no hay notch,
+`env()` vale 0 y nada cambia. Se añade también `-webkit-text-size-adjust: 100%`, porque Safari
+agranda el texto por su cuenta y desborda los contenedores.
+
+### D-083 · Una tabla de 5+ columnas se apila en el teléfono
+
+De los «minimal pairs» (8 columnas) solo se veía el **54 %**: 270 px había que arrastrarlos fila
+por fila, y 42 de los 44 ítems de fonética tienen una. Arrastrar no es leer. En pantalla estrecha
+cada fila pasa a ser una ficha y cada celda lleva delante el nombre de su columna; la cabecera
+sigue ahí para el lector de pantalla. Lo decide el **número de columnas**, no de qué va la tabla
+(regla 2: nada de contenido en la app). Una celda que solo repite el nombre de su columna —la
+«vs.»— se convierte en la raya que separa las dos mitades que se contrastan.
+
+### D-084 · La cámara del cuerpo se acota al lienzo
+
+Centrar el punto sin acotar dejaba la caja medio vacía: con el punto 1 —lo alto de la cabeza— la
+traslación salía **positiva** y empujaba el cuerpo hacia abajo, con media pantalla en negro en la
+sesión del teléfono. Acotada, el lienzo escalado siempre cubre la vista.
+
+### D-085 · Una barra pegada acaba tapando lo que tiene encima
+
+`position: sticky; bottom: 0` desplaza el elemento **sobre** el contenido anterior, igual que
+D-077 pero por abajo: «Revelar» se montaba sobre el texto de la tarjeta. En el teléfono las dos
+barras de acción son ahora **fijas y opacas**, y `.ses` reserva su hueco, de modo que no pueden
+tapar nada y todo se alcanza desplazando.
+
+### D-086 · Los e2e corren también en Safari
+
+Nada de lo anterior se vio en seis auditorías porque Playwright solo corría Chromium: Safari en
+iOS no es Chrome con otra piel. Hay un tercer proyecto, `movil-iphone` (WebKit, iPhone 13), y los
+tests de teléfono miran el prefijo `movil`, así que corren en los dos. Requiere
+`npx playwright install webkit`.

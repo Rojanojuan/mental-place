@@ -11,6 +11,13 @@ body {
   min-height: 100%;
 }
 
+html {
+  /* Safari en iOS agranda el texto por su cuenta en algunos bloques y
+     desborda los contenedores. Esto se lo prohibe sin impedir el zoom. */
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
 body {
   background: var(--bg);
   color: var(--text);

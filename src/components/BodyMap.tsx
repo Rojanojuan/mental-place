@@ -122,8 +122,16 @@ export function BodyMap({
   // tamaño aparente no cambie con el aumento.
   const focused = focusId === null ? undefined : placed.find((p) => p.locus.id === focusId);
   const scale = focused && zoom !== 1 ? zoom : 1;
-  const tx = focused ? canvasW / 2 - focused.cx * scale : 0;
-  const ty = focused ? canvasH / 2 - focused.cy * scale : 0;
+  /**
+   * La camara centra el punto, pero sin acotarla deja la caja medio vacia: con
+   * el punto 1 —lo alto de la cabeza— la traslacion salia POSITIVA y empujaba
+   * el cuerpo hacia abajo, dejando media pantalla en negro en la sesion del
+   * telefono. Acotada, el lienzo escalado siempre cubre la vista (D-084).
+   */
+  const encuadra = (centro: number, tamano: number): number =>
+    Math.min(0, Math.max(tamano - tamano * scale, tamano / 2 - centro * scale));
+  const tx = focused ? encuadra(focused.cx, canvasW) : 0;
+  const ty = focused ? encuadra(focused.cy, canvasH) : 0;
 
   const selected = new Set(selectedIds);
   const interactive = onLocusTap !== undefined || onLocusDrag !== undefined;

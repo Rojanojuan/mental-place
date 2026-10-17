@@ -563,3 +563,61 @@ Comprobado además a 1280 px que el escritorio no cambia: el sticky vuelve y no 
 En `/editor` tocar un punto **no** lleva el panel a la vista: en los modos de mover y crear se toca
 el lienzo muchas veces seguidas y desplazar en cada toque pelearía con el usuario. Sin el sticky el
 panel ya es alcanzable.
+
+## Tercera auditoría: en un iPhone de verdad — ✅ (2026-10-16)
+
+El usuario avisó de que en su teléfono seguía mal y añadió el dato que lo cambiaba todo: **es un
+iPhone**. Las seis auditorías anteriores se hicieron en Chromium con perfil Pixel 5.
+
+### Por qué nada de esto se había visto
+
+`.shell { overflow-x: clip }`, puesto como red de seguridad, **recortaba el desborde en silencio**:
+`document.scrollWidth` nunca crecía, así que todas las mediciones decían «desborda 0 px» mientras
+el texto se perdía por la derecha. Hay que medir contra la caja que recorta, no contra el
+documento (D-081).
+
+### Lo que estaba roto
+
+- **`grid-template-columns: 1fr` es `minmax(auto, 1fr)`**: el mínimo es el min-content, así que al
+  colapsar a una columna la pista crecía a **439,8 px en una pantalla de 390**. Doce rejillas con
+  el mismo defecto (D-081).
+- **`viewport-fit=cover` sin `env(safe-area-inset-*)`** (D-082): el contenido iba bajo el notch y
+  el indicador de inicio.
+- **La tabla de «minimal pairs» (8 columnas) mostraba el 54 %** y la tienen 42 de los 44 ítems
+  (D-083).
+- **El `<h1>` no se encogía** y dejaba la navegación en 93 px de un iPhone SE.
+- **La cámara del cuerpo sin acotar** dejaba media caja en negro (D-084).
+- **«Revelar» pegado se montaba sobre el texto** de la tarjeta (D-085).
+
+### Lo que se hizo
+
+`minmax(0, 1fr)` en las doce rejillas; zonas seguras en el shell y en las tres barras inferiores;
+`-webkit-text-size-adjust: 100%`; las tablas de 5+ columnas se apilan en ficha con el rótulo de
+cada celda —y la celda que repite el nombre de su columna pasa a ser la raya que separa las dos
+mitades—; la cámara se acota al lienzo; las barras de acción son fijas y opacas con su hueco
+reservado; y la navegación recupera el ancho porque el título queda solo para el lector de
+pantalla.
+
+| Medida                                   | Antes    | Ahora     |
+| ---------------------------------------- | -------- | --------- |
+| Elementos recortados, 3 iPhone × 7 rutas | varios   | **0**     |
+| Ancho útil de la navegación (SE / 13)    | 93 / 163 | 244 / 315 |
+| «Minimal pairs» visible                  | 54 %     | **100 %** |
+| Texto tapado por la barra de acción      | 39 px    | **0 px**  |
+
+### Comprobaciones
+
+| Comando         | Resultado                                          |
+| --------------- | -------------------------------------------------- |
+| `npm run check` | ✅ typecheck + lint + **486 tests**                |
+| `npm run e2e`   | ✅ escritorio + `movil` (Pixel 5) + `movil-iphone` |
+
+10 e2e nuevos y un tercer proyecto de Playwright en **WebKit** (D-086): la razón de fondo de que
+seis auditorías no vieran nada es que solo se corría Chromium. Requiere
+`npx playwright install webkit`.
+
+### Lo que no se arregló
+
+La **lupa** para los 15 puntos amontonados de la cabeza sigue sin construirse; al medir se
+confirmó de paso que el pin del punto 2 no se puede tocar porque lo cubre el área del punto 4. La
+lista de ruta sigue siendo la vía fiable.

@@ -35,7 +35,7 @@
 
 @media (max-width: 900px) {
   .pae__grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 }
 
@@ -192,7 +192,7 @@
 }
 
 .pae__grid--plan {
-  grid-template-columns: 1fr;
+  grid-template-columns: minmax(0, 1fr);
 }
 
 .pae__grid--plan .pae__map {

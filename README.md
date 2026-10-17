@@ -11,20 +11,29 @@ npm install
 npm run dev
 ```
 
+Para los e2e hace falta además el navegador de Safari:
+
+```bash
+npx playwright install webkit
+```
+
+No es un capricho: el desborde que recortaba el texto por la derecha en un iPhone **solo** se veía
+en WebKit (`docs/DECISIONES.md` D-086).
+
 ## Comandos
 
-| Comando                 | Qué hace                                               |
-| ----------------------- | ------------------------------------------------------ |
-| `npm run dev`           | Servidor de desarrollo.                                |
-| `npm run build`         | Typecheck + bundle de producción + service worker.     |
-| `npm run preview`       | Sirve `dist/` (para probar la PWA instalada).          |
-| `npm test`              | Vitest una pasada.                                     |
-| `npm run test:cov`      | Cobertura (umbral ≥ 90 % en `src/srs`, `src/domain`).  |
-| `npm run lint`          | ESLint.                                                |
-| `npm run format`        | Prettier.                                              |
-| `npm run check`         | typecheck + lint + tests. Es la puerta de cada fase.   |
-| `npm run e2e`           | 42 e2e con Playwright en Chromium, escritorio y móvil. |
-| `npm run seed:fonetica` | Regenera `seed/fonetica45.json` desde el Word.         |
+| Comando                 | Qué hace                                                     |
+| ----------------------- | ------------------------------------------------------------ |
+| `npm run dev`           | Servidor de desarrollo.                                      |
+| `npm run build`         | Typecheck + bundle de producción + service worker.           |
+| `npm run preview`       | Sirve `dist/` (para probar la PWA instalada).                |
+| `npm test`              | Vitest una pasada.                                           |
+| `npm run test:cov`      | Cobertura (umbral ≥ 90 % en `src/srs`, `src/domain`).        |
+| `npm run lint`          | ESLint.                                                      |
+| `npm run format`        | Prettier.                                                    |
+| `npm run check`         | typecheck + lint + tests. Es la puerta de cada fase.         |
+| `npm run e2e`           | E2E en escritorio, Android (Chromium) e **iPhone (WebKit)**. |
+| `npm run seed:fonetica` | Regenera `seed/fonetica45.json` desde el Word.               |
 
 ## Publicar
 
