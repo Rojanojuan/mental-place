@@ -621,3 +621,67 @@ seis auditorías no vieran nada es que solo se corría Chromium. Requiere
 La **lupa** para los 15 puntos amontonados de la cabeza sigue sin construirse; al medir se
 confirmó de paso que el pin del punto 2 no se puede tocar porque lo cubre el área del punto 4. La
 lista de ruta sigue siendo la vía fiable.
+
+## Los pendientes que quedaban — ✅ (2026-10-17)
+
+Repaso de todo lo que estas notas tenían anotado como «falta» o «no medido».
+
+### 1 · La lupa (D-088)
+
+Lo arrastraban dos auditorías: 15 de los 45 puntos caen en la cabeza y elegir uno con el dedo era
+cuestión de suerte. Ya está, en el Inspector y en el editor de palacio. El recorte sale de los
+puntos marcados `dense` y el tamaño de los pines de la distancia real al vecino más cercano
+—agrandarlos a ojo los volvía a amontonar—.
+
+De paso salieron dos defectos de `BodyMap`: medía el número y el área táctil contra el lienzo
+entero en vez de contra el ancho visible (en un recorte, pines grandes pero mudos y con 19 px de
+área), y un punto que sale dos veces en pantalla necesitaba nombres accesibles distintos.
+
+### 2 · Rendimiento a escala (D-089) — **había un problema de verdad**
+
+La Fase 6 daba por buena una app con 500 puntos y 10 000 ítems **sin haberlo medido nunca**. Medido
+(`tests/escala.test.ts`), cuatro de seis comprobaciones se agotaban a los 20 segundos.
+
+| Paso                                       | Tiempo        |
+| ------------------------------------------ | ------------- |
+| `items.where('locusId').anyOf(500 claves)` | **53 479 ms** |
+| `items.toArray()` (10 000)                 | 69 ms         |
+
+`anyOf` recorre el índice una vez por clave. Cambiado por leer y filtrar en los tres sitios que lo
+usaban con los puntos de un palacio o una zona, más dos consultas por ítem que pasan a `bulkGet`.
+**De 102 s con cuatro agotados a 2,3 s con los seis en verde.**
+
+### 3 · Fase 7 · `ContentProvider`
+
+`src/providers/`: la interfaz y un doble que no habla con nadie. El adaptador real se conectará con
+la clave del usuario, nunca con una en el código. El borrador va marcado como borrador a
+propósito: un texto que parece real y no lo es acaba estudiándose.
+
+### 4 · Palacio 2 · Gramática C1 (D-090)
+
+`seed/gramatica_c1.json` (`npm run seed:gramatica`): los 2 cuerpos de 50 puntos del contrato
+§10.1, con sus 10 zonas, los 100 puntos con su nombre anatómico y el elemento que le toca a cada
+uno, y la plantilla «Gramática C1» de §10.6. Del traspaso de diseño, no inventado.
+
+**Sin contenido**: el PDF de origen solo trae 34 de los 100 elementos como sección propia, así que
+no da para una ingesta fiable y escribir yo las reglas sería inventar material de estudio. Cada
+punto lleva su ancla y ningún ítem, de modo que nada entra en la cola hasta que haya algo real.
+
+### 5 · Los cinco e2e de iPhone que quedaron sin verificar
+
+Verificados: pasan. Eran defectos de los tests (tecleaban antes de que la cola estuviera armada
+—en WebKit tarda hasta 6 s— y dos leían el sitio equivocado del DOM), no de la app.
+
+### Comprobaciones
+
+| Comando         | Resultado                                                   |
+| --------------- | ----------------------------------------------------------- |
+| `npm run check` | ✅ typecheck + lint + **534 tests** en 30 archivos          |
+| `npm run e2e`   | ✅ escritorio + `movil` (Pixel 5) + `movil-iphone` (WebKit) |
+
+### Lo que sigue dependiendo de ti
+
+1. **El contenido de los 100 elementos de gramática.** La vía está hecha: import parcial de solo
+   `items` con `locusRef` («Cuerpo 1 · Gramática C1 · L8»), o escribirlos en la app.
+2. **Las 20 anomalías del Word de fonética**, sobre todo la sección **34 · TOBILLO /s/** que falta.
+   Al corregir el Word basta `npm run seed:fonetica`.

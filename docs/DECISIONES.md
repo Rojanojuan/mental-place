@@ -771,3 +771,24 @@ uno (10 000 viajes seguidos) y la Biblioteca hacía lo mismo al abrirse. Las dos
 El fichero de medida (`tests/escala.test.ts`) pasó de **102 s con cuatro agotados a 2,3 s con los
 seis en verde**. Los topes son generosos —esto corre en cualquier máquina— pero cortan de raíz
 cualquier vuelta a un O(n²).
+
+### D-090 · El Palacio 2 llega con sus 100 puntos y sin contenido inventado
+
+El contrato (§10.1) pide «100 elementos en 2 cuerpos de 50 puntos», y el traspaso de diseño ya los
+trae: `LOCI` y `LOCI_C2` de `pc-data.js` son dos cuerpos de 50 puntos con su nombre anatómico, su
+posición, su zona y **el elemento de gramática que le toca a cada uno**. `seed/gramatica_c1.json`
+los traduce a las entidades del contrato, con la plantilla «Gramática C1» de §10.6.
+
+Lo que **no** se hace es inventar el contenido. Se sondeó el PDF de origen (`100 grammar
+news.pdf`): de sus 2 millones de caracteres solo aparecen **34 de los 100** elementos como sección
+con título propio; el resto vive en tablas de plan y referencias cruzadas. No da para una ingesta
+fiable como la del Word de fonética, y escribir yo las reglas de gramática sería contenido
+inventado presentado como material de estudio.
+
+Así que cada punto queda con su **ancla** —el nombre del elemento, que es lo que hay que recordar
+ahí— y **sin ítems**: nada entra en la cola de repaso mientras no haya algo de verdad que
+estudiar. El contenido entra después a mano o con un import parcial de solo `items` con
+`locusRef`, que es justo para lo que se construyó (Fase 3).
+
+Como `casas.json`, no se carga al arrancar: son dos palacios que quizá no quieras. Se importa
+desde «Datos».

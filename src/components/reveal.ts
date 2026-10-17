@@ -24,3 +24,8 @@ export function revealPanel(el: HTMLElement | null): void {
     block: 'start',
   });
 }
+
+/** Si la pantalla da para dos columnas. En un entorno sin `matchMedia`, no. */
+export function esEscritorio(): boolean {
+  return media(DOS_COLUMNAS) === true;
+}

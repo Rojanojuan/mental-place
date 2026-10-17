@@ -1,0 +1,1719 @@
+{
+  "version": 1,
+  "palaces": [
+    {
+      "id": "pal-gram-c1",
+      "name": "Cuerpo 1 · Gramática C1",
+      "kind": "body_both",
+      "color": "torso",
+      "order": 1,
+      "style": {
+        "accent": "cabeza",
+        "draw": "atlas",
+        "skin": "neutral",
+        "hair": "none",
+        "hairColor": "var(--line-2)",
+        "facial": "none",
+        "glasses": false,
+        "detail": "full",
+        "vol": "shade",
+        "line": "fine"
+      },
+      "createdAt": "2026-10-17T14:42:05.100Z",
+      "updatedAt": "2026-10-17T14:42:05.100Z"
+    },
+    {
+      "id": "pal-gram-c2",
+      "name": "Cuerpo 2 · Gramática C1",
+      "kind": "body_both",
+      "color": "torso",
+      "order": 2,
+      "style": {
+        "accent": "cabeza",
+        "draw": "atlas",
+        "skin": "neutral",
+        "hair": "none",
+        "hairColor": "var(--line-2)",
+        "facial": "none",
+        "glasses": false,
+        "detail": "full",
+        "vol": "shade",
+        "line": "fine"
+      },
+      "createdAt": "2026-10-17T14:42:05.100Z",
+      "updatedAt": "2026-10-17T14:42:05.100Z"
+    }
+  ],
+  "zones": [
+    {
+      "id": "zon-gram-c1-cabeza",
+      "palaceId": "pal-gram-c1",
+      "name": "Cabeza · Presentes",
+      "color": "cabeza",
+      "order": 0
+    },
+    {
+      "id": "zon-gram-c1-hombros",
+      "palaceId": "pal-gram-c1",
+      "name": "Hombros · Perfectos",
+      "color": "hombros",
+      "order": 1
+    },
+    {
+      "id": "zon-gram-c1-brazos",
+      "palaceId": "pal-gram-c1",
+      "name": "Brazos · Pasados y futuros",
+      "color": "brazos",
+      "order": 2
+    },
+    {
+      "id": "zon-gram-c1-torso",
+      "palaceId": "pal-gram-c1",
+      "name": "Tronco · Modales y condicionales",
+      "color": "torso",
+      "order": 3
+    },
+    {
+      "id": "zon-gram-c1-piernas",
+      "palaceId": "pal-gram-c1",
+      "name": "Espalda · Voz, estilo y nombres",
+      "color": "piernas",
+      "order": 4
+    },
+    {
+      "id": "zon-gram-c2-cabeza",
+      "palaceId": "pal-gram-c2",
+      "name": "Cabeza · Adjetivos y adverbios",
+      "color": "cabeza",
+      "order": 0
+    },
+    {
+      "id": "zon-gram-c2-hombros",
+      "palaceId": "pal-gram-c2",
+      "name": "Hombros · Relativas",
+      "color": "hombros",
+      "order": 1
+    },
+    {
+      "id": "zon-gram-c2-brazos",
+      "palaceId": "pal-gram-c2",
+      "name": "Brazos · Preposiciones y phrasal",
+      "color": "brazos",
+      "order": 2
+    },
+    {
+      "id": "zon-gram-c2-torso",
+      "palaceId": "pal-gram-c2",
+      "name": "Tronco · Énfasis y estructura",
+      "color": "torso",
+      "order": 3
+    },
+    {
+      "id": "zon-gram-c2-piernas",
+      "palaceId": "pal-gram-c2",
+      "name": "Espalda · Formación y registro",
+      "color": "piernas",
+      "order": 4
+    }
+  ],
+  "loci": [
+    {
+      "id": "loc-gram-c1-01",
+      "palaceId": "pal-gram-c1",
+      "zoneId": "zon-gram-c1-cabeza",
+      "routeNo": 1,
+      "partName": "Coronilla",
+      "side": "front",
+      "pos": {
+        "x": 0.5,
+        "y": 0.02
+      },
+      "anchor": {
+        "text": "Present Simple"
+      },
+      "dense": true
+    },
+    {
+      "id": "loc-gram-c1-02",
+      "palaceId": "pal-gram-c1",
+      "zoneId": "zon-gram-c1-cabeza",
+      "routeNo": 2,
+      "partName": "Frente",
+      "side": "front",
+      "pos": {
+        "x": 0.5,
+        "y": 0.05
+      },
+      "anchor": {
+        "text": "Present Continuous"
+      },
+      "dense": true
+    },
+    {
+      "id": "loc-gram-c1-03",
+      "palaceId": "pal-gram-c1",
+      "zoneId": "zon-gram-c1-cabeza",
+      "routeNo": 3,
+      "partName": "Ojos",
+      "side": "front",
+      "pos": {
+        "x": 0.5,
+        "y": 0.079
+      },
+      "anchor": {
+        "text": "Stative verbs"
+      },
+      "dense": true
+    },
+    {
+      "id": "loc-gram-c1-04",
+      "palaceId": "pal-gram-c1",
+      "zoneId": "zon-gram-c1-cabeza",
+      "routeNo": 4,
+      "partName": "Nariz",
+      "side": "front",
+      "pos": {
+        "x": 0.5,
+        "y": 0.097
+      },
+      "anchor": {
+        "text": "Presente con valor de futuro"
+      },
+      "dense": true
+    },
+    {
+      "id": "loc-gram-c1-05",
+      "palaceId": "pal-gram-c1",
+      "zoneId": "zon-gram-c1-cabeza",
+      "routeNo": 5,
+      "partName": "Boca",
+      "side": "front",
+      "pos": {
+        "x": 0.5,
+        "y": 0.116
+      },
+      "anchor": {
+        "text": "Questions & Negatives"
+      },
+      "dense": true
+    },
+    {
+      "id": "loc-gram-c1-06",
+      "palaceId": "pal-gram-c1",
+      "zoneId": "zon-gram-c1-cabeza",
+      "routeNo": 6,
+      "partName": "Mentón",
+      "side": "front",
+      "pos": {
+        "x": 0.5,
+        "y": 0.135
+      },
+      "anchor": {
+        "text": "Question tags"
+      },
+      "dense": true
+    },
+    {
+      "id": "loc-gram-c1-07",
+      "palaceId": "pal-gram-c1",
+      "zoneId": "zon-gram-c1-cabeza",
+      "routeNo": 7,
+      "partName": "Cuello",
+      "side": "front",
+      "pos": {
+        "x": 0.5,
+        "y": 0.168
+      },
+      "anchor": {
+        "text": "Subject / object questions"
+      }
+    },
+    {
+      "id": "loc-gram-c1-08",
+      "palaceId": "pal-gram-c1",
+      "zoneId": "zon-gram-c1-hombros",
+      "routeNo": 8,
+      "partName": "Hombro derecho",
+      "side": "front",
+      "pos": {
+        "x": 0.27,
+        "y": 0.204
+      },
+      "anchor": {
+        "text": "Present Perfect"
+      }
+    },
+    {
+      "id": "loc-gram-c1-09",
+      "palaceId": "pal-gram-c1",
+      "zoneId": "zon-gram-c1-hombros",
+      "routeNo": 9,
+      "partName": "Hombro izquierdo",
+      "side": "front",
+      "pos": {
+        "x": 0.73,
+        "y": 0.204
+      },
+      "anchor": {
+        "text": "Present Perfect Continuous"
+      }
+    },
+    {
+      "id": "loc-gram-c1-10",
+      "palaceId": "pal-gram-c1",
+      "zoneId": "zon-gram-c1-hombros",
+      "routeNo": 10,
+      "partName": "Pecho derecho",
+      "side": "front",
+      "pos": {
+        "x": 0.4,
+        "y": 0.25
+      },
+      "anchor": {
+        "text": "Past Perfect"
+      }
+    },
+    {
+      "id": "loc-gram-c1-11",
+      "palaceId": "pal-gram-c1",
+      "zoneId": "zon-gram-c1-hombros",
+      "routeNo": 11,
+      "partName": "Pecho izquierdo",
+      "side": "front",
+      "pos": {
+        "x": 0.6,
+        "y": 0.25
+      },
+      "anchor": {
+        "text": "Past Perfect Continuous"
+      }
+    },
+    {
+      "id": "loc-gram-c1-12",
+      "palaceId": "pal-gram-c1",
+      "zoneId": "zon-gram-c1-hombros",
+      "routeNo": 12,
+      "partName": "Esternón",
+      "side": "front",
+      "pos": {
+        "x": 0.5,
+        "y": 0.305
+      },
+      "anchor": {
+        "text": "Future Perfect"
+      }
+    },
+    {
+      "id": "loc-gram-c1-13",
+      "palaceId": "pal-gram-c1",
+      "zoneId": "zon-gram-c1-brazos",
+      "routeNo": 13,
+      "partName": "Bíceps derecho",
+      "side": "front",
+      "pos": {
+        "x": 0.255,
+        "y": 0.32
+      },
+      "anchor": {
+        "text": "Past Simple"
+      }
+    },
+    {
+      "id": "loc-gram-c1-14",
+      "palaceId": "pal-gram-c1",
+      "zoneId": "zon-gram-c1-brazos",
+      "routeNo": 14,
+      "partName": "Bíceps izquierdo",
+      "side": "front",
+      "pos": {
+        "x": 0.745,
+        "y": 0.32
+      },
+      "anchor": {
+        "text": "Past Continuous"
+      }
+    },
+    {
+      "id": "loc-gram-c1-15",
+      "palaceId": "pal-gram-c1",
+      "zoneId": "zon-gram-c1-brazos",
+      "routeNo": 15,
+      "partName": "Codo derecho",
+      "side": "front",
+      "pos": {
+        "x": 0.225,
+        "y": 0.417
+      },
+      "anchor": {
+        "text": "Used to / would"
+      }
+    },
+    {
+      "id": "loc-gram-c1-16",
+      "palaceId": "pal-gram-c1",
+      "zoneId": "zon-gram-c1-brazos",
+      "routeNo": 16,
+      "partName": "Codo izquierdo",
+      "side": "front",
+      "pos": {
+        "x": 0.775,
+        "y": 0.417
+      },
+      "anchor": {
+        "text": "Be / get used to"
+      }
+    },
+    {
+      "id": "loc-gram-c1-17",
+      "palaceId": "pal-gram-c1",
+      "zoneId": "zon-gram-c1-brazos",
+      "routeNo": 17,
+      "partName": "Antebrazo derecho",
+      "side": "front",
+      "pos": {
+        "x": 0.21,
+        "y": 0.49
+      },
+      "anchor": {
+        "text": "Will vs going to"
+      }
+    },
+    {
+      "id": "loc-gram-c1-18",
+      "palaceId": "pal-gram-c1",
+      "zoneId": "zon-gram-c1-brazos",
+      "routeNo": 18,
+      "partName": "Antebrazo izquierdo",
+      "side": "front",
+      "pos": {
+        "x": 0.79,
+        "y": 0.49
+      },
+      "anchor": {
+        "text": "Future Continuous"
+      }
+    },
+    {
+      "id": "loc-gram-c1-19",
+      "palaceId": "pal-gram-c1",
+      "zoneId": "zon-gram-c1-brazos",
+      "routeNo": 19,
+      "partName": "Muñeca derecha",
+      "side": "front",
+      "pos": {
+        "x": 0.19,
+        "y": 0.56
+      },
+      "anchor": {
+        "text": "Future in the past"
+      }
+    },
+    {
+      "id": "loc-gram-c1-20",
+      "palaceId": "pal-gram-c1",
+      "zoneId": "zon-gram-c1-brazos",
+      "routeNo": 20,
+      "partName": "Muñeca izquierda",
+      "side": "front",
+      "pos": {
+        "x": 0.81,
+        "y": 0.56
+      },
+      "anchor": {
+        "text": "Be about to / be due to"
+      }
+    },
+    {
+      "id": "loc-gram-c1-21",
+      "palaceId": "pal-gram-c1",
+      "zoneId": "zon-gram-c1-brazos",
+      "routeNo": 21,
+      "partName": "Mano derecha",
+      "side": "front",
+      "pos": {
+        "x": 0.175,
+        "y": 0.608
+      },
+      "anchor": {
+        "text": "Narrative tenses"
+      }
+    },
+    {
+      "id": "loc-gram-c1-22",
+      "palaceId": "pal-gram-c1",
+      "zoneId": "zon-gram-c1-brazos",
+      "routeNo": 22,
+      "partName": "Mano izquierda",
+      "side": "front",
+      "pos": {
+        "x": 0.825,
+        "y": 0.608
+      },
+      "anchor": {
+        "text": "Time clauses (when, as soon as)"
+      }
+    },
+    {
+      "id": "loc-gram-c1-23",
+      "palaceId": "pal-gram-c1",
+      "zoneId": "zon-gram-c1-torso",
+      "routeNo": 23,
+      "partName": "Abdomen",
+      "side": "front",
+      "pos": {
+        "x": 0.5,
+        "y": 0.375
+      },
+      "anchor": {
+        "text": "Modales de habilidad"
+      }
+    },
+    {
+      "id": "loc-gram-c1-24",
+      "palaceId": "pal-gram-c1",
+      "zoneId": "zon-gram-c1-torso",
+      "routeNo": 24,
+      "partName": "Ombligo",
+      "side": "front",
+      "pos": {
+        "x": 0.5,
+        "y": 0.43
+      },
+      "anchor": {
+        "text": "Obligación: must / have to"
+      }
+    },
+    {
+      "id": "loc-gram-c1-25",
+      "palaceId": "pal-gram-c1",
+      "zoneId": "zon-gram-c1-torso",
+      "routeNo": 25,
+      "partName": "Cadera derecha",
+      "side": "front",
+      "pos": {
+        "x": 0.34,
+        "y": 0.5
+      },
+      "anchor": {
+        "text": "Necesidad: needn’t / mustn’t"
+      }
+    },
+    {
+      "id": "loc-gram-c1-26",
+      "palaceId": "pal-gram-c1",
+      "zoneId": "zon-gram-c1-torso",
+      "routeNo": 26,
+      "partName": "Cadera izquierda",
+      "side": "front",
+      "pos": {
+        "x": 0.66,
+        "y": 0.5
+      },
+      "anchor": {
+        "text": "Deducción en presente"
+      }
+    },
+    {
+      "id": "loc-gram-c1-27",
+      "palaceId": "pal-gram-c1",
+      "zoneId": "zon-gram-c1-torso",
+      "routeNo": 27,
+      "partName": "Muslo derecho",
+      "side": "front",
+      "pos": {
+        "x": 0.4,
+        "y": 0.63
+      },
+      "anchor": {
+        "text": "Deducción en pasado"
+      }
+    },
+    {
+      "id": "loc-gram-c1-28",
+      "palaceId": "pal-gram-c1",
+      "zoneId": "zon-gram-c1-torso",
+      "routeNo": 28,
+      "partName": "Muslo izquierdo",
+      "side": "front",
+      "pos": {
+        "x": 0.6,
+        "y": 0.63
+      },
+      "anchor": {
+        "text": "Crítica: should have"
+      }
+    },
+    {
+      "id": "loc-gram-c1-29",
+      "palaceId": "pal-gram-c1",
+      "zoneId": "zon-gram-c1-torso",
+      "routeNo": 29,
+      "partName": "Rodilla derecha",
+      "side": "front",
+      "pos": {
+        "x": 0.405,
+        "y": 0.752
+      },
+      "anchor": {
+        "text": "Permiso y peticiones"
+      }
+    },
+    {
+      "id": "loc-gram-c1-30",
+      "palaceId": "pal-gram-c1",
+      "zoneId": "zon-gram-c1-torso",
+      "routeNo": 30,
+      "partName": "Rodilla izquierda",
+      "side": "front",
+      "pos": {
+        "x": 0.595,
+        "y": 0.752
+      },
+      "anchor": {
+        "text": "Condicional 0 y 1"
+      }
+    },
+    {
+      "id": "loc-gram-c1-31",
+      "palaceId": "pal-gram-c1",
+      "zoneId": "zon-gram-c1-torso",
+      "routeNo": 31,
+      "partName": "Espinilla derecha",
+      "side": "front",
+      "pos": {
+        "x": 0.41,
+        "y": 0.84
+      },
+      "anchor": {
+        "text": "Segundo condicional"
+      }
+    },
+    {
+      "id": "loc-gram-c1-32",
+      "palaceId": "pal-gram-c1",
+      "zoneId": "zon-gram-c1-torso",
+      "routeNo": 32,
+      "partName": "Espinilla izquierda",
+      "side": "front",
+      "pos": {
+        "x": 0.59,
+        "y": 0.84
+      },
+      "anchor": {
+        "text": "Tercer condicional"
+      }
+    },
+    {
+      "id": "loc-gram-c1-33",
+      "palaceId": "pal-gram-c1",
+      "zoneId": "zon-gram-c1-torso",
+      "routeNo": 33,
+      "partName": "Tobillo derecho",
+      "side": "front",
+      "pos": {
+        "x": 0.39,
+        "y": 0.93
+      },
+      "anchor": {
+        "text": "Mixed conditionals"
+      }
+    },
+    {
+      "id": "loc-gram-c1-34",
+      "palaceId": "pal-gram-c1",
+      "zoneId": "zon-gram-c1-torso",
+      "routeNo": 34,
+      "partName": "Tobillo izquierdo",
+      "side": "front",
+      "pos": {
+        "x": 0.61,
+        "y": 0.93
+      },
+      "anchor": {
+        "text": "Wish / if only"
+      }
+    },
+    {
+      "id": "loc-gram-c1-35",
+      "palaceId": "pal-gram-c1",
+      "zoneId": "zon-gram-c1-torso",
+      "routeNo": 35,
+      "partName": "Pie derecho",
+      "side": "front",
+      "pos": {
+        "x": 0.42,
+        "y": 0.972
+      },
+      "anchor": {
+        "text": "I’d rather / It’s time"
+      }
+    },
+    {
+      "id": "loc-gram-c1-36",
+      "palaceId": "pal-gram-c1",
+      "zoneId": "zon-gram-c1-torso",
+      "routeNo": 36,
+      "partName": "Pie izquierdo",
+      "side": "front",
+      "pos": {
+        "x": 0.58,
+        "y": 0.972
+      },
+      "anchor": {
+        "text": "Unless / provided that"
+      }
+    },
+    {
+      "id": "loc-gram-c1-37",
+      "palaceId": "pal-gram-c1",
+      "zoneId": "zon-gram-c1-piernas",
+      "routeNo": 37,
+      "partName": "Nuca",
+      "side": "back",
+      "pos": {
+        "x": 0.5,
+        "y": 0.15
+      },
+      "anchor": {
+        "text": "Passive voice"
+      }
+    },
+    {
+      "id": "loc-gram-c1-38",
+      "palaceId": "pal-gram-c1",
+      "zoneId": "zon-gram-c1-piernas",
+      "routeNo": 38,
+      "partName": "Omóplato izquierdo",
+      "side": "back",
+      "pos": {
+        "x": 0.32,
+        "y": 0.26
+      },
+      "anchor": {
+        "text": "Passive reporting (It is said…)"
+      }
+    },
+    {
+      "id": "loc-gram-c1-39",
+      "palaceId": "pal-gram-c1",
+      "zoneId": "zon-gram-c1-piernas",
+      "routeNo": 39,
+      "partName": "Omóplato derecho",
+      "side": "back",
+      "pos": {
+        "x": 0.68,
+        "y": 0.26
+      },
+      "anchor": {
+        "text": "Causative have / get"
+      }
+    },
+    {
+      "id": "loc-gram-c1-40",
+      "palaceId": "pal-gram-c1",
+      "zoneId": "zon-gram-c1-piernas",
+      "routeNo": 40,
+      "partName": "Columna alta",
+      "side": "back",
+      "pos": {
+        "x": 0.5,
+        "y": 0.3
+      },
+      "anchor": {
+        "text": "Reported statements"
+      }
+    },
+    {
+      "id": "loc-gram-c1-41",
+      "palaceId": "pal-gram-c1",
+      "zoneId": "zon-gram-c1-piernas",
+      "routeNo": 41,
+      "partName": "Columna media",
+      "side": "back",
+      "pos": {
+        "x": 0.5,
+        "y": 0.38
+      },
+      "anchor": {
+        "text": "Reported questions"
+      }
+    },
+    {
+      "id": "loc-gram-c1-42",
+      "palaceId": "pal-gram-c1",
+      "zoneId": "zon-gram-c1-piernas",
+      "routeNo": 42,
+      "partName": "Lumbar",
+      "side": "back",
+      "pos": {
+        "x": 0.5,
+        "y": 0.46
+      },
+      "anchor": {
+        "text": "Reporting verbs"
+      }
+    },
+    {
+      "id": "loc-gram-c1-43",
+      "palaceId": "pal-gram-c1",
+      "zoneId": "zon-gram-c1-piernas",
+      "routeNo": 43,
+      "partName": "Nalga izquierda",
+      "side": "back",
+      "pos": {
+        "x": 0.42,
+        "y": 0.56
+      },
+      "anchor": {
+        "text": "Gerund vs infinitive"
+      }
+    },
+    {
+      "id": "loc-gram-c1-44",
+      "palaceId": "pal-gram-c1",
+      "zoneId": "zon-gram-c1-piernas",
+      "routeNo": 44,
+      "partName": "Nalga derecha",
+      "side": "back",
+      "pos": {
+        "x": 0.58,
+        "y": 0.56
+      },
+      "anchor": {
+        "text": "-ing / to que cambian de sentido"
+      }
+    },
+    {
+      "id": "loc-gram-c1-45",
+      "palaceId": "pal-gram-c1",
+      "zoneId": "zon-gram-c1-piernas",
+      "routeNo": 45,
+      "partName": "Corva izquierda",
+      "side": "back",
+      "pos": {
+        "x": 0.405,
+        "y": 0.75
+      },
+      "anchor": {
+        "text": "Countable / uncountable"
+      }
+    },
+    {
+      "id": "loc-gram-c1-46",
+      "palaceId": "pal-gram-c1",
+      "zoneId": "zon-gram-c1-piernas",
+      "routeNo": 46,
+      "partName": "Corva derecha",
+      "side": "back",
+      "pos": {
+        "x": 0.595,
+        "y": 0.75
+      },
+      "anchor": {
+        "text": "Articles a / an / the / Ø"
+      }
+    },
+    {
+      "id": "loc-gram-c1-47",
+      "palaceId": "pal-gram-c1",
+      "zoneId": "zon-gram-c1-piernas",
+      "routeNo": 47,
+      "partName": "Pantorrilla izquierda",
+      "side": "back",
+      "pos": {
+        "x": 0.41,
+        "y": 0.82
+      },
+      "anchor": {
+        "text": "Quantifiers"
+      }
+    },
+    {
+      "id": "loc-gram-c1-48",
+      "palaceId": "pal-gram-c1",
+      "zoneId": "zon-gram-c1-piernas",
+      "routeNo": 48,
+      "partName": "Pantorrilla derecha",
+      "side": "back",
+      "pos": {
+        "x": 0.59,
+        "y": 0.82
+      },
+      "anchor": {
+        "text": "Possessives & ’s"
+      }
+    },
+    {
+      "id": "loc-gram-c1-49",
+      "palaceId": "pal-gram-c1",
+      "zoneId": "zon-gram-c1-piernas",
+      "routeNo": 49,
+      "partName": "Talón izquierdo",
+      "side": "back",
+      "pos": {
+        "x": 0.42,
+        "y": 0.97
+      },
+      "anchor": {
+        "text": "Pronouns & reflexives"
+      }
+    },
+    {
+      "id": "loc-gram-c1-50",
+      "palaceId": "pal-gram-c1",
+      "zoneId": "zon-gram-c1-piernas",
+      "routeNo": 50,
+      "partName": "Talón derecho",
+      "side": "back",
+      "pos": {
+        "x": 0.58,
+        "y": 0.97
+      },
+      "anchor": {
+        "text": "Compound nouns"
+      }
+    },
+    {
+      "id": "loc-gram-c2-01",
+      "palaceId": "pal-gram-c2",
+      "zoneId": "zon-gram-c2-cabeza",
+      "routeNo": 1,
+      "partName": "Coronilla",
+      "side": "front",
+      "pos": {
+        "x": 0.5,
+        "y": 0.02
+      },
+      "anchor": {
+        "text": "Adjective order"
+      },
+      "dense": true
+    },
+    {
+      "id": "loc-gram-c2-02",
+      "palaceId": "pal-gram-c2",
+      "zoneId": "zon-gram-c2-cabeza",
+      "routeNo": 2,
+      "partName": "Frente",
+      "side": "front",
+      "pos": {
+        "x": 0.5,
+        "y": 0.05
+      },
+      "anchor": {
+        "text": "-ed / -ing adjectives"
+      },
+      "dense": true
+    },
+    {
+      "id": "loc-gram-c2-03",
+      "palaceId": "pal-gram-c2",
+      "zoneId": "zon-gram-c2-cabeza",
+      "routeNo": 3,
+      "partName": "Ojos",
+      "side": "front",
+      "pos": {
+        "x": 0.5,
+        "y": 0.079
+      },
+      "anchor": {
+        "text": "Comparatives & superlatives"
+      },
+      "dense": true
+    },
+    {
+      "id": "loc-gram-c2-04",
+      "palaceId": "pal-gram-c2",
+      "zoneId": "zon-gram-c2-cabeza",
+      "routeNo": 4,
+      "partName": "Nariz",
+      "side": "front",
+      "pos": {
+        "x": 0.5,
+        "y": 0.097
+      },
+      "anchor": {
+        "text": "The more…, the more…"
+      },
+      "dense": true
+    },
+    {
+      "id": "loc-gram-c2-05",
+      "palaceId": "pal-gram-c2",
+      "zoneId": "zon-gram-c2-cabeza",
+      "routeNo": 5,
+      "partName": "Boca",
+      "side": "front",
+      "pos": {
+        "x": 0.5,
+        "y": 0.116
+      },
+      "anchor": {
+        "text": "Adverbs of degree"
+      },
+      "dense": true
+    },
+    {
+      "id": "loc-gram-c2-06",
+      "palaceId": "pal-gram-c2",
+      "zoneId": "zon-gram-c2-cabeza",
+      "routeNo": 6,
+      "partName": "Mentón",
+      "side": "front",
+      "pos": {
+        "x": 0.5,
+        "y": 0.135
+      },
+      "anchor": {
+        "text": "Adverb position"
+      },
+      "dense": true
+    },
+    {
+      "id": "loc-gram-c2-07",
+      "palaceId": "pal-gram-c2",
+      "zoneId": "zon-gram-c2-cabeza",
+      "routeNo": 7,
+      "partName": "Cuello",
+      "side": "front",
+      "pos": {
+        "x": 0.5,
+        "y": 0.168
+      },
+      "anchor": {
+        "text": "So / such / too / enough"
+      }
+    },
+    {
+      "id": "loc-gram-c2-08",
+      "palaceId": "pal-gram-c2",
+      "zoneId": "zon-gram-c2-hombros",
+      "routeNo": 8,
+      "partName": "Hombro derecho",
+      "side": "front",
+      "pos": {
+        "x": 0.27,
+        "y": 0.204
+      },
+      "anchor": {
+        "text": "Defining relative clauses"
+      }
+    },
+    {
+      "id": "loc-gram-c2-09",
+      "palaceId": "pal-gram-c2",
+      "zoneId": "zon-gram-c2-hombros",
+      "routeNo": 9,
+      "partName": "Hombro izquierdo",
+      "side": "front",
+      "pos": {
+        "x": 0.73,
+        "y": 0.204
+      },
+      "anchor": {
+        "text": "Non-defining relative clauses"
+      }
+    },
+    {
+      "id": "loc-gram-c2-10",
+      "palaceId": "pal-gram-c2",
+      "zoneId": "zon-gram-c2-hombros",
+      "routeNo": 10,
+      "partName": "Pecho derecho",
+      "side": "front",
+      "pos": {
+        "x": 0.4,
+        "y": 0.25
+      },
+      "anchor": {
+        "text": "Reduced relative clauses"
+      }
+    },
+    {
+      "id": "loc-gram-c2-11",
+      "palaceId": "pal-gram-c2",
+      "zoneId": "zon-gram-c2-hombros",
+      "routeNo": 11,
+      "partName": "Pecho izquierdo",
+      "side": "front",
+      "pos": {
+        "x": 0.6,
+        "y": 0.25
+      },
+      "anchor": {
+        "text": "Whose / whom / prep + which"
+      }
+    },
+    {
+      "id": "loc-gram-c2-12",
+      "palaceId": "pal-gram-c2",
+      "zoneId": "zon-gram-c2-hombros",
+      "routeNo": 12,
+      "partName": "Esternón",
+      "side": "front",
+      "pos": {
+        "x": 0.5,
+        "y": 0.305
+      },
+      "anchor": {
+        "text": "Whatever / whoever"
+      }
+    },
+    {
+      "id": "loc-gram-c2-13",
+      "palaceId": "pal-gram-c2",
+      "zoneId": "zon-gram-c2-brazos",
+      "routeNo": 13,
+      "partName": "Bíceps derecho",
+      "side": "front",
+      "pos": {
+        "x": 0.255,
+        "y": 0.32
+      },
+      "anchor": {
+        "text": "Prepositions of time"
+      }
+    },
+    {
+      "id": "loc-gram-c2-14",
+      "palaceId": "pal-gram-c2",
+      "zoneId": "zon-gram-c2-brazos",
+      "routeNo": 14,
+      "partName": "Bíceps izquierdo",
+      "side": "front",
+      "pos": {
+        "x": 0.745,
+        "y": 0.32
+      },
+      "anchor": {
+        "text": "Prepositions of place"
+      }
+    },
+    {
+      "id": "loc-gram-c2-15",
+      "palaceId": "pal-gram-c2",
+      "zoneId": "zon-gram-c2-brazos",
+      "routeNo": 15,
+      "partName": "Codo derecho",
+      "side": "front",
+      "pos": {
+        "x": 0.225,
+        "y": 0.417
+      },
+      "anchor": {
+        "text": "Adjective + preposition"
+      }
+    },
+    {
+      "id": "loc-gram-c2-16",
+      "palaceId": "pal-gram-c2",
+      "zoneId": "zon-gram-c2-brazos",
+      "routeNo": 16,
+      "partName": "Codo izquierdo",
+      "side": "front",
+      "pos": {
+        "x": 0.775,
+        "y": 0.417
+      },
+      "anchor": {
+        "text": "Verb + preposition"
+      }
+    },
+    {
+      "id": "loc-gram-c2-17",
+      "palaceId": "pal-gram-c2",
+      "zoneId": "zon-gram-c2-brazos",
+      "routeNo": 17,
+      "partName": "Antebrazo derecho",
+      "side": "front",
+      "pos": {
+        "x": 0.21,
+        "y": 0.49
+      },
+      "anchor": {
+        "text": "Phrasal verbs separables"
+      }
+    },
+    {
+      "id": "loc-gram-c2-18",
+      "palaceId": "pal-gram-c2",
+      "zoneId": "zon-gram-c2-brazos",
+      "routeNo": 18,
+      "partName": "Antebrazo izquierdo",
+      "side": "front",
+      "pos": {
+        "x": 0.79,
+        "y": 0.49
+      },
+      "anchor": {
+        "text": "Phrasal verbs de 3 partes"
+      }
+    },
+    {
+      "id": "loc-gram-c2-19",
+      "palaceId": "pal-gram-c2",
+      "zoneId": "zon-gram-c2-brazos",
+      "routeNo": 19,
+      "partName": "Muñeca derecha",
+      "side": "front",
+      "pos": {
+        "x": 0.19,
+        "y": 0.56
+      },
+      "anchor": {
+        "text": "Make vs do"
+      }
+    },
+    {
+      "id": "loc-gram-c2-20",
+      "palaceId": "pal-gram-c2",
+      "zoneId": "zon-gram-c2-brazos",
+      "routeNo": 20,
+      "partName": "Muñeca izquierda",
+      "side": "front",
+      "pos": {
+        "x": 0.81,
+        "y": 0.56
+      },
+      "anchor": {
+        "text": "Get: usos múltiples"
+      }
+    },
+    {
+      "id": "loc-gram-c2-21",
+      "palaceId": "pal-gram-c2",
+      "zoneId": "zon-gram-c2-brazos",
+      "routeNo": 21,
+      "partName": "Mano derecha",
+      "side": "front",
+      "pos": {
+        "x": 0.175,
+        "y": 0.608
+      },
+      "anchor": {
+        "text": "Conectores de contraste"
+      }
+    },
+    {
+      "id": "loc-gram-c2-22",
+      "palaceId": "pal-gram-c2",
+      "zoneId": "zon-gram-c2-brazos",
+      "routeNo": 22,
+      "partName": "Mano izquierda",
+      "side": "front",
+      "pos": {
+        "x": 0.825,
+        "y": 0.608
+      },
+      "anchor": {
+        "text": "Conectores de causa y resultado"
+      }
+    },
+    {
+      "id": "loc-gram-c2-23",
+      "palaceId": "pal-gram-c2",
+      "zoneId": "zon-gram-c2-torso",
+      "routeNo": 23,
+      "partName": "Abdomen",
+      "side": "front",
+      "pos": {
+        "x": 0.5,
+        "y": 0.375
+      },
+      "anchor": {
+        "text": "Inversión tras adverbios negativos"
+      }
+    },
+    {
+      "id": "loc-gram-c2-24",
+      "palaceId": "pal-gram-c2",
+      "zoneId": "zon-gram-c2-torso",
+      "routeNo": 24,
+      "partName": "Ombligo",
+      "side": "front",
+      "pos": {
+        "x": 0.5,
+        "y": 0.43
+      },
+      "anchor": {
+        "text": "Inversión en condicionales"
+      }
+    },
+    {
+      "id": "loc-gram-c2-25",
+      "palaceId": "pal-gram-c2",
+      "zoneId": "zon-gram-c2-torso",
+      "routeNo": 25,
+      "partName": "Cadera derecha",
+      "side": "front",
+      "pos": {
+        "x": 0.34,
+        "y": 0.5
+      },
+      "anchor": {
+        "text": "Cleft sentences: It"
+      }
+    },
+    {
+      "id": "loc-gram-c2-26",
+      "palaceId": "pal-gram-c2",
+      "zoneId": "zon-gram-c2-torso",
+      "routeNo": 26,
+      "partName": "Cadera izquierda",
+      "side": "front",
+      "pos": {
+        "x": 0.66,
+        "y": 0.5
+      },
+      "anchor": {
+        "text": "Cleft sentences: What"
+      }
+    },
+    {
+      "id": "loc-gram-c2-27",
+      "palaceId": "pal-gram-c2",
+      "zoneId": "zon-gram-c2-torso",
+      "routeNo": 27,
+      "partName": "Muslo derecho",
+      "side": "front",
+      "pos": {
+        "x": 0.4,
+        "y": 0.63
+      },
+      "anchor": {
+        "text": "Fronting"
+      }
+    },
+    {
+      "id": "loc-gram-c2-28",
+      "palaceId": "pal-gram-c2",
+      "zoneId": "zon-gram-c2-torso",
+      "routeNo": 28,
+      "partName": "Muslo izquierdo",
+      "side": "front",
+      "pos": {
+        "x": 0.6,
+        "y": 0.63
+      },
+      "anchor": {
+        "text": "Emphatic do"
+      }
+    },
+    {
+      "id": "loc-gram-c2-29",
+      "palaceId": "pal-gram-c2",
+      "zoneId": "zon-gram-c2-torso",
+      "routeNo": 29,
+      "partName": "Rodilla derecha",
+      "side": "front",
+      "pos": {
+        "x": 0.405,
+        "y": 0.752
+      },
+      "anchor": {
+        "text": "Ellipsis"
+      }
+    },
+    {
+      "id": "loc-gram-c2-30",
+      "palaceId": "pal-gram-c2",
+      "zoneId": "zon-gram-c2-torso",
+      "routeNo": 30,
+      "partName": "Rodilla izquierda",
+      "side": "front",
+      "pos": {
+        "x": 0.595,
+        "y": 0.752
+      },
+      "anchor": {
+        "text": "Substitution: so / not / one"
+      }
+    },
+    {
+      "id": "loc-gram-c2-31",
+      "palaceId": "pal-gram-c2",
+      "zoneId": "zon-gram-c2-torso",
+      "routeNo": 31,
+      "partName": "Espinilla derecha",
+      "side": "front",
+      "pos": {
+        "x": 0.41,
+        "y": 0.84
+      },
+      "anchor": {
+        "text": "Participle clauses"
+      }
+    },
+    {
+      "id": "loc-gram-c2-32",
+      "palaceId": "pal-gram-c2",
+      "zoneId": "zon-gram-c2-torso",
+      "routeNo": 32,
+      "partName": "Espinilla izquierda",
+      "side": "front",
+      "pos": {
+        "x": 0.59,
+        "y": 0.84
+      },
+      "anchor": {
+        "text": "Purpose clauses"
+      }
+    },
+    {
+      "id": "loc-gram-c2-33",
+      "palaceId": "pal-gram-c2",
+      "zoneId": "zon-gram-c2-torso",
+      "routeNo": 33,
+      "partName": "Tobillo derecho",
+      "side": "front",
+      "pos": {
+        "x": 0.39,
+        "y": 0.93
+      },
+      "anchor": {
+        "text": "Concesión: although / despite"
+      }
+    },
+    {
+      "id": "loc-gram-c2-34",
+      "palaceId": "pal-gram-c2",
+      "zoneId": "zon-gram-c2-torso",
+      "routeNo": 34,
+      "partName": "Tobillo izquierdo",
+      "side": "front",
+      "pos": {
+        "x": 0.61,
+        "y": 0.93
+      },
+      "anchor": {
+        "text": "As if / as though"
+      }
+    },
+    {
+      "id": "loc-gram-c2-35",
+      "palaceId": "pal-gram-c2",
+      "zoneId": "zon-gram-c2-torso",
+      "routeNo": 35,
+      "partName": "Pie derecho",
+      "side": "front",
+      "pos": {
+        "x": 0.42,
+        "y": 0.972
+      },
+      "anchor": {
+        "text": "Subjunctive"
+      }
+    },
+    {
+      "id": "loc-gram-c2-36",
+      "palaceId": "pal-gram-c2",
+      "zoneId": "zon-gram-c2-torso",
+      "routeNo": 36,
+      "partName": "Pie izquierdo",
+      "side": "front",
+      "pos": {
+        "x": 0.58,
+        "y": 0.972
+      },
+      "anchor": {
+        "text": "Hedging & distancing"
+      }
+    },
+    {
+      "id": "loc-gram-c2-37",
+      "palaceId": "pal-gram-c2",
+      "zoneId": "zon-gram-c2-piernas",
+      "routeNo": 37,
+      "partName": "Nuca",
+      "side": "back",
+      "pos": {
+        "x": 0.5,
+        "y": 0.15
+      },
+      "anchor": {
+        "text": "Prefixes"
+      }
+    },
+    {
+      "id": "loc-gram-c2-38",
+      "palaceId": "pal-gram-c2",
+      "zoneId": "zon-gram-c2-piernas",
+      "routeNo": 38,
+      "partName": "Omóplato izquierdo",
+      "side": "back",
+      "pos": {
+        "x": 0.32,
+        "y": 0.26
+      },
+      "anchor": {
+        "text": "Suffixes"
+      }
+    },
+    {
+      "id": "loc-gram-c2-39",
+      "palaceId": "pal-gram-c2",
+      "zoneId": "zon-gram-c2-piernas",
+      "routeNo": 39,
+      "partName": "Omóplato derecho",
+      "side": "back",
+      "pos": {
+        "x": 0.68,
+        "y": 0.26
+      },
+      "anchor": {
+        "text": "Noun formation"
+      }
+    },
+    {
+      "id": "loc-gram-c2-40",
+      "palaceId": "pal-gram-c2",
+      "zoneId": "zon-gram-c2-piernas",
+      "routeNo": 40,
+      "partName": "Columna alta",
+      "side": "back",
+      "pos": {
+        "x": 0.5,
+        "y": 0.3
+      },
+      "anchor": {
+        "text": "Compound adjectives"
+      }
+    },
+    {
+      "id": "loc-gram-c2-41",
+      "palaceId": "pal-gram-c2",
+      "zoneId": "zon-gram-c2-piernas",
+      "routeNo": 41,
+      "partName": "Columna media",
+      "side": "back",
+      "pos": {
+        "x": 0.5,
+        "y": 0.38
+      },
+      "anchor": {
+        "text": "Formal vs informal register"
+      }
+    },
+    {
+      "id": "loc-gram-c2-42",
+      "palaceId": "pal-gram-c2",
+      "zoneId": "zon-gram-c2-piernas",
+      "routeNo": 42,
+      "partName": "Lumbar",
+      "side": "back",
+      "pos": {
+        "x": 0.5,
+        "y": 0.46
+      },
+      "anchor": {
+        "text": "Discourse markers"
+      }
+    },
+    {
+      "id": "loc-gram-c2-43",
+      "palaceId": "pal-gram-c2",
+      "zoneId": "zon-gram-c2-piernas",
+      "routeNo": 43,
+      "partName": "Nalga izquierda",
+      "side": "back",
+      "pos": {
+        "x": 0.42,
+        "y": 0.56
+      },
+      "anchor": {
+        "text": "Indirect questions"
+      }
+    },
+    {
+      "id": "loc-gram-c2-44",
+      "palaceId": "pal-gram-c2",
+      "zoneId": "zon-gram-c2-piernas",
+      "routeNo": 44,
+      "partName": "Nalga derecha",
+      "side": "back",
+      "pos": {
+        "x": 0.58,
+        "y": 0.56
+      },
+      "anchor": {
+        "text": "There / it como sujeto"
+      }
+    },
+    {
+      "id": "loc-gram-c2-45",
+      "palaceId": "pal-gram-c2",
+      "zoneId": "zon-gram-c2-piernas",
+      "routeNo": 45,
+      "partName": "Corva izquierda",
+      "side": "back",
+      "pos": {
+        "x": 0.405,
+        "y": 0.75
+      },
+      "anchor": {
+        "text": "All / both / either"
+      }
+    },
+    {
+      "id": "loc-gram-c2-46",
+      "palaceId": "pal-gram-c2",
+      "zoneId": "zon-gram-c2-piernas",
+      "routeNo": 46,
+      "partName": "Corva derecha",
+      "side": "back",
+      "pos": {
+        "x": 0.595,
+        "y": 0.75
+      },
+      "anchor": {
+        "text": "Neither / nor"
+      }
+    },
+    {
+      "id": "loc-gram-c2-47",
+      "palaceId": "pal-gram-c2",
+      "zoneId": "zon-gram-c2-piernas",
+      "routeNo": 47,
+      "partName": "Pantorrilla izquierda",
+      "side": "back",
+      "pos": {
+        "x": 0.41,
+        "y": 0.82
+      },
+      "anchor": {
+        "text": "Question words + -ever"
+      }
+    },
+    {
+      "id": "loc-gram-c2-48",
+      "palaceId": "pal-gram-c2",
+      "zoneId": "zon-gram-c2-piernas",
+      "routeNo": 48,
+      "partName": "Pantorrilla derecha",
+      "side": "back",
+      "pos": {
+        "x": 0.59,
+        "y": 0.82
+      },
+      "anchor": {
+        "text": "Numbers & fractions"
+      }
+    },
+    {
+      "id": "loc-gram-c2-49",
+      "palaceId": "pal-gram-c2",
+      "zoneId": "zon-gram-c2-piernas",
+      "routeNo": 49,
+      "partName": "Talón izquierdo",
+      "side": "back",
+      "pos": {
+        "x": 0.42,
+        "y": 0.97
+      },
+      "anchor": {
+        "text": "Punctuation & commas"
+      }
+    },
+    {
+      "id": "loc-gram-c2-50",
+      "palaceId": "pal-gram-c2",
+      "zoneId": "zon-gram-c2-piernas",
+      "routeNo": 50,
+      "partName": "Talón derecho",
+      "side": "back",
+      "pos": {
+        "x": 0.58,
+        "y": 0.97
+      },
+      "anchor": {
+        "text": "Errores típicos C1"
+      }
+    }
+  ],
+  "sceneObjects": [],
+  "items": [],
+  "decks": [
+    {
+      "id": "dck-gramatica-c1",
+      "name": "Gramática C1 · 100 elementos",
+      "description": "Los 100 elementos del plan, repartidos en dos cuerpos de 50 puntos.",
+      "templateId": "tpl-gramatica-c1",
+      "scheduleId": "sch-r10"
+    }
+  ],
+  "templates": [
+    {
+      "id": "tpl-gramatica-c1",
+      "name": "Gramática C1",
+      "description": "Un elemento de gramática inglesa, con su regla, su forma y sus trampas.",
+      "fields": [
+        {
+          "key": "rule",
+          "label": "Regla en una frase",
+          "kind": "text"
+        },
+        {
+          "key": "definition",
+          "label": "Definición",
+          "kind": "longtext"
+        },
+        {
+          "key": "formula",
+          "label": "Fórmula",
+          "kind": "text",
+          "hint": "S + have/has + participio"
+        },
+        {
+          "key": "conjugation",
+          "label": "Tabla de conjugación",
+          "kind": "table"
+        },
+        {
+          "key": "parts",
+          "label": "Sub-elementos",
+          "kind": "object",
+          "hint": "pieza · función · apreciación · ejemplo · dato interesante"
+        },
+        {
+          "key": "examples",
+          "label": "Ejemplos EN/ES",
+          "kind": "list"
+        },
+        {
+          "key": "typicalError",
+          "label": "Error típico",
+          "kind": "text"
+        },
+        {
+          "key": "exceptions",
+          "label": "Excepciones",
+          "kind": "list"
+        },
+        {
+          "key": "confusion",
+          "label": "Confusión común",
+          "kind": "text"
+        },
+        {
+          "key": "tip",
+          "label": "Tip",
+          "kind": "text"
+        },
+        {
+          "key": "links",
+          "label": "Conexiones",
+          "kind": "list"
+        }
+      ],
+      "blockOrder": [
+        "text",
+        "note",
+        "table",
+        "list",
+        "bilingual",
+        "error"
+      ]
+    }
+  ],
+  "schedules": []
+}

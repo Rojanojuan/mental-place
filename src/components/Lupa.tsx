@@ -1,7 +1,8 @@
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import type { ID, Locus, LocusState, PalaceStyle } from '@/domain/types';
 import { BodyMap } from './BodyMap';
 import { diametroSinSolape, recorteDenso } from './lupa-crop';
+import { esEscritorio } from './reveal';
 import './lupa.css';
 
 /**
@@ -29,17 +30,32 @@ export function Lupa({
   title?: string | undefined;
 }) {
   const recorte = useMemo(() => recorteDenso(loci, side), [loci, side]);
+  /*
+   * Plegada en el teléfono. Abierta, el cuerpo + la lupa + la lista de ruta
+   * volvían a llenar la pantalla y empujaban el detalle fuera de vista, que es
+   * el problema de D-077 otra vez. En escritorio hay sitio de sobra.
+   */
+  const [abierta, setAbierta] = useState(esEscritorio);
   if (recorte === null) return null;
 
   // Solo los del lado que se amplía: los del otro cuerpo caerían encima.
   const visibles = loci.filter((l) => l.side === side);
+  const densos = visibles.filter((l) => l.dense === true).length;
   // El tamaño lo decide el hueco disponible, no un porcentaje fijo: agrandar
   // los pines a ojo los volvía a amontonar.
   const pin = diametroSinSolape(visibles, recorte);
 
   return (
-    <figure className="lupa">
-      <figcaption className="lupa__title">{title ?? 'Lupa · puntos juntos'}</figcaption>
+    <details
+      className="lupa"
+      open={abierta}
+      onToggle={(event) => {
+        setAbierta(event.currentTarget.open);
+      }}
+    >
+      <summary className="lupa__title">
+        {title ?? 'Lupa'} · {densos} puntos juntos
+      </summary>
       <div className="lupa__circle">
         <BodyMap
           loci={visibles}
@@ -52,9 +68,9 @@ export function Lupa({
           selectedIds={selectedId === null ? [] : [selectedId]}
           onLocusTap={onLocusTap}
           pinLabelPrefix="Lupa"
-          label={`${title ?? 'Lupa'}: ${String(visibles.filter((l) => l.dense === true).length)} puntos ampliados`}
+          label={`${title ?? 'Lupa'}: ${String(densos)} puntos ampliados`}
         />
       </div>
-    </figure>
+    </details>
   );
 }

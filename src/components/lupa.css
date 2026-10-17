@@ -3,19 +3,33 @@
 
 .lupa {
   margin: var(--space-3) 0 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: var(--space-2);
 }
 
+/* Plegable: en el telefono viene cerrada, porque el cuerpo, la lupa y la
+   lista de ruta juntos empujan el detalle fuera de pantalla. */
 .lupa__title {
-  font-size: 11px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  min-height: var(--hit);
+  font-size: 12px;
+  color: var(--text-2);
+  cursor: pointer;
+  border-radius: var(--radius-md);
+}
+
+.lupa__title:hover {
+  background: var(--surface-2);
+  color: var(--text);
+}
+
+.lupa[open] .lupa__title {
   color: var(--text-3);
-  text-align: center;
 }
 
 .lupa__circle {
+  margin: var(--space-2) auto 0;
   width: 100%;
   max-width: 260px;
   aspect-ratio: 1;

@@ -101,6 +101,8 @@ describe('la lupa en pantalla', () => {
 
   it('enseña los puntos amontonados con su número', () => {
     const { container } = render(<Lupa loci={LOCI} statusByLocus={estados} />);
+    // En jsdom no hay `matchMedia` de ancho real: la lupa nace cerrada, pero
+    // el contenido está en el DOM igual (es `<details>`, no un condicional).
     const numeros = [...container.querySelectorAll('.lupa__map text')].map((t) => t.textContent);
     // Los 15 densos de la cabeza, cada uno con su número de ruta.
     expect(numeros).toContain('1');
@@ -114,6 +116,11 @@ describe('la lupa en pantalla', () => {
     const pin = screen.getAllByRole('button', { name: /^Lupa:/ })[0]!;
     await userEvent.click(pin);
     expect(onLocusTap).toHaveBeenCalledTimes(1);
+  });
+
+  it('dice cuántos puntos agrupa, para saber si merece abrirla', () => {
+    render(<Lupa loci={LOCI} statusByLocus={estados} />);
+    expect(screen.getByText(/15 puntos juntos/)).toBeInTheDocument();
   });
 
   it('no se pinta si no hay puntos amontonados', () => {
