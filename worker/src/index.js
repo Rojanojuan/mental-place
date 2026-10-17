@@ -24,6 +24,15 @@ const MAX_FECHAS = 60;
 const CADUCA_MS = 6 * 60 * 60 * 1000;
 /** Sin noticias de un dispositivo en este tiempo, se olvida. */
 const OLVIDO_MS = 90 * 24 * 60 * 60 * 1000;
+/**
+ * La lista de dispositivos, en **una sola clave**.
+ *
+ * KV regala 100 000 lecturas al día pero solo 1 000 `list`, y el cron corre
+ * una vez por minuto: 1 440 `list` no caben, 1 440 lecturas sobran de largo.
+ * Por eso el índice se lee con un `get` y el cron puede ir al minuto en vez de
+ * cada cinco (D-093).
+ */
+const INDICE = 'indice';
 
 const CORS = {
   'Access-Control-Allow-Origin': '*',
@@ -134,10 +143,12 @@ export default {
         return json({ error: 'falta la suscripción' }, 400);
       }
       const fechas = limpiarFechas(cuerpo?.dueAts ?? [], Date.now());
+      const clave = await claveDe(sub.endpoint);
       await env.AVISOS.put(
-        await claveDe(sub.endpoint),
+        clave,
         JSON.stringify({ subscription: sub, dueAts: fechas, visto: Date.now() }),
       );
+      await anotarEnIndice(env, clave);
       return json({ ok: true, programados: fechas.length });
     }
 
@@ -149,7 +160,9 @@ export default {
         return json({ error: 'cuerpo ilegible' }, 400);
       }
       if (!cuerpo?.endpoint) return json({ error: 'falta el endpoint' }, 400);
-      await env.AVISOS.delete(await claveDe(cuerpo.endpoint));
+      const clave = await claveDe(cuerpo.endpoint);
+      await env.AVISOS.delete(clave);
+      await olvidar(env, clave);
       return json({ ok: true });
     }
 
@@ -162,41 +175,75 @@ export default {
   },
 };
 
+/** Añade una clave al índice, si no estaba. */
+async function anotarEnIndice(env, clave) {
+  const claves = await leerIndice(env);
+  if (claves.includes(clave)) return;
+  claves.push(clave);
+  await env.AVISOS.put(INDICE, JSON.stringify(claves));
+}
+
+/** Quita una clave del índice. */
+async function olvidar(env, clave) {
+  const claves = await leerIndice(env);
+  const quedan = claves.filter((k) => k !== clave);
+  if (quedan.length !== claves.length) {
+    await env.AVISOS.put(INDICE, JSON.stringify(quedan));
+  }
+}
+
+export async function leerIndice(env) {
+  const crudo = await env.AVISOS.get(INDICE);
+  if (!crudo) return [];
+  try {
+    const valor = JSON.parse(crudo);
+    return Array.isArray(valor) ? valor : [];
+  } catch {
+    return [];
+  }
+}
+
 export async function repartir(env) {
   const ahora = Date.now();
-  let cursor;
+  const claves = await leerIndice(env);
+  const caducadas = [];
   let enviados = 0;
 
-  do {
-    const lista = await env.AVISOS.list({ prefix: 'sub:', cursor });
-    cursor = lista.list_complete ? undefined : lista.cursor;
-
-    for (const entrada of lista.keys) {
-      const crudo = await env.AVISOS.get(entrada.name);
-      if (!crudo) continue;
-      const registro = JSON.parse(crudo);
-
-      // Un dispositivo que lleva meses sin dar señales se olvida.
-      if (ahora - (registro.visto ?? 0) > OLVIDO_MS) {
-        await env.AVISOS.delete(entrada.name);
-        continue;
-      }
-
-      if (!tocaAvisar(registro.dueAts ?? [], ahora)) continue;
-
-      const respuesta = await empujar(registro.subscription, env);
-      // 404/410: el navegador tiró la suscripción. Se borra y ya.
-      if (respuesta.status === 404 || respuesta.status === 410) {
-        await env.AVISOS.delete(entrada.name);
-        continue;
-      }
-
-      // Lo avisado se quita, para no repetirlo en el siguiente cron.
-      registro.dueAts = (registro.dueAts ?? []).filter((f) => f > ahora);
-      await env.AVISOS.put(entrada.name, JSON.stringify(registro));
-      enviados += 1;
+  for (const clave of claves) {
+    const crudo = await env.AVISOS.get(clave);
+    if (!crudo) {
+      caducadas.push(clave);
+      continue;
     }
-  } while (cursor);
+    const registro = JSON.parse(crudo);
 
+    // Un dispositivo que lleva meses sin dar señales se olvida.
+    if (ahora - (registro.visto ?? 0) > OLVIDO_MS) {
+      await env.AVISOS.delete(clave);
+      caducadas.push(clave);
+      continue;
+    }
+
+    if (!tocaAvisar(registro.dueAts ?? [], ahora)) continue;
+
+    const respuesta = await empujar(registro.subscription, env);
+    // 404/410: el navegador tiró la suscripción. Se borra y ya.
+    if (respuesta.status === 404 || respuesta.status === 410) {
+      await env.AVISOS.delete(clave);
+      caducadas.push(clave);
+      continue;
+    }
+
+    // Lo avisado se quita, para no repetirlo en el siguiente minuto.
+    registro.dueAts = (registro.dueAts ?? []).filter((f) => f > ahora);
+    await env.AVISOS.put(clave, JSON.stringify(registro));
+    enviados += 1;
+  }
+
+  // El índice solo se reescribe si de verdad cambió: es una escritura, y de
+  // esas solo hay 1 000 al día.
+  if (caducadas.length > 0) {
+    await env.AVISOS.put(INDICE, JSON.stringify(claves.filter((k) => !caducadas.includes(k))));
+  }
   return enviados;
 }

@@ -4,10 +4,11 @@ name = "palacio-avisos"
 main = "src/index.js"
 compatibility_date = "2026-01-01"
 
-# Cada cinco minutos: con los checkpoints cortos de R10 (10 min) es el grano
-# más fino que tiene sentido sin gastar ejecuciones de balde.
+# Cada minuto. El primer checkpoint de R10 son 10 minutos, así que esperar
+# cinco sería la mitad del intervalo. Cabe en el plan gratuito porque el cron
+# lee el índice con un `get` y no con un `list` (ver src/index.js, D-093).
 [triggers]
-crons = ["*/5 * * * *"]
+crons = ["* * * * *"]
 
 # Dónde se guardan las suscripciones. El id lo da `wrangler kv namespace create`.
 [[kv_namespaces]]

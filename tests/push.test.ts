@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 // El Worker es JavaScript plano: se importa igual que cualquier módulo.
-import { limpiarFechas, tocaAvisar } from '../worker/src/index.js';
+import { leerIndice, limpiarFechas, repartir, tocaAvisar } from '../worker/src/index.js';
 import { claveABytes } from '@/features/notifications/push';
 
 const AHORA = Date.UTC(2026, 9, 17, 12, 0, 0);
@@ -63,5 +63,83 @@ describe('la clave pública para suscribirse', () => {
   it('acepta las que vienen sin relleno', () => {
     expect(claveABytes('AQAB')).toHaveLength(3);
     expect(() => claveABytes('AQA')).not.toThrow();
+  });
+});
+
+describe('el reparto del cron', () => {
+  /** Un KV de mentira que además cuenta las operaciones que se gastan. */
+  function kvFalso(inicial: Record<string, string> = {}) {
+    const datos = new Map(Object.entries(inicial));
+    const ops = { get: 0, put: 0, delete: 0 };
+    return {
+      ops,
+      datos,
+      env: {
+        AVISOS: {
+          get: (k: string) => {
+            ops.get += 1;
+            return Promise.resolve(datos.get(k) ?? null);
+          },
+          put: (k: string, v: string) => {
+            ops.put += 1;
+            datos.set(k, v);
+            return Promise.resolve();
+          },
+          delete: (k: string) => {
+            ops.delete += 1;
+            datos.delete(k);
+            return Promise.resolve();
+          },
+        },
+      },
+    };
+  }
+
+  it('sin dispositivos no gasta más que una lectura', async () => {
+    const kv = kvFalso();
+    expect(await repartir(kv.env)).toBe(0);
+    // Una sola: la del índice. Nada de `list`, que es lo que está limitado.
+    expect(kv.ops.get).toBe(1);
+    expect(kv.ops.put).toBe(0);
+  });
+
+  it('olvida al dispositivo cuyo registro ya no está', async () => {
+    const kv = kvFalso({ indice: JSON.stringify(['sub:fantasma']) });
+    await repartir(kv.env);
+    expect(await leerIndice(kv.env)).toEqual([]);
+  });
+
+  it('olvida al que lleva meses sin dar señales', async () => {
+    const viejo = Date.now() - 200 * 24 * 60 * 60 * 1000;
+    const kv = kvFalso({
+      indice: JSON.stringify(['sub:a']),
+      'sub:a': JSON.stringify({
+        subscription: { endpoint: 'https://push/x' },
+        dueAts: [],
+        visto: viejo,
+      }),
+    });
+    await repartir(kv.env);
+    expect(kv.datos.has('sub:a')).toBe(false);
+    expect(await leerIndice(kv.env)).toEqual([]);
+  });
+
+  it('a quien no le toca, no lo toca: ni una escritura', async () => {
+    const kv = kvFalso({
+      indice: JSON.stringify(['sub:a']),
+      'sub:a': JSON.stringify({
+        subscription: { endpoint: 'https://push/x' },
+        dueAts: [Date.now() + 60 * 60_000],
+        visto: Date.now(),
+      }),
+    });
+    expect(await repartir(kv.env)).toBe(0);
+    expect(kv.ops.put).toBe(0);
+  });
+
+  it('un índice corrupto no tumba el cron', async () => {
+    const kv = kvFalso({ indice: 'esto no es json' });
+    expect(await leerIndice(kv.env)).toEqual([]);
+    expect(await repartir(kv.env)).toBe(0);
   });
 });

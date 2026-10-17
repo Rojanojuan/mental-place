@@ -105,12 +105,15 @@ Listo. Estudia algo y verás llegar el aviso en el minuto del siguiente checkpoi
 | No sale la sección de avisos a la hora exacta | Faltan las variables del paso 5, o no diste permiso de notificaciones.   |
 | «Falta instalar la app»                     | Estás en una pestaña de Safari. Compartir → Añadir a pantalla de inicio. |
 | Se activa pero no llega nada                | Mira los registros: `npx wrangler tail` desde `worker/`.                 |
-| Llegó tarde                                 | El cron va cada 5 minutos: ese es el margen. Se ajusta en `wrangler.toml`. |
+| Llegó tarde                                 | El cron va cada minuto, así que el margen es < 60 s más lo que tarde Apple en entregar. |
 
 ## Lo que cuesta
 
-Nada. El plan gratuito de Cloudflare da 100 000 peticiones al día y 1 000 escrituras de KV; un
-cron cada cinco minutos son 288 ejecuciones diarias.
+Nada, y con holgura. El plan gratuito da 100 000 lecturas de KV al día, 1 000 escrituras y 100 000
+peticiones al Worker. Con un dispositivo se gastan **1 440 lecturas** (el cron, una por minuto) y
+**unas 50 escrituras**. El cron lee el índice con un `get` y no con un `list` a propósito: de
+`list` solo hay 1 000 al día y era lo que obligaba a esperar cinco minutos entre avisos
+(`docs/DECISIONES.md` D-093).
 
 ## Si prefieres no montarlo
 

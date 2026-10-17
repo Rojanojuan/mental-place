@@ -17,6 +17,17 @@ const SERVIDOR = import.meta.env.VITE_PUSH_SERVER ?? '';
 const CLAVE_PUBLICA = import.meta.env.VITE_VAPID_PUBLIC_KEY ?? '';
 /** Cuántos repasos por delante se anuncian; el resto, al siguiente arranque. */
 const HORIZONTE_DIAS = 45;
+/**
+ * Descanso entre envíos al servidor.
+ *
+ * Se llama al calificar, y una sesión larga son decenas de tarjetas. Cada
+ * envío es una escritura en KV, y de esas el plan gratuito da 1 000 al día:
+ * sin este descanso, una sesión de 200 tarjetas se come la quinta parte de la
+ * cuota para decir casi lo mismo (D-093).
+ */
+const DESCANSO_MS = 60_000;
+
+let ultimoEnvio = 0;
 
 export type PushState =
   /** El navegador no lo trae, o no hay servidor configurado. */
@@ -82,13 +93,15 @@ export async function fechasPendientes(now = new Date()): Promise<number[]> {
  * Se llama al activarlo y **cada vez que cambia la cola** (al calificar), que
  * es cuando las fechas dejan de ser las que el servidor tenía.
  */
-export async function syncPush(now = new Date()): Promise<boolean> {
+export async function syncPush(now = new Date(), forzar = false): Promise<boolean> {
   if (!pushDisponible()) return false;
+  if (!forzar && now.getTime() - ultimoEnvio < DESCANSO_MS) return false;
   const registro = await navigator.serviceWorker.getRegistration();
   const subscription = await registro?.pushManager.getSubscription();
   if (!subscription) return false;
 
   const dueAts = await fechasPendientes(now);
+  ultimoEnvio = now.getTime();
   const respuesta = await fetch(`${SERVIDOR}/suscribir`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -113,7 +126,8 @@ export async function enablePush(now = new Date()): Promise<PushState> {
     }));
 
   await setSetting(PUSH_KEY, subscription.endpoint);
-  await syncPush(now);
+  // Al activarlo sí se fuerza: es lo que el usuario acaba de pedir.
+  await syncPush(now, true);
   return 'on';
 }
 

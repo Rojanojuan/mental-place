@@ -848,3 +848,27 @@ olvida; y las fechas ya avisadas se quitan para no repetir el aviso en el siguie
 Las fechas se reenvían **al calificar**, porque entonces la cola cambia y las que el servidor tenía
 dejan de valer. Se mandan las de 45 días por delante: si no abres la app en mes y medio, el aviso
 se para —y entonces el problema no es el aviso—.
+
+### D-093 · La precisión del aviso la decidía una cuota de KV
+
+El cron iba cada cinco minutos, y eso no era una elección de diseño sino una consecuencia: el
+reparto recorría los dispositivos con `AVISOS.list()`, y el plan gratuito de Workers KV da **100
+000 lecturas al día pero solo 1 000 `list`**. Un cron al minuto son 1 440 ejecuciones: no cabía.
+
+El problema es que el **primer checkpoint de R10 son 10 minutos**. Esperar cinco es la mitad del
+intervalo —un aviso que llega a los 14 minutos de un repaso de 10 ya no es el aviso que se pidió—.
+
+Se cambia el `list` por un **índice en una sola clave**: las claves de los dispositivos viven en
+una entrada de KV que el cron lee con un `get`. 1 440 lecturas al día frente a las 100 000 del
+plan, así que el cron puede ir **al minuto** y el aviso llega con menos de 60 s de retraso.
+
+De paso, dos escrituras que se iban de las manos:
+
+- El índice solo se reescribe cuando de verdad cambia (un dispositivo nuevo o uno que se cae), no
+  en cada pasada.
+- El cliente reenvía sus fechas **como mucho una vez por minuto**. Se llamaba al calificar, y una
+  sesión de 200 tarjetas eran 200 escrituras: la quinta parte de la cuota diaria para decir casi
+  lo mismo. Al activar el aviso sí se fuerza, porque es lo que el usuario acaba de pedir.
+
+Cuentas del día, con un dispositivo: 1 440 lecturas (cron) + ~50 escrituras (sesiones y avisos),
+contra 100 000 y 1 000. Sobra sitio.
