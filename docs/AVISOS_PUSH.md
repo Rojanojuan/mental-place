@@ -1,0 +1,119 @@
+# Avisos con la app cerrada — puesta en marcha
+
+Diez minutos, una vez. Al final, el iPhone avisa a la hora del repaso aunque la app esté cerrada.
+
+Por qué hace falta un servidor y no se puede de otra forma: `docs/DECISIONES.md` D-091.
+
+---
+
+## Lo que vas a montar
+
+```
+iPhone (app instalada)                 Cloudflare (gratis)
+┌──────────────────────┐               ┌─────────────────────────┐
+│ Se suscribe y manda  │ ──POST────▶   │ Worker                  │
+│ SOLO las fechas      │               │  KV: { endpoint, fechas }│
+│                      │               │                         │
+│                      │               │ Cron cada 5 min         │
+│ Service worker       │ ◀──push────   │  ¿alguna fecha llegó?   │
+│  cuenta los vencidos │   (vacío)     └─────────────────────────┘
+│  y escribe el aviso  │
+└──────────────────────┘
+```
+
+**Tu contenido no sale del teléfono.** El servidor guarda marcas de tiempo y nada más; el push va
+vacío y el aviso lo escribe el móvil leyendo su propia base.
+
+---
+
+## 1 · Las claves
+
+```bash
+npm run vapid
+```
+
+Escupe dos claves. La **pública** no es secreta; la **privada** no se comparte ni se sube al repo.
+
+## 2 · La cuenta y el almacén
+
+Crea una cuenta gratuita en <https://dash.cloudflare.com> y luego, desde la carpeta `worker/`:
+
+```bash
+cd worker
+npx wrangler login
+npx wrangler kv namespace create AVISOS
+```
+
+El último comando imprime un `id`. Cópialo en `worker/wrangler.toml`, en `[[kv_namespaces]]`.
+
+## 3 · Configura el Worker
+
+En `worker/wrangler.toml`:
+
+- `VAPID_PUBLIC_KEY` → la pública del paso 1.
+- `VAPID_SUBJECT` → `mailto:tu-correo` (lo piden los servicios de push por si hay problemas).
+
+La privada va como secreto, **nunca** en el archivo:
+
+```bash
+npx wrangler secret put VAPID_PRIVATE_KEY
+# y pega el JSON completo: {"d":"…","x":"…","y":"…"}
+```
+
+## 4 · Despliega
+
+```bash
+npx wrangler deploy
+```
+
+Te da una URL del tipo `https://palacio-avisos.TU-CUENTA.workers.dev`. Compruébala:
+
+```bash
+curl https://palacio-avisos.TU-CUENTA.workers.dev/clave-publica
+```
+
+Debe responder con tu clave pública.
+
+## 5 · Dile a la app dónde está
+
+En GitHub: **Settings → Secrets and variables → Actions → Variables → New repository variable**.
+Dos variables:
+
+| Nombre                  | Valor                                          |
+| ----------------------- | ---------------------------------------------- |
+| `VITE_PUSH_SERVER`      | `https://palacio-avisos.TU-CUENTA.workers.dev` |
+| `VITE_VAPID_PUBLIC_KEY` | la clave pública del paso 1                    |
+
+Son **variables**, no secretos: viajan dentro de la app y no son secretas. Al siguiente empujón a
+`main`, el despliegue las recoge solo.
+
+## 6 · En el iPhone
+
+1. Abre la app **instalada** desde la pantalla de inicio. En una pestaña de Safari, iOS no deja
+   avisar: la propia pantalla te lo dirá.
+2. **Datos → Permitir avisos**.
+3. **Datos → Activar avisos a la hora exacta**.
+
+Listo. Estudia algo y verás llegar el aviso en el minuto del siguiente checkpoint.
+
+---
+
+## Si algo no va
+
+| Qué ves                                     | Qué pasa                                                                 |
+| ------------------------------------------- | ------------------------------------------------------------------------ |
+| No sale la sección de avisos a la hora exacta | Faltan las variables del paso 5, o no diste permiso de notificaciones.   |
+| «Falta instalar la app»                     | Estás en una pestaña de Safari. Compartir → Añadir a pantalla de inicio. |
+| Se activa pero no llega nada                | Mira los registros: `npx wrangler tail` desde `worker/`.                 |
+| Llegó tarde                                 | El cron va cada 5 minutos: ese es el margen. Se ajusta en `wrangler.toml`. |
+
+## Lo que cuesta
+
+Nada. El plan gratuito de Cloudflare da 100 000 peticiones al día y 1 000 escrituras de KV; un
+cron cada cinco minutos son 288 ejecuciones diarias.
+
+## Si prefieres no montarlo
+
+La app funciona igual sin esto: avisa al abrirla y en el minuto exacto mientras esté abierta, y
+puedes exportar los repasos al calendario del teléfono desde **Datos**, que da alarma a la hora
+exacta sin servidor ninguno.

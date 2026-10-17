@@ -1,0 +1,23 @@
+# El servidor de avisos. Se despliega con `npx wrangler deploy` desde esta
+# carpeta; ver docs/AVISOS_PUSH.md.
+name = "palacio-avisos"
+main = "src/index.js"
+compatibility_date = "2026-01-01"
+
+# Cada cinco minutos: con los checkpoints cortos de R10 (10 min) es el grano
+# más fino que tiene sentido sin gastar ejecuciones de balde.
+[triggers]
+crons = ["*/5 * * * *"]
+
+# Dónde se guardan las suscripciones. El id lo da `wrangler kv namespace create`.
+[[kv_namespaces]]
+binding = "AVISOS"
+id = "PON_AQUI_EL_ID"
+
+[vars]
+# La pública no es secreta: viaja en la app al suscribirse.
+VAPID_PUBLIC_KEY = "PON_AQUI_LA_PUBLICA"
+VAPID_SUBJECT = "mailto:tu-correo@example.com"
+
+# La privada NO va aquí. Se pone con:
+#   npx wrangler secret put VAPID_PRIVATE_KEY

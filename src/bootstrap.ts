@@ -3,6 +3,7 @@ import type { Bundle } from '@/domain/types';
 import { type PalacioDB, db, ensurePresets, importBundle, isEmpty } from '@/db';
 import { runAutoBackup } from '@/features/import-export/autobackup';
 import { notifyDue } from '@/features/notifications/notify';
+import { syncPush } from '@/features/notifications/push';
 import { scheduleNextDue } from '@/features/notifications/timer';
 
 export interface BootstrapResult {
@@ -41,6 +42,9 @@ let programado: { cancel: () => void } | null = null;
 export function rearmarAviso(): void {
   programado?.cancel();
   programado = scheduleNextDue();
+  // Y el servidor de push, que tenía las fechas viejas. Si no hay servidor
+  // configurado no hace nada.
+  void syncPush().catch(() => undefined);
 }
 
 /**

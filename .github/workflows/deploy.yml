@@ -39,6 +39,10 @@ jobs:
         env:
           # Pages sirve el repositorio bajo su nombre, no en la raíz.
           BASE_PATH: /mental-place/
+          # El servidor de avisos. Si no están, la app simplemente no ofrece
+          # el aviso con la app cerrada (docs/AVISOS_PUSH.md).
+          VITE_PUSH_SERVER: ${{ vars.VITE_PUSH_SERVER }}
+          VITE_VAPID_PUBLIC_KEY: ${{ vars.VITE_VAPID_PUBLIC_KEY }}
 
       # Un enlace directo a /sesion abierto antes de que el service worker
       # esté instalado llega a Pages como 404: se le da el mismo index.

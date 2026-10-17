@@ -30,7 +30,9 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["src", "tests"],
+  // `worker/` es el servidor de avisos: JavaScript plano que corre en
+  // Cloudflare. Solo entran sus tipos, para que los tests lo importen.
+  "include": ["src", "tests", "worker/src/index.d.ts"],
   // El service worker se comprueba aparte: usa la librería WebWorker, no DOM.
   "exclude": ["src/sw.ts"]
 }

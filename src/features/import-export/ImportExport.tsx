@@ -29,6 +29,13 @@ import {
   periodicReminderState,
   requestNotifyPermission,
 } from '@/features/notifications/notify';
+import {
+  type PushState,
+  disablePush,
+  enablePush,
+  pushDisponible,
+  pushState,
+} from '@/features/notifications/push';
 import { getBackup, listBackups } from './autobackup';
 import './import-export.css';
 
@@ -144,6 +151,11 @@ export function ImportExport() {
   // navegador, y solo responde si la app esta instalada.
   const [periodic, setPeriodic] = useState<PeriodicState | null>(null);
   const [ics, setIcs] = useState<number | null>(null);
+  const [push, setPush] = useState<PushState | null>(null);
+  useEffect(() => {
+    if (!pushDisponible()) return;
+    void pushState().then(setPush);
+  }, []);
   useEffect(() => {
     void periodicReminderState().then(setPeriodic);
   }, []);
@@ -347,6 +359,45 @@ export function ImportExport() {
                 </li>
               ))}
             </ul>
+          )}
+
+          {pushDisponible() && permission === 'granted' && (
+            <>
+              <h3>Avisarme a la hora del repaso, con la app cerrada</h3>
+              {push === 'needs-install' ? (
+                <p className="iox__hint">
+                  Falta instalar la app: en Safari,{' '}
+                  <strong>Compartir → Añadir a pantalla de inicio</strong>. En una pestaña del
+                  navegador, iOS no deja avisar.
+                </p>
+              ) : push === 'on' ? (
+                <>
+                  <p className="iox__hint">
+                    Activo. Llega el aviso aunque la app esté cerrada. El servidor solo guarda
+                    <strong> las fechas</strong>: lo que estudias no sale del teléfono.
+                  </p>
+                  <button
+                    type="button"
+                    className="btn"
+                    onClick={() => {
+                      void disablePush().then(setPush);
+                    }}
+                  >
+                    Desactivar
+                  </button>
+                </>
+              ) : (
+                <button
+                  type="button"
+                  className="btn btn--primary"
+                  onClick={() => {
+                    void enablePush().then(setPush);
+                  }}
+                >
+                  Activar avisos a la hora exacta
+                </button>
+              )}
+            </>
           )}
 
           <h3>Repasos en el calendario</h3>

@@ -825,3 +825,26 @@ Lo que **no** se hace sin tu visto bueno: **Web Push**. Es lo único que avisa a
 la app cerrada en iPhone, pero necesita un servidor que envíe (claves VAPID, dónde guardar las
 suscripciones y un cron que dispare). GitHub Pages es estático, así que supondría otro servicio y
 un cambio de stack — y eso se pregunta antes (regla 6).
+
+### D-092 · El servidor de avisos guarda fechas, no contenido
+
+Elegido Cloudflare Workers para el push (D-091). La decisión que de verdad importa no es el
+proveedor sino **qué se le cuenta**:
+
+- La app manda la suscripción y **una lista de marcas de tiempo**: cuándo le tocan los próximos
+  repasos. Nada más. Ni los puntos, ni los ítems, ni cuántos son, ni de qué van.
+- El cron mira cada cinco minutos qué fechas han llegado y manda un push **sin contenido**.
+- El service worker del teléfono recibe ese golpecito, cuenta los vencidos **leyendo su propia
+  base** y escribe el aviso. Ya lo hacía para `periodicsync` (D-076), así que no hubo que inventar
+  nada.
+
+Dos ventajas de una sola decisión: lo que estudias no sale del móvil, y nos ahorramos cifrar la
+carga útil (`aes128gcm`), que es la parte fea y frágil del protocolo de Web Push.
+
+El resto son cuidados normales: la clave privada es un secreto de Wrangler y nunca el repositorio;
+una suscripción que el navegador tira (404/410) se borra; un dispositivo sin señales en 90 días se
+olvida; y las fechas ya avisadas se quitan para no repetir el aviso en el siguiente cron.
+
+Las fechas se reenvían **al calificar**, porque entonces la cola cambia y las que el servidor tenía
+dejan de valer. Se mandan las de 45 días por delante: si no abres la app en mes y medio, el aviso
+se para —y entonces el problema no es el aviso—.
