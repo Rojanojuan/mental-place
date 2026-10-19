@@ -26,13 +26,18 @@ vacío y el aviso lo escribe el móvil leyendo su propia base.
 
 ---
 
-## 1 · Las claves
+## 1 · Las claves — **ya hechas**
 
-```bash
-npm run vapid
-```
+Ya están generadas y colocadas:
 
-Escupe dos claves. La **pública** no es secreta; la **privada** no se comparte ni se sube al repo.
+- La **pública** está en `worker/wrangler.toml` y la verás abajo, en el paso 5.
+- La **privada** está en `worker/.dev.vars`, que git ignora. De ahí la copias en el paso 3.
+
+Si alguna vez quieres cambiarlas: `npm run vapid`.
+
+> Comprobado antes de dejártelo: el Worker arrancado en local firma el JWT con ES256 y esa firma
+> **verifica contra la clave pública**, el push sale con el cuerpo vacío y el cron no repite un
+> aviso ya enviado. Lo que falta es solo desplegarlo con tu cuenta.
 
 ## 2 · La cuenta y el almacén
 
@@ -48,17 +53,18 @@ El último comando imprime un `id`. Cópialo en `worker/wrangler.toml`, en `[[kv
 
 ## 3 · Configura el Worker
 
-En `worker/wrangler.toml`:
+En `worker/wrangler.toml` solo queda cambiar una cosa: `VAPID_SUBJECT`, que ahora pone
+`mailto:tu-correo@example.com`. Ponle tu correo de verdad — lo piden los servicios de push por si
+hay problemas con tus envíos.
 
-- `VAPID_PUBLIC_KEY` → la pública del paso 1.
-- `VAPID_SUBJECT` → `mailto:tu-correo` (lo piden los servicios de push por si hay problemas).
-
-La privada va como secreto, **nunca** en el archivo:
+La privada va como **secreto**, nunca en el archivo:
 
 ```bash
 npx wrangler secret put VAPID_PRIVATE_KEY
-# y pega el JSON completo: {"d":"…","x":"…","y":"…"}
 ```
+
+Cuando te lo pida, pega el contenido de `worker/.dev.vars` **sin** el `VAPID_PRIVATE_KEY=` del
+principio: solo el JSON, desde `{` hasta `}`.
 
 ## 4 · Despliega
 
@@ -100,12 +106,12 @@ Listo. Estudia algo y verás llegar el aviso en el minuto del siguiente checkpoi
 
 ## Si algo no va
 
-| Qué ves                                     | Qué pasa                                                                 |
-| ------------------------------------------- | ------------------------------------------------------------------------ |
-| No sale la sección de avisos a la hora exacta | Faltan las variables del paso 5, o no diste permiso de notificaciones.   |
-| «Falta instalar la app»                     | Estás en una pestaña de Safari. Compartir → Añadir a pantalla de inicio. |
-| Se activa pero no llega nada                | Mira los registros: `npx wrangler tail` desde `worker/`.                 |
-| Llegó tarde                                 | El cron va cada minuto, así que el margen es < 60 s más lo que tarde Apple en entregar. |
+| Qué ves                                       | Qué pasa                                                                                |
+| --------------------------------------------- | --------------------------------------------------------------------------------------- |
+| No sale la sección de avisos a la hora exacta | Faltan las variables del paso 5, o no diste permiso de notificaciones.                  |
+| «Falta instalar la app»                       | Estás en una pestaña de Safari. Compartir → Añadir a pantalla de inicio.                |
+| Se activa pero no llega nada                  | Mira los registros: `npx wrangler tail` desde `worker/`.                                |
+| Llegó tarde                                   | El cron va cada minuto, así que el margen es < 60 s más lo que tarde Apple en entregar. |
 
 ## Lo que cuesta
 

@@ -15,6 +15,8 @@ export default tseslint.config(
       // Artefactos de Playwright: trazas minificadas, no codigo del proyecto.
       'test-results',
       'playwright-report',
+      // Y los de Wrangler, que deja su bundle al arrancar el Worker en local.
+      '**/.wrangler',
       // Prototipos de diseño: referencia, no código del proyecto.
       'design_handoff_palacio_corporal',
     ],

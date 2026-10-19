@@ -17,7 +17,7 @@ id = "PON_AQUI_EL_ID"
 
 [vars]
 # La pública no es secreta: viaja en la app al suscribirse.
-VAPID_PUBLIC_KEY = "PON_AQUI_LA_PUBLICA"
+VAPID_PUBLIC_KEY = "BM40iJmDCfqmIQfUY-uZiYDU513y7qoxwYR_hhrM3koG1pwiN4yHCbZzXLE5pBvFO15d8R7nYlR6iPvUqiEdaa8"
 VAPID_SUBJECT = "mailto:tu-correo@example.com"
 
 # La privada NO va aquí. Se pone con:

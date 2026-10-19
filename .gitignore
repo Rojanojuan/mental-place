@@ -12,3 +12,9 @@ dev-dist/
 playwright-report/
 test-results/
 *.tsbuildinfo
+
+# Secretos del servidor de avisos. La clave privada VAPID NUNCA al repositorio.
+.dev.vars
+worker/.dev.vars
+*.vapid.json
+.wrangler/
