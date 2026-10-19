@@ -872,3 +872,27 @@ De paso, dos escrituras que se iban de las manos:
 
 Cuentas del día, con un dispositivo: 1 440 lecturas (cron) + ~50 escrituras (sesiones y avisos),
 contra 100 000 y 1 000. Sobra sitio.
+
+### D-094 · La accesibilidad se audita a mano, y luego se vigila con tests
+
+La Fase 6 pedía accesibilidad y solo estaba hecha la mitad: el teclado (espacio revela, 1–4
+califican) sí, el lector de pantalla nunca se había mirado.
+
+Auditado con `npm run audit:a11y`, que no añade ninguna dependencia: comprueba a mano lo que de
+verdad deja a alguien fuera, que es un puñado corto de cosas y todas medibles. Las once rutas
+salieron limpias —ningún interactivo sin nombre, ningún control sin etiqueta, ningún salto de
+encabezado, ningún `aria-labelledby` colgando— y los diez pares de contraste pasan el 4,5:1 en los
+dos temas; el más justo es `--text-3` en claro, 4,69:1.
+
+Se dejó por escrito lo que **no** cubre: no es axe. Cubre nombres accesibles, etiquetas de
+formulario, orden de encabezados, referencias ARIA, landmarks, `alt` y contraste. No cubre orden
+de foco, trampas de teclado ni roles mal aplicados. Añadir axe sería una dependencia nueva y eso
+se pregunta antes (regla 6); con la auditoría en limpio, no parecía el momento.
+
+De la propia auditoría salió una lección que ya conocíamos: la primera versión **no supo leer
+`#fff`** y dejó un par de contraste sin medir, pero lo imprimía como si no pasara nada. Un dato
+que falta esconde problemas igual que el `overflow-x: clip` de D-081, así que ahora «sin medir»
+cuenta como fallo, tanto en el script como en el test.
+
+Las cinco comprobaciones son ya e2e: lo que importa no es que hoy esté limpio, sino que no pueda
+dejar de estarlo sin que salte.

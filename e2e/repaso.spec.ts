@@ -586,3 +586,187 @@ test.describe('nada se pierde por la derecha', () => {
     expect(camara?.ty ?? 1).toBeLessThanOrEqual(0.5);
   });
 });
+
+/**
+ * Accesibilidad: lo que deja fuera a quien navega con teclado o con lector de
+ * pantalla. No es una auditoría completa —no se usa axe, que sería una
+ * dependencia nueva—, pero cubre las categorías que de verdad rompen el uso y,
+ * sobre todo, **impide que vuelvan**. El informe largo lo saca
+ * `npm run audit:a11y` (D-094).
+ */
+test.describe('accesibilidad', () => {
+  const RUTAS_A11Y = ['/', '/sesion', '/inspector', '/editor', '/biblioteca', '/datos'];
+
+  for (const ruta of RUTAS_A11Y) {
+    test(`en ${ruta} todo lo que se toca tiene nombre`, async ({ page }, testInfo) => {
+      test.skip(testInfo.project.name !== 'escritorio', 'basta con una vez');
+      await page.goto('/');
+      await expect(page.getByRole('link', { name: /Repasar ahora/ })).toBeVisible(SEEDED);
+      await page.goto(ruta);
+      await page.waitForTimeout(700);
+
+      const malos = await page.evaluate(() => {
+        const texto = (el: Element): string => el.textContent.replace(/\s+/g, ' ').trim();
+        const visible = (el: Element): boolean => {
+          const b = el.getBoundingClientRect();
+          if (b.width === 0 && b.height === 0) return false;
+          const cs = getComputedStyle(el);
+          return cs.visibility !== 'hidden' && cs.display !== 'none';
+        };
+        const nombre = (el: Element): string => {
+          const etiqueta = el.getAttribute('aria-label');
+          if (etiqueta !== null && etiqueta.trim() !== '') return etiqueta.trim();
+          if (el instanceof HTMLInputElement || el instanceof HTMLSelectElement) {
+            const envoltorio = el.closest('label');
+            if (envoltorio && texto(envoltorio) !== '') return texto(envoltorio);
+            return el.getAttribute('placeholder')?.trim() ?? '';
+          }
+          return texto(el);
+        };
+
+        const fuera: string[] = [];
+        const selector =
+          'button, a[href], [role="button"], [role="tab"], summary, input, select, textarea';
+        for (const el of document.querySelectorAll(selector)) {
+          if (!visible(el)) continue;
+          if (el.getAttribute('aria-hidden') === 'true') continue;
+          if (el instanceof HTMLInputElement && el.type === 'hidden') continue;
+          if (nombre(el) === '') {
+            fuera.push(`${el.tagName.toLowerCase()}.${el.className.slice(0, 30)}`);
+          }
+        }
+        return fuera;
+      });
+
+      expect(malos).toEqual([]);
+    });
+  }
+
+  test('los encabezados van en orden y hay un solo h1', async ({ page }, testInfo) => {
+    test.skip(testInfo.project.name !== 'escritorio', 'basta con una vez');
+    await page.goto('/');
+    await expect(page.getByRole('link', { name: /Repasar ahora/ })).toBeVisible(SEEDED);
+
+    for (const ruta of RUTAS_A11Y) {
+      await page.goto(ruta);
+      await page.waitForTimeout(500);
+      const niveles = await page.evaluate(() =>
+        [...document.querySelectorAll('h1,h2,h3,h4,h5,h6')]
+          .filter((h) => h.getBoundingClientRect().height > 0)
+          .map((h) => Number(h.tagName[1])),
+      );
+      expect(
+        niveles.filter((n) => n === 1),
+        `h1 en ${ruta}`,
+      ).toHaveLength(1);
+      for (let i = 1; i < niveles.length; i += 1) {
+        // Saltarse un nivel deja al lector de pantalla sin el índice.
+        expect(niveles[i]! - niveles[i - 1]!, `salto de encabezado en ${ruta}`).toBeLessThanOrEqual(
+          1,
+        );
+      }
+    }
+  });
+
+  test('ningún aria-labelledby apunta a la nada', async ({ page }, testInfo) => {
+    test.skip(testInfo.project.name !== 'escritorio', 'basta con una vez');
+    await page.goto('/');
+    await expect(page.getByRole('link', { name: /Repasar ahora/ })).toBeVisible(SEEDED);
+
+    for (const ruta of RUTAS_A11Y) {
+      await page.goto(ruta);
+      await page.waitForTimeout(500);
+      const rotos = await page.evaluate(() => {
+        const fuera: string[] = [];
+        for (const el of document.querySelectorAll('[aria-labelledby], [aria-describedby]')) {
+          for (const attr of ['aria-labelledby', 'aria-describedby']) {
+            const v = el.getAttribute(attr);
+            if (v === null) continue;
+            for (const id of v.split(/\s+/)) {
+              if (document.getElementById(id) === null) fuera.push(`${attr}="${id}"`);
+            }
+          }
+        }
+        return fuera;
+      });
+      expect(rotos, ruta).toEqual([]);
+    }
+  });
+
+  test('el texto contrasta con su fondo en los dos temas', async ({ page }, testInfo) => {
+    test.skip(testInfo.project.name !== 'escritorio', 'basta con una vez');
+    await page.goto('/');
+    await expect(page.getByRole('link', { name: /Repasar ahora/ })).toBeVisible(SEEDED);
+
+    for (const tema of ['dark', 'light']) {
+      const ratios = await page.evaluate((t) => {
+        document.documentElement.setAttribute('data-pc-theme', t);
+        const cs = getComputedStyle(document.documentElement);
+        const v = (n: string): string => cs.getPropertyValue(n).trim();
+
+        const aRgb = (c: string): number[] | null => {
+          const m = /rgba?\(([^)]+)\)/.exec(c);
+          if (m)
+            return (m[1] ?? '')
+              .split(',')
+              .slice(0, 3)
+              .map((x) => Number(x.trim()));
+          const h6 = /^#([0-9a-f]{6})$/i.exec(c);
+          if (h6) return [0, 2, 4].map((i) => parseInt((h6[1] ?? '').slice(i, i + 2), 16));
+          // `#fff` también: sin esto un par se quedaba sin medir.
+          const h3 = /^#([0-9a-f]{3})$/i.exec(c);
+          if (h3) return [0, 1, 2].map((i) => parseInt(((h3[1] ?? '')[i] ?? '0').repeat(2), 16));
+          return null;
+        };
+        const lum = (c: number[]): number => {
+          const [r, g, b] = c.map((x) => {
+            const s = x / 255;
+            return s <= 0.03928 ? s / 12.92 : ((s + 0.055) / 1.055) ** 2.4;
+          });
+          return 0.2126 * (r ?? 0) + 0.7152 * (g ?? 0) + 0.0722 * (b ?? 0);
+        };
+
+        const pares: [string, string, string][] = [
+          ['texto/fondo', v('--text'), v('--bg')],
+          ['texto-2/fondo', v('--text-2'), v('--bg')],
+          ['texto-3/fondo', v('--text-3'), v('--bg')],
+          ['texto/superficie', v('--text'), v('--surface')],
+          ['acento/fondo', v('--accent-text'), v('--bg')],
+        ];
+        return pares.map(([nombre, a, b]) => {
+          const ca = aRgb(a);
+          const cb = aRgb(b);
+          // Sin medir cuenta como fallo: un dato que falta esconde problemas.
+          if (!ca || !cb) return { nombre, ratio: 0 };
+          const la = lum(ca);
+          const lb = lum(cb);
+          return { nombre, ratio: (Math.max(la, lb) + 0.05) / (Math.min(la, lb) + 0.05) };
+        });
+      }, tema);
+
+      for (const { nombre, ratio } of ratios) {
+        expect(ratio, `${tema} ${nombre}`).toBeGreaterThanOrEqual(4.5);
+      }
+    }
+  });
+
+  test('los calificadores anuncian su atajo y su intervalo', async ({ page }, testInfo) => {
+    test.skip(testInfo.project.name !== 'escritorio', 'basta con una vez');
+    await page.goto('/sesion');
+    await expect(page.getByText('1 / 20')).toBeVisible(SEEDED);
+    await page.keyboard.press('Space');
+    await page.keyboard.press('Space');
+    await expect(page.getByText(/Patrones del sonido/)).toBeVisible();
+
+    const botones = await page.evaluate(() =>
+      [...document.querySelectorAll('.grade')].map((b) => ({
+        atajo: b.getAttribute('aria-keyshortcuts'),
+        nombre: b.getAttribute('aria-label'),
+      })),
+    );
+    expect(botones).toHaveLength(4);
+    expect(botones.map((b) => b.atajo)).toEqual(['1', '2', '3', '4']);
+    // El nombre dice qué hace y cuándo vuelve: «Otra vez · 10 min».
+    for (const b of botones) expect(b.nombre).toMatch(/\S+ · \S+/);
+  });
+});

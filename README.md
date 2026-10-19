@@ -33,6 +33,8 @@ en WebKit (`docs/DECISIONES.md` D-086).
 | `npm run format`        | Prettier.                                                    |
 | `npm run check`         | typecheck + lint + tests. Es la puerta de cada fase.         |
 | `npm run e2e`           | E2E en escritorio, Android (Chromium) e **iPhone (WebKit)**. |
+| `npm run audit:a11y`    | Informe de accesibilidad de las once pantallas.              |
+| `npm run audit:movil`   | Informe de uso táctil y maquetación en el teléfono.          |
 | `npm run seed:fonetica` | Regenera `seed/fonetica45.json` desde el Word.               |
 
 ## Publicar

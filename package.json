@@ -23,7 +23,8 @@
     "seed:casas": "node scripts/ingest_casas.mjs",
     "seed:gramatica": "node scripts/ingest_gramatica.mjs",
     "vapid": "node scripts/vapid.mjs",
-    "audit:movil": "node scripts/audit_movil.mjs"
+    "audit:movil": "node scripts/audit_movil.mjs",
+    "audit:a11y": "node scripts/audit_a11y.mjs"
   },
   "dependencies": {
     "date-fns": "^4.4.0",

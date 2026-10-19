@@ -752,3 +752,44 @@ exporta el calendario.
 
 **No verificado**: la entrega real contra Apple, porque exige el Worker desplegado y una
 suscripción de un iPhone de verdad. Todo lo anterior a ese salto, sí.
+
+## Accesibilidad: auditada y vigilada — ✅ (2026-10-19)
+
+La Fase 6 la pedía y estaba a medias: el teclado sí (espacio revela, 1–4 califican), el lector de
+pantalla nunca se había mirado.
+
+### Lo auditado (`npm run audit:a11y`, D-094)
+
+Sin añadir dependencias. Once rutas, y salieron **limpias**:
+
+| Comprobación                                     | Resultado |
+| ------------------------------------------------ | --------- |
+| Interactivos sin nombre accesible                | **0**     |
+| Controles de formulario sin etiqueta             | **0**     |
+| Saltos de nivel en los encabezados / `h1` únicos | **0**     |
+| `aria-labelledby` que no apuntan a nada          | **0**     |
+| Imágenes sin `alt`, landmarks, `lang`            | correctos |
+
+Contraste, los diez pares por encima del 4,5:1 en ambos temas; el más justo es `--text-3` en claro
+con **4,69:1**. Los calificadores anuncian su atajo (`aria-keyshortcuts` 1–4) y su intervalo
+(«Otra vez · 10 min»).
+
+### Un punto ciego de la propia auditoría
+
+La primera versión del script **no supo leer `#fff`** y dejó un par de contraste sin medir, pero lo
+imprimía sin avisar. Es el mismo patrón que el `overflow-x: clip` de D-081: un dato que falta
+esconde problemas. Ahora «sin medir» cuenta como fallo, en el script y en el test.
+
+### Lo que NO cubre
+
+No es axe. Cubre nombres accesibles, etiquetas, orden de encabezados, referencias ARIA, landmarks,
+`alt` y contraste. **No** cubre orden de foco, trampas de teclado ni roles mal aplicados. Añadir
+axe sería una dependencia nueva, y eso se pregunta antes.
+
+### Comprobaciones
+
+| Comando            | Resultado                                   |
+| ------------------ | ------------------------------------------- |
+| `npm run check`    | ✅ typecheck + lint + **571 tests**         |
+| `npm run test:cov` | ✅ **98,45 %** sentencias · 94,37 % ramas   |
+| `npm run e2e`      | ✅ con **10 tests nuevos** de accesibilidad |
