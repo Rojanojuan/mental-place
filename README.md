@@ -56,16 +56,20 @@ Sin esa variable la base es `/`, que es lo que necesitan `npm run preview` y los
 
 ### Avisos de repaso
 
-Dos caminos, y la pantalla **Datos** dice cuál está activo:
+Cuatro caminos, y la pantalla **Datos** dice cuál está activo. En iPhone importa cuál, porque
+`periodicsync` no existe en iOS (`docs/DECISIONES.md` D-091):
 
-1. **Al abrir la app** — funciona en cualquier navegador. Mira si hay vencidos al arrancar y al
-   volver del segundo plano, con cuatro horas de descanso entre avisos.
-2. **Con la app cerrada** — `periodicsync` en `src/sw.ts`. Pide Chrome o Edge, **la app
-   instalada** (menú del navegador → «Instalar app») y HTTPS; el navegador decide el momento y
-   mira como mucho cada doce horas. En iOS no existe.
+| Camino            | Cuándo avisa                       | Qué necesita                      |
+| ----------------- | ---------------------------------- | --------------------------------- |
+| Al abrir la app   | al arrancar y al volver            | nada                              |
+| Temporizador      | en el minuto exacto, app abierta   | nada                              |
+| Calendario (.ics) | hora exacta, app cerrada           | exportar desde «Datos»            |
+| `periodicsync`    | cada ~12 h, lo decide el navegador | Chrome/Edge + app instalada       |
+| **Web Push**      | hora exacta, app cerrada           | el Worker de `worker/` desplegado |
 
-Pages es estático: no hay avisos enviados desde un servidor. Ver `docs/DECISIONES.md` D-075 y
-D-076.
+El Web Push es lo único que avisa a la hora exacta con la app cerrada en un iPhone, y necesita un
+servidor porque Pages es estático. Puesta en marcha: **`docs/AVISOS_PUSH.md`** (10 minutos, 0 €).
+El servidor solo guarda marcas de tiempo: lo que estudias no sale del teléfono (D-092).
 
 ## Mapa del repositorio
 

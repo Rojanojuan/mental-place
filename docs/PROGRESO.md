@@ -685,3 +685,70 @@ Verificados: pasan. Eran defectos de los tests (tecleaban antes de que la cola e
    `items` con `locusRef` («Cuerpo 1 · Gramática C1 · L8»), o escribirlos en la app.
 2. **Las 20 anomalías del Word de fonética**, sobre todo la sección **34 · TOBILLO /s/** que falta.
    Al corregir el Word basta `npm run seed:fonetica`.
+
+## Avisos: que suene cuando toca el repaso — ✅ (2026-10-19)
+
+El usuario pidió un aviso **por cada repetición**, a su hora, y que evaluara las alternativas. La
+restricción que mandaba era que usa un **iPhone**, donde `periodicsync` —lo que había— sencillamente
+no existe.
+
+### La evaluación (D-091)
+
+| Alternativa             | iPhone                   | Hora exacta | Servidor |
+| ----------------------- | ------------------------ | ----------- | -------- |
+| Al abrir la app (D-056) | sí                       | no          | no       |
+| `periodicsync` (D-076)  | **no existe en iOS**     | no          | no       |
+| Notification Triggers   | **nunca pasó de prueba** | sí          | no       |
+| Temporizador en la app  | sí, con la app viva      | **sí**      | no       |
+| Calendario (.ics)       | sí                       | **sí**      | no       |
+| Web Push                | sí, instalada            | **sí**      | **sí**   |
+
+### Lo hecho
+
+Tres capas, de menos a más alcance:
+
+1. **Temporizador** (`features/notifications/timer.ts`): mientras la app viva, un `setTimeout` al
+   **siguiente vencimiento**; el aviso salta en su minuto y nombra el punto («Toca repasar: Pelo /
+   Cabello»). Cubre los checkpoints cortos de R10 —10 min, 1 h—, que se perdían mirando solo al
+   abrir. Se trocea en tramos de 10 minutos porque un `setTimeout` largo se desvía al suspenderse
+   el equipo, y se rearma al calificar.
+2. **Calendario** (`io/ics.ts`): cada repaso, un evento con alarma a su hora. Es la única forma de
+   que un iPhone avise con la app cerrada **sin montar nada**. Es una foto y la pantalla lo dice.
+3. **Web Push** (`worker/`, D-092): el usuario eligió Cloudflare Workers. El servidor guarda la
+   suscripción y **una lista de marcas de tiempo, nada más**; el push va **sin contenido** y es el
+   service worker del teléfono quien cuenta los vencidos leyendo su propia base y escribe el aviso
+   —ya lo hacía para `periodicsync`—. Así lo que se estudia no sale del móvil y de paso se evita
+   cifrar la carga útil.
+
+### Una cuota decidía la precisión (D-093)
+
+El cron iba cada cinco minutos, y no por diseño: el reparto usaba `KV.list()`, y el plan gratuito
+da 100 000 lecturas al día pero solo **1 000 `list`**. Con el primer checkpoint de R10 en 10
+minutos, esperar cinco es la mitad del intervalo. Cambiado el `list` por un **índice en una sola
+clave** que se lee con un `get`, el cron va **al minuto**: el margen baja de 5 min a **< 60 s**,
+al mismo coste de cero.
+
+### Comprobado antes de entregarlo
+
+El Worker se levantó con `wrangler dev` y se verificó lo que fallaría **en silencio** contra Apple:
+
+- el JWT se firma con ES256 y la firma **verifica contra la clave pública**;
+- el push sale con el cuerpo vacío;
+- de tres fechas enviadas guarda dos, descartando la caducada;
+- tras avisar no repite en las pasadas siguientes del cron;
+- cuerpo inválido → 400, ruta inexistente → 404.
+
+| Comando         | Resultado                                          |
+| --------------- | -------------------------------------------------- |
+| `npm run check` | ✅ typecheck + lint + **571 tests** en 33 archivos |
+| `npm run e2e`   | ✅ escritorio + `movil` + `movil-iphone`           |
+
+### Lo que depende de ti
+
+**Desplegar el Worker**, que necesita tu cuenta de Cloudflare: `docs/AVISOS_PUSH.md`. Las claves ya
+están generadas (la pública en `wrangler.toml`, la privada en `worker/.dev.vars`, que git ignora).
+Sin ese paso la app funciona igual: avisa al abrir, en el minuto exacto con la app abierta, y
+exporta el calendario.
+
+**No verificado**: la entrega real contra Apple, porque exige el Worker desplegado y una
+suscripción de un iPhone de verdad. Todo lo anterior a ese salto, sí.
