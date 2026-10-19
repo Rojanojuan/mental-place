@@ -1,0 +1,143 @@
+.pal h2 {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.pal h3 {
+  margin: var(--space-6) 0 var(--space-2);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-2);
+}
+
+.pal__sub,
+.pal__hint {
+  margin: var(--space-1) 0 var(--space-3);
+  color: var(--text-3);
+  font-size: 13px;
+}
+
+.pal__aviso {
+  margin: var(--space-3) 0 0;
+  padding: var(--space-3);
+  background: var(--accent-tint);
+  color: var(--accent-text);
+  border-radius: var(--radius-md);
+  font-size: 13px;
+}
+
+.pal__mios,
+.pal__casas {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--space-2);
+}
+
+.pal__mios li,
+.pal__casas li {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  background: var(--surface);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+}
+
+/* El catálogo no tiene «Editar»: una columna menos. */
+.pal__casas li {
+  grid-template-columns: minmax(0, 1fr) auto;
+}
+
+.pal__nombre {
+  font-size: 15px;
+  font-weight: 500;
+  overflow-wrap: anywhere;
+}
+
+.pal__meta {
+  grid-column: 1;
+  color: var(--text-3);
+  font-size: 12px;
+}
+
+/* Toda la fila elige el palacio: es el gesto principal. */
+.pal__usar {
+  grid-row: 1 / 3;
+  grid-column: 1;
+  display: grid;
+  gap: 2px;
+  min-height: var(--hit);
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.pal__usar:hover .pal__nombre {
+  color: var(--accent-text);
+}
+
+.pal__editar,
+.pal__borrar {
+  grid-row: 1 / 3;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--hit);
+  min-width: var(--hit);
+  padding: 0 var(--space-3);
+  border: 1px solid var(--line-2);
+  border-radius: var(--radius-md);
+  background: none;
+  color: var(--text-2);
+  font-size: 13px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.pal__borrar:hover {
+  border-color: var(--bad);
+  color: var(--bad);
+}
+
+.pal__casas li button {
+  grid-row: 1 / 3;
+}
+
+.pal__campo {
+  display: grid;
+  gap: var(--space-1);
+  max-width: 320px;
+  margin-bottom: var(--space-3);
+}
+
+.pal__campo span {
+  font-size: 11px;
+  color: var(--text-3);
+}
+
+.pal__campo input {
+  min-height: var(--hit);
+  padding: 0 var(--space-3);
+  border: 1px solid var(--line-2);
+  border-radius: var(--radius-md);
+  background: var(--sunken);
+  color: var(--text);
+}
+
+.pal__cuerpos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.pal__pie {
+  margin-top: var(--space-6);
+}

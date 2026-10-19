@@ -1,0 +1,85 @@
+{
+  "version": 1,
+  "casas": [
+    {
+      "slug": "h1",
+      "name": "Casa familiar · 136 puntos",
+      "puntos": 136,
+      "zonas": 5,
+      "habitaciones": 12,
+      "kb": 92
+    },
+    {
+      "slug": "h2",
+      "name": "Piso urbano · 133 puntos",
+      "puntos": 133,
+      "zonas": 5,
+      "habitaciones": 12,
+      "kb": 92
+    },
+    {
+      "slug": "h3",
+      "name": "Casa de campo · 132 puntos",
+      "puntos": 132,
+      "zonas": 5,
+      "habitaciones": 12,
+      "kb": 91
+    },
+    {
+      "slug": "h4",
+      "name": "Ático con terraza · 133 puntos",
+      "puntos": 133,
+      "zonas": 5,
+      "habitaciones": 12,
+      "kb": 90
+    },
+    {
+      "slug": "h5",
+      "name": "Villa mediterránea · 133 puntos",
+      "puntos": 133,
+      "zonas": 5,
+      "habitaciones": 12,
+      "kb": 91
+    },
+    {
+      "slug": "h6",
+      "name": "Casa de la abuela · 131 puntos",
+      "puntos": 131,
+      "zonas": 5,
+      "habitaciones": 12,
+      "kb": 88
+    },
+    {
+      "slug": "h7",
+      "name": "Loft industrial · 134 puntos",
+      "puntos": 134,
+      "zonas": 5,
+      "habitaciones": 12,
+      "kb": 91
+    },
+    {
+      "slug": "h8",
+      "name": "Cabaña de montaña · 133 puntos",
+      "puntos": 133,
+      "zonas": 5,
+      "habitaciones": 12,
+      "kb": 90
+    },
+    {
+      "slug": "h9",
+      "name": "Casa de playa · 133 puntos",
+      "puntos": 133,
+      "zonas": 5,
+      "habitaciones": 12,
+      "kb": 90
+    },
+    {
+      "slug": "h10",
+      "name": "Mansión victoriana · 165 puntos",
+      "puntos": 165,
+      "zonas": 5,
+      "habitaciones": 15,
+      "kb": 114
+    }
+  ]
+}

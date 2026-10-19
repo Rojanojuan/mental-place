@@ -1,0 +1,1933 @@
+{
+  "version": 1,
+  "palaces": [
+    {
+      "id": "pal-h4",
+      "name": "Ático con terraza · 133 puntos",
+      "kind": "custom_plan",
+      "style": {
+        "accent": "hombros",
+        "draw": "atlas",
+        "skin": "neutral",
+        "hair": "none",
+        "hairColor": "var(--line-2)",
+        "facial": "none",
+        "glasses": false,
+        "detail": "full",
+        "vol": "shade",
+        "line": "fine"
+      },
+      "aspect": 1.627906976744186,
+      "planData": {
+        "svg": "<defs><pattern id=\"pcg-wood\" width=\"48\" height=\"16\" patternUnits=\"userSpaceOnUse\"><path d=\"M0,8 H48 M0,16 H48 M16,0 V8 M40,8 V16\" stroke=\"currentColor\" stroke-opacity=\"0.13\" stroke-width=\"0.5\" fill=\"none\"/></pattern><pattern id=\"pcg-tile\" width=\"12\" height=\"12\" patternUnits=\"userSpaceOnUse\"><path d=\"M12,0 H0 V12\" stroke=\"currentColor\" stroke-opacity=\"0.15\" stroke-width=\"0.5\" fill=\"none\"/></pattern><pattern id=\"pcg-deck\" width=\"48\" height=\"7\" patternUnits=\"userSpaceOnUse\"><path d=\"M0,7 H48\" stroke=\"currentColor\" stroke-opacity=\"0.17\" stroke-width=\"0.6\" fill=\"none\"/></pattern><filter id=\"pcg-sh\" x=\"-10%\" y=\"-10%\" width=\"120%\" height=\"120%\"><feDropShadow dx=\"1.1\" dy=\"1.6\" stdDeviation=\"1.1\" flood-color=\"oklch(0.08 0.02 270)\" flood-opacity=\"0.45\"/></filter><pattern id=\"pcg-hatch\" width=\"4\" height=\"4\" patternUnits=\"userSpaceOnUse\" patternTransform=\"rotate(45)\"><path d=\"M0,0 V4\" stroke=\"currentColor\" stroke-opacity=\"0.35\" stroke-width=\"0.7\"/></pattern><pattern id=\"pcg-conc\" width=\"14\" height=\"14\" patternUnits=\"userSpaceOnUse\"><circle cx=\"3\" cy=\"4\" r=\"0.6\" fill=\"currentColor\" fill-opacity=\"0.2\"/><circle cx=\"10\" cy=\"10\" r=\"0.5\" fill=\"currentColor\" fill-opacity=\"0.2\"/></pattern></defs><rect x=\"0\" y=\"0\" width=\"110\" height=\"140\" fill=\"color-mix(in srgb, var(--zone-cabeza) 9%, transparent)\" stroke=\"none\"/><rect x=\"0\" y=\"0\" width=\"110\" height=\"140\" fill=\"url(#pcg-wood)\" stroke=\"none\"/><rect x=\"110\" y=\"0\" width=\"250\" height=\"140\" fill=\"color-mix(in srgb, var(--zone-cabeza) 9%, transparent)\" stroke=\"none\"/><rect x=\"110\" y=\"0\" width=\"250\" height=\"140\" fill=\"url(#pcg-wood)\" stroke=\"none\"/><rect x=\"360\" y=\"0\" width=\"170\" height=\"140\" fill=\"color-mix(in srgb, var(--zone-cabeza) 9%, transparent)\" stroke=\"none\"/><rect x=\"360\" y=\"0\" width=\"170\" height=\"140\" fill=\"url(#pcg-wood)\" stroke=\"none\"/><rect x=\"530\" y=\"0\" width=\"170\" height=\"140\" fill=\"color-mix(in srgb, var(--zone-torso) 9%, transparent)\" stroke=\"none\"/><rect x=\"530\" y=\"0\" width=\"170\" height=\"140\" fill=\"url(#pcg-tile)\" stroke=\"none\"/><rect x=\"543.1034482758621\" y=\"140\" width=\"156.89655172413794\" height=\"130\" fill=\"color-mix(in srgb, var(--zone-torso) 9%, transparent)\" stroke=\"none\"/><rect x=\"543.1034482758621\" y=\"140\" width=\"156.89655172413794\" height=\"130\" fill=\"url(#pcg-tile)\" stroke=\"none\"/><rect x=\"337.9310344827586\" y=\"140\" width=\"205.17241379310346\" height=\"130\" fill=\"color-mix(in srgb, var(--zone-brazos) 9%, transparent)\" stroke=\"none\"/><rect x=\"337.9310344827586\" y=\"140\" width=\"205.17241379310346\" height=\"130\" fill=\"url(#pcg-wood)\" stroke=\"none\"/><rect x=\"229.31034482758622\" y=\"140\" width=\"108.62068965517241\" height=\"130\" fill=\"color-mix(in srgb, var(--zone-hombros) 9%, transparent)\" stroke=\"none\"/><rect x=\"229.31034482758622\" y=\"140\" width=\"108.62068965517241\" height=\"130\" fill=\"url(#pcg-tile)\" stroke=\"none\"/><rect x=\"0\" y=\"140\" width=\"229.31034482758622\" height=\"130\" fill=\"color-mix(in srgb, var(--zone-brazos) 9%, transparent)\" stroke=\"none\"/><rect x=\"0\" y=\"140\" width=\"229.31034482758622\" height=\"130\" fill=\"url(#pcg-wood)\" stroke=\"none\"/><rect x=\"0\" y=\"270\" width=\"220\" height=\"160\" fill=\"color-mix(in srgb, var(--zone-hombros) 9%, transparent)\" stroke=\"none\"/><rect x=\"0\" y=\"270\" width=\"220\" height=\"160\" fill=\"url(#pcg-wood)\" stroke=\"none\"/><rect x=\"220\" y=\"270\" width=\"130\" height=\"160\" fill=\"color-mix(in srgb, var(--zone-hombros) 9%, transparent)\" stroke=\"none\"/><rect x=\"220\" y=\"270\" width=\"130\" height=\"160\" fill=\"url(#pcg-tile)\" stroke=\"none\"/><rect x=\"350\" y=\"270\" width=\"110\" height=\"160\" fill=\"color-mix(in srgb, var(--zone-hombros) 9%, transparent)\" stroke=\"none\"/><rect x=\"350\" y=\"270\" width=\"110\" height=\"160\" fill=\"url(#pcg-wood)\" stroke=\"none\"/><rect x=\"460\" y=\"270\" width=\"240\" height=\"160\" fill=\"color-mix(in srgb, var(--zone-piernas) 9%, transparent)\" stroke=\"none\"/><rect x=\"460\" y=\"270\" width=\"240\" height=\"160\" fill=\"url(#pcg-deck)\" stroke=\"none\"/><g stroke=\"currentColor\" stroke-width=\"0.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\" filter=\"url(#pcg-sh)\"><g transform=\"translate(80,336)\"><rect x=\"0\" y=\"0\" width=\"60\" height=\"40\" rx=\"3\" fill=\"currentColor\" opacity=\"0.07\" stroke=\"none\"/></g><g transform=\"translate(410.51724137931035,191)\"><rect x=\"0\" y=\"0\" width=\"60\" height=\"40\" rx=\"3\" fill=\"currentColor\" opacity=\"0.07\" stroke=\"none\"/></g><g transform=\"translate(205,56)\"><rect x=\"0\" y=\"0\" width=\"60\" height=\"40\" rx=\"3\" fill=\"currentColor\" opacity=\"0.07\" stroke=\"none\"/></g><g transform=\"translate(3,55) rotate(270)\"><circle cx=\"6\" cy=\"6\" r=\"5\" fill=\"var(--surface)\"/><path d=\"M6,1 V11 M1,6 H11\" fill=\"none\" opacity=\"0.55\"/><circle cx=\"6\" cy=\"6\" r=\"1.4\" fill=\"var(--sunken)\"/></g><g transform=\"translate(3,38) rotate(270)\"><rect x=\"0\" y=\"0\" width=\"30\" height=\"10\" rx=\"1\" fill=\"var(--surface)\"/><path d=\"M4,3 q2,4 4,0 M11,3 q2,4 4,0 M18,3 q2,4 4,0 M25,3 q2,4 4,0\" fill=\"none\" opacity=\"0.55\"/></g><g transform=\"translate(15,3)\"><rect x=\"0\" y=\"0\" width=\"28\" height=\"4\" rx=\"1\" fill=\"var(--sunken)\"/><path d=\"M3,1.2 L7,2.8 M9,1.2 L13,2.8\" fill=\"none\" opacity=\"0.4\"/></g><g transform=\"translate(48,3)\"><rect x=\"0\" y=\"0\" width=\"32\" height=\"10\" rx=\"1.5\" fill=\"var(--surface)\"/><circle cx=\"8\" cy=\"5\" r=\"2\" fill=\"var(--sunken)\"/><rect x=\"17.6\" y=\"2.5\" width=\"9.6\" height=\"5\" rx=\"1\" fill=\"var(--sunken)\"/></g><g transform=\"translate(85,3)\"><circle cx=\"7\" cy=\"7\" r=\"6.2\" fill=\"var(--surface)\"/><circle cx=\"4.6\" cy=\"5.5\" r=\"2.6\" fill=\"var(--sunken)\"/><circle cx=\"9.6\" cy=\"6.5\" r=\"2.4\" fill=\"var(--sunken)\"/><circle cx=\"7\" cy=\"9.6\" r=\"2.4\" fill=\"var(--sunken)\"/></g><g transform=\"translate(107,17) rotate(90)\"><rect x=\"0\" y=\"0\" width=\"32\" height=\"12\" rx=\"2\" fill=\"var(--surface)\"/><path d=\"M10.7,1.5 V10.5 M21.3,1.5 V10.5 \" fill=\"none\" opacity=\"0.55\"/></g><g transform=\"translate(107,85) rotate(90)\"><circle cx=\"5\" cy=\"5\" r=\"4.2\" fill=\"var(--surface)\"/><circle cx=\"3.6\" cy=\"4\" r=\"1\" fill=\"var(--sunken)\"/><circle cx=\"6.4\" cy=\"5.6\" r=\"1\" fill=\"var(--sunken)\"/></g><g transform=\"translate(107,100) rotate(90)\"><circle cx=\"6\" cy=\"6\" r=\"5.4\" fill=\"var(--surface)\"/><circle cx=\"6\" cy=\"6\" r=\"2\" fill=\"var(--sunken)\"/><path d=\"M0.5999999999999996,6 H11.4 M6,0.5999999999999996 V11.4\" fill=\"none\" opacity=\"0.3\"/></g><g transform=\"translate(107,117) rotate(90)\"><rect x=\"0\" y=\"0\" width=\"12\" height=\"9\" rx=\"1\" fill=\"var(--surface)\"/><circle cx=\"6\" cy=\"4.5\" r=\"3\" fill=\"var(--sunken)\"/><path d=\"M6,4.5 V2.1 M6,4.5 H7.8\" fill=\"none\"/></g><g transform=\"translate(95,137) rotate(180)\"><circle cx=\"7\" cy=\"7\" r=\"6.2\" fill=\"var(--surface)\"/><circle cx=\"4.6\" cy=\"5.5\" r=\"2.6\" fill=\"var(--sunken)\"/><circle cx=\"9.6\" cy=\"6.5\" r=\"2.4\" fill=\"var(--sunken)\"/><circle cx=\"7\" cy=\"9.6\" r=\"2.4\" fill=\"var(--sunken)\"/></g><g transform=\"translate(76,137) rotate(180)\"><rect x=\"0\" y=\"0\" width=\"12\" height=\"10\" rx=\"1.5\" fill=\"var(--surface)\"/><circle cx=\"6\" cy=\"5\" r=\"3\" fill=\"var(--sunken)\"/></g><g transform=\"translate(59,137) rotate(180)\"><circle cx=\"6\" cy=\"6\" r=\"5.4\" fill=\"var(--surface)\"/><circle cx=\"6\" cy=\"6\" r=\"2\" fill=\"var(--sunken)\"/><path d=\"M0.5999999999999996,6 H11.4 M6,0.5999999999999996 V11.4\" fill=\"none\" opacity=\"0.3\"/></g><g transform=\"translate(113,3)\"><rect x=\"0\" y=\"0\" width=\"56\" height=\"22\" rx=\"4\" fill=\"var(--surface)\"/><rect x=\"0\" y=\"0\" width=\"56\" height=\"6\" rx=\"3\" fill=\"var(--sunken)\"/><rect x=\"0\" y=\"0\" width=\"6\" height=\"22\" rx=\"3\" fill=\"var(--surface)\"/><rect x=\"50\" y=\"0\" width=\"6\" height=\"22\" rx=\"3\" fill=\"var(--surface)\"/><path d=\"M18.666666666666668,6 V20 M37.333333333333336,6 V20\" fill=\"none\" opacity=\"0.55\"/></g><g transform=\"translate(174,3)\"><circle cx=\"6\" cy=\"6\" r=\"5.4\" fill=\"var(--surface)\"/><circle cx=\"6\" cy=\"6\" r=\"2\" fill=\"var(--sunken)\"/><path d=\"M0.5999999999999996,6 H11.4 M6,0.5999999999999996 V11.4\" fill=\"none\" opacity=\"0.3\"/></g><g transform=\"translate(191,3)\"><rect x=\"0\" y=\"0\" width=\"38\" height=\"9\" rx=\"0.6\" fill=\"var(--surface)\"/><path d=\"M9.5,1.5 V7.5 M19.0,1.5 V7.5 M28.5,1.5 V7.5 \" fill=\"none\" opacity=\"0.55\"/><path d=\"M2,2 V7 M5,2 V6 M8,2 V5 M11,2 V7 M14,2 V6 M17,2 V5 M20,2 V7 M23,2 V6 M26,2 V5 M29,2 V7 M32,2 V6 M35,2 V5\" fill=\"none\" opacity=\"0.35\"/></g><g transform=\"translate(234,3)\"><circle cx=\"7\" cy=\"7\" r=\"6.2\" fill=\"var(--surface)\"/><circle cx=\"4.6\" cy=\"5.5\" r=\"2.6\" fill=\"var(--sunken)\"/><circle cx=\"9.6\" cy=\"6.5\" r=\"2.4\" fill=\"var(--sunken)\"/><circle cx=\"7\" cy=\"9.6\" r=\"2.4\" fill=\"var(--sunken)\"/></g><g transform=\"translate(253,3)\"><rect x=\"0\" y=\"0\" width=\"40\" height=\"9\" rx=\"1.5\" fill=\"var(--surface)\"/><rect x=\"4.8\" y=\"2.6\" width=\"30.4\" height=\"2.4\" fill=\"currentColor\" opacity=\"0.8\"/></g><g transform=\"translate(298,3)\"><rect x=\"0\" y=\"0\" width=\"34\" height=\"11\" rx=\"1\" fill=\"var(--surface)\"/><path d=\"M8.5,0 V6.050000000000001 Q17,11.55 25.5,6.050000000000001 V0\" fill=\"var(--sunken)\"/><path d=\"M13.600000000000001,3.8499999999999996 Q17,1.1 20.4,3.8499999999999996\" fill=\"none\" opacity=\"0.55\"/></g><g transform=\"translate(337,3)\"><rect x=\"0\" y=\"0\" width=\"22\" height=\"22\" rx=\"6\" fill=\"var(--surface)\"/><rect x=\"3\" y=\"0\" width=\"16\" height=\"6\" rx=\"3\" fill=\"var(--sunken)\"/><path d=\"M5,6 V19 M17,6 V19\" fill=\"none\" opacity=\"0.55\"/></g><g transform=\"translate(357,85) rotate(90)\"><rect x=\"0\" y=\"0\" width=\"32\" height=\"12\" rx=\"1\" fill=\"var(--surface)\"/><path d=\"M2,2 L15,10 M17,2 L30,10 M16,0 V12\" fill=\"none\" opacity=\"0.55\"/></g><g transform=\"translate(345,137) rotate(180)\"><rect x=\"0\" y=\"0\" width=\"38\" height=\"20\" rx=\"4\" fill=\"var(--surface)\"/><rect x=\"0\" y=\"0\" width=\"38\" height=\"6\" rx=\"3\" fill=\"var(--sunken)\"/><rect x=\"0\" y=\"0\" width=\"6\" height=\"20\" rx=\"3\" fill=\"var(--surface)\"/><rect x=\"32\" y=\"0\" width=\"6\" height=\"20\" rx=\"3\" fill=\"var(--surface)\"/><path d=\"M19,6 V18\" fill=\"none\" opacity=\"0.55\"/></g><g transform=\"translate(302,137) rotate(180)\"><circle cx=\"7\" cy=\"7\" r=\"6.2\" fill=\"var(--surface)\"/><circle cx=\"4.6\" cy=\"5.5\" r=\"2.6\" fill=\"var(--sunken)\"/><circle cx=\"9.6\" cy=\"6.5\" r=\"2.4\" fill=\"var(--sunken)\"/><circle cx=\"7\" cy=\"9.6\" r=\"2.4\" fill=\"var(--sunken)\"/></g><g transform=\"translate(283,137) rotate(180)\"><rect x=\"0\" y=\"0\" width=\"12\" height=\"10\" rx=\"1.5\" fill=\"var(--surface)\"/><circle cx=\"6\" cy=\"5\" r=\"3\" fill=\"var(--sunken)\"/></g><g transform=\"translate(266,137) rotate(180)\"><circle cx=\"6\" cy=\"6\" r=\"5.4\" fill=\"var(--surface)\"/><circle cx=\"6\" cy=\"6\" r=\"2\" fill=\"var(--sunken)\"/><path d=\"M0.5999999999999996,6 H11.4 M6,0.5999999999999996 V11.4\" fill=\"none\" opacity=\"0.3\"/></g><g transform=\"translate(216,66)\"><rect x=\"0\" y=\"0\" width=\"38\" height=\"20\" rx=\"3\" fill=\"var(--surface)\"/><rect x=\"22.8\" y=\"5\" width=\"9.5\" height=\"10\" rx=\"2\" fill=\"var(--sunken)\"/></g><g transform=\"translate(363,55) rotate(270)\"><rect x=\"0\" y=\"0\" width=\"40\" height=\"12\" rx=\"1\" fill=\"var(--surface)\"/><path d=\"M10.0,1.5 V10.5 M20.0,1.5 V10.5 M30.0,1.5 V10.5 \" fill=\"none\" opacity=\"0.55\"/><path d=\"M5,9 h2 M15,9 h2 M25,9 h2 M33,9 h2\" fill=\"none\"/></g><g transform=\"translate(375,3)\"><rect x=\"0\" y=\"0\" width=\"12\" height=\"9\" rx=\"1\" fill=\"var(--surface)\"/><circle cx=\"6\" cy=\"4.5\" r=\"3\" fill=\"var(--sunken)\"/><path d=\"M6,4.5 V2.1 M6,4.5 H7.8\" fill=\"none\"/></g><g transform=\"translate(392,3)\"><circle cx=\"7\" cy=\"7\" r=\"6.2\" fill=\"var(--surface)\"/><circle cx=\"4.6\" cy=\"5.5\" r=\"2.6\" fill=\"var(--sunken)\"/><circle cx=\"9.6\" cy=\"6.5\" r=\"2.4\" fill=\"var(--sunken)\"/><circle cx=\"7\" cy=\"9.6\" r=\"2.4\" fill=\"var(--sunken)\"/></g><g transform=\"translate(411,3)\"><rect x=\"0\" y=\"0\" width=\"32\" height=\"12\" rx=\"1\" fill=\"var(--surface)\"/><path d=\"M2,2 L15,10 M17,2 L30,10 M16,0 V12\" fill=\"none\" opacity=\"0.55\"/></g><g transform=\"translate(448,3)\"><rect x=\"0\" y=\"0\" width=\"30\" height=\"14\" rx=\"1.5\" fill=\"var(--surface)\"/><circle cx=\"6\" cy=\"7\" r=\"2.4\" fill=\"var(--sunken)\"/><circle cx=\"12\" cy=\"7\" r=\"2.4\" fill=\"var(--sunken)\"/><circle cx=\"18\" cy=\"7\" r=\"2.4\" fill=\"var(--sunken)\"/><rect x=\"21\" y=\"3\" width=\"6\" height=\"8\" rx=\"1\" fill=\"var(--sunken)\"/></g><g transform=\"translate(483,3)\"><circle cx=\"6\" cy=\"6\" r=\"5.4\" fill=\"var(--surface)\"/><circle cx=\"6\" cy=\"6\" r=\"2\" fill=\"var(--sunken)\"/><path d=\"M0.5999999999999996,6 H11.4 M6,0.5999999999999996 V11.4\" fill=\"none\" opacity=\"0.3\"/></g><g transform=\"translate(500,3)\"><circle cx=\"7\" cy=\"7\" r=\"6.2\" fill=\"var(--surface)\"/><circle cx=\"4.6\" cy=\"5.5\" r=\"2.6\" fill=\"var(--sunken)\"/><circle cx=\"9.6\" cy=\"6.5\" r=\"2.4\" fill=\"var(--sunken)\"/><circle cx=\"7\" cy=\"9.6\" r=\"2.4\" fill=\"var(--sunken)\"/></g><g transform=\"translate(527,17) rotate(90)\"><rect x=\"0\" y=\"0\" width=\"12\" height=\"10\" rx=\"1.5\" fill=\"var(--surface)\"/><circle cx=\"6\" cy=\"5\" r=\"3\" fill=\"var(--sunken)\"/></g><g transform=\"translate(527,34) rotate(90)\"><circle cx=\"6\" cy=\"6\" r=\"5.4\" fill=\"var(--surface)\"/><circle cx=\"6\" cy=\"6\" r=\"2\" fill=\"var(--sunken)\"/><path d=\"M0.5999999999999996,6 H11.4 M6,0.5999999999999996 V11.4\" fill=\"none\" opacity=\"0.3\"/></g><g transform=\"translate(413,58)\"><rect x=\"0\" y=\"0\" width=\"64\" height=\"36\" rx=\"2\" fill=\"var(--surface)\"/><g transform=\"translate(12.8,-6) rotate(0)\"><rect x=\"-5\" y=\"-4\" width=\"10\" height=\"8\" rx=\"2\" fill=\"var(--surface)\"/><path d=\"M-5,-4 H5\" fill=\"none\" stroke-width=\"1.6\"/></g><g transform=\"translate(32,-6) rotate(0)\"><rect x=\"-5\" y=\"-4\" width=\"10\" height=\"8\" rx=\"2\" fill=\"var(--surface)\"/><path d=\"M-5,-4 H5\" fill=\"none\" stroke-width=\"1.6\"/></g><g transform=\"translate(51.2,-6) rotate(0)\"><rect x=\"-5\" y=\"-4\" width=\"10\" height=\"8\" rx=\"2\" fill=\"var(--surface)\"/><path d=\"M-5,-4 H5\" fill=\"none\" stroke-width=\"1.6\"/></g><g transform=\"translate(12.8,42) rotate(180)\"><rect x=\"-5\" y=\"-4\" width=\"10\" height=\"8\" rx=\"2\" fill=\"var(--surface)\"/><path d=\"M-5,-4 H5\" fill=\"none\" stroke-width=\"1.6\"/></g><g transform=\"translate(32,42) rotate(180)\"><rect x=\"-5\" y=\"-4\" width=\"10\" height=\"8\" rx=\"2\" fill=\"var(--surface)\"/><path d=\"M-5,-4 H5\" fill=\"none\" stroke-width=\"1.6\"/></g><g transform=\"translate(51.2,42) rotate(180)\"><rect x=\"-5\" y=\"-4\" width=\"10\" height=\"8\" rx=\"2\" fill=\"var(--surface)\"/><path d=\"M-5,-4 H5\" fill=\"none\" stroke-width=\"1.6\"/></g><rect x=\"19.2\" y=\"10.8\" width=\"25.6\" height=\"14.4\" rx=\"2\" fill=\"var(--sunken)\" opacity=\"0.55\"/></g><g transform=\"translate(533,55) rotate(270)\"><rect x=\"0\" y=\"0\" width=\"20\" height=\"18\" rx=\"1.5\" fill=\"var(--surface)\"/><path d=\"M11,0 V18 M2,15.5 H18\" fill=\"none\" opacity=\"0.55\"/></g><g transform=\"translate(551,3)\"><rect x=\"0\" y=\"0\" width=\"32\" height=\"16\" rx=\"1\" fill=\"var(--surface)\"/><path d=\"M0,13.5 H32\" fill=\"none\" opacity=\"0.55\"/><rect x=\"19.2\" y=\"3\" width=\"8\" height=\"7.2\" rx=\"1\" fill=\"var(--sunken)\"/></g><g transform=\"translate(588,3)\"><rect x=\"0\" y=\"0\" width=\"24\" height=\"16\" rx=\"1.5\" fill=\"var(--sunken)\"/><circle cx=\"6.7\" cy=\"5.1\" r=\"3.2\" fill=\"none\"/><circle cx=\"17.3\" cy=\"5.1\" r=\"3.2\" fill=\"none\"/><circle cx=\"6.7\" cy=\"11.5\" r=\"3.2\" fill=\"none\"/><circle cx=\"17.3\" cy=\"11.5\" r=\"3.2\" fill=\"none\"/></g><g transform=\"translate(617,3)\"><rect x=\"0\" y=\"0\" width=\"22\" height=\"16\" rx=\"1.5\" fill=\"var(--surface)\"/><rect x=\"3\" y=\"3\" width=\"16\" height=\"9\" rx=\"1.5\" fill=\"var(--sunken)\"/><path d=\"M4,14 H18\" fill=\"none\"/></g><g transform=\"translate(644,3)\"><rect x=\"0\" y=\"0\" width=\"30\" height=\"16\" rx=\"1.5\" fill=\"var(--surface)\"/><rect x=\"3\" y=\"3\" width=\"12.6\" height=\"10\" rx=\"2.5\" fill=\"var(--sunken)\"/><rect x=\"15\" y=\"3\" width=\"12.6\" height=\"10\" rx=\"2.5\" fill=\"var(--sunken)\"/><circle cx=\"15\" cy=\"2\" r=\"1.2\" fill=\"var(--surface)\"/></g><g transform=\"translate(679,3)\"><rect x=\"0\" y=\"0\" width=\"20\" height=\"16\" rx=\"1.5\" fill=\"var(--surface)\"/><path d=\"M1.5,4.0 H18.5 M1.5,8.0 H18.5 M1.5,12.0 H18.5 \" fill=\"none\" opacity=\"0.55\"/></g><g transform=\"translate(697,19) rotate(90)\"><rect x=\"0\" y=\"0\" width=\"18\" height=\"12\" rx=\"1.5\" fill=\"var(--surface)\"/><rect x=\"2\" y=\"2\" width=\"11.2\" height=\"8\" rx=\"1\" fill=\"var(--sunken)\"/><circle cx=\"14.5\" cy=\"6\" r=\"1.2\" fill=\"none\"/></g><g transform=\"translate(697,42) rotate(90)\"><rect x=\"0\" y=\"0\" width=\"32\" height=\"14\" rx=\"1\" fill=\"var(--surface)\"/><path d=\"M1.5,3.5 H30.5 M1.5,7.0 H30.5 M1.5,10.5 H30.5 \" fill=\"none\" opacity=\"0.55\"/><path d=\"M4,4.2 h2.6 M8.6,4.2 h2.6 M13.2,4.2 h2.6 M17.799999999999997,4.2 h2.6 M22.4,4.2 h2.6 M27,4.2 h2.6\" fill=\"none\"/></g><g transform=\"translate(697,79) rotate(90)\"><circle cx=\"5\" cy=\"5\" r=\"4.4\" fill=\"var(--surface)\"/><circle cx=\"5\" cy=\"5\" r=\"1.4\" fill=\"var(--sunken)\"/></g><g transform=\"translate(697,94) rotate(90)\"><circle cx=\"5\" cy=\"5\" r=\"4.4\" fill=\"var(--surface)\"/><circle cx=\"5\" cy=\"5\" r=\"1.4\" fill=\"var(--sunken)\"/></g><g transform=\"translate(697,109) rotate(90)\"><circle cx=\"6.5\" cy=\"6.5\" r=\"5.6\" fill=\"var(--surface)\"/><path d=\"M2.5,4.5 H10.5 M1.5,6.5 H11.5 M2.5,8.5 H10.5\" fill=\"none\" opacity=\"0.55\"/></g><g transform=\"translate(662,137) rotate(180)\"><circle cx=\"7\" cy=\"7\" r=\"6.2\" fill=\"var(--surface)\"/><circle cx=\"4.6\" cy=\"5.5\" r=\"2.6\" fill=\"var(--sunken)\"/><circle cx=\"9.6\" cy=\"6.5\" r=\"2.4\" fill=\"var(--sunken)\"/><circle cx=\"7\" cy=\"9.6\" r=\"2.4\" fill=\"var(--sunken)\"/></g><g transform=\"translate(588,64)\"><rect x=\"0\" y=\"0\" width=\"54\" height=\"24\" rx=\"2\" fill=\"var(--surface)\"/><rect x=\"18.9\" y=\"4\" width=\"16.2\" height=\"16\" rx=\"2\" fill=\"var(--sunken)\"/><circle cx=\"10.8\" cy=\"29\" r=\"4\" fill=\"var(--surface)\"/><circle cx=\"27\" cy=\"29\" r=\"4\" fill=\"var(--surface)\"/><circle cx=\"43.2\" cy=\"29\" r=\"4\" fill=\"var(--surface)\"/></g><g transform=\"translate(697,143) rotate(90)\"><rect x=\"0\" y=\"0\" width=\"20\" height=\"20\" rx=\"2\" fill=\"var(--surface)\"/><circle cx=\"10\" cy=\"11\" r=\"6.2\" fill=\"var(--sunken)\"/><circle cx=\"10\" cy=\"11\" r=\"3.4\" fill=\"none\"/><path d=\"M3,3 h4\" fill=\"none\"/></g><g transform=\"translate(697,168) rotate(90)\"><rect x=\"0\" y=\"0\" width=\"20\" height=\"20\" rx=\"2\" fill=\"var(--surface)\"/><circle cx=\"10\" cy=\"11\" r=\"6.2\" fill=\"var(--sunken)\"/><path d=\"M6,11 H14\" fill=\"none\"/><circle cx=\"16\" cy=\"3.5\" r=\"1\" fill=\"var(--surface)\"/></g><g transform=\"translate(697,193) rotate(90)\"><circle cx=\"6.5\" cy=\"6.5\" r=\"5.6\" fill=\"var(--surface)\"/><path d=\"M2.5,4.5 H10.5 M1.5,6.5 H11.5 M2.5,8.5 H10.5\" fill=\"none\" opacity=\"0.55\"/></g><g transform=\"translate(697,211) rotate(90)\"><path d=\"M0,1 H28 Q38,5.5 28,10 H0Z\" fill=\"var(--surface)\"/><rect x=\"20.9\" y=\"3.5\" width=\"7\" height=\"4\" rx=\"1.5\" fill=\"var(--sunken)\"/></g><g transform=\"translate(697,254) rotate(90)\"><rect x=\"0\" y=\"0\" width=\"15\" height=\"10\" rx=\"1.5\" fill=\"var(--surface)\"/><circle cx=\"7.5\" cy=\"5\" r=\"2.6\" fill=\"var(--sunken)\"/></g><g transform=\"translate(677,267) rotate(180)\"><rect x=\"0\" y=\"0\" width=\"40\" height=\"12\" rx=\"0.5\" fill=\"var(--surface)\"/><path d=\"M10.0,1.5 V10.5 M20.0,1.5 V10.5 M30.0,1.5 V10.5 \" fill=\"none\" opacity=\"0.55\"/><path d=\"M1.5,6.0 H38.5 \" fill=\"none\" opacity=\"0.55\"/></g><g transform=\"translate(632,267) rotate(180)\"><rect x=\"0\" y=\"0\" width=\"30\" height=\"16\" rx=\"1.5\" fill=\"var(--surface)\"/><rect x=\"3\" y=\"3\" width=\"12.6\" height=\"10\" rx=\"2.5\" fill=\"var(--sunken)\"/><rect x=\"15\" y=\"3\" width=\"12.6\" height=\"10\" rx=\"2.5\" fill=\"var(--sunken)\"/><circle cx=\"15\" cy=\"2\" r=\"1.2\" fill=\"var(--surface)\"/></g><g transform=\"translate(597,267) rotate(180)\"><circle cx=\"5\" cy=\"5\" r=\"4.4\" fill=\"var(--surface)\"/><circle cx=\"5\" cy=\"5\" r=\"1.4\" fill=\"var(--sunken)\"/></g><g transform=\"translate(582,267) rotate(180)\"><circle cx=\"6.5\" cy=\"6.5\" r=\"5.6\" fill=\"var(--surface)\"/><path d=\"M2.5,4.5 H10.5 M1.5,6.5 H11.5 M2.5,8.5 H10.5\" fill=\"none\" opacity=\"0.55\"/></g><g transform=\"translate(564,267) rotate(180)\"><circle cx=\"7\" cy=\"7\" r=\"6.2\" fill=\"var(--surface)\"/><circle cx=\"4.6\" cy=\"5.5\" r=\"2.6\" fill=\"var(--sunken)\"/><circle cx=\"9.6\" cy=\"6.5\" r=\"2.4\" fill=\"var(--sunken)\"/><circle cx=\"7\" cy=\"9.6\" r=\"2.4\" fill=\"var(--sunken)\"/></g><g transform=\"translate(540.1034482758621,220) rotate(90)\"><rect x=\"0\" y=\"0\" width=\"38\" height=\"14.3\" rx=\"1.5\" fill=\"var(--surface)\"/><rect x=\"11.4\" y=\"1.5\" width=\"15.2\" height=\"2.6\" fill=\"currentColor\" opacity=\"0.7\"/><rect x=\"12.2\" y=\"7.8\" width=\"13.7\" height=\"4\" rx=\"1\" fill=\"var(--sunken)\"/><circle cx=\"19\" cy=\"21.3\" r=\"6\" fill=\"var(--surface)\"/><path d=\"M13,24.7 Q19,27.5 25,24.7\" fill=\"none\" stroke-width=\"1.8\"/></g><g transform=\"translate(514.1034482758621,267) rotate(180)\"><rect x=\"0\" y=\"0\" width=\"38\" height=\"9\" rx=\"0.6\" fill=\"var(--surface)\"/><path d=\"M9.5,1.5 V7.5 M19.0,1.5 V7.5 M28.5,1.5 V7.5 \" fill=\"none\" opacity=\"0.55\"/><path d=\"M2,2 V7 M5,2 V6 M8,2 V5 M11,2 V7 M14,2 V6 M17,2 V5 M20,2 V7 M23,2 V6 M26,2 V5 M29,2 V7 M32,2 V6 M35,2 V5\" fill=\"none\" opacity=\"0.35\"/></g><g transform=\"translate(471.1034482758621,267) rotate(180)\"><rect x=\"0\" y=\"0\" width=\"16\" height=\"14\" rx=\"1\" fill=\"var(--surface)\"/><path d=\"M1.5,4.7 H14.5 M1.5,9.3 H14.5 \" fill=\"none\" opacity=\"0.55\"/></g><g transform=\"translate(450.1034482758621,267) rotate(180)\"><rect x=\"0\" y=\"0\" width=\"18\" height=\"13\" rx=\"2\" fill=\"var(--surface)\"/><rect x=\"3\" y=\"9\" width=\"12\" height=\"2.6\" rx=\"0.6\" fill=\"var(--sunken)\"/><rect x=\"4\" y=\"2\" width=\"10\" height=\"3\" rx=\"0.6\" fill=\"var(--sunken)\"/></g><g transform=\"translate(427.1034482758621,267) rotate(180)\"><rect x=\"0\" y=\"0\" width=\"42\" height=\"4\" rx=\"1\" fill=\"var(--sunken)\"/><path d=\"M4,2 h6 M14,2 h10\" fill=\"none\" opacity=\"0.5\"/></g><g transform=\"translate(380.1034482758621,267) rotate(180)\"><rect x=\"0\" y=\"0\" width=\"22\" height=\"24\" rx=\"7\" fill=\"var(--surface)\"/><rect x=\"3\" y=\"0\" width=\"16\" height=\"7\" rx=\"3\" fill=\"var(--sunken)\"/><circle cx=\"27\" cy=\"20\" r=\"3.4\" fill=\"var(--surface)\"/></g><g transform=\"translate(353.1034482758621,267) rotate(180)\"><circle cx=\"7\" cy=\"7\" r=\"6.2\" fill=\"var(--surface)\"/><circle cx=\"4.6\" cy=\"5.5\" r=\"2.6\" fill=\"var(--sunken)\"/><circle cx=\"9.6\" cy=\"6.5\" r=\"2.4\" fill=\"var(--sunken)\"/><circle cx=\"7\" cy=\"9.6\" r=\"2.4\" fill=\"var(--sunken)\"/></g><g transform=\"translate(340.9310344827586,243) rotate(270)\"><circle cx=\"6\" cy=\"6\" r=\"5.4\" fill=\"var(--surface)\"/><circle cx=\"6\" cy=\"6\" r=\"2\" fill=\"var(--sunken)\"/><path d=\"M0.5999999999999996,6 H11.4 M6,0.5999999999999996 V11.4\" fill=\"none\" opacity=\"0.3\"/></g><g transform=\"translate(340.9310344827586,190) rotate(270)\"><rect x=\"0\" y=\"0\" width=\"38\" height=\"9\" rx=\"0.6\" fill=\"var(--surface)\"/><path d=\"M9.5,1.5 V7.5 M19.0,1.5 V7.5 M28.5,1.5 V7.5 \" fill=\"none\" opacity=\"0.55\"/><path d=\"M2,2 V7 M5,2 V6 M8,2 V5 M11,2 V7 M14,2 V6 M17,2 V5 M20,2 V7 M23,2 V6 M26,2 V5 M29,2 V7 M32,2 V6 M35,2 V5\" fill=\"none\" opacity=\"0.35\"/></g><g transform=\"translate(352.9310344827586,143)\"><circle cx=\"7\" cy=\"7\" r=\"6.2\" fill=\"var(--surface)\"/><circle cx=\"4.6\" cy=\"5.5\" r=\"2.6\" fill=\"var(--sunken)\"/><circle cx=\"9.6\" cy=\"6.5\" r=\"2.4\" fill=\"var(--sunken)\"/><circle cx=\"7\" cy=\"9.6\" r=\"2.4\" fill=\"var(--sunken)\"/></g><g transform=\"translate(371.9310344827586,143)\"><rect x=\"0\" y=\"0\" width=\"12\" height=\"10\" rx=\"1.5\" fill=\"var(--surface)\"/><circle cx=\"6\" cy=\"5\" r=\"3\" fill=\"var(--sunken)\"/></g><g transform=\"translate(388.9310344827586,143)\"><circle cx=\"6\" cy=\"6\" r=\"5.4\" fill=\"var(--surface)\"/><circle cx=\"6\" cy=\"6\" r=\"2\" fill=\"var(--sunken)\"/><path d=\"M0.5999999999999996,6 H11.4 M6,0.5999999999999996 V11.4\" fill=\"none\" opacity=\"0.3\"/></g><g transform=\"translate(334.9310344827586,220) rotate(90)\"><rect x=\"0\" y=\"0\" width=\"24\" height=\"15\" rx=\"2\" fill=\"var(--surface)\"/><ellipse cx=\"12\" cy=\"8.5\" rx=\"7.68\" ry=\"4.5\" fill=\"var(--sunken)\"/><circle cx=\"12\" cy=\"2.2\" r=\"1.1\" fill=\"var(--surface)\"/></g><g transform=\"translate(334.9310344827586,249) rotate(90)\"><rect x=\"0\" y=\"0\" width=\"15\" height=\"7\" rx=\"2\" fill=\"var(--surface)\"/><ellipse cx=\"7.5\" cy=\"13.6\" rx=\"7\" ry=\"7.92\" fill=\"var(--surface)\"/><ellipse cx=\"7.5\" cy=\"14.1\" rx=\"4.5\" ry=\"5.279999999999999\" fill=\"var(--sunken)\"/></g><g transform=\"translate(312.9310344827586,267) rotate(180)\"><rect x=\"0\" y=\"0\" width=\"22\" height=\"5\" rx=\"1\" fill=\"var(--surface)\"/><path d=\"M4.4,1.5 V3.5 M8.8,1.5 V3.5 M13.2,1.5 V3.5 M17.6,1.5 V3.5 \" fill=\"none\" opacity=\"0.55\"/></g><g transform=\"translate(285.9310344827586,267) rotate(180)\"><rect x=\"0\" y=\"0\" width=\"28\" height=\"4\" rx=\"1\" fill=\"var(--sunken)\"/><path d=\"M3,1.2 L7,2.8 M9,1.2 L13,2.8\" fill=\"none\" opacity=\"0.4\"/></g><g transform=\"translate(232.31034482758622,262) rotate(270)\"><rect x=\"0\" y=\"0\" width=\"30\" height=\"30\" rx=\"1\" fill=\"var(--sunken)\"/><path d=\"M0,30 L30,0\" fill=\"none\" opacity=\"0.35\"/><circle cx=\"15\" cy=\"15\" r=\"1.8\" fill=\"var(--surface)\"/><path d=\"M30,0 V30\" fill=\"none\" stroke-width=\"1.8\" opacity=\"0.6\"/></g><g transform=\"translate(232.31034482758622,190) rotate(270)\"><circle cx=\"7\" cy=\"7\" r=\"6.2\" fill=\"var(--surface)\"/><circle cx=\"4.6\" cy=\"5.5\" r=\"2.6\" fill=\"var(--sunken)\"/><circle cx=\"9.6\" cy=\"6.5\" r=\"2.4\" fill=\"var(--sunken)\"/><circle cx=\"7\" cy=\"9.6\" r=\"2.4\" fill=\"var(--sunken)\"/></g><g transform=\"translate(232.31034482758622,171) rotate(270)\"><circle cx=\"6.5\" cy=\"6.5\" r=\"5.6\" fill=\"var(--surface)\"/><path d=\"M2.5,4.5 H10.5 M1.5,6.5 H11.5 M2.5,8.5 H10.5\" fill=\"none\" opacity=\"0.55\"/></g><g transform=\"translate(232.31034482758622,153) rotate(270)\"><circle cx=\"6\" cy=\"6\" r=\"5.4\" fill=\"var(--surface)\"/><circle cx=\"6\" cy=\"6\" r=\"2\" fill=\"var(--sunken)\"/><path d=\"M0.5999999999999996,6 H11.4 M6,0.5999999999999996 V11.4\" fill=\"none\" opacity=\"0.3\"/></g><g transform=\"translate(226.31034482758622,220) rotate(90)\"><rect x=\"0\" y=\"0\" width=\"36\" height=\"10.8\" rx=\"1.5\" fill=\"var(--surface)\"/><rect x=\"2\" y=\"8.1\" width=\"32\" height=\"4\" fill=\"var(--sunken)\"/><path transform=\"translate(0 8.1)\" d=\"M3.0,1.5 V2.5 M6.0,1.5 V2.5 M9.0,1.5 V2.5 M12.0,1.5 V2.5 M15.0,1.5 V2.5 M18.0,1.5 V2.5 M21.0,1.5 V2.5 M24.0,1.5 V2.5 M27.0,1.5 V2.5 M30.0,1.5 V2.5 M33.0,1.5 V2.5 \" fill=\"none\" opacity=\"0.4\"/><rect x=\"10.8\" y=\"13\" width=\"14.4\" height=\"5\" rx=\"1.5\" fill=\"var(--surface)\"/></g><g transform=\"translate(208.31034482758622,267) rotate(180)\"><path d=\"M6,1 V11.700000000000001\" fill=\"none\" stroke-width=\"1.6\"/><ellipse cx=\"6\" cy=\"16.1\" rx=\"4.6\" ry=\"4.2\" fill=\"var(--surface)\"/><ellipse cx=\"6\" cy=\"21.8\" rx=\"5.6\" ry=\"4.4\" fill=\"var(--surface)\"/><circle cx=\"6\" cy=\"18.2\" r=\"1.4\" fill=\"var(--sunken)\"/></g><g transform=\"translate(191.31034482758622,267) rotate(180)\"><rect x=\"0\" y=\"0\" width=\"12\" height=\"10\" rx=\"1.5\" fill=\"var(--surface)\"/><circle cx=\"6\" cy=\"5\" r=\"3\" fill=\"var(--sunken)\"/></g><g transform=\"translate(174.31034482758622,267) rotate(180)\"><rect x=\"0\" y=\"0\" width=\"24\" height=\"14\" rx=\"1.5\" fill=\"var(--surface)\"/><circle cx=\"9.6\" cy=\"7\" r=\"5\" fill=\"var(--sunken)\"/><circle cx=\"9.6\" cy=\"7\" r=\"1\" fill=\"var(--surface)\"/><path d=\"M20,3 L13.200000000000001,7\" fill=\"none\"/></g><g transform=\"translate(145.31034482758622,267) rotate(180)\"><circle cx=\"9.6\" cy=\"9.1\" r=\"5\" fill=\"var(--surface)\"/><circle cx=\"22.4\" cy=\"9.1\" r=\"5\" fill=\"var(--surface)\"/><circle cx=\"16\" cy=\"18.2\" r=\"7\" fill=\"var(--sunken)\"/><circle cx=\"3.8\" cy=\"19.5\" r=\"3.6\" fill=\"var(--surface)\"/><circle cx=\"28.2\" cy=\"19.5\" r=\"3.6\" fill=\"var(--surface)\"/></g><g transform=\"translate(108.31034482758622,267) rotate(180)\"><rect x=\"0\" y=\"0\" width=\"12\" height=\"10\" rx=\"1.5\" fill=\"var(--surface)\"/><circle cx=\"6\" cy=\"5\" r=\"3\" fill=\"var(--sunken)\"/></g><g transform=\"translate(91.31034482758622,267) rotate(180)\"><rect x=\"0\" y=\"0\" width=\"38\" height=\"9\" rx=\"0.6\" fill=\"var(--surface)\"/><path d=\"M9.5,1.5 V7.5 M19.0,1.5 V7.5 M28.5,1.5 V7.5 \" fill=\"none\" opacity=\"0.55\"/><path d=\"M2,2 V7 M5,2 V6 M8,2 V5 M11,2 V7 M14,2 V6 M17,2 V5 M20,2 V7 M23,2 V6 M26,2 V5 M29,2 V7 M32,2 V6 M35,2 V5\" fill=\"none\" opacity=\"0.35\"/></g><g transform=\"translate(3,241) rotate(270)\"><rect x=\"0\" y=\"0\" width=\"22\" height=\"22\" rx=\"6\" fill=\"var(--surface)\"/><rect x=\"3\" y=\"0\" width=\"16\" height=\"6\" rx=\"3\" fill=\"var(--sunken)\"/><path d=\"M5,6 V19 M17,6 V19\" fill=\"none\" opacity=\"0.55\"/></g><g transform=\"translate(3,214) rotate(270)\"><circle cx=\"7\" cy=\"7\" r=\"6.2\" fill=\"var(--surface)\"/><circle cx=\"4.6\" cy=\"5.5\" r=\"2.6\" fill=\"var(--sunken)\"/><circle cx=\"9.6\" cy=\"6.5\" r=\"2.4\" fill=\"var(--sunken)\"/><circle cx=\"7\" cy=\"9.6\" r=\"2.4\" fill=\"var(--sunken)\"/></g><g transform=\"translate(3,195) rotate(270)\"><rect x=\"0\" y=\"0\" width=\"12\" height=\"10\" rx=\"1.5\" fill=\"var(--surface)\"/><circle cx=\"6\" cy=\"5\" r=\"3\" fill=\"var(--sunken)\"/></g><g transform=\"translate(3,178) rotate(270)\"><circle cx=\"6\" cy=\"6\" r=\"5.4\" fill=\"var(--surface)\"/><circle cx=\"6\" cy=\"6\" r=\"2\" fill=\"var(--sunken)\"/><path d=\"M0.5999999999999996,6 H11.4 M6,0.5999999999999996 V11.4\" fill=\"none\" opacity=\"0.3\"/></g><g transform=\"translate(38,273)\"><rect x=\"0\" y=\"0\" width=\"14\" height=\"12\" rx=\"1.5\" fill=\"var(--surface)\"/><circle cx=\"7\" cy=\"6\" r=\"3.6\" fill=\"var(--sunken)\"/><circle cx=\"7\" cy=\"6\" r=\"1.2\" fill=\"var(--surface)\"/></g><g transform=\"translate(57,273)\"><rect x=\"0\" y=\"0\" width=\"46\" height=\"3\" rx=\"1\" fill=\"var(--surface)\"/><rect x=\"1\" y=\"2\" width=\"44\" height=\"40\" rx=\"3\" fill=\"var(--surface)\"/><rect x=\"1\" y=\"15.1\" width=\"44\" height=\"25.9\" rx=\"3\" fill=\"var(--sunken)\"/><path d=\"M2,18.48 Q23,15.54 44,19.32\" fill=\"none\" opacity=\"0.55\"/><rect x=\"4\" y=\"5\" width=\"17\" height=\"8.4\" rx=\"3\" fill=\"var(--surface)\"/><rect x=\"25\" y=\"5\" width=\"17\" height=\"8.4\" rx=\"3\" fill=\"var(--surface)\"/></g><g transform=\"translate(108,273)\"><rect x=\"0\" y=\"0\" width=\"14\" height=\"12\" rx=\"1.5\" fill=\"var(--surface)\"/><circle cx=\"7\" cy=\"6\" r=\"3.6\" fill=\"var(--sunken)\"/><circle cx=\"7\" cy=\"6\" r=\"1.2\" fill=\"var(--surface)\"/></g><g transform=\"translate(127,273)\"><circle cx=\"6\" cy=\"6\" r=\"5.4\" fill=\"var(--surface)\"/><circle cx=\"6\" cy=\"6\" r=\"2\" fill=\"var(--sunken)\"/><path d=\"M0.5999999999999996,6 H11.4 M6,0.5999999999999996 V11.4\" fill=\"none\" opacity=\"0.3\"/></g><g transform=\"translate(144,273)\"><rect x=\"0\" y=\"0\" width=\"42\" height=\"14\" rx=\"1\" fill=\"var(--surface)\"/><path d=\"M21,0 V14\" fill=\"none\"/><path d=\"M5.3,1.5 V8.3 M10.5,1.5 V8.3 M15.8,1.5 V8.3 M21.0,1.5 V8.3 M26.3,1.5 V8.3 M31.5,1.5 V8.3 M36.8,1.5 V8.3 \" fill=\"none\" opacity=\"0.55\"/></g><g transform=\"translate(217,365) rotate(90)\"><rect x=\"0\" y=\"0\" width=\"32\" height=\"12\" rx=\"1\" fill=\"var(--surface)\"/><path d=\"M10.7,1.5 V10.5 M21.3,1.5 V10.5 \" fill=\"none\" opacity=\"0.55\"/><circle cx=\"5.3\" cy=\"9\" r=\"0.9\" fill=\"currentColor\"/><circle cx=\"16\" cy=\"9\" r=\"0.9\" fill=\"currentColor\"/><circle cx=\"26.7\" cy=\"9\" r=\"0.9\" fill=\"currentColor\"/></g><g transform=\"translate(217,402) rotate(90)\"><rect x=\"0\" y=\"0\" width=\"28\" height=\"4\" rx=\"1\" fill=\"var(--sunken)\"/><path d=\"M3,1.2 L7,2.8 M9,1.2 L13,2.8\" fill=\"none\" opacity=\"0.4\"/></g><g transform=\"translate(205,427) rotate(180)\"><rect x=\"0\" y=\"0\" width=\"22\" height=\"22\" rx=\"6\" fill=\"var(--surface)\"/><rect x=\"3\" y=\"0\" width=\"16\" height=\"6\" rx=\"3\" fill=\"var(--sunken)\"/><path d=\"M5,6 V19 M17,6 V19\" fill=\"none\" opacity=\"0.55\"/></g><g transform=\"translate(178,427) rotate(180)\"><circle cx=\"7\" cy=\"7\" r=\"6.2\" fill=\"var(--surface)\"/><circle cx=\"4.6\" cy=\"5.5\" r=\"2.6\" fill=\"var(--sunken)\"/><circle cx=\"9.6\" cy=\"6.5\" r=\"2.4\" fill=\"var(--sunken)\"/><circle cx=\"7\" cy=\"9.6\" r=\"2.4\" fill=\"var(--sunken)\"/></g><g transform=\"translate(159,427) rotate(180)\"><rect x=\"0\" y=\"0\" width=\"30\" height=\"13\" rx=\"1.5\" fill=\"var(--surface)\"/><ellipse cx=\"15\" cy=\"3\" rx=\"9\" ry=\"2.4\" fill=\"var(--sunken)\"/><g transform=\"translate(15,19) rotate(180)\"><rect x=\"-5\" y=\"-4\" width=\"10\" height=\"8\" rx=\"2\" fill=\"var(--surface)\"/><path d=\"M-5,-4 H5\" fill=\"none\" stroke-width=\"1.6\"/></g></g><g transform=\"translate(124,427) rotate(180)\"><circle cx=\"7\" cy=\"7\" r=\"6.2\" fill=\"var(--surface)\"/><circle cx=\"4.6\" cy=\"5.5\" r=\"2.6\" fill=\"var(--sunken)\"/><circle cx=\"9.6\" cy=\"6.5\" r=\"2.4\" fill=\"var(--sunken)\"/><circle cx=\"7\" cy=\"9.6\" r=\"2.4\" fill=\"var(--sunken)\"/></g><g transform=\"translate(105,427) rotate(180)\"><circle cx=\"6.5\" cy=\"6.5\" r=\"5.6\" fill=\"var(--surface)\"/><path d=\"M2.5,4.5 H10.5 M1.5,6.5 H11.5 M2.5,8.5 H10.5\" fill=\"none\" opacity=\"0.55\"/></g><g transform=\"translate(87,427) rotate(180)\"><circle cx=\"6\" cy=\"6\" r=\"5.4\" fill=\"var(--surface)\"/><circle cx=\"6\" cy=\"6\" r=\"2\" fill=\"var(--sunken)\"/><path d=\"M0.5999999999999996,6 H11.4 M6,0.5999999999999996 V11.4\" fill=\"none\" opacity=\"0.3\"/></g><g transform=\"translate(223,335) rotate(270)\"><rect x=\"0\" y=\"0\" width=\"24\" height=\"15\" rx=\"2\" fill=\"var(--surface)\"/><ellipse cx=\"12\" cy=\"8.5\" rx=\"7.68\" ry=\"4.5\" fill=\"var(--sunken)\"/><circle cx=\"12\" cy=\"2.2\" r=\"1.1\" fill=\"var(--surface)\"/></g><g transform=\"translate(223,306) rotate(270)\"><rect x=\"0\" y=\"0\" width=\"15\" height=\"7\" rx=\"2\" fill=\"var(--surface)\"/><ellipse cx=\"7.5\" cy=\"13.6\" rx=\"7\" ry=\"7.92\" fill=\"var(--surface)\"/><ellipse cx=\"7.5\" cy=\"14.1\" rx=\"4.5\" ry=\"5.279999999999999\" fill=\"var(--sunken)\"/></g><g transform=\"translate(223,286) rotate(270)\"><ellipse cx=\"6.5\" cy=\"10\" rx=\"6\" ry=\"7.5\" fill=\"var(--surface)\"/><ellipse cx=\"6.5\" cy=\"10\" rx=\"3.5\" ry=\"5\" fill=\"var(--sunken)\"/></g><g transform=\"translate(245,273)\"><rect x=\"0\" y=\"0\" width=\"48\" height=\"24\" rx=\"5\" fill=\"var(--surface)\"/><rect x=\"3\" y=\"3\" width=\"42\" height=\"18\" rx=\"8\" fill=\"var(--sunken)\"/><circle cx=\"39\" cy=\"12\" r=\"1.4\" fill=\"var(--surface)\"/></g><g transform=\"translate(298,273)\"><rect x=\"0\" y=\"0\" width=\"22\" height=\"5\" rx=\"1\" fill=\"var(--surface)\"/><path d=\"M4.4,1.5 V3.5 M8.8,1.5 V3.5 M13.2,1.5 V3.5 M17.6,1.5 V3.5 \" fill=\"none\" opacity=\"0.55\"/></g><g transform=\"translate(347,297) rotate(90)\"><rect x=\"0\" y=\"0\" width=\"28\" height=\"12\" rx=\"1\" fill=\"var(--surface)\"/><path d=\"M14.0,1.5 V10.5 \" fill=\"none\" opacity=\"0.55\"/></g><g transform=\"translate(347,365) rotate(90)\"><rect x=\"0\" y=\"0\" width=\"28\" height=\"4\" rx=\"1\" fill=\"var(--sunken)\"/><path d=\"M3,1.2 L7,2.8 M9,1.2 L13,2.8\" fill=\"none\" opacity=\"0.4\"/></g><g transform=\"translate(347,398) rotate(90)\"><circle cx=\"7\" cy=\"7\" r=\"6.2\" fill=\"var(--surface)\"/><circle cx=\"4.6\" cy=\"5.5\" r=\"2.6\" fill=\"var(--sunken)\"/><circle cx=\"9.6\" cy=\"6.5\" r=\"2.4\" fill=\"var(--sunken)\"/><circle cx=\"7\" cy=\"9.6\" r=\"2.4\" fill=\"var(--sunken)\"/></g><g transform=\"translate(347,417) rotate(90)\"><circle cx=\"6.5\" cy=\"6.5\" r=\"5.6\" fill=\"var(--surface)\"/><path d=\"M2.5,4.5 H10.5 M1.5,6.5 H11.5 M2.5,8.5 H10.5\" fill=\"none\" opacity=\"0.55\"/></g><g transform=\"translate(333,427) rotate(180)\"><circle cx=\"6\" cy=\"6\" r=\"5.4\" fill=\"var(--surface)\"/><circle cx=\"6\" cy=\"6\" r=\"2\" fill=\"var(--sunken)\"/><path d=\"M0.5999999999999996,6 H11.4 M6,0.5999999999999996 V11.4\" fill=\"none\" opacity=\"0.3\"/></g><g transform=\"translate(353,335) rotate(270)\"><rect x=\"0\" y=\"0\" width=\"42\" height=\"14\" rx=\"1\" fill=\"var(--surface)\"/><path d=\"M21,0 V14\" fill=\"none\"/><path d=\"M5.3,1.5 V8.3 M10.5,1.5 V8.3 M15.8,1.5 V8.3 M21.0,1.5 V8.3 M26.3,1.5 V8.3 M31.5,1.5 V8.3 M36.8,1.5 V8.3 \" fill=\"none\" opacity=\"0.55\"/></g><g transform=\"translate(367,273)\"><rect x=\"0\" y=\"0\" width=\"30\" height=\"10\" rx=\"1\" fill=\"var(--surface)\"/><path d=\"M4,3 q2,4 4,0 M11,3 q2,4 4,0 M18,3 q2,4 4,0 M25,3 q2,4 4,0\" fill=\"none\" opacity=\"0.55\"/></g><g transform=\"translate(402,273)\"><rect x=\"0\" y=\"0\" width=\"28\" height=\"4\" rx=\"1\" fill=\"var(--sunken)\"/><path d=\"M3,1.2 L7,2.8 M9,1.2 L13,2.8\" fill=\"none\" opacity=\"0.4\"/></g><g transform=\"translate(457,283) rotate(90)\"><rect x=\"0\" y=\"0\" width=\"32\" height=\"12\" rx=\"1\" fill=\"var(--surface)\"/><path d=\"M10.7,1.5 V10.5 M21.3,1.5 V10.5 \" fill=\"none\" opacity=\"0.55\"/><circle cx=\"5.3\" cy=\"9\" r=\"0.9\" fill=\"currentColor\"/><circle cx=\"16\" cy=\"9\" r=\"0.9\" fill=\"currentColor\"/><circle cx=\"26.7\" cy=\"9\" r=\"0.9\" fill=\"currentColor\"/></g><g transform=\"translate(457,365) rotate(90)\"><rect x=\"0\" y=\"0\" width=\"42\" height=\"14\" rx=\"1\" fill=\"var(--surface)\"/><path d=\"M21,0 V14\" fill=\"none\"/><path d=\"M5.3,1.5 V8.3 M10.5,1.5 V8.3 M15.8,1.5 V8.3 M21.0,1.5 V8.3 M26.3,1.5 V8.3 M31.5,1.5 V8.3 M36.8,1.5 V8.3 \" fill=\"none\" opacity=\"0.55\"/></g><g transform=\"translate(443,427) rotate(180)\"><rect x=\"0\" y=\"0\" width=\"32\" height=\"12\" rx=\"2\" fill=\"var(--surface)\"/><path d=\"M10.7,1.5 V10.5 M21.3,1.5 V10.5 \" fill=\"none\" opacity=\"0.55\"/></g><g transform=\"translate(406,427) rotate(180)\"><circle cx=\"7\" cy=\"7\" r=\"6.2\" fill=\"var(--surface)\"/><circle cx=\"4.6\" cy=\"5.5\" r=\"2.6\" fill=\"var(--sunken)\"/><circle cx=\"9.6\" cy=\"6.5\" r=\"2.4\" fill=\"var(--sunken)\"/><circle cx=\"7\" cy=\"9.6\" r=\"2.4\" fill=\"var(--sunken)\"/></g><g transform=\"translate(387,427) rotate(180)\"><circle cx=\"6.5\" cy=\"6.5\" r=\"5.6\" fill=\"var(--surface)\"/><path d=\"M2.5,4.5 H10.5 M1.5,6.5 H11.5 M2.5,8.5 H10.5\" fill=\"none\" opacity=\"0.55\"/></g><g transform=\"translate(369,427) rotate(180)\"><circle cx=\"6\" cy=\"6\" r=\"5.4\" fill=\"var(--surface)\"/><circle cx=\"6\" cy=\"6\" r=\"2\" fill=\"var(--sunken)\"/><path d=\"M0.5999999999999996,6 H11.4 M6,0.5999999999999996 V11.4\" fill=\"none\" opacity=\"0.3\"/></g><g transform=\"translate(463,335) rotate(270)\"><circle cx=\"7\" cy=\"7\" r=\"6.2\" fill=\"var(--surface)\"/><circle cx=\"4.6\" cy=\"5.5\" r=\"2.6\" fill=\"var(--sunken)\"/><circle cx=\"9.6\" cy=\"6.5\" r=\"2.4\" fill=\"var(--sunken)\"/><circle cx=\"7\" cy=\"9.6\" r=\"2.4\" fill=\"var(--sunken)\"/></g><g transform=\"translate(463,316) rotate(270)\"><circle cx=\"9\" cy=\"8\" r=\"7\" fill=\"var(--surface)\"/><path d=\"M4,5.6 H14 M3,8 H15 M4,10.4 H14\" fill=\"none\" opacity=\"0.55\"/></g><g transform=\"translate(463,293) rotate(270)\"><rect x=\"0\" y=\"0\" width=\"18\" height=\"42\" rx=\"3\" fill=\"var(--surface)\"/><rect x=\"2\" y=\"2\" width=\"14\" height=\"11.8\" rx=\"2\" fill=\"var(--sunken)\"/><path d=\"M1.5,7.0 H16.5 M1.5,14.0 H16.5 M1.5,21.0 H16.5 M1.5,28.0 H16.5 M1.5,35.0 H16.5 \" fill=\"none\" opacity=\"0.3\"/></g><g transform=\"translate(505,273)\"><rect x=\"0\" y=\"0\" width=\"18\" height=\"42\" rx=\"3\" fill=\"var(--surface)\"/><rect x=\"2\" y=\"2\" width=\"14\" height=\"11.8\" rx=\"2\" fill=\"var(--sunken)\"/><path d=\"M1.5,7.0 H16.5 M1.5,14.0 H16.5 M1.5,21.0 H16.5 M1.5,28.0 H16.5 M1.5,35.0 H16.5 \" fill=\"none\" opacity=\"0.3\"/></g><g transform=\"translate(528,273)\"><circle cx=\"7\" cy=\"7\" r=\"6.2\" fill=\"var(--surface)\"/><circle cx=\"4.6\" cy=\"5.5\" r=\"2.6\" fill=\"var(--sunken)\"/><circle cx=\"9.6\" cy=\"6.5\" r=\"2.4\" fill=\"var(--sunken)\"/><circle cx=\"7\" cy=\"9.6\" r=\"2.4\" fill=\"var(--sunken)\"/></g><g transform=\"translate(547,273)\"><path d=\"M2,8 Q23,1.6 44,8 Q23,15.2 2,8Z\" fill=\"var(--surface)\"/><circle cx=\"2\" cy=\"8\" r=\"1.6\" fill=\"var(--sunken)\"/><circle cx=\"44\" cy=\"8\" r=\"1.6\" fill=\"var(--sunken)\"/></g><g transform=\"translate(598,273)\"><circle cx=\"6\" cy=\"6\" r=\"5.4\" fill=\"var(--surface)\"/><circle cx=\"6\" cy=\"6\" r=\"2\" fill=\"var(--sunken)\"/><path d=\"M0.5999999999999996,6 H11.4 M6,0.5999999999999996 V11.4\" fill=\"none\" opacity=\"0.3\"/></g><g transform=\"translate(615,273)\"><circle cx=\"7\" cy=\"7\" r=\"6.2\" fill=\"var(--surface)\"/><circle cx=\"4.6\" cy=\"5.5\" r=\"2.6\" fill=\"var(--sunken)\"/><circle cx=\"9.6\" cy=\"6.5\" r=\"2.4\" fill=\"var(--sunken)\"/><circle cx=\"7\" cy=\"9.6\" r=\"2.4\" fill=\"var(--sunken)\"/></g><g transform=\"translate(634,273)\"><circle cx=\"6\" cy=\"6\" r=\"5.4\" fill=\"var(--surface)\"/><circle cx=\"6\" cy=\"6\" r=\"2\" fill=\"var(--sunken)\"/><path d=\"M0.5999999999999996,6 H11.4 M6,0.5999999999999996 V11.4\" fill=\"none\" opacity=\"0.3\"/></g><g transform=\"translate(651,273)\"><circle cx=\"7\" cy=\"7\" r=\"6.2\" fill=\"var(--surface)\"/><circle cx=\"4.6\" cy=\"5.5\" r=\"2.6\" fill=\"var(--sunken)\"/><circle cx=\"9.6\" cy=\"6.5\" r=\"2.4\" fill=\"var(--sunken)\"/><circle cx=\"7\" cy=\"9.6\" r=\"2.4\" fill=\"var(--sunken)\"/></g><g transform=\"translate(560,336)\"><circle cx=\"20\" cy=\"20\" r=\"18\" fill=\"var(--surface)\"/><g transform=\"translate(20,-5) rotate(0)\"><rect x=\"-5\" y=\"-4\" width=\"10\" height=\"8\" rx=\"2\" fill=\"var(--surface)\"/><path d=\"M-5,-4 H5\" fill=\"none\" stroke-width=\"1.6\"/></g><g transform=\"translate(20,45) rotate(180)\"><rect x=\"-5\" y=\"-4\" width=\"10\" height=\"8\" rx=\"2\" fill=\"var(--surface)\"/><path d=\"M-5,-4 H5\" fill=\"none\" stroke-width=\"1.6\"/></g><g transform=\"translate(-5,20) rotate(-90)\"><rect x=\"-5\" y=\"-4\" width=\"10\" height=\"8\" rx=\"2\" fill=\"var(--surface)\"/><path d=\"M-5,-4 H5\" fill=\"none\" stroke-width=\"1.6\"/></g><g transform=\"translate(45,20) rotate(90)\"><rect x=\"-5\" y=\"-4\" width=\"10\" height=\"8\" rx=\"2\" fill=\"var(--surface)\"/><path d=\"M-5,-4 H5\" fill=\"none\" stroke-width=\"1.6\"/></g><circle cx=\"20\" cy=\"20\" r=\"4\" fill=\"var(--sunken)\"/></g></g><g stroke-linecap=\"square\" fill=\"none\"><path d=\"M0.0,0.0 L110.0,0.0 M0.0,0.0 L0.0,59.0 M0.0,81.0 L0.0,140.0 M110.0,0.0 L360.0,0.0 M360.0,0.0 L530.0,0.0 M530.0,0.0 L700.0,0.0 M700.0,0.0 L700.0,140.0 M700.0,140.0 L700.0,270.0 M0.0,140.0 L0.0,270.0 M0.0,430.0 L220.0,430.0 M0.0,270.0 L0.0,430.0 M220.0,430.0 L350.0,430.0 M350.0,430.0 L460.0,430.0 M700.0,270.0 L700.0,430.0 M460.0,430.0 L700.0,430.0 \" stroke=\"currentColor\" stroke-width=\"7.4\"/><path d=\"M110.0,0.0 L110.0,59.0 M110.0,81.0 L110.0,140.0 M0.0,140.0 L110.0,140.0 M360.0,0.0 L360.0,59.0 M360.0,81.0 L360.0,140.0 M110.0,140.0 L360.0,140.0 M110.0,0.0 L110.0,59.0 M110.0,81.0 L110.0,140.0 M530.0,0.0 L530.0,59.0 M530.0,81.0 L530.0,140.0 M360.0,140.0 L530.0,140.0 M360.0,0.0 L360.0,59.0 M360.0,81.0 L360.0,140.0 M530.0,140.0 L666.0,140.0 M688.0,140.0 L700.0,140.0 M530.0,0.0 L530.0,59.0 M530.0,81.0 L530.0,140.0 M543.1,140.0 L666.0,140.0 M688.0,140.0 L700.0,140.0 M543.1,270.0 L700.0,270.0 M543.1,140.0 L543.1,194.0 M543.1,216.0 L543.1,270.0 M337.9,140.0 L543.1,140.0 M543.1,140.0 L543.1,194.0 M543.1,216.0 L543.1,270.0 M337.9,270.0 L543.1,270.0 M337.9,140.0 L337.9,194.0 M337.9,216.0 L337.9,270.0 M229.3,140.0 L337.9,140.0 M337.9,140.0 L337.9,194.0 M337.9,216.0 L337.9,270.0 M229.3,270.0 L337.9,270.0 M229.3,140.0 L229.3,194.0 M229.3,216.0 L229.3,270.0 M0.0,140.0 L229.3,140.0 M229.3,140.0 L229.3,194.0 M229.3,216.0 L229.3,270.0 M0.0,270.0 L12.0,270.0 M34.0,270.0 L229.3,270.0 M0.0,270.0 L12.0,270.0 M34.0,270.0 L220.0,270.0 M220.0,270.0 L220.0,339.0 M220.0,361.0 L220.0,430.0 M220.0,270.0 L350.0,270.0 M350.0,270.0 L350.0,339.0 M350.0,361.0 L350.0,430.0 M220.0,270.0 L220.0,339.0 M220.0,361.0 L220.0,430.0 M350.0,270.0 L460.0,270.0 M460.0,270.0 L460.0,339.0 M460.0,361.0 L460.0,430.0 M350.0,270.0 L350.0,339.0 M350.0,361.0 L350.0,430.0 M460.0,270.0 L700.0,270.0 M460.0,270.0 L460.0,339.0 M460.0,361.0 L460.0,430.0 \" stroke=\"currentColor\" stroke-width=\"4.6\"/><path d=\"M0.0,0.0 L110.0,0.0 M0.0,0.0 L0.0,59.0 M0.0,81.0 L0.0,140.0 M110.0,0.0 L360.0,0.0 M360.0,0.0 L530.0,0.0 M530.0,0.0 L700.0,0.0 M700.0,0.0 L700.0,140.0 M700.0,140.0 L700.0,270.0 M0.0,140.0 L0.0,270.0 M0.0,430.0 L220.0,430.0 M0.0,270.0 L0.0,430.0 M220.0,430.0 L350.0,430.0 M350.0,430.0 L460.0,430.0 M700.0,270.0 L700.0,430.0 M460.0,430.0 L700.0,430.0 \" stroke=\"var(--sunken)\" stroke-width=\"5.6\"/><path d=\"M110.0,0.0 L110.0,59.0 M110.0,81.0 L110.0,140.0 M0.0,140.0 L110.0,140.0 M360.0,0.0 L360.0,59.0 M360.0,81.0 L360.0,140.0 M110.0,140.0 L360.0,140.0 M110.0,0.0 L110.0,59.0 M110.0,81.0 L110.0,140.0 M530.0,0.0 L530.0,59.0 M530.0,81.0 L530.0,140.0 M360.0,140.0 L530.0,140.0 M360.0,0.0 L360.0,59.0 M360.0,81.0 L360.0,140.0 M530.0,140.0 L666.0,140.0 M688.0,140.0 L700.0,140.0 M530.0,0.0 L530.0,59.0 M530.0,81.0 L530.0,140.0 M543.1,140.0 L666.0,140.0 M688.0,140.0 L700.0,140.0 M543.1,270.0 L700.0,270.0 M543.1,140.0 L543.1,194.0 M543.1,216.0 L543.1,270.0 M337.9,140.0 L543.1,140.0 M543.1,140.0 L543.1,194.0 M543.1,216.0 L543.1,270.0 M337.9,270.0 L543.1,270.0 M337.9,140.0 L337.9,194.0 M337.9,216.0 L337.9,270.0 M229.3,140.0 L337.9,140.0 M337.9,140.0 L337.9,194.0 M337.9,216.0 L337.9,270.0 M229.3,270.0 L337.9,270.0 M229.3,140.0 L229.3,194.0 M229.3,216.0 L229.3,270.0 M0.0,140.0 L229.3,140.0 M229.3,140.0 L229.3,194.0 M229.3,216.0 L229.3,270.0 M0.0,270.0 L12.0,270.0 M34.0,270.0 L229.3,270.0 M0.0,270.0 L12.0,270.0 M34.0,270.0 L220.0,270.0 M220.0,270.0 L220.0,339.0 M220.0,361.0 L220.0,430.0 M220.0,270.0 L350.0,270.0 M350.0,270.0 L350.0,339.0 M350.0,361.0 L350.0,430.0 M220.0,270.0 L220.0,339.0 M220.0,361.0 L220.0,430.0 M350.0,270.0 L460.0,270.0 M460.0,270.0 L460.0,339.0 M460.0,361.0 L460.0,430.0 M350.0,270.0 L350.0,339.0 M350.0,361.0 L350.0,430.0 M460.0,270.0 L700.0,270.0 M460.0,270.0 L460.0,339.0 M460.0,361.0 L460.0,430.0 \" stroke=\"var(--sunken)\" stroke-width=\"2.8\"/><path d=\"M0.0,0.0 L110.0,0.0 M0.0,0.0 L0.0,59.0 M0.0,81.0 L0.0,140.0 M110.0,0.0 L360.0,0.0 M360.0,0.0 L530.0,0.0 M530.0,0.0 L700.0,0.0 M700.0,0.0 L700.0,140.0 M700.0,140.0 L700.0,270.0 M0.0,140.0 L0.0,270.0 M0.0,430.0 L220.0,430.0 M0.0,270.0 L0.0,430.0 M220.0,430.0 L350.0,430.0 M350.0,430.0 L460.0,430.0 M700.0,270.0 L700.0,430.0 M460.0,430.0 L700.0,430.0 \" stroke=\"url(#pcg-hatch)\" stroke-width=\"5.6\"/></g><path d=\"M22,59 A22,22 0 0,1 0,81 M132,59 A22,22 0 0,1 110,81 M382,59 A22,22 0 0,1 360,81 M552,59 A22,22 0 0,1 530,81 M666,162 A22,22 0 0,0 688,140 M521.1034482758621,194 A22,22 0 0,0 543.1034482758621,216 M315.9310344827586,194 A22,22 0 0,0 337.9310344827586,216 M207.31034482758622,194 A22,22 0 0,0 229.31034482758622,216 M12,292 A22,22 0 0,0 34,270 M242,339 A22,22 0 0,1 220,361 M372,339 A22,22 0 0,1 350,361 M482,339 A22,22 0 0,1 460,361\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"0.6\" stroke-dasharray=\"2 2\" opacity=\"0.6\"/><g fill=\"var(--surface)\" stroke=\"currentColor\" stroke-width=\"0.7\"><rect x=\"0\" y=\"58\" width=\"22\" height=\"2\" rx=\"0.6\"/><rect x=\"110\" y=\"58\" width=\"22\" height=\"2\" rx=\"0.6\"/><rect x=\"360\" y=\"58\" width=\"22\" height=\"2\" rx=\"0.6\"/><rect x=\"530\" y=\"58\" width=\"22\" height=\"2\" rx=\"0.6\"/><rect x=\"665\" y=\"140\" width=\"2\" height=\"22\" rx=\"0.6\"/><rect x=\"521.1034482758621\" y=\"193\" width=\"22\" height=\"2\" rx=\"0.6\"/><rect x=\"315.9310344827586\" y=\"193\" width=\"22\" height=\"2\" rx=\"0.6\"/><rect x=\"207.31034482758622\" y=\"193\" width=\"22\" height=\"2\" rx=\"0.6\"/><rect x=\"11\" y=\"270\" width=\"2\" height=\"22\" rx=\"0.6\"/><rect x=\"220\" y=\"338\" width=\"22\" height=\"2\" rx=\"0.6\"/><rect x=\"350\" y=\"338\" width=\"22\" height=\"2\" rx=\"0.6\"/><rect x=\"460\" y=\"338\" width=\"22\" height=\"2\" rx=\"0.6\"/></g><g fill=\"var(--surface)\" stroke=\"currentColor\" stroke-width=\"0.7\"><rect x=\"40\" y=\"-3.7\" width=\"30\" height=\"7.4\"/><path d=\"M40,-1 H70 M40,1 H70\" fill=\"none\" stroke-width=\"0.5\"/><rect x=\"220\" y=\"-3.7\" width=\"30\" height=\"7.4\"/><path d=\"M220,-1 H250 M220,1 H250\" fill=\"none\" stroke-width=\"0.5\"/><rect x=\"430\" y=\"-3.7\" width=\"30\" height=\"7.4\"/><path d=\"M430,-1 H460 M430,1 H460\" fill=\"none\" stroke-width=\"0.5\"/><rect x=\"600\" y=\"-3.7\" width=\"30\" height=\"7.4\"/><path d=\"M600,-1 H630 M600,1 H630\" fill=\"none\" stroke-width=\"0.5\"/><rect x=\"696.3\" y=\"55\" width=\"7.4\" height=\"30\"/><path d=\"M699,55 V85 M701,55 V85\" fill=\"none\" stroke-width=\"0.5\"/><rect x=\"696.3\" y=\"190\" width=\"7.4\" height=\"30\"/><path d=\"M699,190 V220 M701,190 V220\" fill=\"none\" stroke-width=\"0.5\"/><rect x=\"-3.7\" y=\"190\" width=\"7.4\" height=\"30\"/><path d=\"M-1,190 V220 M1,190 V220\" fill=\"none\" stroke-width=\"0.5\"/><rect x=\"95\" y=\"426.3\" width=\"30\" height=\"7.4\"/><path d=\"M95,429 H125 M95,431 H125\" fill=\"none\" stroke-width=\"0.5\"/><rect x=\"-3.7\" y=\"335\" width=\"7.4\" height=\"30\"/><path d=\"M-1,335 V365 M1,335 V365\" fill=\"none\" stroke-width=\"0.5\"/><rect x=\"270\" y=\"426.3\" width=\"30\" height=\"7.4\"/><path d=\"M270,429 H300 M270,431 H300\" fill=\"none\" stroke-width=\"0.5\"/><rect x=\"390\" y=\"426.3\" width=\"30\" height=\"7.4\"/><path d=\"M390,429 H420 M390,431 H420\" fill=\"none\" stroke-width=\"0.5\"/><rect x=\"696.3\" y=\"335\" width=\"7.4\" height=\"30\"/><path d=\"M699,335 V365 M701,335 V365\" fill=\"none\" stroke-width=\"0.5\"/><rect x=\"565\" y=\"426.3\" width=\"30\" height=\"7.4\"/><path d=\"M565,429 H595 M565,431 H595\" fill=\"none\" stroke-width=\"0.5\"/></g>",
+        "w": 700,
+        "h": 430
+      },
+      "rooms": [
+        {
+          "label": "Recibidor",
+          "x": 0,
+          "y": 0,
+          "w": 110,
+          "h": 140,
+          "zone": "cabeza",
+          "lx": 22.6,
+          "ly": 46,
+          "sub": "5,5 × 7,0 m"
+        },
+        {
+          "label": "Salón",
+          "x": 110,
+          "y": 0,
+          "w": 250,
+          "h": 140,
+          "zone": "cabeza",
+          "lx": 217,
+          "ly": 46,
+          "sub": "12,5 × 7,0 m"
+        },
+        {
+          "label": "Comedor",
+          "x": 360,
+          "y": 0,
+          "w": 170,
+          "h": 140,
+          "zone": "cabeza",
+          "lx": 419.8,
+          "ly": 46,
+          "sub": "8,5 × 7,0 m"
+        },
+        {
+          "label": "Cocina",
+          "x": 530,
+          "y": 0,
+          "w": 170,
+          "h": 140,
+          "zone": "torso",
+          "lx": 593.4,
+          "ly": 46,
+          "sub": "8,5 × 7,0 m"
+        },
+        {
+          "label": "Lavadero",
+          "x": 543.1034482758621,
+          "y": 140,
+          "w": 156.89655172413794,
+          "h": 130,
+          "zone": "torso",
+          "lx": 592.7517241379311,
+          "ly": 186,
+          "sub": "7,8 × 6,5 m"
+        },
+        {
+          "label": "Estudio",
+          "x": 337.9310344827586,
+          "y": 140,
+          "w": 205.17241379310346,
+          "h": 130,
+          "zone": "brazos",
+          "lx": 415.31724137931036,
+          "ly": 186,
+          "sub": "10,3 × 6,5 m"
+        },
+        {
+          "label": "Aseo",
+          "x": 229.31034482758622,
+          "y": 140,
+          "w": 108.62068965517241,
+          "h": 130,
+          "zone": "hombros",
+          "lx": 269.22068965517246,
+          "ly": 186,
+          "sub": "5,4 × 6,5 m"
+        },
+        {
+          "label": "Sala de música",
+          "x": 0,
+          "y": 140,
+          "w": 229.31034482758622,
+          "h": 130,
+          "zone": "brazos",
+          "lx": 64.2551724137931,
+          "ly": 186,
+          "sub": "11,5 × 6,5 m"
+        },
+        {
+          "label": "Dormitorio principal",
+          "x": 0,
+          "y": 270,
+          "w": 220,
+          "h": 160,
+          "zone": "hombros",
+          "lx": 38,
+          "ly": 316,
+          "sub": "11,0 × 8,0 m"
+        },
+        {
+          "label": "Baño",
+          "x": 220,
+          "y": 270,
+          "w": 130,
+          "h": 160,
+          "zone": "hombros",
+          "lx": 270.6,
+          "ly": 316,
+          "sub": "6,5 × 8,0 m"
+        },
+        {
+          "label": "Vestidor",
+          "x": 350,
+          "y": 270,
+          "w": 110,
+          "h": 160,
+          "zone": "hombros",
+          "lx": 376.2,
+          "ly": 316,
+          "sub": "5,5 × 8,0 m"
+        },
+        {
+          "label": "Terraza",
+          "x": 460,
+          "y": 270,
+          "w": 240,
+          "h": 160,
+          "zone": "piernas",
+          "lx": 554.8,
+          "ly": 316,
+          "sub": "12,0 × 8,0 m"
+        }
+      ],
+      "order": 13,
+      "createdAt": "2026-10-15T14:52:51Z",
+      "updatedAt": "2026-10-15T14:52:51Z"
+    }
+  ],
+  "zones": [
+    {
+      "id": "zon-h4-cabeza",
+      "palaceId": "pal-h4",
+      "name": "Zona de día · Recibidor, Salón, Comedor",
+      "color": "cabeza",
+      "order": 0
+    },
+    {
+      "id": "zon-h4-torso",
+      "palaceId": "pal-h4",
+      "name": "Cocina y servicio · Cocina, Lavadero",
+      "color": "torso",
+      "order": 1
+    },
+    {
+      "id": "zon-h4-brazos",
+      "palaceId": "pal-h4",
+      "name": "Trabajo y ocio · Estudio, Sala de música",
+      "color": "brazos",
+      "order": 2
+    },
+    {
+      "id": "zon-h4-hombros",
+      "palaceId": "pal-h4",
+      "name": "Zona de noche · Aseo, Dormitorio principal, Baño, Vestidor",
+      "color": "hombros",
+      "order": 3
+    },
+    {
+      "id": "zon-h4-piernas",
+      "palaceId": "pal-h4",
+      "name": "Exterior · Terraza",
+      "color": "piernas",
+      "order": 4
+    }
+  ],
+  "loci": [
+    {
+      "id": "loc-h4-001",
+      "palaceId": "pal-h4",
+      "zoneId": "zon-h4-cabeza",
+      "routeNo": 1,
+      "partName": "Puerta principal",
+      "side": "front",
+      "pos": {
+        "x": 0.0086,
+        "y": 0.1628
+      },
+      "room": "Recibidor"
+    },
+    {
+      "id": "loc-h4-002",
+      "palaceId": "pal-h4",
+      "zoneId": "zon-h4-cabeza",
+      "routeNo": 2,
+      "partName": "Perchero",
+      "side": "front",
+      "pos": {
+        "x": 0.0129,
+        "y": 0.114
+      },
+      "room": "Recibidor"
+    },
+    {
+      "id": "loc-h4-003",
+      "palaceId": "pal-h4",
+      "zoneId": "zon-h4-cabeza",
+      "routeNo": 3,
+      "partName": "Zapatero · Recibidor",
+      "side": "front",
+      "pos": {
+        "x": 0.0114,
+        "y": 0.0535
+      },
+      "room": "Recibidor"
+    },
+    {
+      "id": "loc-h4-004",
+      "palaceId": "pal-h4",
+      "zoneId": "zon-h4-cabeza",
+      "routeNo": 4,
+      "partName": "Espejo · Recibidor",
+      "side": "front",
+      "pos": {
+        "x": 0.0414,
+        "y": 0.0116
+      },
+      "room": "Recibidor"
+    },
+    {
+      "id": "loc-h4-005",
+      "palaceId": "pal-h4",
+      "zoneId": "zon-h4-cabeza",
+      "routeNo": 5,
+      "partName": "Consola",
+      "side": "front",
+      "pos": {
+        "x": 0.0914,
+        "y": 0.0186
+      },
+      "room": "Recibidor"
+    },
+    {
+      "id": "loc-h4-006",
+      "palaceId": "pal-h4",
+      "zoneId": "zon-h4-cabeza",
+      "routeNo": 6,
+      "partName": "Planta · Recibidor",
+      "side": "front",
+      "pos": {
+        "x": 0.1314,
+        "y": 0.0233
+      },
+      "room": "Recibidor"
+    },
+    {
+      "id": "loc-h4-007",
+      "palaceId": "pal-h4",
+      "zoneId": "zon-h4-cabeza",
+      "routeNo": 7,
+      "partName": "Banco · Recibidor",
+      "side": "front",
+      "pos": {
+        "x": 0.1443,
+        "y": 0.0767
+      },
+      "room": "Recibidor"
+    },
+    {
+      "id": "loc-h4-008",
+      "palaceId": "pal-h4",
+      "zoneId": "zon-h4-cabeza",
+      "routeNo": 8,
+      "partName": "Paragüero",
+      "side": "front",
+      "pos": {
+        "x": 0.1457,
+        "y": 0.2093
+      },
+      "room": "Recibidor"
+    },
+    {
+      "id": "loc-h4-009",
+      "palaceId": "pal-h4",
+      "zoneId": "zon-h4-cabeza",
+      "routeNo": 9,
+      "partName": "Lámpara de pie · Recibidor",
+      "side": "front",
+      "pos": {
+        "x": 0.1443,
+        "y": 0.2465
+      },
+      "room": "Recibidor"
+    },
+    {
+      "id": "loc-h4-010",
+      "palaceId": "pal-h4",
+      "zoneId": "zon-h4-cabeza",
+      "routeNo": 10,
+      "partName": "Reloj de pie · Recibidor",
+      "side": "front",
+      "pos": {
+        "x": 0.1464,
+        "y": 0.286
+      },
+      "room": "Recibidor"
+    },
+    {
+      "id": "loc-h4-011",
+      "palaceId": "pal-h4",
+      "zoneId": "zon-h4-cabeza",
+      "routeNo": 11,
+      "partName": "Planta · Recibidor",
+      "side": "front",
+      "pos": {
+        "x": 0.1257,
+        "y": 0.3023
+      },
+      "room": "Recibidor"
+    },
+    {
+      "id": "loc-h4-012",
+      "palaceId": "pal-h4",
+      "zoneId": "zon-h4-cabeza",
+      "routeNo": 12,
+      "partName": "Altavoz · Recibidor",
+      "side": "front",
+      "pos": {
+        "x": 0.1,
+        "y": 0.307
+      },
+      "room": "Recibidor"
+    },
+    {
+      "id": "loc-h4-013",
+      "palaceId": "pal-h4",
+      "zoneId": "zon-h4-cabeza",
+      "routeNo": 13,
+      "partName": "Lámpara de pie · Recibidor",
+      "side": "front",
+      "pos": {
+        "x": 0.0757,
+        "y": 0.3047
+      },
+      "room": "Recibidor"
+    },
+    {
+      "id": "loc-h4-014",
+      "palaceId": "pal-h4",
+      "zoneId": "zon-h4-cabeza",
+      "routeNo": 14,
+      "partName": "Sofá",
+      "side": "front",
+      "pos": {
+        "x": 0.2014,
+        "y": 0.0326
+      },
+      "room": "Salón"
+    },
+    {
+      "id": "loc-h4-015",
+      "palaceId": "pal-h4",
+      "zoneId": "zon-h4-cabeza",
+      "routeNo": 15,
+      "partName": "Lámpara de pie · Salón",
+      "side": "front",
+      "pos": {
+        "x": 0.2571,
+        "y": 0.0209
+      },
+      "room": "Salón"
+    },
+    {
+      "id": "loc-h4-016",
+      "palaceId": "pal-h4",
+      "zoneId": "zon-h4-cabeza",
+      "routeNo": 16,
+      "partName": "Estantería · Salón",
+      "side": "front",
+      "pos": {
+        "x": 0.3,
+        "y": 0.0174
+      },
+      "room": "Salón"
+    },
+    {
+      "id": "loc-h4-017",
+      "palaceId": "pal-h4",
+      "zoneId": "zon-h4-cabeza",
+      "routeNo": 17,
+      "partName": "Planta · Salón",
+      "side": "front",
+      "pos": {
+        "x": 0.3443,
+        "y": 0.0233
+      },
+      "room": "Salón"
+    },
+    {
+      "id": "loc-h4-018",
+      "palaceId": "pal-h4",
+      "zoneId": "zon-h4-cabeza",
+      "routeNo": 18,
+      "partName": "Televisión",
+      "side": "front",
+      "pos": {
+        "x": 0.39,
+        "y": 0.0174
+      },
+      "room": "Salón"
+    },
+    {
+      "id": "loc-h4-019",
+      "palaceId": "pal-h4",
+      "zoneId": "zon-h4-cabeza",
+      "routeNo": 19,
+      "partName": "Chimenea",
+      "side": "front",
+      "pos": {
+        "x": 0.45,
+        "y": 0.0198
+      },
+      "room": "Salón"
+    },
+    {
+      "id": "loc-h4-020",
+      "palaceId": "pal-h4",
+      "zoneId": "zon-h4-cabeza",
+      "routeNo": 20,
+      "partName": "Sillón · Salón",
+      "side": "front",
+      "pos": {
+        "x": 0.4971,
+        "y": 0.0326
+      },
+      "room": "Salón"
+    },
+    {
+      "id": "loc-h4-021",
+      "palaceId": "pal-h4",
+      "zoneId": "zon-h4-cabeza",
+      "routeNo": 21,
+      "partName": "Vitrina · Salón",
+      "side": "front",
+      "pos": {
+        "x": 0.5014,
+        "y": 0.2349
+      },
+      "room": "Salón"
+    },
+    {
+      "id": "loc-h4-022",
+      "palaceId": "pal-h4",
+      "zoneId": "zon-h4-cabeza",
+      "routeNo": 22,
+      "partName": "Sofá de dos plazas",
+      "side": "front",
+      "pos": {
+        "x": 0.4657,
+        "y": 0.2953
+      },
+      "room": "Salón"
+    },
+    {
+      "id": "loc-h4-023",
+      "palaceId": "pal-h4",
+      "zoneId": "zon-h4-cabeza",
+      "routeNo": 23,
+      "partName": "Planta · Salón",
+      "side": "front",
+      "pos": {
+        "x": 0.4214,
+        "y": 0.3023
+      },
+      "room": "Salón"
+    },
+    {
+      "id": "loc-h4-024",
+      "palaceId": "pal-h4",
+      "zoneId": "zon-h4-cabeza",
+      "routeNo": 24,
+      "partName": "Altavoz · Salón",
+      "side": "front",
+      "pos": {
+        "x": 0.3957,
+        "y": 0.307
+      },
+      "room": "Salón"
+    },
+    {
+      "id": "loc-h4-025",
+      "palaceId": "pal-h4",
+      "zoneId": "zon-h4-cabeza",
+      "routeNo": 25,
+      "partName": "Lámpara de pie · Salón",
+      "side": "front",
+      "pos": {
+        "x": 0.3714,
+        "y": 0.3047
+      },
+      "room": "Salón"
+    },
+    {
+      "id": "loc-h4-026",
+      "palaceId": "pal-h4",
+      "zoneId": "zon-h4-cabeza",
+      "routeNo": 26,
+      "partName": "Mesa de centro",
+      "side": "front",
+      "pos": {
+        "x": 0.3357,
+        "y": 0.1767
+      },
+      "room": "Salón"
+    },
+    {
+      "id": "loc-h4-027",
+      "palaceId": "pal-h4",
+      "zoneId": "zon-h4-cabeza",
+      "routeNo": 27,
+      "partName": "Aparador",
+      "side": "front",
+      "pos": {
+        "x": 0.5271,
+        "y": 0.0814
+      },
+      "room": "Comedor"
+    },
+    {
+      "id": "loc-h4-028",
+      "palaceId": "pal-h4",
+      "zoneId": "zon-h4-cabeza",
+      "routeNo": 28,
+      "partName": "Reloj de pie · Comedor",
+      "side": "front",
+      "pos": {
+        "x": 0.5443,
+        "y": 0.0174
+      },
+      "room": "Comedor"
+    },
+    {
+      "id": "loc-h4-029",
+      "palaceId": "pal-h4",
+      "zoneId": "zon-h4-cabeza",
+      "routeNo": 29,
+      "partName": "Planta · Comedor",
+      "side": "front",
+      "pos": {
+        "x": 0.57,
+        "y": 0.0233
+      },
+      "room": "Comedor"
+    },
+    {
+      "id": "loc-h4-030",
+      "palaceId": "pal-h4",
+      "zoneId": "zon-h4-cabeza",
+      "routeNo": 30,
+      "partName": "Vitrina · Comedor",
+      "side": "front",
+      "pos": {
+        "x": 0.61,
+        "y": 0.0209
+      },
+      "room": "Comedor"
+    },
+    {
+      "id": "loc-h4-031",
+      "palaceId": "pal-h4",
+      "zoneId": "zon-h4-cabeza",
+      "routeNo": 31,
+      "partName": "Mueble bar",
+      "side": "front",
+      "pos": {
+        "x": 0.6614,
+        "y": 0.0233
+      },
+      "room": "Comedor"
+    },
+    {
+      "id": "loc-h4-032",
+      "palaceId": "pal-h4",
+      "zoneId": "zon-h4-cabeza",
+      "routeNo": 32,
+      "partName": "Lámpara de pie · Comedor",
+      "side": "front",
+      "pos": {
+        "x": 0.6986,
+        "y": 0.0209
+      },
+      "room": "Comedor"
+    },
+    {
+      "id": "loc-h4-033",
+      "palaceId": "pal-h4",
+      "zoneId": "zon-h4-cabeza",
+      "routeNo": 33,
+      "partName": "Planta · Comedor",
+      "side": "front",
+      "pos": {
+        "x": 0.7243,
+        "y": 0.0233
+      },
+      "room": "Comedor"
+    },
+    {
+      "id": "loc-h4-034",
+      "palaceId": "pal-h4",
+      "zoneId": "zon-h4-cabeza",
+      "routeNo": 34,
+      "partName": "Altavoz · Comedor",
+      "side": "front",
+      "pos": {
+        "x": 0.7457,
+        "y": 0.0535
+      },
+      "room": "Comedor"
+    },
+    {
+      "id": "loc-h4-035",
+      "palaceId": "pal-h4",
+      "zoneId": "zon-h4-cabeza",
+      "routeNo": 35,
+      "partName": "Lámpara de pie · Comedor",
+      "side": "front",
+      "pos": {
+        "x": 0.7443,
+        "y": 0.093
+      },
+      "room": "Comedor"
+    },
+    {
+      "id": "loc-h4-036",
+      "palaceId": "pal-h4",
+      "zoneId": "zon-h4-cabeza",
+      "routeNo": 36,
+      "partName": "Mesa de comedor",
+      "side": "front",
+      "pos": {
+        "x": 0.6357,
+        "y": 0.1767
+      },
+      "room": "Comedor"
+    },
+    {
+      "id": "loc-h4-037",
+      "palaceId": "pal-h4",
+      "zoneId": "zon-h4-torso",
+      "routeNo": 37,
+      "partName": "Nevera",
+      "side": "front",
+      "pos": {
+        "x": 0.7743,
+        "y": 0.1047
+      },
+      "room": "Cocina"
+    },
+    {
+      "id": "loc-h4-038",
+      "palaceId": "pal-h4",
+      "zoneId": "zon-h4-torso",
+      "routeNo": 38,
+      "partName": "Encimera",
+      "side": "front",
+      "pos": {
+        "x": 0.81,
+        "y": 0.0256
+      },
+      "room": "Cocina"
+    },
+    {
+      "id": "loc-h4-039",
+      "palaceId": "pal-h4",
+      "zoneId": "zon-h4-torso",
+      "routeNo": 39,
+      "partName": "Fogones",
+      "side": "front",
+      "pos": {
+        "x": 0.8571,
+        "y": 0.0256
+      },
+      "room": "Cocina"
+    },
+    {
+      "id": "loc-h4-040",
+      "palaceId": "pal-h4",
+      "zoneId": "zon-h4-torso",
+      "routeNo": 40,
+      "partName": "Horno",
+      "side": "front",
+      "pos": {
+        "x": 0.8971,
+        "y": 0.0256
+      },
+      "room": "Cocina"
+    },
+    {
+      "id": "loc-h4-041",
+      "palaceId": "pal-h4",
+      "zoneId": "zon-h4-torso",
+      "routeNo": 41,
+      "partName": "Fregadero · Cocina",
+      "side": "front",
+      "pos": {
+        "x": 0.9414,
+        "y": 0.0256
+      },
+      "room": "Cocina"
+    },
+    {
+      "id": "loc-h4-042",
+      "palaceId": "pal-h4",
+      "zoneId": "zon-h4-torso",
+      "routeNo": 42,
+      "partName": "Lavavajillas",
+      "side": "front",
+      "pos": {
+        "x": 0.9843,
+        "y": 0.0256
+      },
+      "room": "Cocina"
+    },
+    {
+      "id": "loc-h4-043",
+      "palaceId": "pal-h4",
+      "zoneId": "zon-h4-torso",
+      "routeNo": 43,
+      "partName": "Microondas",
+      "side": "front",
+      "pos": {
+        "x": 0.9871,
+        "y": 0.0651
+      },
+      "room": "Cocina"
+    },
+    {
+      "id": "loc-h4-044",
+      "palaceId": "pal-h4",
+      "zoneId": "zon-h4-torso",
+      "routeNo": 44,
+      "partName": "Despensa",
+      "side": "front",
+      "pos": {
+        "x": 0.9857,
+        "y": 0.1349
+      },
+      "room": "Cocina"
+    },
+    {
+      "id": "loc-h4-045",
+      "palaceId": "pal-h4",
+      "zoneId": "zon-h4-torso",
+      "routeNo": 45,
+      "partName": "Cubo de basura · Cocina",
+      "side": "front",
+      "pos": {
+        "x": 0.9886,
+        "y": 0.1953
+      },
+      "room": "Cocina"
+    },
+    {
+      "id": "loc-h4-046",
+      "palaceId": "pal-h4",
+      "zoneId": "zon-h4-torso",
+      "routeNo": 46,
+      "partName": "Cubo de basura · Cocina",
+      "side": "front",
+      "pos": {
+        "x": 0.9886,
+        "y": 0.2302
+      },
+      "room": "Cocina"
+    },
+    {
+      "id": "loc-h4-047",
+      "palaceId": "pal-h4",
+      "zoneId": "zon-h4-torso",
+      "routeNo": 47,
+      "partName": "Cesto de ropa · Cocina",
+      "side": "front",
+      "pos": {
+        "x": 0.9864,
+        "y": 0.2686
+      },
+      "room": "Cocina"
+    },
+    {
+      "id": "loc-h4-048",
+      "palaceId": "pal-h4",
+      "zoneId": "zon-h4-torso",
+      "routeNo": 48,
+      "partName": "Planta · Cocina",
+      "side": "front",
+      "pos": {
+        "x": 0.9357,
+        "y": 0.3023
+      },
+      "room": "Cocina"
+    },
+    {
+      "id": "loc-h4-049",
+      "palaceId": "pal-h4",
+      "zoneId": "zon-h4-torso",
+      "routeNo": 49,
+      "partName": "Isla de cocina",
+      "side": "front",
+      "pos": {
+        "x": 0.8786,
+        "y": 0.1767
+      },
+      "room": "Cocina"
+    },
+    {
+      "id": "loc-h4-050",
+      "palaceId": "pal-h4",
+      "zoneId": "zon-h4-torso",
+      "routeNo": 50,
+      "partName": "Lavadora",
+      "side": "front",
+      "pos": {
+        "x": 0.9814,
+        "y": 0.3558
+      },
+      "room": "Lavadero"
+    },
+    {
+      "id": "loc-h4-051",
+      "palaceId": "pal-h4",
+      "zoneId": "zon-h4-torso",
+      "routeNo": 51,
+      "partName": "Secadora",
+      "side": "front",
+      "pos": {
+        "x": 0.9814,
+        "y": 0.414
+      },
+      "room": "Lavadero"
+    },
+    {
+      "id": "loc-h4-052",
+      "palaceId": "pal-h4",
+      "zoneId": "zon-h4-torso",
+      "routeNo": 52,
+      "partName": "Cesto de ropa · Lavadero",
+      "side": "front",
+      "pos": {
+        "x": 0.9864,
+        "y": 0.464
+      },
+      "room": "Lavadero"
+    },
+    {
+      "id": "loc-h4-053",
+      "palaceId": "pal-h4",
+      "zoneId": "zon-h4-torso",
+      "routeNo": 53,
+      "partName": "Tabla de planchar",
+      "side": "front",
+      "pos": {
+        "x": 0.9879,
+        "y": 0.5349
+      },
+      "room": "Lavadero"
+    },
+    {
+      "id": "loc-h4-054",
+      "palaceId": "pal-h4",
+      "zoneId": "zon-h4-torso",
+      "routeNo": 54,
+      "partName": "Caldera",
+      "side": "front",
+      "pos": {
+        "x": 0.9886,
+        "y": 0.6081
+      },
+      "room": "Lavadero"
+    },
+    {
+      "id": "loc-h4-055",
+      "palaceId": "pal-h4",
+      "zoneId": "zon-h4-torso",
+      "routeNo": 55,
+      "partName": "Estantes metálicos",
+      "side": "front",
+      "pos": {
+        "x": 0.9386,
+        "y": 0.607
+      },
+      "room": "Lavadero"
+    },
+    {
+      "id": "loc-h4-056",
+      "palaceId": "pal-h4",
+      "zoneId": "zon-h4-torso",
+      "routeNo": 56,
+      "partName": "Fregadero · Lavadero",
+      "side": "front",
+      "pos": {
+        "x": 0.8814,
+        "y": 0.6023
+      },
+      "room": "Lavadero"
+    },
+    {
+      "id": "loc-h4-057",
+      "palaceId": "pal-h4",
+      "zoneId": "zon-h4-torso",
+      "routeNo": 57,
+      "partName": "Cubo de basura · Lavadero",
+      "side": "front",
+      "pos": {
+        "x": 0.8457,
+        "y": 0.6093
+      },
+      "room": "Lavadero"
+    },
+    {
+      "id": "loc-h4-058",
+      "palaceId": "pal-h4",
+      "zoneId": "zon-h4-torso",
+      "routeNo": 58,
+      "partName": "Cesto de ropa · Lavadero",
+      "side": "front",
+      "pos": {
+        "x": 0.8221,
+        "y": 0.6058
+      },
+      "room": "Lavadero"
+    },
+    {
+      "id": "loc-h4-059",
+      "palaceId": "pal-h4",
+      "zoneId": "zon-h4-torso",
+      "routeNo": 59,
+      "partName": "Planta · Lavadero",
+      "side": "front",
+      "pos": {
+        "x": 0.7957,
+        "y": 0.6047
+      },
+      "room": "Lavadero"
+    },
+    {
+      "id": "loc-h4-060",
+      "palaceId": "pal-h4",
+      "zoneId": "zon-h4-brazos",
+      "routeNo": 60,
+      "partName": "Escritorio",
+      "side": "front",
+      "pos": {
+        "x": 0.753,
+        "y": 0.5558
+      },
+      "room": "Estudio"
+    },
+    {
+      "id": "loc-h4-061",
+      "palaceId": "pal-h4",
+      "zoneId": "zon-h4-brazos",
+      "routeNo": 61,
+      "partName": "Estantería · Estudio",
+      "side": "front",
+      "pos": {
+        "x": 0.7073,
+        "y": 0.6105
+      },
+      "room": "Estudio"
+    },
+    {
+      "id": "loc-h4-062",
+      "palaceId": "pal-h4",
+      "zoneId": "zon-h4-brazos",
+      "routeNo": 62,
+      "partName": "Archivador",
+      "side": "front",
+      "pos": {
+        "x": 0.6616,
+        "y": 0.6047
+      },
+      "room": "Estudio"
+    },
+    {
+      "id": "loc-h4-063",
+      "palaceId": "pal-h4",
+      "zoneId": "zon-h4-brazos",
+      "routeNo": 63,
+      "partName": "Impresora",
+      "side": "front",
+      "pos": {
+        "x": 0.6301,
+        "y": 0.6058
+      },
+      "room": "Estudio"
+    },
+    {
+      "id": "loc-h4-064",
+      "palaceId": "pal-h4",
+      "zoneId": "zon-h4-brazos",
+      "routeNo": 64,
+      "partName": "Pizarra",
+      "side": "front",
+      "pos": {
+        "x": 0.5801,
+        "y": 0.6163
+      },
+      "room": "Estudio"
+    },
+    {
+      "id": "loc-h4-065",
+      "palaceId": "pal-h4",
+      "zoneId": "zon-h4-brazos",
+      "routeNo": 65,
+      "partName": "Sillón de lectura",
+      "side": "front",
+      "pos": {
+        "x": 0.5273,
+        "y": 0.593
+      },
+      "room": "Estudio"
+    },
+    {
+      "id": "loc-h4-066",
+      "palaceId": "pal-h4",
+      "zoneId": "zon-h4-brazos",
+      "routeNo": 66,
+      "partName": "Planta · Estudio",
+      "side": "front",
+      "pos": {
+        "x": 0.4944,
+        "y": 0.6047
+      },
+      "room": "Estudio"
+    },
+    {
+      "id": "loc-h4-067",
+      "palaceId": "pal-h4",
+      "zoneId": "zon-h4-brazos",
+      "routeNo": 67,
+      "partName": "Lámpara de pie · Estudio",
+      "side": "front",
+      "pos": {
+        "x": 0.4956,
+        "y": 0.5512
+      },
+      "room": "Estudio"
+    },
+    {
+      "id": "loc-h4-068",
+      "palaceId": "pal-h4",
+      "zoneId": "zon-h4-brazos",
+      "routeNo": 68,
+      "partName": "Estantería · Estudio",
+      "side": "front",
+      "pos": {
+        "x": 0.4935,
+        "y": 0.3977
+      },
+      "room": "Estudio"
+    },
+    {
+      "id": "loc-h4-069",
+      "palaceId": "pal-h4",
+      "zoneId": "zon-h4-brazos",
+      "routeNo": 69,
+      "partName": "Planta · Estudio",
+      "side": "front",
+      "pos": {
+        "x": 0.5142,
+        "y": 0.3488
+      },
+      "room": "Estudio"
+    },
+    {
+      "id": "loc-h4-070",
+      "palaceId": "pal-h4",
+      "zoneId": "zon-h4-brazos",
+      "routeNo": 70,
+      "partName": "Altavoz · Estudio",
+      "side": "front",
+      "pos": {
+        "x": 0.5399,
+        "y": 0.3442
+      },
+      "room": "Estudio"
+    },
+    {
+      "id": "loc-h4-071",
+      "palaceId": "pal-h4",
+      "zoneId": "zon-h4-brazos",
+      "routeNo": 71,
+      "partName": "Lámpara de pie · Estudio",
+      "side": "front",
+      "pos": {
+        "x": 0.5642,
+        "y": 0.3465
+      },
+      "room": "Estudio"
+    },
+    {
+      "id": "loc-h4-072",
+      "palaceId": "pal-h4",
+      "zoneId": "zon-h4-hombros",
+      "routeNo": 72,
+      "partName": "Lavabo · Aseo",
+      "side": "front",
+      "pos": {
+        "x": 0.4678,
+        "y": 0.5395
+      },
+      "room": "Aseo"
+    },
+    {
+      "id": "loc-h4-073",
+      "palaceId": "pal-h4",
+      "zoneId": "zon-h4-hombros",
+      "routeNo": 73,
+      "partName": "Inodoro · Aseo",
+      "side": "front",
+      "pos": {
+        "x": 0.4628,
+        "y": 0.5965
+      },
+      "room": "Aseo"
+    },
+    {
+      "id": "loc-h4-074",
+      "palaceId": "pal-h4",
+      "zoneId": "zon-h4-hombros",
+      "routeNo": 74,
+      "partName": "Toallero · Aseo",
+      "side": "front",
+      "pos": {
+        "x": 0.4313,
+        "y": 0.6151
+      },
+      "room": "Aseo"
+    },
+    {
+      "id": "loc-h4-075",
+      "palaceId": "pal-h4",
+      "zoneId": "zon-h4-hombros",
+      "routeNo": 75,
+      "partName": "Espejo · Aseo",
+      "side": "front",
+      "pos": {
+        "x": 0.3885,
+        "y": 0.6163
+      },
+      "room": "Aseo"
+    },
+    {
+      "id": "loc-h4-076",
+      "palaceId": "pal-h4",
+      "zoneId": "zon-h4-hombros",
+      "routeNo": 76,
+      "partName": "Ducha",
+      "side": "front",
+      "pos": {
+        "x": 0.3533,
+        "y": 0.5744
+      },
+      "room": "Aseo"
+    },
+    {
+      "id": "loc-h4-077",
+      "palaceId": "pal-h4",
+      "zoneId": "zon-h4-hombros",
+      "routeNo": 77,
+      "partName": "Planta · Aseo",
+      "side": "front",
+      "pos": {
+        "x": 0.3419,
+        "y": 0.4256
+      },
+      "room": "Aseo"
+    },
+    {
+      "id": "loc-h4-078",
+      "palaceId": "pal-h4",
+      "zoneId": "zon-h4-hombros",
+      "routeNo": 78,
+      "partName": "Cesto de ropa · Aseo",
+      "side": "front",
+      "pos": {
+        "x": 0.3412,
+        "y": 0.3826
+      },
+      "room": "Aseo"
+    },
+    {
+      "id": "loc-h4-079",
+      "palaceId": "pal-h4",
+      "zoneId": "zon-h4-hombros",
+      "routeNo": 79,
+      "partName": "Lámpara de pie · Aseo",
+      "side": "front",
+      "pos": {
+        "x": 0.3404,
+        "y": 0.3419
+      },
+      "room": "Aseo"
+    },
+    {
+      "id": "loc-h4-080",
+      "palaceId": "pal-h4",
+      "zoneId": "zon-h4-brazos",
+      "routeNo": 80,
+      "partName": "Piano",
+      "side": "front",
+      "pos": {
+        "x": 0.3104,
+        "y": 0.5535
+      },
+      "room": "Sala de música"
+    },
+    {
+      "id": "loc-h4-081",
+      "palaceId": "pal-h4",
+      "zoneId": "zon-h4-brazos",
+      "routeNo": 81,
+      "partName": "Guitarra",
+      "side": "front",
+      "pos": {
+        "x": 0.289,
+        "y": 0.5907
+      },
+      "room": "Sala de música"
+    },
+    {
+      "id": "loc-h4-082",
+      "palaceId": "pal-h4",
+      "zoneId": "zon-h4-brazos",
+      "routeNo": 82,
+      "partName": "Altavoz · Sala de música",
+      "side": "front",
+      "pos": {
+        "x": 0.2647,
+        "y": 0.6093
+      },
+      "room": "Sala de música"
+    },
+    {
+      "id": "loc-h4-083",
+      "palaceId": "pal-h4",
+      "zoneId": "zon-h4-brazos",
+      "routeNo": 83,
+      "partName": "Tocadiscos",
+      "side": "front",
+      "pos": {
+        "x": 0.2319,
+        "y": 0.6047
+      },
+      "room": "Sala de música"
+    },
+    {
+      "id": "loc-h4-084",
+      "palaceId": "pal-h4",
+      "zoneId": "zon-h4-brazos",
+      "routeNo": 84,
+      "partName": "Batería",
+      "side": "front",
+      "pos": {
+        "x": 0.1847,
+        "y": 0.5907
+      },
+      "room": "Sala de música"
+    },
+    {
+      "id": "loc-h4-085",
+      "palaceId": "pal-h4",
+      "zoneId": "zon-h4-brazos",
+      "routeNo": 85,
+      "partName": "Altavoz · Sala de música",
+      "side": "front",
+      "pos": {
+        "x": 0.1462,
+        "y": 0.6093
+      },
+      "room": "Sala de música"
+    },
+    {
+      "id": "loc-h4-086",
+      "palaceId": "pal-h4",
+      "zoneId": "zon-h4-brazos",
+      "routeNo": 86,
+      "partName": "Estantería · Sala de música",
+      "side": "front",
+      "pos": {
+        "x": 0.1033,
+        "y": 0.6105
+      },
+      "room": "Sala de música"
+    },
+    {
+      "id": "loc-h4-087",
+      "palaceId": "pal-h4",
+      "zoneId": "zon-h4-brazos",
+      "routeNo": 87,
+      "partName": "Sillón · Sala de música",
+      "side": "front",
+      "pos": {
+        "x": 0.02,
+        "y": 0.5349
+      },
+      "room": "Sala de música"
+    },
+    {
+      "id": "loc-h4-088",
+      "palaceId": "pal-h4",
+      "zoneId": "zon-h4-brazos",
+      "routeNo": 88,
+      "partName": "Planta · Sala de música",
+      "side": "front",
+      "pos": {
+        "x": 0.0143,
+        "y": 0.4814
+      },
+      "room": "Sala de música"
+    },
+    {
+      "id": "loc-h4-089",
+      "palaceId": "pal-h4",
+      "zoneId": "zon-h4-brazos",
+      "routeNo": 89,
+      "partName": "Altavoz · Sala de música",
+      "side": "front",
+      "pos": {
+        "x": 0.0114,
+        "y": 0.4395
+      },
+      "room": "Sala de música"
+    },
+    {
+      "id": "loc-h4-090",
+      "palaceId": "pal-h4",
+      "zoneId": "zon-h4-brazos",
+      "routeNo": 90,
+      "partName": "Lámpara de pie · Sala de música",
+      "side": "front",
+      "pos": {
+        "x": 0.0129,
+        "y": 0.4
+      },
+      "room": "Sala de música"
+    },
+    {
+      "id": "loc-h4-091",
+      "palaceId": "pal-h4",
+      "zoneId": "zon-h4-hombros",
+      "routeNo": 91,
+      "partName": "Mesilla · Dormitorio principal",
+      "side": "front",
+      "pos": {
+        "x": 0.0643,
+        "y": 0.6488
+      },
+      "room": "Dormitorio principal"
+    },
+    {
+      "id": "loc-h4-092",
+      "palaceId": "pal-h4",
+      "zoneId": "zon-h4-hombros",
+      "routeNo": 92,
+      "partName": "Cama",
+      "side": "front",
+      "pos": {
+        "x": 0.1143,
+        "y": 0.6837
+      },
+      "room": "Dormitorio principal"
+    },
+    {
+      "id": "loc-h4-093",
+      "palaceId": "pal-h4",
+      "zoneId": "zon-h4-hombros",
+      "routeNo": 93,
+      "partName": "Mesilla · Dormitorio principal",
+      "side": "front",
+      "pos": {
+        "x": 0.1643,
+        "y": 0.6488
+      },
+      "room": "Dormitorio principal"
+    },
+    {
+      "id": "loc-h4-094",
+      "palaceId": "pal-h4",
+      "zoneId": "zon-h4-hombros",
+      "routeNo": 94,
+      "partName": "Lámpara de pie · Dormitorio principal",
+      "side": "front",
+      "pos": {
+        "x": 0.19,
+        "y": 0.6488
+      },
+      "room": "Dormitorio principal"
+    },
+    {
+      "id": "loc-h4-095",
+      "palaceId": "pal-h4",
+      "zoneId": "zon-h4-hombros",
+      "routeNo": 95,
+      "partName": "Armario · Dormitorio principal",
+      "side": "front",
+      "pos": {
+        "x": 0.2357,
+        "y": 0.6512
+      },
+      "room": "Dormitorio principal"
+    },
+    {
+      "id": "loc-h4-096",
+      "palaceId": "pal-h4",
+      "zoneId": "zon-h4-hombros",
+      "routeNo": 96,
+      "partName": "Cómoda · Dormitorio principal",
+      "side": "front",
+      "pos": {
+        "x": 0.3014,
+        "y": 0.886
+      },
+      "room": "Dormitorio principal"
+    },
+    {
+      "id": "loc-h4-097",
+      "palaceId": "pal-h4",
+      "zoneId": "zon-h4-hombros",
+      "routeNo": 97,
+      "partName": "Espejo · Dormitorio principal",
+      "side": "front",
+      "pos": {
+        "x": 0.3071,
+        "y": 0.9674
+      },
+      "room": "Dormitorio principal"
+    },
+    {
+      "id": "loc-h4-098",
+      "palaceId": "pal-h4",
+      "zoneId": "zon-h4-hombros",
+      "routeNo": 98,
+      "partName": "Sillón · Dormitorio principal",
+      "side": "front",
+      "pos": {
+        "x": 0.2771,
+        "y": 0.9674
+      },
+      "room": "Dormitorio principal"
+    },
+    {
+      "id": "loc-h4-099",
+      "palaceId": "pal-h4",
+      "zoneId": "zon-h4-hombros",
+      "routeNo": 99,
+      "partName": "Planta · Dormitorio principal",
+      "side": "front",
+      "pos": {
+        "x": 0.2443,
+        "y": 0.9767
+      },
+      "room": "Dormitorio principal"
+    },
+    {
+      "id": "loc-h4-100",
+      "palaceId": "pal-h4",
+      "zoneId": "zon-h4-hombros",
+      "routeNo": 100,
+      "partName": "Tocador",
+      "side": "front",
+      "pos": {
+        "x": 0.2057,
+        "y": 0.9779
+      },
+      "room": "Dormitorio principal"
+    },
+    {
+      "id": "loc-h4-101",
+      "palaceId": "pal-h4",
+      "zoneId": "zon-h4-hombros",
+      "routeNo": 101,
+      "partName": "Planta · Dormitorio principal",
+      "side": "front",
+      "pos": {
+        "x": 0.1671,
+        "y": 0.9767
+      },
+      "room": "Dormitorio principal"
+    },
+    {
+      "id": "loc-h4-102",
+      "palaceId": "pal-h4",
+      "zoneId": "zon-h4-hombros",
+      "routeNo": 102,
+      "partName": "Cesto de ropa · Dormitorio principal",
+      "side": "front",
+      "pos": {
+        "x": 0.1407,
+        "y": 0.9779
+      },
+      "room": "Dormitorio principal"
+    },
+    {
+      "id": "loc-h4-103",
+      "palaceId": "pal-h4",
+      "zoneId": "zon-h4-hombros",
+      "routeNo": 103,
+      "partName": "Lámpara de pie · Dormitorio principal",
+      "side": "front",
+      "pos": {
+        "x": 0.1157,
+        "y": 0.9791
+      },
+      "room": "Dormitorio principal"
+    },
+    {
+      "id": "loc-h4-104",
+      "palaceId": "pal-h4",
+      "zoneId": "zon-h4-hombros",
+      "routeNo": 104,
+      "partName": "Lavabo · Baño",
+      "side": "front",
+      "pos": {
+        "x": 0.3293,
+        "y": 0.7512
+      },
+      "room": "Baño"
+    },
+    {
+      "id": "loc-h4-105",
+      "palaceId": "pal-h4",
+      "zoneId": "zon-h4-hombros",
+      "routeNo": 105,
+      "partName": "Inodoro · Baño",
+      "side": "front",
+      "pos": {
+        "x": 0.3343,
+        "y": 0.6942
+      },
+      "room": "Baño"
+    },
+    {
+      "id": "loc-h4-106",
+      "palaceId": "pal-h4",
+      "zoneId": "zon-h4-hombros",
+      "routeNo": 106,
+      "partName": "Bidé",
+      "side": "front",
+      "pos": {
+        "x": 0.3314,
+        "y": 0.65
+      },
+      "room": "Baño"
+    },
+    {
+      "id": "loc-h4-107",
+      "palaceId": "pal-h4",
+      "zoneId": "zon-h4-hombros",
+      "routeNo": 107,
+      "partName": "Bañera",
+      "side": "front",
+      "pos": {
+        "x": 0.3843,
+        "y": 0.6628
+      },
+      "room": "Baño"
+    },
+    {
+      "id": "loc-h4-108",
+      "palaceId": "pal-h4",
+      "zoneId": "zon-h4-hombros",
+      "routeNo": 108,
+      "partName": "Toallero · Baño",
+      "side": "front",
+      "pos": {
+        "x": 0.4414,
+        "y": 0.6407
+      },
+      "room": "Baño"
+    },
+    {
+      "id": "loc-h4-109",
+      "palaceId": "pal-h4",
+      "zoneId": "zon-h4-hombros",
+      "routeNo": 109,
+      "partName": "Mueble de baño",
+      "side": "front",
+      "pos": {
+        "x": 0.4871,
+        "y": 0.7233
+      },
+      "room": "Baño"
+    },
+    {
+      "id": "loc-h4-110",
+      "palaceId": "pal-h4",
+      "zoneId": "zon-h4-hombros",
+      "routeNo": 110,
+      "partName": "Espejo · Baño",
+      "side": "front",
+      "pos": {
+        "x": 0.4929,
+        "y": 0.8814
+      },
+      "room": "Baño"
+    },
+    {
+      "id": "loc-h4-111",
+      "palaceId": "pal-h4",
+      "zoneId": "zon-h4-hombros",
+      "routeNo": 111,
+      "partName": "Planta · Baño",
+      "side": "front",
+      "pos": {
+        "x": 0.4857,
+        "y": 0.9419
+      },
+      "room": "Baño"
+    },
+    {
+      "id": "loc-h4-112",
+      "palaceId": "pal-h4",
+      "zoneId": "zon-h4-hombros",
+      "routeNo": 112,
+      "partName": "Cesto de ropa · Baño",
+      "side": "front",
+      "pos": {
+        "x": 0.4864,
+        "y": 0.9849
+      },
+      "room": "Baño"
+    },
+    {
+      "id": "loc-h4-113",
+      "palaceId": "pal-h4",
+      "zoneId": "zon-h4-hombros",
+      "routeNo": 113,
+      "partName": "Lámpara de pie · Baño",
+      "side": "front",
+      "pos": {
+        "x": 0.4671,
+        "y": 0.9791
+      },
+      "room": "Baño"
+    },
+    {
+      "id": "loc-h4-114",
+      "palaceId": "pal-h4",
+      "zoneId": "zon-h4-hombros",
+      "routeNo": 114,
+      "partName": "Armario · Vestidor",
+      "side": "front",
+      "pos": {
+        "x": 0.5143,
+        "y": 0.7302
+      },
+      "room": "Vestidor"
+    },
+    {
+      "id": "loc-h4-115",
+      "palaceId": "pal-h4",
+      "zoneId": "zon-h4-hombros",
+      "routeNo": 115,
+      "partName": "Zapatero · Vestidor",
+      "side": "front",
+      "pos": {
+        "x": 0.5457,
+        "y": 0.6465
+      },
+      "room": "Vestidor"
+    },
+    {
+      "id": "loc-h4-116",
+      "palaceId": "pal-h4",
+      "zoneId": "zon-h4-hombros",
+      "routeNo": 116,
+      "partName": "Espejo · Vestidor",
+      "side": "front",
+      "pos": {
+        "x": 0.5943,
+        "y": 0.6395
+      },
+      "room": "Vestidor"
+    },
+    {
+      "id": "loc-h4-117",
+      "palaceId": "pal-h4",
+      "zoneId": "zon-h4-hombros",
+      "routeNo": 117,
+      "partName": "Cómoda · Vestidor",
+      "side": "front",
+      "pos": {
+        "x": 0.6443,
+        "y": 0.6953
+      },
+      "room": "Vestidor"
+    },
+    {
+      "id": "loc-h4-118",
+      "palaceId": "pal-h4",
+      "zoneId": "zon-h4-hombros",
+      "routeNo": 118,
+      "partName": "Armario · Vestidor",
+      "side": "front",
+      "pos": {
+        "x": 0.6429,
+        "y": 0.8977
+      },
+      "room": "Vestidor"
+    },
+    {
+      "id": "loc-h4-119",
+      "palaceId": "pal-h4",
+      "zoneId": "zon-h4-hombros",
+      "routeNo": 119,
+      "partName": "Banco · Vestidor",
+      "side": "front",
+      "pos": {
+        "x": 0.61,
+        "y": 0.9791
+      },
+      "room": "Vestidor"
+    },
+    {
+      "id": "loc-h4-120",
+      "palaceId": "pal-h4",
+      "zoneId": "zon-h4-hombros",
+      "routeNo": 120,
+      "partName": "Planta · Vestidor",
+      "side": "front",
+      "pos": {
+        "x": 0.57,
+        "y": 0.9767
+      },
+      "room": "Vestidor"
+    },
+    {
+      "id": "loc-h4-121",
+      "palaceId": "pal-h4",
+      "zoneId": "zon-h4-hombros",
+      "routeNo": 121,
+      "partName": "Cesto de ropa · Vestidor",
+      "side": "front",
+      "pos": {
+        "x": 0.5436,
+        "y": 0.9779
+      },
+      "room": "Vestidor"
+    },
+    {
+      "id": "loc-h4-122",
+      "palaceId": "pal-h4",
+      "zoneId": "zon-h4-hombros",
+      "routeNo": 122,
+      "partName": "Lámpara de pie · Vestidor",
+      "side": "front",
+      "pos": {
+        "x": 0.5186,
+        "y": 0.9791
+      },
+      "room": "Vestidor"
+    },
+    {
+      "id": "loc-h4-123",
+      "palaceId": "pal-h4",
+      "zoneId": "zon-h4-piernas",
+      "routeNo": 123,
+      "partName": "Planta · Terraza",
+      "side": "front",
+      "pos": {
+        "x": 0.6714,
+        "y": 0.7628
+      },
+      "room": "Terraza"
+    },
+    {
+      "id": "loc-h4-124",
+      "palaceId": "pal-h4",
+      "zoneId": "zon-h4-piernas",
+      "routeNo": 124,
+      "partName": "Barbacoa",
+      "side": "front",
+      "pos": {
+        "x": 0.6729,
+        "y": 0.714
+      },
+      "room": "Terraza"
+    },
+    {
+      "id": "loc-h4-125",
+      "palaceId": "pal-h4",
+      "zoneId": "zon-h4-piernas",
+      "routeNo": 125,
+      "partName": "Tumbona · Terraza",
+      "side": "front",
+      "pos": {
+        "x": 0.6914,
+        "y": 0.6605
+      },
+      "room": "Terraza"
+    },
+    {
+      "id": "loc-h4-126",
+      "palaceId": "pal-h4",
+      "zoneId": "zon-h4-piernas",
+      "routeNo": 126,
+      "partName": "Tumbona · Terraza",
+      "side": "front",
+      "pos": {
+        "x": 0.7343,
+        "y": 0.6837
+      },
+      "room": "Terraza"
+    },
+    {
+      "id": "loc-h4-127",
+      "palaceId": "pal-h4",
+      "zoneId": "zon-h4-piernas",
+      "routeNo": 127,
+      "partName": "Planta · Terraza",
+      "side": "front",
+      "pos": {
+        "x": 0.7643,
+        "y": 0.6512
+      },
+      "room": "Terraza"
+    },
+    {
+      "id": "loc-h4-128",
+      "palaceId": "pal-h4",
+      "zoneId": "zon-h4-piernas",
+      "routeNo": 128,
+      "partName": "Hamaca",
+      "side": "front",
+      "pos": {
+        "x": 0.8143,
+        "y": 0.6535
+      },
+      "room": "Terraza"
+    },
+    {
+      "id": "loc-h4-129",
+      "palaceId": "pal-h4",
+      "zoneId": "zon-h4-piernas",
+      "routeNo": 129,
+      "partName": "Lámpara de pie · Terraza",
+      "side": "front",
+      "pos": {
+        "x": 0.8629,
+        "y": 0.6488
+      },
+      "room": "Terraza"
+    },
+    {
+      "id": "loc-h4-130",
+      "palaceId": "pal-h4",
+      "zoneId": "zon-h4-piernas",
+      "routeNo": 130,
+      "partName": "Planta · Terraza",
+      "side": "front",
+      "pos": {
+        "x": 0.8886,
+        "y": 0.6512
+      },
+      "room": "Terraza"
+    },
+    {
+      "id": "loc-h4-131",
+      "palaceId": "pal-h4",
+      "zoneId": "zon-h4-piernas",
+      "routeNo": 131,
+      "partName": "Lámpara de pie · Terraza",
+      "side": "front",
+      "pos": {
+        "x": 0.9143,
+        "y": 0.6488
+      },
+      "room": "Terraza"
+    },
+    {
+      "id": "loc-h4-132",
+      "palaceId": "pal-h4",
+      "zoneId": "zon-h4-piernas",
+      "routeNo": 132,
+      "partName": "Planta · Terraza",
+      "side": "front",
+      "pos": {
+        "x": 0.94,
+        "y": 0.6512
+      },
+      "room": "Terraza"
+    },
+    {
+      "id": "loc-h4-133",
+      "palaceId": "pal-h4",
+      "zoneId": "zon-h4-piernas",
+      "routeNo": 133,
+      "partName": "Mesa redonda",
+      "side": "front",
+      "pos": {
+        "x": 0.8286,
+        "y": 0.8279
+      },
+      "room": "Terraza"
+    }
+  ]
+}

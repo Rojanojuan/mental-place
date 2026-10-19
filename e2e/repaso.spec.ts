@@ -770,3 +770,89 @@ test.describe('accesibilidad', () => {
     for (const b of botones) expect(b.nombre).toMatch(/\S+ · \S+/);
   });
 });
+
+/**
+ * Añadir un palacio desde la app.
+ *
+ * Las casas existían desde hacía días, pero para usar una había que bajarse un
+ * JSON de 950 kB del repositorio e importarlo a mano: en un teléfono, nadie lo
+ * haría. Existir no es estar integrado (D-095).
+ */
+test.describe('añadir un palacio', () => {
+  test('el catálogo se lee sin descargar ninguna casa', async ({ page }) => {
+    const bajadas: string[] = [];
+    page.on('request', (r) => {
+      if (r.url().includes('casa-')) bajadas.push(r.url());
+    });
+
+    await page.goto('/');
+    await expect(page.getByRole('link', { name: /Repasar ahora/ })).toBeVisible(SEEDED);
+    await page.goto('/palacios');
+    await expect(page.getByRole('heading', { name: 'Palacios', level: 2 })).toBeVisible();
+
+    await expect(page.locator('.pal__casas li')).toHaveCount(10);
+    // Lo caro se baja solo cuando eliges: el índice pesa 4 kB.
+    expect(bajadas).toEqual([]);
+  });
+
+  test('elegir un lugar lo añade, lo pone en uso y pinta su plano', async ({ page }) => {
+    const bajadas: string[] = [];
+    page.on('request', (r) => {
+      if (r.url().includes('casa-')) bajadas.push(r.url().split('/').pop() ?? '');
+    });
+
+    await page.goto('/');
+    await expect(page.getByRole('link', { name: /Repasar ahora/ })).toBeVisible(SEEDED);
+    await page.goto('/palacios');
+    await expect(page.locator('.pal__casas li')).toHaveCount(10);
+
+    const antes = await page.locator('.pal__mios li').count();
+    await page.locator('.pal__casas li').first().getByRole('button', { name: 'Añadir' }).click();
+
+    await expect(page.locator('.pal__aviso')).toContainText(/añadido y en uso/, { timeout: 30000 });
+    await expect(page.locator('.pal__mios li')).toHaveCount(antes + 1);
+    // Y solo una casa: no se bajan las diez.
+    expect(bajadas).toHaveLength(1);
+
+    // El palacio nuevo es el que se ve, con su plano y sus puntos.
+    await page.goto('/inspector');
+    await expect(page.locator('.insp__sub')).toContainText('136 puntos', SEEDED);
+    await expect(page.locator('.bodymap .plan')).toHaveCount(1);
+  });
+
+  test('una casa que ya tienes no se puede añadir dos veces', async ({ page }) => {
+    await page.goto('/');
+    await expect(page.getByRole('link', { name: /Repasar ahora/ })).toBeVisible(SEEDED);
+    await page.goto('/palacios');
+    await expect(page.locator('.pal__casas li')).toHaveCount(10);
+
+    const fila = page.locator('.pal__casas li').first();
+    await fila.getByRole('button', { name: 'Añadir' }).click();
+    await expect(page.locator('.pal__aviso')).toContainText(/añadido/, { timeout: 30000 });
+
+    // El botón lo dice y además no deja: un palacio repetido partiría el repaso.
+    await expect(fila.getByRole('button', { name: 'Ya lo tienes' })).toBeDisabled();
+  });
+
+  test('un cuerpo nuevo nace vacío, para que los puntos los pongas tú', async ({ page }) => {
+    await page.goto('/');
+    await expect(page.getByRole('link', { name: /Repasar ahora/ })).toBeVisible(SEEDED);
+    await page.goto('/palacios');
+    await expect(page.getByRole('heading', { name: 'Palacios', level: 2 })).toBeVisible();
+
+    await page.getByLabel('Nombre').fill('Mi cuerpo de prueba');
+    await page
+      .locator('.pal__cuerpos')
+      .getByRole('button', { name: /frente y espalda/ })
+      .click();
+
+    await expect(page.locator('.pal__aviso')).toContainText(/creado, vacío/, { timeout: 15000 });
+    // En la lista, no en el aviso: lo que importa es que quedó guardado.
+    await expect(
+      page.locator('.pal__mios .pal__nombre', { hasText: 'Mi cuerpo de prueba' }),
+    ).toBeVisible();
+
+    await page.goto('/inspector');
+    await expect(page.locator('.insp__sub')).toContainText('0 puntos', SEEDED);
+  });
+});

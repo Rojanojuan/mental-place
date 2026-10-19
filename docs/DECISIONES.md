@@ -896,3 +896,31 @@ cuenta como fallo, tanto en el script como en el test.
 
 Las cinco comprobaciones son ya e2e: lo que importa no es que hoy esté limpio, sino que no pueda
 dejar de estarlo sin que salte.
+
+### D-095 · Existir no es estar integrado: los lugares se añaden desde la app
+
+Las casas estaban hechas desde el 16 de octubre: diez planos amueblados, cada mueble un punto, la
+ruta en orden desde la puerta, modo plano en `BodyMap`, selector de palacio y catorce tests. Y aun
+así no se podían usar, porque la única forma de cargarlas era **bajarse `seed/casas.json` (950 kB)
+del repositorio e importarlo a mano** desde «Datos». En un teléfono eso no lo hace nadie.
+
+Ahora hay una pantalla, **Palacios**, que lista los tuyos y deja añadir uno sin salir de la app:
+un lugar del catálogo o un cuerpo vacío.
+
+Tres decisiones de peso:
+
+1. **Una casa por archivo** (`seed/casas/casa-*.json`, 88–114 kB) más un **índice de 4 kB**. La
+   lista se pinta con el índice —que Vite incrusta en el bundle, así que funciona sin red— y solo
+   se baja la casa que elijas. Juntas son 950 kB de palacios de los que querrás uno.
+2. **No entran en la precarga** (`globIgnores: ['**/casa-*.json']`): casi doblarían el tamaño de
+   la app para algo que puede que nunca añadas. Añadir un palacio es un gesto deliberado y con
+   red; después vive en IndexedDB y funciona sin conexión como todo lo demás.
+3. **Un cuerpo nuevo nace vacío.** Los puntos los pone el usuario en el editor, tocando el cuerpo.
+   Un palacio con puntos que no has elegido no es tu palacio, y en un palacio de la memoria el
+   sitio de cada cosa _es_ el contenido.
+
+Una casa que ya tienes no se puede añadir dos veces: el botón lo dice y además no deja. Un palacio
+duplicado ensucia el selector y partiría el repaso en dos sitios.
+
+La navegación pasa a tener «Palacios» y «Apariencia» donde antes había solo «Cuerpos»: elegir
+dónde colocas las cosas y cómo se ve el cuerpo son dos tareas distintas.

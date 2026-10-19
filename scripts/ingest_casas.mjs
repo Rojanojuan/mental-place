@@ -11,7 +11,7 @@
  *
  * Uso:  node scripts/ingest_casas.mjs [--out seed/casas.json]
  */
-import { writeFileSync, statSync } from 'node:fs';
+import { writeFileSync, statSync, mkdirSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join, relative } from 'node:path';
 import { HOUSES } from '../design_handoff_palacio_corporal/pc-houses.js';
@@ -106,6 +106,43 @@ HOUSES.forEach((house, index) => {
 const bundle = { version: 1, palaces, zones, loci };
 writeFileSync(out, `${JSON.stringify(bundle, null, 2)}\n`, 'utf8');
 
+/*
+ * Y una por una, además del paquete entero.
+ *
+ * Juntas pesan 950 kB para diez palacios de los que seguramente quieras uno:
+ * sueltas, la app enseña el catálogo con el índice —unos pocos kB— y solo baja
+ * la casa que elijas (D-095).
+ */
+const dirCasas = join(dirname(out), 'casas');
+mkdirSync(dirCasas, { recursive: true });
+
+const indice = palaces.map((palace) => {
+  const suyos = loci.filter((l) => l.palaceId === palace.id);
+  const suyas = zones.filter((z) => z.palaceId === palace.id);
+  const slug = palace.id.replace(/^pal-/, '');
+  const archivo = join(dirCasas, `casa-${slug}.json`);
+  writeFileSync(
+    archivo,
+    `${JSON.stringify({ version: 1, palaces: [palace], zones: suyas, loci: suyos }, null, 2)}\n`,
+    'utf8',
+  );
+  return {
+    slug,
+    name: palace.name,
+    puntos: suyos.length,
+    zonas: suyas.length,
+    habitaciones: palace.rooms.length,
+    kb: Math.round(statSync(archivo).size / 1024),
+  };
+});
+
+// El catálogo: lo que la app necesita para pintar la lista sin bajar nada.
+writeFileSync(
+  join(dirCasas, 'index.json'),
+  `${JSON.stringify({ version: 1, casas: indice }, null, 2)}\n`,
+  'utf8',
+);
+
 const svgBytes = palaces.reduce((sum, p) => sum + p.planData.svg.length, 0);
 console.log(`Casas:        ${String(palaces.length)}`);
 console.log(`Zonas:        ${String(zones.length)}`);
@@ -113,3 +150,8 @@ console.log(`Puntos:       ${String(loci.length)}`);
 console.log(`Habitaciones: ${String(palaces.reduce((sum, p) => sum + p.rooms.length, 0))}`);
 console.log(`SVG de planos: ${String(Math.round(svgBytes / 1024))} kB`);
 console.log(`→ ${relative(ROOT, out).replace(/\\/g, '/')}`);
+console.log(
+  `→ seed/casas/ — ${String(indice.length)} sueltas de ${String(
+    Math.min(...indice.map((c) => c.kb)),
+  )}–${String(Math.max(...indice.map((c) => c.kb)))} kB, más index.json`,
+);

@@ -42,6 +42,10 @@ export default defineConfig({
       },
       injectManifest: {
         globPatterns: ['**/*.{js,css,html,svg,woff2,json}'],
+        // Las casas, no: son 950 kB de palacios que puede que nunca añadas.
+        // Se bajan al elegirlas y a partir de ahí viven en IndexedDB, así que
+        // una vez añadida la casa funciona sin red igual que el resto (D-095).
+        globIgnores: ['**/casa-*.json'],
         // La semilla de fonetica pesa 693 kB y el precache la necesita entera
         // para que la app funcione sin red en el primer arranque.
         maximumFileSizeToCacheInBytes: 4 * 1024 * 1024,
